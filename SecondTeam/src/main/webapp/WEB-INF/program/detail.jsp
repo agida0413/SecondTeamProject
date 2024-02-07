@@ -23,7 +23,7 @@ background-color:#f0f0f0;;
 
 .informObj{
 text-align:center;
-background-color:#f0f0f0;;
+
 font-weight:bold;
 }
 .detailTable{
@@ -66,49 +66,49 @@ border-bottom: 1px solid #ccc;
             			
             			
             			<tr>
-            				<td style="width:15%" class="informObj">봉사기간</td>
+            				<td style="width:15%; background-color:#f0f0f0;" class="informObj" >봉사기간</td>
             				<td style="width:35%">${vo.dbV_start}&nbsp;~&nbsp;${vo.dbV_end}</td>
-            				<td style="width:15%" class="informObj">봉사시간</td>
+            				<td style="width:15%; background-color:#f0f0f0;" class="informObj">봉사시간</td>
             				<td style="width:35%">${vo.runtime }</td>
             			</tr>
             			
             			<tr>
-            				<td class="informObj">모집기간</td>
+            				<td class="informObj" style="background-color:#f0f0f0;">모집기간</td>
             				<td>${vo.dbCollect_start }&nbsp;~&nbsp;${vo.dbCollect_end }</td>
-            				<td class="informObj">활동요일</td>
+            				<td class="informObj" style="background-color:#f0f0f0;">활동요일</td>
             				<td>${vo.rundate }</td>
             			</tr>
             			
             			<tr>
-            				<td class="informObj">모집인원</td>
+            				<td class="informObj" style="background-color:#f0f0f0;">모집인원</td>
             				<td>${vo.collect_num }명</td>
-            				<td class="informObj">신청인원</td>
+            				<td class="informObj" style="background-color:#f0f0f0;">신청인원</td>
             				<td>${vo.apply_num }명</td>
             			</tr>
             			
             			<tr>
-            				<td class="informObj">봉사분야</td>
+            				<td class="informObj" style="background-color:#f0f0f0;">봉사분야</td>
             				<td>${vo.major_field}&nbsp;&gt;&nbsp;${vo.minor_field }</td>
-            				<td class="informObj">봉사자유형</td>
+            				<td class="informObj" style="background-color:#f0f0f0;">봉사자유형</td>
             				<td>${vo.volunteer_type }</td>
             			</tr>
             			
             			<tr>
-            				<td class="informObj">모집센터</td>
+            				<td class="informObj" style="background-color:#f0f0f0;">모집센터</td>
             				<td>${vo.centername }</td>
-            				<td class="informObj">위치구분</td>
+            				<td class="informObj" style="background-color:#f0f0f0;">위치구분</td>
             				<td>${vo.si }&nbsp;${vo.gu }</td>
             			</tr>
             			
             			<tr>
-            				<td class="informObj">상세위치</td>
+            				<td class="informObj" style="background-color:#f0f0f0;">상세위치</td>
             				<td>${vo.address }</td>
-            				<td class="informObj">봉사대상</td>
+            				<td class="informObj" style="background-color:#f0f0f0;">봉사대상</td>
             				<td>${vo.target }</td>
             			</tr>
             			
             			<tr>
-            			<td class="informObj">활동구분</td>
+            			<td class="informObj" style="background-color:#f0f0f0;">활동구분</td>
             			<td colspan="3">${vo.active_type }</td>
             			</tr>
             		</table>

@@ -22,20 +22,42 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @MapperScan(basePackages = {"com.sist.mapper"})
 @EnableTransactionManagement
+@PropertySource("/WEB-INF/config/db.properties")
 public class DataSourceConfig {
-	
+	  @Value("${driver}")
+	    private String driverClassName;
 
+	    @Value("${projectUsername}")
+	    private String username;
+
+	    @Value("${url}")
+	    private String url;
+
+	    @Value("${password}")
+	    private String password;
+
+	    
+	    @Value("${maxActive}")
+	    private int maxActive;
+
+	    @Value("${maxIdle}")
+	    private int maxIdle;
+
+	    @Value("${maxWait}")
+	    private int maxWait;
 
 	@Bean("ds")
 	public BasicDataSource dataSource() {
+		
 		BasicDataSource ds=new BasicDataSource();
-		ds.setDriverClassName("oracle.jdbc.driver.OracleDriver");
-		ds.setUrl("jdbc:oracle:thin:@211.238.142.102:1521:XE");
-		ds.setUsername("hr");
-		ds.setPassword("happy");
-		
-		
-		return ds;
+		    ds.setDriverClassName(driverClassName);
+	        ds.setUrl(url);
+	        ds.setUsername(username);
+	        ds.setPassword(password);
+	        ds.setMaxActive(maxActive);
+	        ds.setMaxIdle(maxIdle);
+	        ds.setMaxWait(maxWait);
+	        return ds;
 	}
 	    
 		@Bean("ssf")

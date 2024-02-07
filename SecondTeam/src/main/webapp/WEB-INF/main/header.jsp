@@ -28,7 +28,7 @@
 							<ul class="js-clone-nav d-none d-lg-inline-block text-start site-menu mx-auto">
 								<li class="active"><a href="index.html">Home</a></li>
 								<li class="has-children">
-									<a href="category.html">Pages</a>
+									<a href="category.html">드롭다운예시</a>
 									<ul class="dropdown">
 										<li><a href="search-result.html">Search Result</a></li>
 										<li><a href="blog.html">Blog</a></li>
@@ -49,8 +49,12 @@
 									</ul>
 								</li>
 								<li><a href="../program/list.do">임시페이지</a></li>
-								<li><a href="category.html">Business</a></li>
-								<li><a href="category.html">Politics</a></li>
+								<li><a href="category.html">추가예정</a></li>
+								<li><a href="category.html">추가예정</a></li>
+								<li><a href="category.html">추가예정</a></li>
+								<li><a href="category.html">추가예정</a></li>
+								<li><a href="category.html">추가예정</a></li>
+								<li><a href="category.html">추가예정</a></li>
 							</ul>
 							
 							<span style="float:right;"><a href="#"><img src="../Projectimages/shop.png" width="35px;"></a></span>

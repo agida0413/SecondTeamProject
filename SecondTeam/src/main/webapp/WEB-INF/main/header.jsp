@@ -3,32 +3,27 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style type="text/css">
+
+</style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-<div class="site-mobile-menu site-navbar-target">
-		<div class="site-mobile-menu-header">
-			<div class="site-mobile-menu-close">
-				<span class="icofont-close js-menu-toggle"></span>
-			</div>
-		</div>
-		<div class="site-mobile-menu-body"></div>
-	</div>
+<!-- 모바일 -->
 
-	<nav class="site-nav">
+	
+	
+	<nav class="site-nav" style="height:80px;">
 		<div class="container">
 			<div class="menu-bg-wrap">
 				<div class="site-navigation">
 					<div class="row g-0 align-items-center">
 						<div class="col-2">
-							<a href="index.html" class="logo m-0 float-start">Blogy<span class="text-primary">.</span></a>
+						<a href="index.html" class="logo m-0 float-start" style="font-size:40px;">site<span class="text-primary">name</span></a>
 						</div>
 						<div class="col-8 text-center">
-							<form action="#" class="search-form d-inline-block d-lg-none">
-								<input type="text" class="form-control" placeholder="Search...">
-								<span class="bi-search"></span>
-							</form>
+							<div>
 
 							<ul class="js-clone-nav d-none d-lg-inline-block text-start site-menu mx-auto">
 								<li class="active"><a href="index.html">Home</a></li>
@@ -57,20 +52,29 @@
 								<li><a href="category.html">Business</a></li>
 								<li><a href="category.html">Politics</a></li>
 							</ul>
+							
+							<span style="float:right;"><a href="#"><img src="../Projectimages/shop.png" width="35px;"></a></span>
+							</div>
+						
 						</div>
 						<div class="col-2 text-end">
-							<a href="#" class="burger ms-auto float-end site-menu-toggle js-menu-toggle d-inline-block d-lg-none light">
-								<span></span>
-							</a>
-							<form action="#" class="search-form d-none d-lg-inline-block">
-								<input type="text" class="form-control" placeholder="Search...">
-								<span class="bi-search"></span>
-							</form>
+						   <div>
+							<span><a href="#" style="color:black;"><img src="../Projectimages/login.png" width="20px;">Login</a></span>
+							<span><a href="#" style="color:black;"><img src="../Projectimages/login.png" width="20px;">Join</a></span>
+							
+						   </div>
+						   
+						   <div style=" float:right; margin-top:10px;">
+						   	<span>보유 윙:0개..</span>
+						   </div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</nav>
+	
+	
+	
 </body>
 </html>

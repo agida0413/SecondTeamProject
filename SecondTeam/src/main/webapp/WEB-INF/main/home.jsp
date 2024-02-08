@@ -266,7 +266,112 @@
 	<!-- End posts-entry -->
 
 	<!-- Start posts-entry -->
+	<!-- Start posts-entry -->
+		<section class="section posts-entry posts-entry-sm bg-light">
+		<div class="container" >
+		<h1>하경</h1><!-- 지워도됌 -->
+			<div class="row mb-4">
+				<div class="col-sm-6">
+					<h2 class="posts-entry-title"></h2>
+				</div>
+				<div class="col-sm-6 text-sm-end"><a href="category.html" class="read-more">View All</a></div>
+			</div>
+			<div class="row g-3">
+				<div class="col-md-9 order-md-2">
+					<div class="row g-3">
+						<div class="col-md-9">
+							<div class="blog-entry">
+								<a href="single.html" class="img-link">
+									<img src="../images/img_1_sq.jpg" alt="Image" class="img-fluid">
+								</a>
+								<span class="date">Apr. 14th, 2022</span>
+								<h2><a href="single.html">Thought you loved Python? Wait until you meet Rust</a></h2>
+								<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, nobis ea quis inventore vel voluptas.</p>
+								<p><a href="single.html" class="btn btn-sm btn-outline-primary">Read More</a></p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<h2>기부스토어 찾기</h2>
+				</div>
+			</div>
+		</div>
+	</section>
 
+	<section class="section posts-entry posts-entry-sm bg-light">
+		<div class="container">
+		
+			<div class="row mb-4">
+				<div class="col-sm-6">
+					<h2 class="posts-entry-title">Politics</h2>
+				</div>
+				<div class="col-sm-6 text-sm-end"><a href="category.html" class="read-more">View All</a></div>
+			</div>
+
+			<div class="row">
+				
+				
+				<div class="col-lg-4 mb-4">
+					<div class="post-entry-alt">
+						<a href="single.html" class="img-link"><img src="../images/img_1_horizontal.jpg" alt="Image" class="img-fluid"></a>
+						<div class="excerpt">
+							
+
+							<h2><a href="single.html">Startup vs corporate: What job suits you best?</a></h2>
+							<div class="post-meta align-items-center text-left clearfix">
+								<figure class="author-figure mb-0 me-3 float-start"><img src="../images/person_3.jpg" alt="Image" class="img-fluid"></figure>
+								<span class="d-inline-block mt-1">By <a href="#">David Anderson</a></span>
+								<span>&nbsp;-&nbsp; July 19, 2019</span>
+							</div>
+
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo sunt tempora dolor laudantium sed optio, explicabo ad deleniti impedit facilis fugit recusandae! Illo, aliquid, dicta beatae quia porro id est.</p>
+							<p><a href="#" class="read-more">Continue Reading</a></p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 mb-4">
+					<div class="post-entry-alt">
+						<a href="single.html" class="img-link"><img src="../images/img_4_horizontal.jpg" alt="Image" class="img-fluid"></a>
+						<div class="excerpt">
+							
+							
+
+							<h2><a href="single.html">Startup vs corporate: What job suits you best?</a></h2>
+							<div class="post-meta align-items-center text-left clearfix">
+								<figure class="author-figure mb-0 me-3 float-start"><img src="../images/person_2.jpg" alt="Image" class="img-fluid"></figure>
+								<span class="d-inline-block mt-1">By <a href="#">David Anderson</a></span>
+								<span>&nbsp;-&nbsp; July 19, 2019</span>
+							</div>
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo sunt tempora dolor laudantium sed optio, explicabo ad deleniti impedit facilis fugit recusandae! Illo, aliquid, dicta beatae quia porro id est.</p>
+							<p><a href="#" class="read-more">Continue Reading</a></p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 mb-4">
+					<div class="post-entry-alt">
+						<a href="single.html" class="img-link"><img src="../images/img_3_horizontal.jpg" alt="Image" class="img-fluid"></a>
+						<div class="excerpt">
+							
+							
+
+							<h2><a href="single.html">Startup vs corporate: What job suits you best?</a></h2>
+							<div class="post-meta align-items-center text-left clearfix">
+								<figure class="author-figure mb-0 me-3 float-start"><img src="../images/person_5.jpg" alt="Image" class="img-fluid"></figure>
+								<span class="d-inline-block mt-1">By <a href="#">David Anderson</a></span>
+								<span>&nbsp;-&nbsp; July 19, 2019</span>
+							</div>
+
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo sunt tempora dolor laudantium sed optio, explicabo ad deleniti impedit facilis fugit recusandae! Illo, aliquid, dicta beatae quia porro id est.</p>
+							<p><a href="#" class="read-more">Continue Reading</a></p>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</section>
+	
 
 	
 

@@ -23,11 +23,11 @@
 					</a>
 					<a href="single.html" class="h-entry v-height gradient">
 
-						<div class="featured-img" style="background-image: url('../Projectimages/test2.jpg');"></div>
+						<div class="featured-img" style="background-image: url('https://www.youthcenter.go.kr/framework/filedownload/getImage.do?filePathName=K43kYCzEpw54N3DsTLz6bJLpCGXfefyPhrBXNjbTRk7OEZSm89DACCuhJZnoTy5l3nVe89E4xNenWWewSQmXfw%3D%3D');"></div>
 
 						<div class="text">
-							<span class="date">Apr. 14th, 2022</span>
-							<h2>Don’t assume your user data in the cloud is safe</h2>
+							<span class="date">서울청년센터 마포 오랑</span>
+							<h2>도움이 필요하지만 뭔가 막막할 때,<br>청년지원매니저를 찾아주세요!</h2>
 						</div>
 					</a>
 				</div>
@@ -54,11 +54,11 @@
 					</a>
 					<a href="single.html" class="h-entry v-height gradient">
 
-						<div class="featured-img" style="background-image: url('../images/img_4_horizontal.jpg');"></div>
+						<div class="featured-img" style="background-image: url('../Projectimages/SNS.jpg');"></div>
 
 						<div class="text">
-							<span class="date">Apr. 14th, 2022</span>
-							<h2>Thought you loved Python? Wait until you meet Rust</h2>
+							<span class="date">다양한 사람<br>지속적인 모임</span>
+							<h2>오프라인을 넘어 SNS에서 따스함을 공유하세요</h2>
 						</div>
 					</a>
 					

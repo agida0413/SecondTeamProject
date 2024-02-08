@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -63,9 +64,16 @@
 						</div>
 						<div class="col-2 text-end">
 						   <div>
-							<span><a href="#" style="color:black;"><img src="../Projectimages/login.png" width="20px;">Login</a></span>
+						   <c:if test="${sessionScope.id==null }">
+							<span><a href="../program/login.do" style="color:black;"><img src="../Projectimages/login.png" width="20px;">Login</a></span>
 							<span><a href="#" style="color:black;"><img src="../Projectimages/login.png" width="20px;">Join</a></span>
+							</c:if>
 							
+							 <c:if test="${sessionScope.id!=null }">
+								<span>${sessionScope.name } 님 환영합니다.</span>
+							<span><a href="../program/logout.do" style="color:black;"><img src="../Projectimages/login.png" width="20px;">Logout</a></span>
+							
+							</c:if>
 						   </div>
 						   
 						   <div style=" float:right; margin-top:10px;">

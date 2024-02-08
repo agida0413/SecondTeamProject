@@ -5,7 +5,7 @@
 <html>
 <head>
  <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
 
 <script src="https://unpkg.com/vue@3"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -293,9 +293,9 @@ a.link:hover{
   		<!-- 검색리스트 -->
   		<div class="row nextline" v-for="vo in programList">
   			<a :href="'../program/detail.do?vno='+vo.vno" style="color:black">
-  			<div class="findList">
+  			<div class="row findList">
   				
-	  			<div class="col-sm-10">
+	  			<div class="col-10">
 	  				<div class="" style="margin-top:15px; margin-bottom:10px;">
 						<!-- 봉사 분야 -->	
 						<span class="">
@@ -321,7 +321,7 @@ a.link:hover{
 					</div>
 				</div>
 				
-				<div class="col-sm-2">
+				<div class="col-2">
 					<!-- 모집상태 -->
 					<div style="margin:30px;">
 						<div class="closeBox" style="height:60px; width:60px; border:1px black solid;">
@@ -342,22 +342,27 @@ a.link:hover{
   		<span style="font-size:25px; opacity:0.8;">검색 결과가 없습니다.</span>
   		</div>
   		
+  		<div style="height:30px;"></div>
   		
   		<!-- 페이징 -->
   			<div class="row text-center">
   			 <ul class="pagination" v-if="totalpage!=0">
-  			 		 <li @click="firstpage"><a v-if="curpage>1" class="link">&lt;&lt;</a></li>
-				  <li @click="prev()"><a v-if="start>1" class="link">&lt;</a></li>
-				  <li v-for="i in range(start,end)" :class="curpage===i?'active':''" @click="move(i)"><a class="link">{{i}}</a></li>
+  			 		 <li @click="firstpage" class="page-item"><a v-if="curpage>1" class="link page-link">&lt;&lt;</a></li>
+				  <li @click="prev()" class="page-item"><a v-if="start>1" class="link page-link">&lt;</a></li>
+				  <li v-for="i in range(start,end)" @click="move(i)"  class="page-item" 
+				  :class="{ 'active': curpage === i }" 
+   				 :aria-current="curpage === i ? 'page' : null">
+				  <a class="link page-link">{{i}}</a>
+				  </li>
 				 
-				  <li @click="next()"><a v-if="end<totalpage" class="link">&gt;</a></li>
-				   <li @click="lastpage"><a v-if="curpage!==totalpage" class="link">&gt;&gt;</a></li>
+				  <li @click="next()" class="page-item"><a v-if="end<totalpage" class="link page-link">&gt;</a></li>
+				   <li @click="lastpage" class="page-item"><a v-if="curpage!==totalpage" class="link page-link">&gt;&gt;</a></li>
 				   
 				   
 				</ul> 
   			</div>
   	
-  	
+  
   		
             
         </div>

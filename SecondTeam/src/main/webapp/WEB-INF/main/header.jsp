@@ -14,13 +14,13 @@
 
 	
 	
-	<nav class="site-nav" style="height:80px;">
+	<nav class="site-nav">
 		<div class="container">
 			<div class="menu-bg-wrap">
 				<div class="site-navigation">
 					<div class="row g-0 align-items-center">
 						<div class="col-2">
-						<a href="index.html" class="logo m-0 float-start" style="font-size:40px;">site<span class="text-primary">name</span></a>
+						<a href="index.html" class="logo m-0 float-start">site<span class="text-primary">name</span></a>
 						</div>
 						<div class="col-8 text-center">
 							<div>

@@ -41,13 +41,15 @@
  <tiles:insertAttribute name="header"/>
 
 <div class="container bg-white">
- <div class="col-sm-2">
+<div class="row">
+ <div class="col-2">
   <tiles:insertAttribute name="aside"/>
  </div>
 
  
- <div class="col-sm-10">
+ <div class="col-10">
   <tiles:insertAttribute name="content"/>
+ </div>
  </div>
 </div>
 

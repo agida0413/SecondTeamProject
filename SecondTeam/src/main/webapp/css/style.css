@@ -5959,6 +5959,7 @@ textarea.form-control-lg {
   vertical-align: text-top !important; }
 
 .float-start {
+
   float: left !important; }
 
 .float-end {
@@ -9247,7 +9248,7 @@ textarea.form-control-lg {
       border: 2px solid #fff; }
 
 .logo {
-  font-size: 24px;
+  font-size: 40px;
   color: #fff;
   font-weight: 700; }
   .logo span {
@@ -9256,6 +9257,7 @@ textarea.form-control-lg {
     color: #fff; }
 
 .site-nav {
+	height:80px;
   position: relative;
   width: 100%;
   background-color: #214252;

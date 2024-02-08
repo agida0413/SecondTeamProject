@@ -265,8 +265,8 @@ a.link:hover{
     			</tr>
     			<tr class="text-center">
     			<td colspan=2>
-    			<span style="margin-right:15px;"><input type="submit" class="btn btn-lg btn-danger" value="검색" style="width: 200px;"></span>
-    				<span><input type="button" class="btn btn-lg btn-primary" value="초기화" style="width: 200px;" @click="optionReset()"></span>
+    			<span style="margin-right:15px;"><input type="submit" class="btn btn-danger btn-lg" value="검색" style="width: 200px;"></span>
+    				<span><input type="button" class="btn btn-primary btn-lg" value="초기화" style="width: 200px;" @click="optionReset()"></span>
     			</td>
     			</tr>
     		</table>

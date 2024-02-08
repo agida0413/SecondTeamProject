@@ -39,7 +39,7 @@
 
 						<div class="text">
 							<span class="date">Apr. 14th, 2022</span>
-							<h2>Why is my internet so slow?</h2>
+							<h2>나현쨩</h2>
 						</div>
 					</a>
 				</div>
@@ -69,20 +69,20 @@
 				<div class="col-md-2">
 					<a href="single.html" class="h-entry mb-30 v-height gradient">
 
-						<div class="featured-img" style="background-image: url('../Projectimages/test1.jpg');"></div>
+						<div class="featured-img" style="background-image: url('../Projectimages/volmain.jpg');"></div>
 
 						<div class="text">
-							<span class="date">Apr. 14th, 2022</span>
-							<h2>봉사프로그램</h2>
+							<span class="date">봉사프로그램</span>
+							<h2>가치있는 시간,보람있는 순간</h2>
 						</div>
 					</a>
 					<a href="single.html" class="h-entry v-height gradient">
 
-						<div class="featured-img" style="background-image: url('../images/img_4_horizontal.jpg');"></div>
+						<div class="featured-img" style="background-image: url('../Projectimages/talenetmain3.jpg');"></div>
 
 						<div class="text">
-							<span class="date">Apr. 14th, 2022</span>
-							<h2>재능기부</h2>
+							<span class="date">재능기부</span>
+							<h2>도운만큼 얻어가는 다양한 재능</h2>
 						</div>
 					</a>
 					
@@ -94,7 +94,106 @@
 		</div>
 	</section>
 	<!-- End retroy layout blog posts -->
+	<section class="section posts-entry posts-entry-sm bg-white">
+		<div class="container" >
+		<h1>하경</h1><!-- 지워도됌 -->
+			<div class="row mb-4">
+				<div class="col-sm-6">
+					<h2 class="posts-entry-title"></h2>
+				</div>
+				<div class="col-sm-6 text-sm-end"><a href="category.html" class="read-more">View All</a></div>
+			</div>
+			<div class="row g-3">
+				<div class="col-md-9 order-md-2">
+					<div class="row" style="margin: 20px 8px 0 0;">
+						<div class="col-md-12">
+							<div class="blog-entry">
+								<a href="single.html" class="img-link">
+									<img src="../images/img_1_sq.jpg" alt="Image" class="img-fluid" style="width: 936px; height: 650px;">
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<h2>기부스토어 찾기</h2>
+				</div>
+			</div>
+		</div>
+	</section>
 
+	<section class="section posts-entry posts-entry-sm bg-light">
+		<div class="container">
+		
+			<div class="row mb-4">
+				<div class="col-sm-6">
+					<h2 class="posts-entry-title">인기상품</h2>
+				</div>
+				<div class="col-sm-6 text-sm-end"><a href="category.html" class="read-more">View All</a></div>
+			</div>
+
+			<div class="row">
+				
+				
+				<div class="col-lg-4 mb-4">
+					<div class="post-entry-alt">
+						<a href="single.html" class="img-link"><img src="../images/img_1_horizontal.jpg" alt="Image" class="img-fluid"></a>
+						<div class="excerpt">
+							
+
+							<h2><a href="single.html">Startup vs corporate: What job suits you best?</a></h2>
+							<div class="post-meta align-items-center text-left clearfix">
+								<figure class="author-figure mb-0 me-3 float-start"><img src="../images/person_3.jpg" alt="Image" class="img-fluid"></figure>
+								<span class="d-inline-block mt-1">By <a href="#">David Anderson</a></span>
+								<span>&nbsp;-&nbsp; July 19, 2019</span>
+							</div>
+
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo sunt tempora dolor laudantium sed optio, explicabo ad deleniti impedit facilis fugit recusandae! Illo, aliquid, dicta beatae quia porro id est.</p>
+							<p><a href="#" class="read-more">Continue Reading</a></p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 mb-4">
+					<div class="post-entry-alt">
+						<a href="single.html" class="img-link"><img src="../images/img_4_horizontal.jpg" alt="Image" class="img-fluid"></a>
+						<div class="excerpt">
+							
+							
+
+							<h2><a href="single.html">Startup vs corporate: What job suits you best?</a></h2>
+							<div class="post-meta align-items-center text-left clearfix">
+								<figure class="author-figure mb-0 me-3 float-start"><img src="../images/person_2.jpg" alt="Image" class="img-fluid"></figure>
+								<span class="d-inline-block mt-1">By <a href="#">David Anderson</a></span>
+								<span>&nbsp;-&nbsp; July 19, 2019</span>
+							</div>
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo sunt tempora dolor laudantium sed optio, explicabo ad deleniti impedit facilis fugit recusandae! Illo, aliquid, dicta beatae quia porro id est.</p>
+							<p><a href="#" class="read-more">Continue Reading</a></p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 mb-4">
+					<div class="post-entry-alt">
+						<a href="single.html" class="img-link"><img src="../images/img_3_horizontal.jpg" alt="Image" class="img-fluid"></a>
+						<div class="excerpt">
+							
+							
+
+							<h2><a href="single.html">Startup vs corporate: What job suits you best?</a></h2>
+							<div class="post-meta align-items-center text-left clearfix">
+								<figure class="author-figure mb-0 me-3 float-start"><img src="../images/person_5.jpg" alt="Image" class="img-fluid"></figure>
+								<span class="d-inline-block mt-1">By <a href="#">David Anderson</a></span>
+								<span>&nbsp;-&nbsp; July 19, 2019</span>
+							</div>
+
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo sunt tempora dolor laudantium sed optio, explicabo ad deleniti impedit facilis fugit recusandae! Illo, aliquid, dicta beatae quia porro id est.</p>
+							<p><a href="#" class="read-more">Continue Reading</a></p>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</section>
 	<!-- Start posts-entry -->
 	<section class="section posts-entry">
 		<div class="container">
@@ -235,106 +334,7 @@
 
 	<!-- Start posts-entry -->
 	<!-- Start posts-entry -->
-		<section class="section posts-entry posts-entry-sm bg-light">
-		<div class="container" >
-		<h1>하경</h1><!-- 지워도됌 -->
-			<div class="row mb-4">
-				<div class="col-sm-6">
-					<h2 class="posts-entry-title"></h2>
-				</div>
-				<div class="col-sm-6 text-sm-end"><a href="category.html" class="read-more">View All</a></div>
-			</div>
-			<div class="row g-3">
-				<div class="col-md-9 order-md-2">
-					<div class="row" style="margin: 20px 8px 0 0;">
-						<div class="col-md-12">
-							<div class="blog-entry">
-								<a href="single.html" class="img-link">
-									<img src="../images/img_1_sq.jpg" alt="Image" class="img-fluid" style="width: 936px; height: 650px;">
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3">
-					<h2>기부스토어 찾기</h2>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<section class="section posts-entry posts-entry-sm bg-light">
-		<div class="container">
 		
-			<div class="row mb-4">
-				<div class="col-sm-6">
-					<h2 class="posts-entry-title">인기상품</h2>
-				</div>
-				<div class="col-sm-6 text-sm-end"><a href="category.html" class="read-more">View All</a></div>
-			</div>
-
-			<div class="row">
-				
-				
-				<div class="col-lg-4 mb-4">
-					<div class="post-entry-alt">
-						<a href="single.html" class="img-link"><img src="../images/img_1_horizontal.jpg" alt="Image" class="img-fluid"></a>
-						<div class="excerpt">
-							
-
-							<h2><a href="single.html">Startup vs corporate: What job suits you best?</a></h2>
-							<div class="post-meta align-items-center text-left clearfix">
-								<figure class="author-figure mb-0 me-3 float-start"><img src="../images/person_3.jpg" alt="Image" class="img-fluid"></figure>
-								<span class="d-inline-block mt-1">By <a href="#">David Anderson</a></span>
-								<span>&nbsp;-&nbsp; July 19, 2019</span>
-							</div>
-
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo sunt tempora dolor laudantium sed optio, explicabo ad deleniti impedit facilis fugit recusandae! Illo, aliquid, dicta beatae quia porro id est.</p>
-							<p><a href="#" class="read-more">Continue Reading</a></p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 mb-4">
-					<div class="post-entry-alt">
-						<a href="single.html" class="img-link"><img src="../images/img_4_horizontal.jpg" alt="Image" class="img-fluid"></a>
-						<div class="excerpt">
-							
-							
-
-							<h2><a href="single.html">Startup vs corporate: What job suits you best?</a></h2>
-							<div class="post-meta align-items-center text-left clearfix">
-								<figure class="author-figure mb-0 me-3 float-start"><img src="../images/person_2.jpg" alt="Image" class="img-fluid"></figure>
-								<span class="d-inline-block mt-1">By <a href="#">David Anderson</a></span>
-								<span>&nbsp;-&nbsp; July 19, 2019</span>
-							</div>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo sunt tempora dolor laudantium sed optio, explicabo ad deleniti impedit facilis fugit recusandae! Illo, aliquid, dicta beatae quia porro id est.</p>
-							<p><a href="#" class="read-more">Continue Reading</a></p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 mb-4">
-					<div class="post-entry-alt">
-						<a href="single.html" class="img-link"><img src="../images/img_3_horizontal.jpg" alt="Image" class="img-fluid"></a>
-						<div class="excerpt">
-							
-							
-
-							<h2><a href="single.html">Startup vs corporate: What job suits you best?</a></h2>
-							<div class="post-meta align-items-center text-left clearfix">
-								<figure class="author-figure mb-0 me-3 float-start"><img src="../images/person_5.jpg" alt="Image" class="img-fluid"></figure>
-								<span class="d-inline-block mt-1">By <a href="#">David Anderson</a></span>
-								<span>&nbsp;-&nbsp; July 19, 2019</span>
-							</div>
-
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo sunt tempora dolor laudantium sed optio, explicabo ad deleniti impedit facilis fugit recusandae! Illo, aliquid, dicta beatae quia porro id est.</p>
-							<p><a href="#" class="read-more">Continue Reading</a></p>
-						</div>
-					</div>
-				</div>
-			</div>
-			
-		</div>
-	</section>
 	
 
 	

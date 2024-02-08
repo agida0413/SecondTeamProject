@@ -73,7 +73,8 @@ a.link:hover{
 <title>Insert title here</title>
 </head>
 <body>
-  
+  <div class=""><span style="font-weight:bold; font-size:30px; color:black;">봉사프로그램 조회</span></div>
+  <hr>
   <div class="container" id="optionSelect">
   		<form @submit.prevent="findClick">
         <div class="row">

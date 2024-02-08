@@ -40,14 +40,14 @@
 
  <tiles:insertAttribute name="header"/>
 
-<div class="container bg-white">
+<div class="container bg-white" style="margin-top:50px;">
 <div class="row">
- <div class="col-2">
+ <div class="col-3">
   <tiles:insertAttribute name="aside"/>
  </div>
 
  
- <div class="col-10">
+ <div class="col-9">
   <tiles:insertAttribute name="content"/>
  </div>
  </div>

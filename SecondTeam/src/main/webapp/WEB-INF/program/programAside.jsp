@@ -7,10 +7,15 @@
 <title>Insert title here</title>
 </head>
 
- <ul class="list-group" style="width:150px;">
-  <li class="list-group-item">First item</li>
-  <li class="list-group-item">Second item</li>
-  <li class="list-group-item">Third item</li>
-</ul> 
+ <ul class="list-group">
+  <li class="list-group-item" style="font-size:40px; padding:25px; font-weight:bold;">봉사프로그램</li>
+  
+  <li class="list-group-item active" style="padding:18px;">봉사프로그램 조회</li>
+  <li class="list-group-item" style="padding:18px;">이달의 봉사자</li>
+  <li class="list-group-item" style="padding:18px;">자료실(양식다운)</li>
+  <li class="list-group-item" style="padding:18px;">Q/A</li>
+  <li class="list-group-item" style="padding:18px;">자주하는질문</li>
+  <li class="list-group-item" style="padding:18px;">통계정보</li>
+</ul>
 
 </html>

@@ -20,7 +20,7 @@ public class ProgramController {
 	@Autowired
 	private ProgramService service;
 	
-	@RequestMapping("program/list.do")
+	@GetMapping("program/list.do")
 	public String programList(OptionVO vo,Model model) {
 		
 		if(vo.getMajor_option()==null) {
@@ -43,17 +43,43 @@ public class ProgramController {
 		model.addAttribute("ovo",vo);
 		model.addAttribute("sList",sList);
 		model.addAttribute("mjList",mjList);
-		
+		model.addAttribute("cate","list");
 		return "program";
 	}
 	
 	
-	@RequestMapping("program/detail.do")
+	@GetMapping("program/detail.do")
 	public String programDetail(int vno,Model model) {
 		ProgramVO vo=service.programDetailData(vno);
 		model.addAttribute("vo",vo);	
+		model.addAttribute("cate","list");
 		return "program/detail";
 	}
+	
+	
+	
+	
+	//프로그램 자료실
+	
+	  @GetMapping("program/databoardList.do")
+	   public String databoard_list(Model model)
+	   {
+		  model.addAttribute("cate","databoard");
+		   return "program/databoardList";
+	   }
+	   @GetMapping("program/databoardInsert.do")
+	   public String databoard_insert(Model model)
+	   {	
+		   model.addAttribute("cate","databoard");
+		   return "program/databoardInsert";
+	   }
+	   @GetMapping("program/databoardDetail.do")
+	   public String databoard_detail(int dno,Model model)
+	   {
+		   model.addAttribute("dno" ,dno);
+		   model.addAttribute("cate","databoard");
+		   return "program/databoardDetail";
+	   }
 	
 	
 		

@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sist.dao.OptionDAO;
+import com.sist.dao.ProgramDataboardDAO;
 import com.sist.dao.ProgramListDAO;
 import com.sist.vo.OptionVO;
 import com.sist.vo.ProgramVO;
+import com.sist.vo.VdataboardVO;
 
 @Service
 public class ProgramServiceImpl implements ProgramService {
@@ -18,6 +20,8 @@ public class ProgramServiceImpl implements ProgramService {
 	private ProgramListDAO pDao;
 	@Autowired
 	private OptionDAO oDao;
+	@Autowired
+	private ProgramDataboardDAO dbDAO;
 
 	@Override
 	public List<OptionVO> stateOption() {
@@ -63,6 +67,33 @@ public class ProgramServiceImpl implements ProgramService {
 		return pDao.programDetailData(vno);
 	}
 
+	
+	
+	
+	//프로그램 자료실
+	@Override
+	public List<VdataboardVO> databoardListData(int start, int end) {
+		// TODO Auto-generated method stub
+		return dbDAO.databoardListData(start, end);
+	}
+
+	@Override
+	public int databoardTotalPage() {
+		// TODO Auto-generated method stub
+		return dbDAO.databoardTotalPage();
+	}
+
+	@Override
+	public void databoardInsert(VdataboardVO vo) {
+		// TODO Auto-generated method stub
+		dbDAO.databoardInsert(vo);
+	}
+
+	@Override
+	public VdataboardVO databoardDetailData(int dno) {
+		// TODO Auto-generated method stub
+		return dbDAO.databoardDetailData(dno);
+	}
 	
 	
 	

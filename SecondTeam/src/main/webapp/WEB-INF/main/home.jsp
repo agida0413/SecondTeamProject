@@ -14,11 +14,11 @@
 				<div class="col-md-4">
 					<a href="single.html" class="h-entry mb-30 v-height gradient">
 
-						<div class="featured-img" style="background-image: url('../Projectimages/test3.jpg');"></div>
+						<div class="featured-img" style="background-image: url('../Projectimages/가치소비(메인)_1.png');"></div>
 
 						<div class="text">
-							<span class="date">Apr. 14th, 2022</span>
-							<h2>AI can now kill those annoying cookie pop-ups</h2>
+							<span class="date">가치소비</span>
+							<h2>가격이 아닌 가치를 봅니다</h2>
 						</div>
 					</a>
 					<a href="single.html" class="h-entry v-height gradient">
@@ -45,11 +45,11 @@
 				<div class="col-md-2">
 					<a href="single.html" class="h-entry mb-30 v-height gradient">
 
-						<div class="featured-img" style="background-image: url('../Projectimages/test1.jpg');"></div>
+						<div class="featured-img" style="background-image: url('../Projectimages/물품기부(메인)_1.png');"></div>
 
 						<div class="text">
-							<span class="date">Apr. 14th, 2022</span>
-							<h2>Startup vs corporate: What job suits you best?</h2>
+							<span class="date">물품기부</span>
+							<h2>나와 우리, 그리고 지구를 위한</h2>
 						</div>
 					</a>
 					<a href="single.html" class="h-entry v-height gradient">
@@ -278,16 +278,12 @@
 			</div>
 			<div class="row g-3">
 				<div class="col-md-9 order-md-2">
-					<div class="row g-3">
-						<div class="col-md-9">
+					<div class="row" style="margin: 20px 8px 0 0;">
+						<div class="col-md-12">
 							<div class="blog-entry">
 								<a href="single.html" class="img-link">
-									<img src="../images/img_1_sq.jpg" alt="Image" class="img-fluid">
+									<img src="../images/img_1_sq.jpg" alt="Image" class="img-fluid" style="width: 936px; height: 650px;">
 								</a>
-								<span class="date">Apr. 14th, 2022</span>
-								<h2><a href="single.html">Thought you loved Python? Wait until you meet Rust</a></h2>
-								<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, nobis ea quis inventore vel voluptas.</p>
-								<p><a href="single.html" class="btn btn-sm btn-outline-primary">Read More</a></p>
 							</div>
 						</div>
 					</div>
@@ -304,7 +300,7 @@
 		
 			<div class="row mb-4">
 				<div class="col-sm-6">
-					<h2 class="posts-entry-title">Politics</h2>
+					<h2 class="posts-entry-title">인기상품</h2>
 				</div>
 				<div class="col-sm-6 text-sm-end"><a href="category.html" class="read-more">View All</a></div>
 			</div>

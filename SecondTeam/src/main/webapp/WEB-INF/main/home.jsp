@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -103,56 +104,23 @@
 				</div>
 				<div class="col-sm-6 text-sm-end"><a href="category.html" class="read-more">View All</a></div>
 			</div>
-			<div class="row g-3">
-				<div class="col-md-9">
-					<div class="row g-3">
-						<div class="col-md-6">
+			<div class="row">
+				<div>
+					<div class="row" style="display: flex; justify-content: space-between;">
+					<c:forEach var="mvo" items="${mlist }">
+						<div class="col-md-6" style="width: 30% !important;">
 							<div class="blog-entry">
 								<a href="single.html" class="img-link">
-									<img src="../images/img_1_sq.jpg" alt="Image" class="img-fluid">
+									<img src="${mvo.img }" alt="Image" class="img-fluid">
 								</a>
-								<span class="date">Apr. 14th, 2022</span>
-								<h2><a href="single.html">Thought you loved Python? Wait until you meet Rust</a></h2>
-								<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, nobis ea quis inventore vel voluptas.</p>
-								<p><a href="single.html" class="btn btn-sm btn-outline-primary">Read More</a></p>
+								<span class="date">${mvo.time }</span>
+								<h2><a href="single.html">${mvo.loc }</a><span class="date" style="font-size: 19px; font-weight: 650;">${mvo.type }</span></h2>
+								<p>${mvo.content }</p>
+								<p><a href="single.html" class="btn btn-sm btn-outline-primary">더보기</a></p>
 							</div>
 						</div>
-						<div class="col-md-6">
-							<div class="blog-entry">
-								<a href="single.html" class="img-link">
-									<img src="../images/img_2_sq.jpg" alt="Image" class="img-fluid">
-								</a>
-								<span class="date">Apr. 14th, 2022</span>
-								<h2><a href="single.html">Startup vs corporate: What job suits you best?</a></h2>
-								<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, nobis ea quis inventore vel voluptas.</p>
-								<p><a href="single.html" class="btn btn-sm btn-outline-primary">Read More</a></p>
-							</div>
-						</div>
+					  </c:forEach>
 					</div>
-				</div>
-				<div class="col-md-3">
-					<ul class="list-unstyled blog-entry-sm">
-						<li>
-							<span class="date">Apr. 14th, 2022</span>
-							<h3><a href="single.html">Don’t assume your user data in the cloud is safe</a></h3>
-							<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, nobis ea quis inventore vel voluptas.</p>
-							<p><a href="#" class="read-more">Continue Reading</a></p>
-						</li>
-
-						<li>
-							<span class="date">Apr. 14th, 2022</span>
-							<h3><a href="single.html">Meta unveils fees on metaverse sales</a></h3>
-							<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, nobis ea quis inventore vel voluptas.</p>
-							<p><a href="#" class="read-more">Continue Reading</a></p>
-						</li>
-
-						<li>
-							<span class="date">Apr. 14th, 2022</span>
-							<h3><a href="single.html">UK sees highest inflation in 30 years</a></h3>
-							<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, nobis ea quis inventore vel voluptas.</p>
-							<p><a href="#" class="read-more">Continue Reading</a></p>
-						</li>
-					</ul>
 				</div>
 			</div>
 		</div>

@@ -6,6 +6,7 @@ import java.util.Map;
 import com.sist.vo.OptionVO;
 import com.sist.vo.ProgramVO;
 import com.sist.vo.VdataboardVO;
+import com.sist.vo.VprogramApplyVO;
 
 public interface ProgramService {
 	//옵션
@@ -23,7 +24,10 @@ public interface ProgramService {
 	
 	public ProgramVO programDetailData(int vno);
 	
-	
+	//프로그램 신청
+	public void programApplyInsert(VprogramApplyVO vo);
+	public int getApplyCount(VprogramApplyVO vo);
+	public List<VprogramApplyVO> applyList(String centername);
 	//프로그램 자료실
 	public List<VdataboardVO> databoardListData(int start,int end);
 	

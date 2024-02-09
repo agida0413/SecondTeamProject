@@ -12,6 +12,7 @@ import com.sist.dao.ProgramListDAO;
 import com.sist.vo.OptionVO;
 import com.sist.vo.ProgramVO;
 import com.sist.vo.VdataboardVO;
+import com.sist.vo.VprogramApplyVO;
 
 @Service
 public class ProgramServiceImpl implements ProgramService {
@@ -66,9 +67,26 @@ public class ProgramServiceImpl implements ProgramService {
 		// TODO Auto-generated method stub
 		return pDao.programDetailData(vno);
 	}
-
 	
 	
+	//프로그램 신청
+	@Override
+	public void programApplyInsert(VprogramApplyVO vo) {
+		pDao.programApplyInsert(vo);
+		
+	}
+	
+	@Override
+	public int getApplyCount(VprogramApplyVO vo) {
+		// TODO Auto-generated method stub
+		return pDao.getApplyCount(vo);
+	}
+	
+	@Override
+	public List<VprogramApplyVO> applyList(String centername) {
+		// TODO Auto-generated method stub
+		return pDao.applyList(centername);
+	}
 	
 	//프로그램 자료실
 	@Override
@@ -106,6 +124,12 @@ public class ProgramServiceImpl implements ProgramService {
 		// TODO Auto-generated method stub
 		return dbDAO.databoardFileInfoData(dno);
 	}
+
+	
+
+
+
+	
 	
 	
 	

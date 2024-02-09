@@ -23,6 +23,8 @@ public class TemptLoginController {
 			session.setAttribute("centername", vo.getCentername());
 			session.setAttribute("name", vo.getName());
 			session.setAttribute("admin", vo.getAdmin());
+			session.setAttribute("email", vo.getEmail());
+			session.setAttribute("phone", vo.getPhone());
 			
 			
 		}

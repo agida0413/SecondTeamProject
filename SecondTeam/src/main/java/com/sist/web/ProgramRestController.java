@@ -14,6 +14,7 @@ import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,7 @@ import com.sist.service.ProgramService;
 import com.sist.vo.OptionVO;
 import com.sist.vo.ProgramVO;
 import com.sist.vo.VdataboardVO;
+import com.sist.vo.VprogramApplyVO;
 
 @RestController
 public class ProgramRestController {
@@ -147,6 +149,68 @@ private CommonsFunction cf;
 			
 		return json;
 	}
+	
+	
+	//봉사신청 
+	 @PostMapping(value="program/apply_vue.do",produces = "text/plain;charset=UTF-8")
+	   public String program_apply_vue(VprogramApplyVO vo,int vno,HttpServletRequest request,HttpSession session)
+	   {
+		
+		 String id=(String)session.getAttribute("id");
+		 vo.setId(id);
+		 vo.setVno(vno);
+		 
+		 int count=service.getApplyCount(vo);
+		   String result="";
+		   try
+		   {
+			   if(count>0) {
+				   result="no";
+			   }
+			   else{
+				   String path=request.getSession().getServletContext().getRealPath("/")+"applyUpload\\";
+				   path=path.replace("\\", File.separator);// 운영체제의 호환 
+				   // Hosting => AWS(리눅스)
+				   File dir=new File(path);
+				   if(!dir.exists())
+				   {
+					   dir.mkdir();
+				   }
+				
+				   List<MultipartFile> list=vo.getFiles();//임시 저장
+				
+				   
+				  
+					   String filename="";
+					   String filesize="";
+					   for(MultipartFile mf:list)
+					   {
+						   String name=mf.getOriginalFilename();
+						   File file=new File(path+name);
+						   mf.transferTo(file);//  업로드
+						   
+						   filename+=name+",";// a.jpg,b.jpg,
+						   filesize+=file.length()+",";
+					   }
+					   filename=filename.substring(0,filename.lastIndexOf(","));
+					   filesize=filesize.substring(0,filesize.lastIndexOf(","));
+					   vo.setV_filename(filename);
+					   vo.setV_filesize(filesize);
+					   vo.setV_filecount(list.size());
+					   
+					  
+					   vo.setV_state("WAIT");
+				  service.programApplyInsert(vo);
+				   result="yes";
+			   }
+			 
+		   }catch(Exception ex)
+		   {
+			   result=ex.getMessage();   
+		   }
+		   return result;
+	   }
+	
 	
 	
 	
@@ -315,4 +379,6 @@ private CommonsFunction cf;
 		   return result;
 	   }
 	
+
+
 }

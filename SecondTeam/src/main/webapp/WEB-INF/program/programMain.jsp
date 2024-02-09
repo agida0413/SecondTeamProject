@@ -6,7 +6,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+<script src="https://unpkg.com/vue@3"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <style type="text/css">
 
 </style>
@@ -70,7 +71,6 @@
     <script src="../js/counter.js"></script>
     <script src="../js/custom.js"></script>
     <script src="../js/programList_vue.js"></script>
-     <script src="../js/programDetail_vue.js"></script>
       <script src="../js/programDataboard_vue.js"></script>
       
 </body>

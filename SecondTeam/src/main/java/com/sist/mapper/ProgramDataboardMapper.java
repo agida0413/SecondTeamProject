@@ -12,8 +12,8 @@ import com.sist.vo.VdataboardVO;
 public interface ProgramDataboardMapper {
 	   @Select("SELECT dno,subject,name,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,hit,v_check,num "
 	    	   +"FROM (SELECT dno,subject,name,regdate,hit,v_check,rownum as num "
-	    	   +"FROM (SELECT /*+ INDEX_DESC(v_DataBoard dno_pk)*/dno,subject,name,regdate,hit,v_check "
-	    	   +"FROM v_DataBoard)) "
+	    	   +"FROM (SELECT dno,subject,name,regdate,hit,v_check "
+	    	   +"FROM v_DataBoard ORDER BY v_check ASC,dno DESC )) "
 	    	   +"WHERE num BETWEEN #{start} AND #{end}")
 	    public List<VdataboardVO> databoardListData(@Param("start") int start,@Param("end") int end);
 	    

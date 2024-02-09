@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
+
 <style type="text/css">
 
 </style>
@@ -15,35 +16,45 @@
 <body>
   <div class="container" id="vDataboard">
      <div class=""><span style="font-weight:bold; font-size:30px; color:black;">자료실(양식다운)</span></div>
+     
+     
   <hr>
+ 
+   
+  
+   
     <div class="row">
+    <table>
+    <tr>
+    <td colspan="5" class="align-right">
+     <a href="../program/databoardInsert.do" class="btn btn-small btn-danger" style="margin-left:860px;  float: right; margin-bottom:5px;">새글</a>
+    </td>
+    </tr>
+      
+       </table>
       <table class="table">
-       <tr>
-        <td>
-          <a href="../program/databoardInsert.do" class="btn btn-sm btn-danger">새글</a>
-        </td>
-       </tr>
-      </table>
-      <table class="table">
-        <tr class="success">
+        <tr class="success"  style="background-color:#cccccc;">
          <th class="text-center" width=10%>번호</th>
          <th class="text-center" width=45%>제목</th>
          <th class="text-center" width=15%>이름</th>
          <th class="text-center" width=20%>작성일</th>
          <th class="text-center" width=10%>조회수</th>
         </tr>
-        <tr v-for="vo in board_list">
+        <tr v-for="vo in board_list" :style="vo.v_check===1?'background-color:#f2f2f2':''">
+        
          <td class="text-center" width=10%>{{vo.dno}}</td>
-         <td width=45%><a :href="'../program/databoardDetail.do?dno='+vo.dno">{{vo.subject}}</a></td>
+         <td width=45%><a :href="'../program/databoardDetail.do?dno='+vo.dno"><span :style="vo.v_check===1?'font-weight:bold;':''">{{vo.subject}}</span></a></td>
          <td class="text-center" width=15%>{{vo.name}}</td>
          <td class="text-center" width=20%>{{vo.dbday}}</td>
          <td class="text-center" width=10%>{{vo.hit}}</td>
+         
         </tr>
+       
         <tr>
           <td colspan="5" class="text-center">
-            <input type=button class="btn btn-sm btn-primary" value="이전" @click="prev()">
+            <input type=button class="btn btn-medium btn-primary" value="이전" @click="prev()">
              {{curpage}} page / {{totalpage}} pages
-            <input type=button class="btn btn-sm btn-primary" value="다음" @click="next()">
+            <input type=button class="btn btn-medium btn-primary" value="다음" @click="next()">
           </td>
         </tr>
       </table>

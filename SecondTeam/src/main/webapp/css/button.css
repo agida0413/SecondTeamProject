@@ -1,0 +1,22 @@
+.btn-small {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+}
+
+/* 보통 크기의 버튼 */
+.btn-medium {
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+}
+
+/* 큰 크기의 버튼 */
+.btn-large {
+    padding: 0.5rem 1rem;
+    font-size: 1.25rem;
+}
+
+/* 매우 큰 크기의 버튼 */
+.btn-xlarge {
+    padding: 0.75rem 1.5rem;
+    font-size: 1.5rem;
+}

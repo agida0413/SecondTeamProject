@@ -9,7 +9,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
 
+</style>
 
 <script src="https://unpkg.com/vue@3"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -20,29 +22,32 @@
      <div class=""><span style="font-weight:bold; font-size:30px; color:black;">자료실(양식다운)</span></div>
   <hr>
      <div class="row">
-       <table class="table">
-         <tr>
-           <th width=20% class="text-center success">번호</th>
+       <table class="table" >
+         <tr style="border-top:2px black solid;">
+           <th width=20% class="text-center success" style="background-color:#f2f2f2;">번호</th>
            <td width=30% class="text-center">{{detail_data.dno}}</td>
-           <th width=20% class="text-center success">작성일</th>
+           <th width=20% class="text-center success" style="background-color:#f2f2f2;">작성일</th>
            <td width=30% class="text-center">{{detail_data.dbday}}</td>
          </tr>
          <tr>
-           <th width=20% class="text-center success">이름</th>
+           <th width=20% class="text-center success" style="background-color:#f2f2f2;">이름</th>
            <td width=30% class="text-center">{{detail_data.name}}</td>
-           <th width=20% class="text-center success">조회수</th>
+           <th width=20% class="text-center success" style="background-color:#f2f2f2;">조회수</th>
            <td width=30% class="text-center">{{detail_data.hit}}</td>
          </tr>
          <tr>
-           <th width=20% class="text-center success">제목</th>
+           <th width=20% class="text-center success" style="background-color:#f2f2f2;">제목</th>
            <td colspan="3">{{detail_data.subject}}</td>
          </tr>
          <tr v-if="v_filecount!=0">
-           <th width=20% class="text-center success">첨부파일</th>
+           <th width=20% class="text-center success" style="background-color:#f2f2f2; vertical-align:middle;">첨부파일</th>
            <td colspan="3">
-             <ul>
-               <li v-for="(fn,index) in filenames">
-                 <a :href="'../program/download.do?fn='+fn">{{fn}}</a>&nbsp;({{filesizes[index]}}Bytes)
+             <ul style="list-style-type: none;   padding-left: 0; /* 왼쪽 패딩 없애기 */
+    margin-left: 0; /* 왼쪽 마진 없애기 */">
+               <li v-for="(fn,index) in filenames" style="list-style-type: none;   padding-left: 0; /* 왼쪽 패딩 없애기 */
+    margin-left: 0; /* 왼쪽 마진 없애기 */">
+               	<img src="../Projectimages/file.png" width="20px" >
+                 <a :href="'../program/download.do?fn='+fn" style="margin-left:5px;">{{fn}}</a>&nbsp;({{filesizes[index]}}Bytes)
                </li>
              </ul>
            </td>
@@ -52,11 +57,15 @@
              <pre style="white-space: pre-wrap;background-color: white;border:none">{{detail_data.content}}</pre>
            </td>
          </tr>
-         <tr>
-           <td colspan="4" class="text-right">
-             <button class="btn-xs btn-danger">수정</button>
-             <button class="btn-xs btn-info">삭제</button>
-             <button class="btn-xs btn-success" @click="dataList()">목록</button>
+         <tr > 
+           <td colspan="4" class="align-right">
+           <span style="margin-left:700px;  float: right;">
+           <span style="margin-right:10px;">
+             <button class="btn btn-small btn-primary" >수정</button>
+             </span>
+             <button class="btn btn-small btn-danger" style="margin-right:10px;">삭제</button>
+             <button class="btn btn-small btn-success"  @click="dataList()">목록</button>
+             </span>
            </td>
          </tr>
        </table>

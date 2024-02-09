@@ -22,11 +22,14 @@
 							<h2>가격이 아닌 가치를 봅니다</h2>
 						</div>
 					</a>
-					<a href="single.html" class="h-entry v-height gradient">
+					<a href="../moim/list.do" class="h-entry v-height gradient">
 
 						<div class="featured-img" style="background-image: url('https://www.youthcenter.go.kr/framework/filedownload/getImage.do?filePathName=K43kYCzEpw54N3DsTLz6bJLpCGXfefyPhrBXNjbTRk7OEZSm89DACCuhJZnoTy5l3nVe89E4xNenWWewSQmXfw%3D%3D');"></div>
 
 						<div class="text">
+						<span class="date" style="
+						color: #fff; font-weight: 700;
+						font-size: 20px; text-shadow: 0 0 5px #555;">소모임 공간대여</span>
 							<span class="date">서울청년센터 마포 오랑</span>
 							<h2>도움이 필요하지만 뭔가 막막할 때,<br>청년지원매니저를 찾아주세요!</h2>
 						</div>
@@ -56,7 +59,11 @@
 					<a href="single.html" class="h-entry v-height gradient">
 
 						<div class="featured-img" style="background-image: url('../Projectimages/SNS.jpg');"></div>
-
+						
+						<span class="date" style="
+						position:absolute; top:20px; right:20px;
+						color: #fff; font-weight: 700;
+						font-size: 25px; text-shadow: 0 0 5px #555;">SNS</span>
 						<div class="text">
 							<span class="date">다양한 사람<br>지속적인 모임</span>
 							<h2>오프라인을 넘어 SNS에서 따스함을 공유하세요</h2>
@@ -201,7 +208,7 @@
 				<div class="col-sm-6">
 					<h2 class="posts-entry-title">유나</h2>
 				</div>
-				<div class="col-sm-6 text-sm-end"><a href="category.html" class="read-more">View All</a></div>
+				<div class="col-sm-6 text-sm-end"><a href="../moim/list.do" class="read-more">View All</a></div>
 			</div>
 			<div class="row">
 				<div>

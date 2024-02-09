@@ -34,18 +34,18 @@ border-bottom: 1px solid #ccc;
 </style>
 </head>
 <body>
-  	
+  	 <div class=""><span style="font-weight:bold; font-size:30px; color:black;">봉사프로그램 조회</span></div>
+
+            		<hr>
             <div class="col-sm-10">
 	<div class="container" id="programDetail">
+	
 		<div class="row">
 			
           
             	<div class="row">
             		<!-- 헤드 -->
-            		<div>
-            		<h2>봉사프로그램</h2>
-            		</div>
-            		<hr>
+            		
             		
             		<!-- 목록,신청,관심목록 -->
             		<div>
@@ -58,7 +58,7 @@ border-bottom: 1px solid #ccc;
             		  
             		  <!-- 타이틀 -->
             		  <div class="pg_detail_title">
-            		  <span style="font-weight:bold;">${vo.title }</span>&nbsp;
+            		  <span style="font-weight:bold; color:black;">${vo.title }</span>&nbsp;
             		  <span style="color:red;opacity:0.7;">(${vo.collect_state})</span>
             		  </div>
             		  <!-- 상세정보 -->

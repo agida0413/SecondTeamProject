@@ -13,7 +13,8 @@
 </head>
 <body>
   <div class="container" id="databoardInsert">
-    <h3 class="text-center">글쓰기</h3>
+    <div class=""><span style="font-weight:bold; font-size:30px; color:black;">자료실(양식다운)</span></div>
+  <hr>
     <div class="row">
      <%--
            form => 기본 기능 (서버로 데이터 전송)
@@ -31,8 +32,11 @@
        <tr>
         <th width=15% class="text-center">제목</th>
         <td width=85%>
-         <input type=text size=50 class="input-sm" v-model="subject" ref="subject">
+         <input type=text size=40 class="input-sm" v-model="subject" ref="subject">
+         <span style="margin-left:30px;"><input type="checkbox" v-model="Jcheck">&nbsp;&nbsp;중요글</span>
         </td>
+
+        
        </tr>
        <tr>
         <th width=15% class="text-center">내용</th>
@@ -75,7 +79,9 @@
     			subject:'',
     			content:'',
     			pwd:'',
-    			upfiles:''
+    			upfiles:'',
+    			Jcheck:'',
+    			check:2
     		}
     	},
     	// 멤버함수 설정
@@ -106,12 +112,19 @@
     				return;
     			}
     			
+    			
+    			if(this.Jcheck===true){
+    				this.check=1	
+    			}
+    			if(this.Jcheck===false || this.Jcheck===''){
+    				this.check=2
+    			}
     			let formData=new FormData();
     			formData.append("name",this.name);
     			formData.append("subject",this.subject);
     			formData.append("content",this.content);
     			formData.append("pwd",this.pwd);
-    			
+    			formData.append("v_check",this.check);
     			let leng=this.$refs.upfiles.files.length;
     			//alert("leng="+leng)
     			// List => [0]

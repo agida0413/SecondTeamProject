@@ -17,7 +17,8 @@
 <body>
    <%-- View : data()에 설정된 데이터값에 따라 변경 (자동) --%>
    <div class="container" id="dataoboardDetail">
-     <h3 class="text-center">내용보기</h3>
+     <div class=""><span style="font-weight:bold; font-size:30px; color:black;">자료실(양식다운)</span></div>
+  <hr>
      <div class="row">
        <table class="table">
          <tr>

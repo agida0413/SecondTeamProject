@@ -14,7 +14,8 @@
 </head>
 <body>
   <div class="container" id="vDataboard">
-    <h3 class="text-center">자료실</h3>
+     <div class=""><span style="font-weight:bold; font-size:30px; color:black;">자료실(양식다운)</span></div>
+  <hr>
     <div class="row">
       <table class="table">
        <tr>

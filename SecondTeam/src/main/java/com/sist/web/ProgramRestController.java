@@ -178,7 +178,7 @@ private CommonsFunction cf;
 	   public String databoard_insert(VdataboardVO vo,HttpServletRequest request)
 	   {
 		 
-		   
+		   System.out.println(vo.getV_check());
 		   String result="";
 		   try
 		   {
@@ -192,6 +192,7 @@ private CommonsFunction cf;
 			   }
 			
 			   List<MultipartFile> list=vo.getFiles();//임시 저장
+			
 			   if(list==null) // 업로드가 없는 상태
 			   {
 				   vo.setFilename("");

@@ -16,11 +16,14 @@
          <put-attribute name="footer" value="/WEB-INF/main/footer.jsp"/>
       </definition>
       
-      
+     
        <definition name="program/*" extends="program">
           <put-attribute name="content" value="/WEB-INF/program/{1}.jsp"/>
            </definition>
-   
+   		 <definition name="program/*/*" extends="program"><!-- {1}/{2}/{3} -->
+			<put-attribute name="content" value="/WEB-INF/program/{1}/{2}.jsp"></put-attribute>
+		</definition>
+   		
       <definition name="*/*" extends="main"><!-- {1}/{2} -->
          <put-attribute name="home" value="/WEB-INF/{1}/{2}.jsp"></put-attribute>
       </definition>

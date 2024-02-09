@@ -10,9 +10,9 @@ import org.apache.ibatis.annotations.Update;
 import com.sist.vo.VdataboardVO;
 
 public interface ProgramDataboardMapper {
-	   @Select("SELECT dno,subject,name,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,hit,num "
-	    	   +"FROM (SELECT dno,subject,name,regdate,hit,rownum as num "
-	    	   +"FROM (SELECT /*+ INDEX_DESC(v_DataBoard dno_pk)*/dno,subject,name,regdate,hit "
+	   @Select("SELECT dno,subject,name,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,hit,v_check,num "
+	    	   +"FROM (SELECT dno,subject,name,regdate,hit,v_check,rownum as num "
+	    	   +"FROM (SELECT /*+ INDEX_DESC(v_DataBoard dno_pk)*/dno,subject,name,regdate,hit,v_check "
 	    	   +"FROM v_DataBoard)) "
 	    	   +"WHERE num BETWEEN #{start} AND #{end}")
 	    public List<VdataboardVO> databoardListData(@Param("start") int start,@Param("end") int end);
@@ -23,7 +23,7 @@ public interface ProgramDataboardMapper {
 	    
 	    @Insert("INSERT INTO v_Databoard VALUES("
 	    	   +"v_databoard_seq.nextval,#{subject},#{content},#{pwd},sysdate"
-	    	   +",0,#{filename},#{filesize},#{v_filecount},#{name})")
+	    	   +",0,#{filename},#{filesize},#{v_filecount},#{name},#{v_check})")
 	    public void databoardInsert(VdataboardVO vo);
 	    
 	    /*
@@ -38,7 +38,7 @@ public interface ProgramDataboardMapper {
 	    public void hitIncrement(int dno);
 	    
 	    @Select("SELECT dno,name,subject,content,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,"
-	    	   +"hit,filename,filesize,v_filecount "
+	    	   +"hit,filename,filesize,v_filecount,v_check "
 	    	   +"FROM v_DataBoard "
 	    	   +"WHERE dno=#{dno}")
 	    

@@ -94,6 +94,18 @@ public class ProgramServiceImpl implements ProgramService {
 		// TODO Auto-generated method stub
 		return dbDAO.databoardDetailData(dno);
 	}
+
+	@Override
+	public void databoardDelete(int dno) {
+		dbDAO.databoardDelete(dno);
+		
+	}
+
+	@Override
+	public VdataboardVO databoardFileInfoData(int dno) {
+		// TODO Auto-generated method stub
+		return dbDAO.databoardFileInfoData(dno);
+	}
 	
 	
 	

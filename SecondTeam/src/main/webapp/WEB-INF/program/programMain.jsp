@@ -34,6 +34,7 @@
 
 	<link rel="stylesheet" href="css/flatpickr.min.css">
 	<link rel="stylesheet" href="../css/button.css">
+	<link rel="stylesheet" href="../css/Program.css">
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -68,5 +69,9 @@
     <script src="../js/navbar.js"></script>
     <script src="../js/counter.js"></script>
     <script src="../js/custom.js"></script>
+    <script src="../js/programList_vue.js"></script>
+     <script src="../js/programDetail_vue.js"></script>
+      <script src="../js/programDataboard_vue.js"></script>
+      
 </body>
 </html>

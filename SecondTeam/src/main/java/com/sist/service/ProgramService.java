@@ -16,7 +16,7 @@ public interface ProgramService {
 
 	
 	
-	//프로그램
+	//프로그램 조회
 	public List<ProgramVO> programListData(Map map);
 	
 	public int programTotalPage(Map map);
@@ -32,5 +32,8 @@ public interface ProgramService {
 	public void databoardInsert(VdataboardVO vo);
 	
 	public VdataboardVO databoardDetailData(int dno);
+	
+	public void databoardDelete(int dno);
+	public VdataboardVO databoardFileInfoData(int dno);
 
 }

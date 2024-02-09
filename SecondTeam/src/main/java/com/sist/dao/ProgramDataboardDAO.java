@@ -31,4 +31,12 @@ public VdataboardVO databoardDetailData(int dno)
 	  mapper.hitIncrement(dno);
 	  return mapper.databoardDetailData(dno);
 }
+
+public void databoardDelete(int dno) {
+	mapper.databoardDelete(dno);
+}
+
+public VdataboardVO databoardFileInfoData(int dno) {
+	return mapper.databoardFileInfoData(dno);
+}
 }

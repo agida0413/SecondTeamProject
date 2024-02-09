@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,6 +25,7 @@
   
    
     <div class="row">
+    <c:if test="${sessionScope.admin==1 }">
     <table>
     <tr>
     <td colspan="5" class="align-right">
@@ -32,6 +34,7 @@
     </tr>
       
        </table>
+       </c:if>
       <table class="table">
         <tr class="success"  style="background-color:#cccccc;">
          <th class="text-center" width=10%>번호</th>
@@ -43,7 +46,7 @@
         <tr v-for="vo in board_list" :style="vo.v_check===1?'background-color:#f2f2f2':''">
         
          <td class="text-center" width=10%>{{vo.dno}}</td>
-         <td width=45%><a :href="'../program/databoardDetail.do?dno='+vo.dno"><span :style="vo.v_check===1?'font-weight:bold;':''">{{vo.subject}}</span></a></td>
+         <td width=45%><a :href="'../program/databoardDetail.do?dno='+vo.dno"><span :style="vo.v_check===1?'font-weight:bold;':''">{{vo.subject}}</span><span v-if="vo.v_check===1" style="color:red; margin-left:5px;">( 중요 )</span></a></td>
          <td class="text-center" width=15%>{{vo.name}}</td>
          <td class="text-center" width=20%>{{vo.dbday}}</td>
          <td class="text-center" width=10%>{{vo.hit}}</td>
@@ -62,53 +65,7 @@
   </div>
   <!--  제어 -->
   <script>
-    let app=Vue.createApp({
-    	// 멤버변수 
-    	data(){
-    		return {
-    			// 변수 선언 
-    			board_list:[],
-    			curpage:1,
-    			totalpage:0
-    		}
-    	},
-    	// Callback
-    	mounted(){
-    		this.dataSend()
-    	},
-    	// 멤버메소드
-    	methods:{
-    		dataSend(){
-    			axios.get('../program/databoardList_vue.do',{
-    				params:{
-    					page:this.curpage
-    				}
-    			}).then(response=>{
-    				console.log(response.data)
-    				this.board_list=response.data
-    			})
-    			
-    			// 페이지 
-    			axios.get("../program/databoardPage_vue.do",{
-    				params:{
-    					page:this.curpage
-    				}
-    			}).then(response=>{
-    				console.log(response.data)
-    				this.curpage=response.data.curpage
-    				this.totalpage=response.data.totalpage
-    			})
-    		},
-    		prev(){
-    			this.curpage=this.curpage>1?this.curpage-1:this.curpage
-    			this.dataSend();
-    		},
-    		next(){
-    			this.curpage=this.curpage<this.totalpage?this.curpage+1:this.curpage
-    		    this.dataSend()
-    		}
-    	}
-    }).mount('#vDataboard')
+  
   </script>
 </body>
 </html>

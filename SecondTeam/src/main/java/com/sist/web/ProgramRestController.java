@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -277,6 +278,41 @@ private CommonsFunction cf;
 			   bos.close();
 			   
 		   }catch(Exception ex) {}
+	   }
+	   
+	   
+	   
+	   @GetMapping("program/databoardDelete_vue.do")
+	   public String databoard_delete(int dno,HttpServletRequest request)
+	   {
+		   String path=request.getSession().getServletContext().getRealPath("/")+"databoardUpload\\";
+		   path=path.replace("\\", File.separator);
+		   String result="";
+		   try
+		   {
+			   VdataboardVO vo=service.databoardFileInfoData(dno);
+			
+			   
+				  
+				   if(vo.getV_filecount()>0)
+				   {
+					   StringTokenizer st=
+							   new StringTokenizer(vo.getFilename(),",");
+					   while(st.hasMoreTokens())
+					   {
+						   File file=new File(path+st.nextToken());
+						   file.delete();
+					   }
+				   }
+				   
+				   service.databoardDelete(dno);
+				   result="yes";
+			  
+		   }catch(Exception ex) {
+			   ex.printStackTrace();
+			   result="no";
+		   }
+		   return result;
 	   }
 	
 }

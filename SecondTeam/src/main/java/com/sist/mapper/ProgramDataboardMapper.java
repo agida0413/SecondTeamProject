@@ -2,6 +2,7 @@ package com.sist.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -22,7 +23,7 @@ public interface ProgramDataboardMapper {
 	    
 	    
 	    @Insert("INSERT INTO v_Databoard VALUES("
-	    	   +"v_databoard_seq.nextval,#{subject},#{content},#{pwd},sysdate"
+	    	   +"v_databoard_seq.nextval,#{subject},#{content},sysdate"
 	    	   +",0,#{filename},#{filesize},#{v_filecount},#{name},#{v_check})")
 	    public void databoardInsert(VdataboardVO vo);
 	    
@@ -43,4 +44,14 @@ public interface ProgramDataboardMapper {
 	    	   +"WHERE dno=#{dno}")
 	    
 	    public VdataboardVO databoardDetailData(int dno);
+	    
+	    @Select("SELECT filename,v_filecount "
+	  		  +"FROM v_databoard "
+	  		  +"WHERE dno=#{dno}")
+	     public VdataboardVO databoardFileInfoData(int dno);
+	    
+	    @Delete("DELETE FROM v_databoard "
+	  		  +"WHERE dno=#{dno}")
+	     public void databoardDelete(int dno);
+	     
 }

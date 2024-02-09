@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%--
-    String json="{"
-    
- --%>
+     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +15,7 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
-   <%-- View : data()에 설정된 데이터값에 따라 변경 (자동) --%>
+  
    <div class="container" id="dataoboardDetail">
      <div class=""><span style="font-weight:bold; font-size:30px; color:black;">자료실(양식다운)</span></div>
   <hr>
@@ -43,9 +41,9 @@
            <th width=20% class="text-center success" style="background-color:#f2f2f2; vertical-align:middle;">첨부파일</th>
            <td colspan="3">
              <ul style="list-style-type: none;   padding-left: 0; /* 왼쪽 패딩 없애기 */
-    margin-left: 0; /* 왼쪽 마진 없애기 */">
+  			    margin-left: 0; /* 왼쪽 마진 없애기 */">
                <li v-for="(fn,index) in filenames" style="list-style-type: none;   padding-left: 0; /* 왼쪽 패딩 없애기 */
-    margin-left: 0; /* 왼쪽 마진 없애기 */">
+    			margin-left: 0; /* 왼쪽 마진 없애기 */">
                	<img src="../Projectimages/file.png" width="20px" >
                  <a :href="'../program/download.do?fn='+fn" style="margin-left:5px;">{{fn}}</a>&nbsp;({{filesizes[index]}}Bytes)
                </li>
@@ -60,10 +58,9 @@
          <tr > 
            <td colspan="4" class="align-right">
            <span style="margin-left:700px;  float: right;">
-           <span style="margin-right:10px;">
-             <button class="btn btn-small btn-primary" >수정</button>
-             </span>
-             <button class="btn btn-small btn-danger" style="margin-right:10px;">삭제</button>
+         	 <c:if test="${sessionScope.admin==1 }">
+             <button class="btn btn-small btn-danger" style="margin-right:10px;" @click="dataDelete()">삭제</button>
+             </c:if>
              <button class="btn btn-small btn-success"  @click="dataList()">목록</button>
              </span>
            </td>
@@ -71,50 +68,70 @@
        </table>
      </div>
    </div>
-   <script>
-    let app=Vue.createApp({
-    	// View에 전송할 데이터를 저장 
-    	data(){
-    		return {
-    			detail_data:{}, // {} = vo , [] = list
-    			dno:${dno},
-    			filenames:[],
-    			filesizes:[],
-    			v_filecount:0
-    		}
-    	},
-    	// ViewModel => 데이터값 변경 
-    	methods:{
-    		// 사용자 행위 => 사용자 정의 함수 
-    		dataList(){
-    			location.href="../program/databoardList.do"
-    		}
-    	},
-    	mounted(){
-    		// window.onload => 브라우저에 화면이 완성  ==> $(function(){})
-    		axios.get('../program/databoardDetail_vue.do',{
-    			params:{
-    				dno:this.dno
-    			}
-    		}).then(response=>{
-    			console.log(response.data.filename)
-    			this.detail_data=response.data;
-    			let leng=response.data.v_filecount;
-    			if(leng>0)
-    			{
-    				this.filenames=response.data.filename.split(",")
-    			    this.filesizes=response.data.filesize.split(",")
-    			}
-    			
-    			this.v_filecount=leng;
-    			
-    		})
-    	},
-    	updated(){
-    		
-    	}
-    }).mount('#dataoboardDetail')
-   </script>
+    <script>
+    let dataDetailApp=Vue.createApp({
+       	// View에 전송할 데이터를 저장 
+       	data(){
+       		return {
+       			detail_data:{}, // {} = vo , [] = list
+       			dno:${dno},
+       			filenames:[],
+       			filesizes:[],
+       			v_filecount:0
+       		}
+       	},
+       	// ViewModel => 데이터값 변경 
+       	methods:{
+       		// 사용자 행위 => 사용자 정의 함수 
+       		dataList(){
+       			location.href="../program/databoardList.do"
+       		},
+       		dataDelete(){
+       			
+       			axios.get('../program/databoardDelete_vue.do',{
+           			params:{
+           				dno:this.dno
+           			}
+           		}).then(response=>{
+           		
+           			let res=response.data
+           			if(res==='yes'){
+           				location.href="../program/databoardList.do"
+           			}
+           			else{
+           				alert('실패')
+           			}
+           		})
+       			
+       			}
+       		
+       		},
+       	
+       	mounted(){
+       		// window.onload => 브라우저에 화면이 완성  ==> $(function(){})
+       		axios.get('../program/databoardDetail_vue.do',{
+       			params:{
+       				dno:this.dno
+       			}
+       		}).then(response=>{
+       			console.log(response.data.filename)
+       			this.detail_data=response.data;
+       			let leng=response.data.v_filecount;
+       			if(leng>0)
+       			{
+       				this.filenames=response.data.filename.split(",")
+       			    this.filesizes=response.data.filesize.split(",")
+       			}
+       			
+       			this.v_filecount=leng;
+       			
+       		})
+       	},
+       	updated(){
+       		
+       	}
+       }).mount('#dataoboardDetail')
+    </script>
 </body>
 </html>
 

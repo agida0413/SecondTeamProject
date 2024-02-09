@@ -1,0 +1,70 @@
+.findOpt{
+border:1px black solid;
+padding:20px 20px 3px 20px;
+}
+.optionTable td {
+    border: 1px solid #ddd; /* 셀 간 경계선 스타일 */
+    padding: 8px; /* 셀 내부 여백 설정 */
+}
+
+
+/* 프로그램 선택 바 스타일 */
+.programSelectBar {	
+    border: none;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+    width: 120px;
+    margin: 0;
+}
+
+.programSelectBar:hover {
+    scrollbar-color: #999 transparent;
+}
+.findTable tr td {
+    border: none !important;
+}
+
+.findNum{
+padding-top:20px;
+border-bottom:2.0px black solid;
+  
+}
+
+.programSubinformAll{
+font-size:13px;
+ margin-right:15px;
+}
+
+.programSubinform{
+margin-left:10px; 
+opacity:0.8;
+}
+
+.nextline{
+ border-bottom: 1px rgba(0, 0, 0, 0.5) solid; /* 투명도를 조절하는 부분: 0.5는 50% 투명 */
+padding-bottom:10px;
+}
+
+a.link:hover{
+  cursor: pointer;
+}
+.pg_detail_title{
+margin-top:15px;
+font-size:23px;
+border-top:1px black solid;
+border-bottom: 1px solid #ccc; 
+padding:10px;
+background-color:#f0f0f0;;
+}
+
+.informObj{
+text-align:center;
+
+font-weight:bold;
+}
+.detailTable{
+border-top:2px black solid;
+margin-top:15px;
+border-bottom: 1px solid #ccc; 
+}

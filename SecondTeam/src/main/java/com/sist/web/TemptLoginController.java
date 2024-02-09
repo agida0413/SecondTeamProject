@@ -22,6 +22,8 @@ public class TemptLoginController {
 			session.setAttribute("id", vo.getId());
 			session.setAttribute("centername", vo.getCentername());
 			session.setAttribute("name", vo.getName());
+			session.setAttribute("admin", vo.getAdmin());
+			
 			
 		}
 		

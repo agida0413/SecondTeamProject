@@ -106,7 +106,7 @@ cursor: pointer;
 		</div>
 	</section>
 	<!-- End retroy layout blog posts -->
-	 <section class="section posts-entry posts-entry-sm bg-light">
+	  <section class="section posts-entry posts-entry-sm bg-light">
 		<div class="container" id="donSearch">
 		<div class="row mb-4">
 				<div class="col-sm-6">
@@ -120,8 +120,8 @@ cursor: pointer;
 						<div class="col-md-12">
 						  <!-- 지도 출력 -->
 							<div class="blog-entry">
-									<div v-if="ss!==''" id="map" style="width:770px;height:500px;"></div>
-									<div v-if="ss===''">
+									<div v-if="donStore_list.length>0" id="map" style="width:770px;height:500px;"></div>
+									<div v-if="donStore_list.length===0">
 									<img src="../Projectimages/지도 (1).png" style="margin-left: 200px;">
 									</div>
 							</div>
@@ -149,7 +149,7 @@ cursor: pointer;
 					</span>
 					
 					<table class="text-center" v-if="ss!==''">
-						<tr>
+						<tr v-if="donStore_list.length>0">
 							<th width="10%">번호</th>
 							<th width="25%">지점</th>
 							<th width="25%">전화번호</th>
@@ -161,8 +161,13 @@ cursor: pointer;
 							<td>{{vo.phone}}</td>
 							<td>{{vo.address}}</td>
 						</tr>
+						<span v-if="donStore_list.length===0 && ss!==''" >
+							<br>
+							검색하신 키워드와 일치하는 매장이 없습니다.<br><br>
+							다시 검색 해주세요.
+					    </span>
 					</table>
-					<div class="row" v-if="ss!==''" class="donSpage">
+					<div class="row" v-if="donStore_list.length>0" class="donSpage">
 					<nav aria-label="Page navigation example">
 						<ul class="pagination">
 							<li class="page-item" v-if="startpage>1"><a class="page-link" href="#"

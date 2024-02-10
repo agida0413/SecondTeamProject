@@ -28,4 +28,9 @@ public class MoimListController {
 		return "moim/detail";
 	}
 	
+	@GetMapping("sns/list.do")
+	public String sns_list() {
+		
+		return "sns/list";
+	}
 }

@@ -67,7 +67,7 @@ cursor: pointer;
 							<h2>나와 우리, 그리고 지구를 위한</h2>
 						</div>
 					</a>
-					<a href="single.html" class="h-entry v-height gradient">
+					<a href="../sns/list.do" class="h-entry v-height gradient">
 
 						<div class="featured-img" style="background-image: url('../Projectimages/SNS.jpg');"></div>
 						

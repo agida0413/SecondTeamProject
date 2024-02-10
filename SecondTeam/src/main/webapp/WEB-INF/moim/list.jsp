@@ -75,7 +75,7 @@ cursor: pointer;
 			<div class="text-center">
 				<ul class="pagination">
 			      <li v-if="startPage>1" class="page-item"><a class="page-link" @click="prev()">&laquo;</a></li>
-          		  <li v-for="i in range(startPage,endPage)" :class="i===curpage?'current':''"><a class="page-link" @click="pageChange(i)">{{i}}</a></li>
+          		  <li v-for="i in range(startPage,endPage)" :class="i===curpage?'active':''"><a class="page-link" @click="pageChange(i)">{{i}}</a></li>
           		  <li v-if="endPage<totalpage" class="page-item"><a class="page-link" @click="next()">&raquo;</a></li>
 			    </ul>
 		     </div>

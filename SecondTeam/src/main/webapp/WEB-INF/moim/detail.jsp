@@ -171,7 +171,7 @@ text-overflow: ellipsis;
 			        <td>
 			          <table class="table" v-for="vo in reply_list">
 			           <tr>
-			            <td class="text-left">▶{{vo.name}}({{vo.dbday}})</td>
+			            <td class="text-left"><i class="xi-tag"></i>&nbsp;{{vo.name}}({{vo.dbday}})</td>
 			            <td style="text-align: right;">
 			              <span v-if="vo.id===sessionId">
 			                <input type=button value="수정" class="btn-xs btn updates" style="margin-left: 3px" :id="'up'+vo.mrno" @click="replyUpdateForm(vo.mrno)">

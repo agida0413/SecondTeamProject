@@ -69,6 +69,10 @@ public class ProgramServiceImpl implements ProgramService {
 	}
 	
 	
+	
+	
+	
+	
 	//프로그램 신청
 	@Override
 	public void programApplyInsert(VprogramApplyVO vo) {
@@ -87,6 +91,23 @@ public class ProgramServiceImpl implements ProgramService {
 		// TODO Auto-generated method stub
 		return pDao.applyList(map);
 	}
+	
+	@Override
+	public VprogramApplyVO getApplyFiles(int vano) {
+		// TODO Auto-generated method stub
+		return pDao.getApplyFiles(vano);
+	}
+	
+	@Override
+	public int applyListTotalPage(Map map) {
+		// TODO Auto-generated method stub
+		return pDao.applyListTotalPage(map);
+	}
+
+
+	
+	
+	
 	
 	//프로그램 자료실
 	@Override
@@ -124,6 +145,9 @@ public class ProgramServiceImpl implements ProgramService {
 		// TODO Auto-generated method stub
 		return dbDAO.databoardFileInfoData(dno);
 	}
+
+	
+	
 
 	
 

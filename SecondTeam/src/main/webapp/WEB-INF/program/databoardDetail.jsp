@@ -45,7 +45,7 @@
                <li v-for="(fn,index) in filenames" style="list-style-type: none;   padding-left: 0; /* 왼쪽 패딩 없애기 */
     			margin-left: 0; /* 왼쪽 마진 없애기 */">
                	<img src="../Projectimages/file.png" width="20px" >
-                 <a :href="'../program/download.do?fn='+fn" style="margin-left:5px;">{{fn}}</a>&nbsp;({{filesizes[index]}}Bytes)
+                 <a :href="'../program/download.do?fn='+fn+'&type=databoard'" style="margin-left:5px;">{{fn}}</a>&nbsp;({{filesizes[index]}}Bytes)
                </li>
              </ul>
            </td>

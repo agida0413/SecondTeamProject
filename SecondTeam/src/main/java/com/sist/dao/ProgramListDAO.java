@@ -43,4 +43,13 @@ public class ProgramListDAO {
 	public List<VprogramApplyVO> applyList(Map map){
 		return mapper.applyList(map);
 	}
+	//신청리스트 토탈페이지
+	public int applyListTotalPage(Map map) {
+		return mapper.applyListTotalPage(map);
+	}
+	
+	//신청 리스트 파일
+	public VprogramApplyVO getApplyFiles(int vano) {
+		return mapper.getApplyFiles(vano);
+	}
 }

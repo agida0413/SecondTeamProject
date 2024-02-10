@@ -39,5 +39,8 @@ public interface ProgramService {
 	
 	public void databoardDelete(int dno);
 	public VdataboardVO databoardFileInfoData(int dno);
-
+	
+	public VprogramApplyVO getApplyFiles(int vano);
+	
+	public int applyListTotalPage(Map map);
 }

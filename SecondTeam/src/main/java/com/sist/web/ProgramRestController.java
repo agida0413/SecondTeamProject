@@ -30,6 +30,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mongodb.DBPortPool.SemaphoresOut;
 import com.sist.commons.CommonsFunction;
 import com.sist.service.ProgramService;
 
@@ -45,6 +46,8 @@ private ProgramService service;
 	
 @Autowired
 private CommonsFunction cf;
+
+	//위치변경
 	@GetMapping(value="program/stateChange_vue.do",produces = "text/plain;charset=UTF-8")
 	public String stateChange_vue(OptionVO vo) throws JsonProcessingException {
 		ObjectMapper mapper=new ObjectMapper();
@@ -56,7 +59,7 @@ private CommonsFunction cf;
 		}
 		return json;
 	}
-	
+	//카테고리변경
 	@GetMapping(value="program/major_fieldChange_vue.do",produces = "text/plain;charset=UTF-8")
 	public String major_fieldChange_vue(OptionVO vo) throws JsonProcessingException {
 		
@@ -71,7 +74,7 @@ private CommonsFunction cf;
 		return json;
 	}
 	
-	
+	//검색
 	@RequestMapping(value="program/find_vue.do",produces = "text/plain;charset=UTF-8")
 	public String find_vue(@RequestParam("ssConditionString") String ssConditionString,
 			@RequestParam("vtConditionString") String vtConditionString,
@@ -106,7 +109,7 @@ private CommonsFunction cf;
 	
 	
 	
-	
+	//프로그램조회 페이징
 	@RequestMapping(value="program/listPage_vue.do",produces = "text/plain;charset=UTF-8")
 	public String listPage_vue(@RequestParam("ssConditionString") String ssConditionString,
 			@RequestParam("vtConditionString") String vtConditionString,
@@ -213,17 +216,18 @@ private CommonsFunction cf;
 	   }
 	
 	
-	 
+	 //신청리스트
 	 @GetMapping(value="program/applyList_vue.do",produces = "text/plain;charset=UTF-8")
-		public String applyList_vue(int page,HttpSession session) throws JsonProcessingException {
+		public String applyList_vue(int page,String type,HttpSession session) throws JsonProcessingException {
 			String centername=(String)session.getAttribute("centername");
 			Map map=new HashMap();
 			map.put("centername", centername);
-			int rowsize=12;
+			int rowsize=10;
 			int start=cf.start(rowsize, page);
 			int end=cf.end(rowsize, page);
 			map.put("start", start);
 			map.put("end", end);
+			map.put("type", type);
 			List<VprogramApplyVO> list=service.applyList(map);
 			
 			ObjectMapper mapper=new ObjectMapper();
@@ -232,6 +236,49 @@ private CommonsFunction cf;
 			return json;
 			
 		}
+	//신청 파일리스트
+	 @GetMapping(value="program/applyListPage_vue.do",produces = "text/plain;charset=UTF-8")
+	public String applyListPage_vue(int page,String type,HttpSession session) throws JsonProcessingException {
+		 
+		 String centername=(String)session.getAttribute("centername");
+			Map map=new HashMap();
+			map.put("centername", centername);
+			map.put("type", type);
+			
+		int totalPage=service.applyListTotalPage(map);
+		
+		final int BLOCK=10;
+		int startpage=cf.startPage(BLOCK, page);
+		int endpage=cf.endPage(BLOCK, page, totalPage);
+			
+		map.put("startpage", startpage);
+		map.put("endpage", endpage);
+		map.put("curpage", page);
+		map.put("totalpage", totalPage);
+		
+		
+		 ObjectMapper mapper= new ObjectMapper();
+		 String json=mapper.writeValueAsString(map);
+		 System.out.println(json);
+		 return json;
+		
+	}
+	 
+		 //신청 파일리스트
+		 @GetMapping(value="program/applyListFiles_vue.do",produces = "text/plain;charset=UTF-8")
+		public String applyListFiles_vue(int vano) throws JsonProcessingException {
+		
+			 VprogramApplyVO vo=service.getApplyFiles(vano);
+			 
+			 ObjectMapper mapper= new ObjectMapper();
+			 String json=mapper.writeValueAsString(vo);
+			 
+			 return json;
+			
+		}
+		 
+		 
+		 
 	
 	
 	//프로그램 자료실
@@ -330,10 +377,15 @@ private CommonsFunction cf;
 		   return json;
 	   }
 	   @GetMapping(value="program/download.do")
-	   public void databoard_download(String fn,HttpServletRequest request,
+	   public void databoard_download(String fn,String type,HttpServletRequest request,
 			   HttpServletResponse response)
 	   {
-		   String path=request.getSession().getServletContext().getRealPath("/")+"databoardUpload\\";
+		   
+		   String dir="databoardUpload\\";
+		   if(type.equals("apply")) {
+			   dir="applyUpload\\";
+		   }
+		   String path=request.getSession().getServletContext().getRealPath("/")+dir;
 		   path=path.replace("\\", File.separator);
 		   
 		   try

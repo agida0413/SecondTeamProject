@@ -37,7 +37,6 @@ public String donstore_search_vue(String ss,int page) throws Exception
 	List<DonStoreVO> list=service.dnoStoreSearch(map);
 	ObjectMapper mapper=new ObjectMapper();
 	String json=mapper.writeValueAsString(list);
-	System.out.println(json);
 	return json;
 }
 @GetMapping(value="donstore/page_vue.do",produces="text/plain;charset=UTF-8")
@@ -64,7 +63,6 @@ public String don_page_vue(String ss,int page) throws Exception
 public String donstore_detail_vue(int dno) throws Exception
 {
 	DonStoreVO vo=service.donDetailData(dno);
-	System.out.println("dno:"+dno);
 	ObjectMapper mapper=new ObjectMapper();
 	String json=mapper.writeValueAsString(vo);
 	return json;

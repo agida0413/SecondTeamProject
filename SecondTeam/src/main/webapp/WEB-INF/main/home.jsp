@@ -21,9 +21,12 @@ cursor: pointer;
 					<a href="single.html" class="h-entry mb-30 v-height gradient">
 
 						<div class="featured-img" style="background-image: url('../Projectimages/상품_메인.jpg');"></div>
-
+						<span class="date" style="
+						position:absolute; top:20px; right:20px;
+						color: #fff; font-weight: 700;
+						font-size: 25px; text-shadow: 0 0 5px #555;">Purchase of goods</span>
 						<div class="text">
-							<span class="date">가치소비</span>
+							<span class="date">가치를 사는 소비</span>
 							<h2>가격이 아닌 가치를 봅니다</h2>
 						</div>
 					</a>
@@ -55,7 +58,10 @@ cursor: pointer;
 					<a href="single.html" class="h-entry mb-30 v-height gradient">
 
 						<div class="featured-img" style="background-image: url('../Projectimages/2.jpg');"></div>
-
+						<span class="date" style="
+						position:absolute; top:20px; right:10px;
+						color: #fff; font-weight: 700;
+						font-size: 25px; text-shadow: 0 0 5px #555;">Donation</span>
 						<div class="text">
 							<span class="date">물품기부</span>
 							<h2>나와 우리, 그리고 지구를 위한</h2>

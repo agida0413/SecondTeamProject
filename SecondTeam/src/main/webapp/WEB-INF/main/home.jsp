@@ -22,7 +22,7 @@ cursor: pointer;
 
 						<div class="featured-img" style="background-image: url('../Projectimages/상품_메인.jpg');"></div>
 						<span class="date" style="
-						position:absolute; top:20px; right:20px;
+						position:absolute; top:10px; right:20px;
 						color: #fff; font-weight: 700;
 						font-size: 25px; text-shadow: 0 0 5px #555;">Purchase of goods</span>
 						<div class="text">
@@ -59,7 +59,7 @@ cursor: pointer;
 
 						<div class="featured-img" style="background-image: url('../Projectimages/2.jpg');"></div>
 						<span class="date" style="
-						position:absolute; top:20px; right:10px;
+						position:absolute; top:10px; right:10px;
 						color: #fff; font-weight: 700;
 						font-size: 25px; text-shadow: 0 0 5px #555;">Donation</span>
 						<div class="text">

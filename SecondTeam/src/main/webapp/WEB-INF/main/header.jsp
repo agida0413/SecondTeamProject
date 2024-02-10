@@ -50,7 +50,7 @@
 									</ul>
 								</li>
 								<li><a href="../program/list.do">임시페이지</a></li>
-								<li><a href="category.html">추가예정</a></li>
+								<li><a href="../goods/goods_main.do">상품</a></li>
 								<li><a href="category.html">추가예정</a></li>
 								<li><a href="category.html">추가예정</a></li>
 								<li><a href="category.html">추가예정</a></li>

@@ -14,4 +14,5 @@ private Date v_state_time;
 private List<MultipartFile>files;
 private List<MultipartFile>accesssImgs;
 private ProgramVO pvo=new ProgramVO();
+private MemberVO mvo=new MemberVO();
 }

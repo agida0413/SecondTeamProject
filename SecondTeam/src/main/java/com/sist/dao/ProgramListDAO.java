@@ -40,7 +40,7 @@ public class ProgramListDAO {
 	}
 	
 	//신청리스트
-	public List<VprogramApplyVO> applyList(String  centername){
-		return mapper.applyList(centername);
+	public List<VprogramApplyVO> applyList(Map map){
+		return mapper.applyList(map);
 	}
 }

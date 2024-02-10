@@ -27,7 +27,7 @@ public interface ProgramService {
 	//프로그램 신청
 	public void programApplyInsert(VprogramApplyVO vo);
 	public int getApplyCount(VprogramApplyVO vo);
-	public List<VprogramApplyVO> applyList(String centername);
+	public List<VprogramApplyVO> applyList(Map map);
 	//프로그램 자료실
 	public List<VdataboardVO> databoardListData(int start,int end);
 	

@@ -2,7 +2,9 @@ package com.sist.web;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -77,11 +79,9 @@ public class ProgramController {
 		@GetMapping("program/applyList.do")
 	public String programApplyList(HttpSession session,Model model) {
 		
-		String centername=(String)session.getAttribute("centername");
 		
-		List<VprogramApplyVO> list=service.applyList(centername);
 		model.addAttribute("cate","applyList");
-		model.addAttribute("list",list);
+		
 		
 		return "program/applyList";
 		

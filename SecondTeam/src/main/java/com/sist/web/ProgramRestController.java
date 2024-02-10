@@ -18,6 +18,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -212,6 +213,25 @@ private CommonsFunction cf;
 	   }
 	
 	
+	 
+	 @GetMapping(value="program/applyList_vue.do",produces = "text/plain;charset=UTF-8")
+		public String applyList_vue(int page,HttpSession session) throws JsonProcessingException {
+			String centername=(String)session.getAttribute("centername");
+			Map map=new HashMap();
+			map.put("centername", centername);
+			int rowsize=12;
+			int start=cf.start(rowsize, page);
+			int end=cf.end(rowsize, page);
+			map.put("start", start);
+			map.put("end", end);
+			List<VprogramApplyVO> list=service.applyList(map);
+			
+			ObjectMapper mapper=new ObjectMapper();
+			String json=mapper.writeValueAsString(list);
+			System.out.println(json);
+			return json;
+			
+		}
 	
 	
 	//프로그램 자료실

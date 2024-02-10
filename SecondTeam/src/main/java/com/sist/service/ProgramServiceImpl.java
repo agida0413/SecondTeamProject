@@ -83,9 +83,9 @@ public class ProgramServiceImpl implements ProgramService {
 	}
 	
 	@Override
-	public List<VprogramApplyVO> applyList(String centername) {
+	public List<VprogramApplyVO> applyList(Map map) {
 		// TODO Auto-generated method stub
-		return pDao.applyList(centername);
+		return pDao.applyList(map);
 	}
 	
 	//프로그램 자료실

@@ -21,4 +21,11 @@ public class MoimListController {
 		return "moim/list";
 	}
 	
+	@GetMapping("moim/detail.do")
+	public String moim_detail(int rno,Model model)
+	{
+		model.addAttribute("rno",rno);
+		return "moim/detail";
+	}
+	
 }

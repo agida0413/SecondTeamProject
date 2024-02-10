@@ -456,16 +456,14 @@ cursor: pointer;
 	        		
 	        	   console.log('서치'+this.dno)
 	        	this.state='Y'
-	        	this.send()	
-	        	this.donMap()
 				let sss=this.$refs.ss.value;
 				if(sss=="")
 				{
 					alert("검색어를 입력하세요")		
 					return
 				}
-				
-	        	
+				this.send()	
+	        	this.donMap()
 	        	this.count=this.count+1;
 			},
 			range(start,end){

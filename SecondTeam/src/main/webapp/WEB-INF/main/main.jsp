@@ -27,6 +27,11 @@
 	<link rel="stylesheet" href="../css/style.css">
 
 	<link rel="stylesheet" href="css/flatpickr.min.css">
+	
+	<script src="https://unpkg.com/vue@3"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>

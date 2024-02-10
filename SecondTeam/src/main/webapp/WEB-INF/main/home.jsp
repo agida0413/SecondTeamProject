@@ -6,6 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+#donSdata:hover{
+cursor: pointer;
+}
+</style>
 </head>
 <body>
 <!-- Start retroy layout blog posts -->
@@ -49,7 +54,7 @@
 				<div class="col-md-2">
 					<a href="single.html" class="h-entry mb-30 v-height gradient">
 
-						<div class="featured-img" style="background-image: url('../Projectimages/물품기부(메인)_1.png');"></div>
+						<div class="featured-img" style="background-image: url('../Projectimages/2.jpg');"></div>
 
 						<div class="text">
 							<span class="date">물품기부</span>
@@ -101,37 +106,85 @@
 		</div>
 	</section>
 	<!-- End retroy layout blog posts -->
-	<section class="section posts-entry posts-entry-sm bg-white">
-		<div class="container" >
-		<h1>하경</h1><!-- 지워도됌 -->
-			<div class="row mb-4">
+	 <section class="section posts-entry posts-entry-sm bg-light">
+		<div class="container" id="donSearch">
+		<div class="row mb-4">
 				<div class="col-sm-6">
-					<h2 class="posts-entry-title"></h2>
+					<h2 class="posts-entry-title">기부스토어 검색</h2>
 				</div>
-				<div class="col-sm-6 text-sm-end"><a href="category.html" class="read-more">View All</a></div>
+				<div class="col-sm-6 text-sm-end"><a href="category.html" class="read-more">방문예약하기</a></div>
 			</div>
 			<div class="row g-3">
-				<div class="col-md-9 order-md-2">
-					<div class="row" style="margin: 20px 8px 0 0;">
+				<div class="col-md-7 order-md-2">
+					<div class="row">
 						<div class="col-md-12">
+						  <!-- 지도 출력 -->
 							<div class="blog-entry">
-								<a href="single.html" class="img-link">
-									<img src="../images/img_1_sq.jpg" alt="Image" class="img-fluid" style="width: 936px; height: 650px;">
-								</a>
+									<div v-if="ss!==''" id="map" style="width:770px;height:500px;"></div>
+									<div v-if="ss===''">
+									<img src="../Projectimages/지도 (1).png" style="margin-left: 200px;">
+									</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="col-md-3">
-					<h2>기부스토어 찾기</h2>
+				<div class="col-md-5">
+					<div class="text-end">
+						<div style="position: relative;">
+							<input type="text" class="form-control" placeholder="Search..."
+								ref="ss" v-model="ss" @keyup.enter="search()"
+								style="background-color: black;"> 
+								<span class="bi bi-search" 
+								style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);"
+								@click="search()"></span>
+						</div>
+					</div>
+					<span v-if="ss===''">
+					<br>
+					[방문기증 예약 안내]<br><br>
+					매장을 검색하시어<br> 
+					보다 편리한 방문 예약을 이용해보세요!<br><br>
+					매장 오픈시간과 마감시간은 혼잡하오니
+					해당 시간대를 피해서 예약해주시면 좀 더 원활하게 이용하실 수 있습니다.<br><br>
+					</span>
+					
+					<table class="text-center" v-if="ss!==''">
+						<tr>
+							<th width="10%">번호</th>
+							<th width="25%">지점</th>
+							<th width="25%">전화번호</th>
+							<th width="40%">주소</th>
+						</tr>
+						<tr v-for="vo in donStore_list" height="85px;"  @click="dnoSend(vo.dno)" id="donSdata">
+							<td>{{vo.dno}}</td>
+							<td>{{vo.name}}</td>
+							<td>{{vo.phone}}</td>
+							<td>{{vo.address}}</td>
+						</tr>
+					</table>
+					<div class="row" v-if="ss!==''" class="donSpage">
+					<nav aria-label="Page navigation example">
+						<ul class="pagination">
+							<li class="page-item" v-if="startpage>1"><a class="page-link" href="#"
+								aria-label="Previous" @click="prev()"> <span aria-hidden="true">&laquo;</span>
+							</a></li>
+							<li class="page-item" v-for="i in range(startpage,endpage)" :class="curpage===i?'active':''"><a class="page-link" href="#" @click="change(i)">{{i}}</a></li>
+							<li class="page-item" v-if="endpage<totalpage"><a class="page-link" href="#"
+								aria-label="Next" @click="next()"> <span aria-hidden="true">&raquo;</span>
+							</a></li>
+						</ul>
+					</nav>
+				</div>
 				</div>
 			</div>
 		</div>
 	</section>
+	<!-- Start posts-entry -->
+	<!-- Start posts-entry -->
+		
 
 	<section class="section posts-entry posts-entry-sm bg-light">
 		<div class="container">
-		
 			<div class="row mb-4">
 				<div class="col-sm-6">
 					<h2 class="posts-entry-title">인기상품</h2>
@@ -341,7 +394,172 @@
 
 	<!-- Start posts-entry -->
 	<!-- Start posts-entry -->
-		
+		<script>
+	let search=Vue.createApp({
+		data(){
+			return{
+				donStore_list:[],
+				ss:'',
+				curpage:1,
+				totalpage:0,
+				startpage:0,
+				endpage:0,
+				dno:0,
+				address:'',
+				name:'',
+				state:'N'
+				
+			}
+		},
+		mounted(){
+			
+		},
+		methods:{
+			send() {
+	            axios.get("../donstore/search_vue.do", {
+	                params: {
+	                    ss: this.ss,
+	                    page: this.curpage
+	                }
+	            }).then(res => {
+	            
+	                this.donStore_list = res.data
+	                if (this.donStore_list.length > 0) {
+	                    this.dno = this.donStore_list[0].dno
+	                    console.log('샌드'+this.dno)
+	                }
+	                this.donMap()
+	                
+	            }).catch(error => {
+	                console.error("error:", error);
+	            })
+	            axios.get("../donstore/page_vue.do",{
+	            	params:{
+	            		ss:this.ss,
+	            		page:this.curpage
+	            	}
+	            }).then(res=>{
+	            	this.curpage=res.data.curpage
+	            	this.startpage=res.data.startpage
+	            	this.endpage=res.data.endpage
+	            	this.totalpage=res.data.totalpage
+	            })
+	         
+	        },
+	        search(){
+	        	
+	        		
+	        	   console.log('서치'+this.dno)
+	        	this.state='Y'
+	        	this.send()	
+	        	this.donMap()
+				let sss=this.$refs.ss.value;
+				if(sss=="")
+				{
+					alert("검색어를 입력하세요")		
+					return
+				}
+				
+	        	
+	        	this.count=this.count+1;
+			},
+			range(start,end){
+				let arr=[]
+				let leng=end-start
+				for(let i=0;i<=leng;i++)
+				{
+					arr[i]=start
+					start++
+				}
+				return arr;
+			},
+			prev(){
+				this.curpage=this.startpage-1
+				this.send()
+			},
+			change(page){
+				this.curpage=page
+				this.send()
+			},
+			next(){
+				this.curpage=this.endpage+1
+				this.send()
+			},
+			dnoSend(dno){
+				this.state='N'
+				this.dno = dno;
+		       
+		        this.donMap();
+		  },
+		  donMap(){
+			
+			  console.log('돈맵'+this.dno)
+			 
+			  axios.get("../donstore/detail_vue.do", {
+			        params: {
+			            dno: this.dno
+			        }
+			    }).then(res => {
+			    
+			        this.vo = res.data;
+			        this.address = res.data.address;
+			        this.name = res.data.name;
+			        if (window.kakao && window.kakao.maps) {
+			            this.initMap();
+			        } else {
+			            this.addScript();
+			        }
+			    });
+			},
+			addScript(){
+				const script=document.createElement("script") // <script>
+				/* global kakao */
+				script.onload=()=>kakao.maps.load(this.initMap)
+				script.src="https://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=23e8040d553778eeeb77f0900cb92322&libraries=services"
+				document.head.appendChild(script)
+			},
+			initMap(){
+				var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+			    mapOption = {
+			        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+			        level: 3 // 지도의 확대 레벨
+			    };  
+
+			// 지도를 생성합니다    
+			var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+			// 주소-좌표 변환 객체를 생성합니다
+			var geocoder = new kakao.maps.services.Geocoder();
+
+			// 주소로 좌표를 검색합니다
+			geocoder.addressSearch(this.address, (result, status)=> {
+
+			    // 정상적으로 검색이 완료됐으면 
+			     if (status === kakao.maps.services.Status.OK) {
+
+			        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+			        // 결과값으로 받은 위치를 마커로 표시합니다
+			        var marker = new kakao.maps.Marker({
+			            map: map,
+			            position: coords
+			        });
+
+			        // 인포윈도우로 장소에 대한 설명을 표시합니다
+			        var infowindow = new kakao.maps.InfoWindow({
+			            content: '<div style="width:150px;text-align:center;padding:6px 0;">'+this.name+'</div>'
+			        });
+			        infowindow.open(map, marker);
+
+			        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+			        map.setCenter(coords);
+			    } 
+			})
+		  }
+			
+		}
+	}).mount("#donSearch")
+</script>
 	
 
 	

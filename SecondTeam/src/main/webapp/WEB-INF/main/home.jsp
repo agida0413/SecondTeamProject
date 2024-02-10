@@ -20,7 +20,7 @@ cursor: pointer;
 				<div class="col-md-4">
 					<a href="single.html" class="h-entry mb-30 v-height gradient">
 
-						<div class="featured-img" style="background-image: url('../Projectimages/가치소비(메인)_1.png');"></div>
+						<div class="featured-img" style="background-image: url('../Projectimages/상품_메인.jpg');"></div>
 
 						<div class="text">
 							<span class="date">가치소비</span>

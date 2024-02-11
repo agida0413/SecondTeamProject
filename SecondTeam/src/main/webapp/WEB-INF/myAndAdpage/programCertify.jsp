@@ -8,29 +8,25 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div class=""><span style="font-weight:bold; font-size:30px; color:black;">봉사프로그램 신청현황</span></div>
+<div class=""><span style="font-weight:bold; font-size:30px; color:black;">봉사프로그램 완료인증신청</span></div>
   <hr>
   
   
 <div class="conatainer">
 
 <div style="margin-top:15px;margin-bottom:15px;">
-<a href="../myAndAdpage/programHistory.do?state=WAIT" class="btn btn-large ${state=='WAIT'?'btn-danger':'btn-primary' }">신청승인 대기중</a> 
-<a href="../myAndAdpage/programHistory.do?state=REJECT" class="btn btn-large ${state=='REJECT'?'btn-danger':'btn-primary' }">승인거절된 프로그램</a> 
-<a href="../myAndAdpage/programHistory.do?state=ACCESS" class="btn btn-large ${state=='ACCESS'?'btn-danger':'btn-primary' }">시작대기중 프로그램</a> 
-<a href="../myAndAdpage/programHistory.do?state=RUN" class="btn btn-large ${state=='RUN'?'btn-danger':'btn-primary' }">봉사중</a> 
-<a href="../myAndAdpage/programHistory.do?state=COMPLETE" class="btn btn-large ${state=='COMPLETE'?'btn-danger':'btn-primary' }">봉사완료</a> 
+<a href="../myAndAdpage/programCertify.do?state=COMPLETE" class="btn btn-large ${state=='COMPLETE'?'btn-danger':'btn-primary' }">인증신청가능 프로그램</a> 
+<a href="../myAndAdpage/programCertify.do?state=WAITCERTIFY" class="btn btn-large ${state=='WAITCERTIFY'?'btn-danger':'btn-primary' }">인증승인 대기중</a> 
+<a href="../myAndAdpage/programCertify.do?state=COMPLETECERTIFY" class="btn btn-large ${state=='COMPLETECERTIFY'?'btn-danger':'btn-primary' }">보상지급완료</a> 
+
+
 </div>
 <hr>
 <c:if test="${size==0 }">
 <h3>내역이 존재하지 않습니다.</h3>
 </c:if>
 
-<c:if test="${state=='COMPLETE' }">
-<div style="margin-top:15px;margin-bottom:15px; color:orange; opacity:0.7;">
-<h2 >봉사완료프로그램 인증신청으로 이동하여 보상을 받으세요</h2>
-</div>
-</c:if>
+
 	<c:forEach var="vo" items="${list }">
 		<div class="row">
   				<div class="programName" style="margin-bottom:15px;">
@@ -42,7 +38,7 @@
 	  					<th width="30%">봉사기간</th>
 	  					
 	  					<th width="20%">신청일시</th>
-	  					<th width="20%">신청상태</th>
+	  					<th width="20%"></th>
 	  				</tr>
 	  				
 	  				<tr style="height:70px; vertical-align:middle;">
@@ -50,7 +46,7 @@
 	  					<td>${vo.pvo.dbV_start }&nbsp;~&nbsp;${vo.pvo.dbV_end }</td>
 	  					
 	  					<td>${vo.getVDbStateTime()}</td>
-	  					<td style="font-weight:bold; font-size:20px; color:blue;">${vo.v_state }</td>
+	  					<td style="font-weight:bold; font-size:20px; color:blue;"><a href="../myAndAdpage/certifyPage.do?vno=${vo.pvo.vno }" class="btn btn-large btn-success">인증하러가기</a></td>
 	  				</tr>
 	  			</table>
 				
@@ -63,16 +59,16 @@
   		   <div class="row">
   		   	 <ul class="pagination" >
   			 		<c:if test="${startpage>1 }">
-				  <li class="page-item"><a href="../myAndAdpage/programHistory.do?page=${endpage+1 }&state=${state}" class="link page-link">&lt;</a></li>
+				  <li class="page-item"><a href="../myAndAdpage/programCertify.do?page=${endpage+1 }&state=${state}" class="link page-link">&lt;</a></li>
 				  </c:if>
 				   <c:forEach var="i" begin="${startpage }" end="${endpage }">
 				  <li class="page-item ${page == i ? 'active' : ''}" aria-current="${page == i ? 'page' : 'null'}">
 				 
-				  <a class="link page-link" href="../myAndAdpage/programHistory.do?page=${i }&state=${state}">${i }</a> 
+				  <a class="link page-link" href="../myAndAdpage/programCertify.do?page=${i }&state=${state}">${i }</a> 
 				  </li>
 				   </c:forEach>
 				 <c:if test="${endpage<totalpage }">
-				  <li  class="page-item"><a href="../myAndAdpage/programHistory.do?page=${startpage-1 }&state=${state}" class="link page-link">&gt;</a></li>
+				  <li  class="page-item"><a href="../myAndAdpage/programCertify.do?page=${startpage-1 }&state=${state}" class="link page-link">&gt;</a></li>
 				   </c:if>
 				   
 				   

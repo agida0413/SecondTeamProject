@@ -21,9 +21,14 @@ public class MypageServiceImpl implements MypageService {
 		return mDao.applyHistoryList(map);
 	}
 	@Override
-	public int applyHistotyTotalPage(String id) {
+	public int applyHistotyTotalPage(Map map) {
 		// TODO Auto-generated method stub
-		return mDao.applyHistotyTotalPage(id);
+		return mDao.applyHistotyTotalPage(map);
+	}
+	@Override
+	public VprogramApplyVO certifyDetail(int vno) {
+		// TODO Auto-generated method stub
+		return mDao.certifyDetail(vno);
 	}
 
 }

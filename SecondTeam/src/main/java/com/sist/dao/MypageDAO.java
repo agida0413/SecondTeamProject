@@ -23,7 +23,11 @@ public class MypageDAO {
 		return mapper.applyHistoryList(map);
 	}
 	
-	public int applyHistotyTotalPage(String id) {
-		return mapper.applyHistotyTotalPage(id);
+	public int applyHistotyTotalPage(Map map) {
+		return mapper.applyHistotyTotalPage(map);
+	}
+	
+	public VprogramApplyVO certifyDetail(int vno) {
+		return mapper.certifyDetail(vno);
 	}
 }

@@ -10,4 +10,5 @@ public interface MypageService {
 	public List<VprogramApplyVO> applyHistoryList(Map map);
 	public int applyHistotyTotalPage(Map map) ;
 	public VprogramApplyVO certifyDetail(int vno);
+	public void updateCertifyUpload(VprogramApplyVO vo);
 }

@@ -23,6 +23,9 @@ private MypageService service;
 
 @Autowired
 private CommonsFunction cf;
+
+
+//메인(개인정보)
 	@GetMapping("myAndAdpage/mypage.do")
 	public String mypage(Model model) {
 		model.addAttribute("cate","inform");
@@ -30,6 +33,8 @@ private CommonsFunction cf;
 		return "mypage";
 	}
 	
+	
+	//프로그램 신청현황
 	@GetMapping("myAndAdpage/programHistory.do")
 	public String programHistory(String page,Model model,String state,HttpSession session) {
 		String sendState="";
@@ -92,6 +97,9 @@ private CommonsFunction cf;
 		return "myAndAdpage/programHistory";
 	}
 	
+	
+	
+	//프로그램 완료인증신청
 	@GetMapping("myAndAdpage/programCertify.do")
 	public String programCertify(String page,Model model,String state,HttpSession session) {
 		String sendState="";
@@ -144,9 +152,12 @@ private CommonsFunction cf;
 		return "myAndAdpage/programCertify";
 	}
 	
+	
+	//프로그램 완료 인증신청 페이지(상세)
 	@RequestMapping("myAndAdpage/certifyPage.do")
 	public String certifyPage(int vno,Model model) {
 		VprogramApplyVO vo= service.certifyDetail(vno);
+		model.addAttribute("cate","programCertify");
 		model.addAttribute("vo",vo);
 		return "myAndAdpage/certifyPage";
 	}

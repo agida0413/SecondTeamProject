@@ -119,4 +119,24 @@ public class ProgramListDAO {
 	public void updateEndSt(Map map) {
 		mapper.updateEndSt(map);
 	}
+	
+	
+	//마이페이지 관련
+	
+	//봉사프로그램 신청내역
+		public List<VprogramApplyVO> applyHistoryList(Map map){
+			return mapper.applyHistoryList(map);
+		}
+		
+		public int applyHistotyTotalPage(Map map) {
+			return mapper.applyHistotyTotalPage(map);
+		}
+		
+		public VprogramApplyVO certifyDetail(int vno) {
+			return mapper.certifyDetail(vno);
+		}
+		
+		public void updateCertifyUpload(VprogramApplyVO vo) {
+			mapper.updateCertifyUpload(vo);
+		}
 }

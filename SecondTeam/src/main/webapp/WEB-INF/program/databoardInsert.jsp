@@ -47,7 +47,7 @@
        <tr>
          <th width=15% class="text-center">첨부파일</th>
          <td width=85%>
-           <input type=file ref="upfiles" class="input-sm" multiple="multiple" accept="upload/*" 
+           <input type=file ref="upfiles" class="input-sm" multiple="multiple" accept="image/*" 
             v-model="upfiles">
          </td>
        </tr>

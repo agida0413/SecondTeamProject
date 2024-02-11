@@ -66,7 +66,7 @@
                 </a>
                  <div class="excerpt">
                 	<template v-for="(img, imgIndex) in fvo.type_img.split(',')">
-                      <img v-if="imgIndex < 2" :src="img" alt="Image" class="img-fluid spaced-img" :key="imgIndex" style=" margin-right: 10px; width: 70px; height: 25px;">
+                      <img v-if="imgIndex < 2" :src="img" alt="Image" class="img-fluid spaced-img" :key="imgIndex" style=" margin-right: 10px;">
              	   </template>
                    <h2 style="font-weight: bold"><a href="single.html">{{fvo.g_name}}</a></h2>
                     <span style="font-size: 20px;font-weight: bold">{{fvo.g_price}}</span>

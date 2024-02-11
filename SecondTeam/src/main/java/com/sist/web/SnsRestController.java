@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sist.service.SnsService;
+import com.sist.vo.SnsIdVO;
 import com.sist.vo.SnsKeepVO;
 
 @RestController
@@ -23,6 +24,16 @@ public class SnsRestController {
 	public String list_keep_vue() throws Exception
 	{
 		List<SnsKeepVO> list=service.snsKeepList();
+		ObjectMapper mapper=new ObjectMapper();
+		String json=mapper.writeValueAsString(list);
+		return json;
+	}
+	
+	//sns id 목록중 4명 랜덤출력
+	@GetMapping(value = "list_id_vue.do", produces = "text/plain;charset=UTF-8")
+	public String list_id_vue() throws Exception
+	{
+		List<SnsIdVO> list=service.snsIdList();
 		ObjectMapper mapper=new ObjectMapper();
 		String json=mapper.writeValueAsString(list);
 		return json;

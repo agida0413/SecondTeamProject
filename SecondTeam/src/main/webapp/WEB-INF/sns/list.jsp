@@ -48,13 +48,32 @@ li{
 .show {
   display: block;
 }
+
+.follow_id_list{
+  cursor:pointer;
+  text-align: center;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e6e6e6;"
+}
 </style>
 </head>
 <body>
 	<div class="container" style="margin-top: 50px;">
 	   <div class="row">
 	    <div class="col-md-1" id="id_list">
-	       <p>아이디 목록 출력부</p>
+	      <h3 class="heading"
+	      style="font-size: 18px; text-align:center;
+   				 color: #000;
+   				 font-weight: 400;
+   				 margin-bottom: 30px;
+   				 padding-bottom: 20px;
+   				 border-bottom: 1px solid #e6e6e6;">추천목록</h3>
+	       <div class="post-entry-sidebar follow_id_list" v-for="(vo,index) in id_list">
+	          <i class="xi-profile"></i><br>
+	          <span class="date"><i class="xi-at"></i>{{vo.id}}</span><br>
+	          <span class="date">{{vo.name}}</span>
+	       </div>
 	    </div>
 		<div class="col-md-7" style="display: flex; flex-flow: column;">
 		   <div class="blog-entry">
@@ -97,7 +116,7 @@ li{
 		</div>
     <div class="col-md-4" id="sns_keep">
          <div class="sidebar-box">
-            <h3 class="heading">임시보호 반려동물111</h3>
+            <h3 class="heading">임시보호 반려동물</h3>
             <div class="post-entry-sidebar">
               <ul>
                 <li v-for="(vo,index) in list_keep" class="page-link"
@@ -180,7 +199,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	  },
 	  methods:{
 		  dataRecv(){
-			  axios.get('').then(res=>{
+			  axios.get('../sns/list_id_vue.do').then(res=>{
 				  console.log(res.data)
 				  this.id_list=res.data
 			  })

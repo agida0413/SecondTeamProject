@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sist.dao.SnsDAO;
+import com.sist.vo.SnsIdVO;
 import com.sist.vo.SnsKeepVO;
 
 @Service
@@ -17,5 +18,11 @@ public class SnsServiceImpl implements SnsService{
 	public List<SnsKeepVO> snsKeepList() {
 		// TODO Auto-generated method stub
 		return dao.snsKeepList();
+	}
+
+	@Override
+	public List<SnsIdVO> snsIdList() {
+		// TODO Auto-generated method stub
+		return dao.snsIdList();
 	}
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.sist.mapper.SnsMapper;
+import com.sist.vo.SnsIdVO;
 import com.sist.vo.SnsKeepVO;
 
 @Repository
@@ -17,5 +18,11 @@ public class SnsDAO {
 	public List<SnsKeepVO> snsKeepList()
 	{
 		return mapper.snsKeepList();
+	}
+	
+	//sns id 목록중 4명 랜덤출력
+	public List<SnsIdVO> snsIdList()
+	{
+		return mapper.snsIdList();
 	}
 }

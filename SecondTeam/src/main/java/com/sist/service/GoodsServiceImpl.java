@@ -25,4 +25,16 @@ public int goodsTotalpage() {
 	// TODO Auto-generated method stub
 	return gDao.goodsTotalpage();
 }
+
+@Override
+public List<GoodsVO> goodsCategoryList(Map map) {
+	// TODO Auto-generated method stub
+	return gDao.goodsCategoryList(map);
+}
+
+@Override
+public int goodsCategoryTotalpage(Map map) {
+	// TODO Auto-generated method stub
+	return gDao.goodsCategoryTotalpage(map);
+}
 }

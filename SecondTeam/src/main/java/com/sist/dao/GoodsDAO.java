@@ -19,4 +19,10 @@ public List<GoodsVO> goodsListData(Map map){
 public int goodsTotalpage() {
 	return mapper.goodsTotalpage();
 }
+public List<GoodsVO> goodsCategoryList(Map map){
+	return mapper.goodsCategoryList(map);
+}
+public int goodsCategoryTotalpage(Map map){
+	return mapper.goodsCategoryTotalpage(map);
+}
 }

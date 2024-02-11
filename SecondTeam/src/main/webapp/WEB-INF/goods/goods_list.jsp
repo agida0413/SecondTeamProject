@@ -16,8 +16,28 @@
         </div>
         <div class="col-sm-6 text-sm-end"><a href="../main/main.do" class="read-more">Main Home</a></div>
     </div>
-
-    <div class="row">
+    <form @submit.prevent="listChange()">
+	<div class="text-end">
+			<select v-model="category" class="input-sm" @change="CateListChange">
+				<option value="전체">전체</option>
+				<option value="뷰티">뷰티</option>
+				<option value="라이프스타일">라이프스타일</option>
+				<option value="패션">패션</option>
+				<option value="식품">식품</option>
+				<option value="출산/유아동">출산/유아동</option>
+				<option value="반려동물">반려동물</option>	
+			</select>
+			<div style="position: relative;">
+							<input type="text" class="form-control" placeholder="Search..."
+								 @keyup.enter="listChange()"
+								style="background-color: black;"> 
+								<button class="bi bi-search" 
+								style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);" @click="listChange()"
+								></button>
+						</div>
+	</div>
+	</form>
+    <div class="row" v-if="category === '전체'">
         <div class="col-lg-4 mb-4" v-for="(vo, index) in goods_list" :key="index">
             <div class="post-entry-alt">
                 <a href="#" class="img-link">
@@ -26,6 +46,19 @@
                 <div class="excerpt">
                     <h2 style="font-weight: bold"><a href="single.html">{{vo.g_name}}</a></h2>
                     <h4>{{vo.g_price}}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+     <div class="row" v-else>
+        <div class="col-lg-4 mb-4" v-for="(fvo, index) in find_list" :key="index">
+            <div class="post-entry-alt">
+                <a href="#" class="img-link">
+                    <img :src="fvo.g_img" alt="Image" class="img-fluid">
+                </a>
+                <div class="excerpt">
+                    <h2 style="font-weight: bold"><a href="single.html">{{fvo.g_name}}</a></h2>
+                    <h4>{{fvo.g_price}}</h4>
                 </div>
             </div>
         </div>
@@ -44,66 +77,6 @@
 					</nav>
 				</div>
 </div>
-<script>
-let goodsList=Vue.createApp({
-	data(){
-		return{
-			goods_list:[],
-			curpage:1,
-			totalpage:0,
-			startpage:0,
-			endpage:0
-		}
-	},
-	mounted(){
-		this.dataRecv()
-	},
-	methods:{
-		dataRecv(){
-			axios.get("../goods/goods_list_vue.do",{
-				params:{
-					page:this.curpage
-				}
-			}).then(res=>{
-				console.log(res.data)
-				this.goods_list=res.data
-			})
-			axios.get("../goods/page_vue.do",{
-            	params:{
-            		page:this.curpage
-            	}
-            }).then(res=>{
-            	this.curpage=res.data.curpage
-            	this.startpage=res.data.startpage
-            	this.endpage=res.data.endpage
-            	this.totalpage=res.data.totalpage
-            })
-         
-        },
-		range(start,end){
-			let arr=[]
-			let leng=end-start
-			for(let i=0;i<=leng;i++)
-			{
-				arr[i]=start
-				start++
-			}
-			return arr;
-		},
-		prev(){
-			this.curpage=this.startpage-1
-			this.dataRecv()
-		},
-		change(page){
-			this.curpage=page
-			this.dataRecv()
-		},
-		next(){
-			this.curpage=this.endpage+1
-			this.dataRecv()
-		}
-	  }
-}).mount("#goodsList")
-</script>
+<script src="../js/goodslist.js"></script>
 </body>
 </html>

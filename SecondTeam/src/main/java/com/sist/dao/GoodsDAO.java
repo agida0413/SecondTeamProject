@@ -16,8 +16,8 @@ private GoodsMapper mapper;
 public List<GoodsVO> goodsListData(Map map){
 	return mapper.goodsListData(map);
 }
-public int goodsTotalpage() {
-	return mapper.goodsTotalpage();
+public int goodsTotalpage(Map map) {
+	return mapper.goodsTotalpage(map);
 }
 public List<GoodsVO> goodsCategoryList(Map map){
 	return mapper.goodsCategoryList(map);

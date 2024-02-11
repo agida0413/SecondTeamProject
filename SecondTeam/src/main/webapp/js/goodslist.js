@@ -7,7 +7,8 @@ let goodsList=Vue.createApp({
 			totalpage:0,
 			startpage:0,
 			endpage:0,
-			category:'전체'
+			category:'전체',
+			ss:''
 		}
 	},
 	mounted(){
@@ -17,7 +18,8 @@ let goodsList=Vue.createApp({
 		dataRecv(){
 			axios.get("../goods/goods_list_vue.do",{
 				params:{
-					page:this.curpage
+					page:this.curpage,
+					ss: this.ss
 				}
 			}).then(res=>{
 				console.log(res.data)
@@ -25,7 +27,8 @@ let goodsList=Vue.createApp({
 			})
 			axios.get("../goods/page_vue.do",{
             	params:{
-            		page:this.curpage
+            		page:this.curpage,
+            		ss: this.ss
             	}
             }).then(res=>{
             	this.curpage=res.data.curpage
@@ -36,6 +39,7 @@ let goodsList=Vue.createApp({
          
         },
         CateListChange() {
+        	this.ss=''
 	        if (this.category === '전체') {
 	        	this.curpage=1
 	        	this.dataRecv();
@@ -78,23 +82,26 @@ let goodsList=Vue.createApp({
 	            this.listChange();
 	        }
 		},
-		listChange() {
-		    axios.get("../goods/goods_category_list_vue.do", {
-		        params:{
-		    	page: this.curpage,
-		        category: this.category 
-		        },
-		        headers: {
-			        'Content-Type': 'application/json;charset=UTF-8'
-			    }
-		    }).then(res => {
-		    	console.log(this.category)
-		        console.log("c:", res.data); 
+		listChange()  {
+		    if (this.category !== '전체') {
+		        axios.get("../goods/goods_category_list_vue.do", {
+		            params:{
+		                page: this.curpage,
+		                category: this.category,
+		                ss:this.ss
+		            },
+		            headers: {
+		                'Content-Type': 'application/json;charset=UTF-8'
+		            }
+		        }).then(res => {
+		            console.log(this.category);
+		            console.log("c:", res.data); 
 		            this.find_list = res.data;
 		            axios.get("../goods/goods_category_page_vue.do", {
 		                params: {
 		                    page: this.curpage,
-		                    category: this.category
+		                    category: this.category,
+		                    ss:this.ss
 		                }
 		            }).then(res => {
 		                this.curpage = res.data.curpage;
@@ -103,10 +110,21 @@ let goodsList=Vue.createApp({
 		                this.totalpage = res.data.totalpage;
 		            }).catch(error => {
 		                console.error('error:', error);
-		            })
-		    }).catch(error => {
-		        console.error('error:', error);
-		    })
-		}
+		            });
+		        }).catch(error => {
+		            console.error('error:', error);
+		        });
+		    } else {
+		        this.dataRecv();
+		    }
+		},
+		 search(){
+				let sss=this.$refs.ss.value;
+				if (this.category === '전체') {
+		            this.dataRecv();
+		        } else {
+		            this.listChange();
+		        }
+			},
 	  }
 }).mount("#goodsList")

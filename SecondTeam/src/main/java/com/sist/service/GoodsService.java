@@ -7,7 +7,7 @@ import com.sist.vo.GoodsVO;
 
 public interface GoodsService {
 	public List<GoodsVO> goodsListData(Map map);
-	public int goodsTotalpage();
+	public int goodsTotalpage(Map map);
 	public List<GoodsVO> goodsCategoryList(Map map);
 	public int goodsCategoryTotalpage(Map map);
 }

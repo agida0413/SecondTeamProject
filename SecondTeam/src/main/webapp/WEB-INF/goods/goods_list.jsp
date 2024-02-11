@@ -29,39 +29,55 @@
 			</select>
 			<div style="position: relative;">
 							<input type="text" class="form-control" placeholder="Search..."
-								 @keyup.enter="listChange()"
+								ref="ss" v-model="ss" @keyup.enter="search()"
 								style="background-color: black;"> 
 								<button class="bi bi-search" 
-								style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);" @click="listChange()"
+								style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);" @click="search()"
 								></button>
 						</div>
 	</div>
 	</form>
-    <div class="row" v-if="category === '전체'">
+    <div class="row" v-if="category === '전체' && goods_list.length !== 0">
         <div class="col-lg-4 mb-4" v-for="(vo, index) in goods_list" :key="index">
             <div class="post-entry-alt">
                 <a href="#" class="img-link">
                     <img :src="vo.g_img" alt="Image" class="img-fluid">
                 </a>
                 <div class="excerpt">
+                	<template v-for="(img, imgIndex) in vo.type_img.split(',')">
+                      <img v-if="imgIndex < 2" :src="img" alt="Image" class="img-fluid spaced-img" :key="imgIndex" style=" margin-right: 10px;">
+             	   </template>
                     <h2 style="font-weight: bold"><a href="single.html">{{vo.g_name}}</a></h2>
-                    <h4>{{vo.g_price}}</h4>
+                    <span style="font-size: 20px;font-weight: bold">{{vo.g_price}}</span>
                 </div>
             </div>
         </div>
     </div>
-     <div class="row" v-else>
+    <div class="row" v-if="category === '전체' && goods_list.length === 0">
+       <div style="margin: 50px 0 230px 0">
+       <span>검색 조건에 해당하는 상품이 없습니다.</span>
+       </div>
+    </div>
+    <div class="row" v-if="category !== '전체' && find_list.length !== 0">
         <div class="col-lg-4 mb-4" v-for="(fvo, index) in find_list" :key="index">
             <div class="post-entry-alt">
                 <a href="#" class="img-link">
                     <img :src="fvo.g_img" alt="Image" class="img-fluid">
                 </a>
-                <div class="excerpt">
-                    <h2 style="font-weight: bold"><a href="single.html">{{fvo.g_name}}</a></h2>
-                    <h4>{{fvo.g_price}}</h4>
+                 <div class="excerpt">
+                	<template v-for="(img, imgIndex) in fvo.type_img.split(',')">
+                      <img v-if="imgIndex < 2" :src="img" alt="Image" class="img-fluid spaced-img" :key="imgIndex" style=" margin-right: 10px; width: 70px; height: 25px;">
+             	   </template>
+                   <h2 style="font-weight: bold"><a href="single.html">{{fvo.g_name}}</a></h2>
+                    <span style="font-size: 20px;font-weight: bold">{{fvo.g_price}}</span>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="row" v-if="category !== '전체' && find_list.length === 0">
+       <div style="margin: 50px 0 230px 0">
+       <span>검색 조건에 해당하는 상품이 없습니다.</span>
+       </div>
     </div>
     <div class="row">
 					<nav aria-label="Page navigation example">

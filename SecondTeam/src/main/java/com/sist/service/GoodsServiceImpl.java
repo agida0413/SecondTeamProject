@@ -21,9 +21,9 @@ public List<GoodsVO> goodsListData(Map map) {
 }
 
 @Override
-public int goodsTotalpage() {
+public int goodsTotalpage(Map map) {
 	// TODO Auto-generated method stub
-	return gDao.goodsTotalpage();
+	return gDao.goodsTotalpage(map);
 }
 
 @Override
@@ -37,4 +37,5 @@ public int goodsCategoryTotalpage(Map map) {
 	// TODO Auto-generated method stub
 	return gDao.goodsCategoryTotalpage(map);
 }
+
 }

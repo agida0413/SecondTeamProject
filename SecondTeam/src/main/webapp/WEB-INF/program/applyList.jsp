@@ -19,6 +19,16 @@ padding:20px;
 <div class=""><span style="font-weight:bold; font-size:30px; color:black;">봉사프로그램 신청승인</span></div>
   <hr>
 <div class="conatainer" id="applyList">
+
+<div style="margin-top:15px;margin-bottom:15px;">
+
+<button class="btn btn-large" :class="type === '신청승인대기중' ? 'btn-danger' : 'btn-primary'" @click="waitList()" style="margin-right:10px;">승인대기중 목록</button>
+<button class="btn btn-large" :class="type === '봉사활동 대기중' ? 'btn-danger' : 'btn-primary'" @click="completeList()" style="margin-right:10px;">승인완료 목록</button>
+<button class="btn btn-large" :class="type === '봉사중' ? 'btn-danger' : 'btn-primary'" @click="runList()" style="margin-right:10px;">봉사중 목록</button>
+<button class="btn btn-large" :class="type === '봉사완료' ? 'btn-danger' : 'btn-primary'" @click="doneList()" style="margin-right:10px;">봉사완료 목록</button>
+<button class="btn btn-large" :class="type === '거절' ? 'btn-danger' : 'btn-primary'" @click="refuseList()" style="margin-right:10px;">거절 목록</button>
+</div>
+
 <div v-if="applyList.length==0">
 <h3>조회 결과가 없습니다.</h3>
 </div>
@@ -106,7 +116,7 @@ padding:20px;
 				</div>
 				
 				
-				<div class="col-2">
+				<div class="col-2" v-if="type=='신청승인대기중'">
 				
 					<div style="margin-top:35px;">
 					<input type="button" class="btn btn-large btn-primary" value="참여승인" @click="access(vo.vano)">
@@ -308,6 +318,27 @@ let applyList=Vue.createApp({
 				alert('거절되었습니다.')
 				this.getList()
 			})
+		},
+		waitList(){
+			this.type='신청승인대기중'
+			this.getList()
+		},
+		completeList(){
+			this.type='봉사활동 대기중'
+				this.getList()
+
+		},
+		runList(){
+			this.type='봉사중'
+				this.getList()
+		},
+		doneList(){
+			this.type='봉사완료'
+				this.getList()
+		},
+		refuseList(){
+			this.type='거절'
+				this.getList()
 		}
 	}
 }).mount('#applyList')

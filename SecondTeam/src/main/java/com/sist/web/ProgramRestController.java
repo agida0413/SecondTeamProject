@@ -203,7 +203,7 @@ private CommonsFunction cf;
 					   vo.setV_filecount(list.size());
 					   
 					  
-					   vo.setV_state("WAIT");
+					   vo.setV_state("신청승인대기중");
 				  service.programApplyInsert(vo);
 				   result="yes";
 			   }

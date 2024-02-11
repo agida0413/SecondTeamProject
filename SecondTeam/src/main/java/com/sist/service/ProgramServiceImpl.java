@@ -105,8 +105,31 @@ public class ProgramServiceImpl implements ProgramService {
 	}
 
 
+	@Override
+	public List<Integer> updateRunStVnoList() {
+		// TODO Auto-generated method stub
+		return pDao.updateRunStVnoList();
+	}
+
+	@Override
+	public List<Integer> updateEndStVnoList() {
+		// TODO Auto-generated method stub
+		return pDao.updateEndStVnoList();
+	}
 	
 	
+	@Override
+	public void updateRunSt(Map map) {
+		// TODO Auto-generated method stub
+		pDao.updateRunSt(map);
+	}
+
+	@Override
+	public void updateEndSt(Map map) {
+		// TODO Auto-generated method stub
+		pDao.updateEndSt(map);
+	}
+
 	
 	
 	//프로그램 자료실
@@ -145,6 +168,9 @@ public class ProgramServiceImpl implements ProgramService {
 		// TODO Auto-generated method stub
 		return dbDAO.databoardFileInfoData(dno);
 	}
+
+	
+	
 
 	
 	

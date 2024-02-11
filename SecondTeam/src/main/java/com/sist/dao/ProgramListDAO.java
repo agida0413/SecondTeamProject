@@ -52,4 +52,20 @@ public class ProgramListDAO {
 	public VprogramApplyVO getApplyFiles(int vano) {
 		return mapper.getApplyFiles(vano);
 	}
+	//신청내역 스케쥴러를 통한 봉사중으로 상태업데이트를 위해 vno리스트넘기기
+	public List<Integer> updateRunStVnoList(){
+		return mapper.updateRunStVnoList();
+	}
+	//신청내역 스케쥴러를 통한 봉사완료로 상태업데이트를 위해 vno리스트넘기기
+	public List<Integer> updateEndStVnoList(){
+		return mapper.updateEndStVnoList();
+	}
+	//스케쥴러 상태업데이트
+	public void updateRunSt(Map map) {
+	 mapper.updateRunSt(map);	
+	}
+	//스케쥴러 상태업데이트
+	public void updateEndSt(Map map) {
+		mapper.updateEndSt(map);
+	}
 }

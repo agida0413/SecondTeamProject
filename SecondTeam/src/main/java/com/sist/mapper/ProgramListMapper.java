@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 import com.sist.vo.OptionVO;
@@ -38,7 +39,7 @@ public interface ProgramListMapper {
 	@Select("SELECT COUNT(*) FROM v_program_apply "
 			+"WHERE id=#{id} AND "
 			+"vno=#{vno} AND "
-			+"v_state !='CANCEL'")
+			+"v_state !='거절'")
 	public int getApplyCount(VprogramApplyVO vo);
 	
 	//센터 프로그램 신청내역 리스트
@@ -94,6 +95,30 @@ public interface ProgramListMapper {
 				+"WHERE vano=#{vano}")
 		public VprogramApplyVO getApplyFiles(int vano);
 			
-	
-	
+		//신청내역 스케쥴러를 통한 봉사중으로 상태업데이트를 위해 vno리스트넘기기
+		@Select("SELECT vno FROM v_program "
+				+"WHERE TRUNC(SYSDATE) = TRUNC(V_START)")
+		public List<Integer> updateRunStVnoList();
+		
+		
+		//신청내역 스케쥴러를 통한 봉사완료로 상태업데이트를 위해 vno리스트넘기기
+		@Select("SELECT vno FROM v_program "
+				+"WHERE TRUNC(SYSDATE-1) = TRUNC(V_end)")
+		public List<Integer> updateEndStVnoList();
+		
+		@Update("UPDATE V_PROGRAM_APPLY SET "
+				+"v_state=#{up} "
+				+"WHERE vno=#{vno} AND "
+				+"v_state=#{wh}")
+		public void updateRunSt(Map map);
+		
+		@Update("UPDATE V_PROGRAM_APPLY SET "
+				+"v_state=#{up} "
+				+"WHERE vno=#{vno} AND "
+				+"v_state=#{wh}")
+		public void updateEndSt(Map map);
+		
+		
+		
+		
 }

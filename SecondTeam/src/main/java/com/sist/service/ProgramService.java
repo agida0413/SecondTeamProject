@@ -28,6 +28,13 @@ public interface ProgramService {
 	public void programApplyInsert(VprogramApplyVO vo);
 	public int getApplyCount(VprogramApplyVO vo);
 	public List<VprogramApplyVO> applyList(Map map);
+	
+	public List<Integer> updateRunStVnoList();
+	
+	public List<Integer> updateEndStVnoList();
+	public void updateRunSt(Map map);
+	public void updateEndSt(Map map);
+	
 	//프로그램 자료실
 	public List<VdataboardVO> databoardListData(int start,int end);
 	

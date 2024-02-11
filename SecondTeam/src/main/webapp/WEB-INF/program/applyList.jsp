@@ -143,7 +143,7 @@ let applyList=Vue.createApp({
 			totalpage:0,
 			startpage:0,
 			endpage:0,
-			type:'WAIT',
+			type:'신청승인대기중',
 			v_filenames:[],
 			v_filesizes:[],
 			v_filecount:0

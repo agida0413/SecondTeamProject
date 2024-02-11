@@ -1,11 +1,14 @@
 package com.sist.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sist.mapper.ProgramListMapper;
 import com.sist.vo.OptionVO;
@@ -46,6 +49,54 @@ public class ProgramListDAO {
 	//신청리스트 토탈페이지
 	public int applyListTotalPage(Map map) {
 		return mapper.applyListTotalPage(map);
+	}
+	
+	//신청 승인
+	
+	
+	 @Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
+	public String  updateAccess(int vano) {
+		String up="봉사활동 대기중";
+		String result="";
+		int vno=mapper.getVno(vano);
+		ProgramVO vo=mapper.getCollectnumApplynum(vno);
+		
+		
+		
+		if (vo.getCollect_num()==vo.getApply_num()) {
+			
+			result="NO";
+		}
+		else {
+				//신청인원===정원-1
+			
+			
+			Map map=new HashMap();
+			map.put("up", up);
+			map.put("vano", vano);
+			mapper.updateAcess(map);
+			
+				if(vo.getCollect_num()-1==vo.getApply_num()) {
+					map.put("st", "모집완료");
+					map.put("vno", vno);
+					mapper.updateCollectState(map);
+				}
+			
+			mapper.updateApplyNum(vno);
+			result="YES";
+		}
+		
+		return result;
+		
+		
+	}
+	//신청거절
+	public void updateRefuse(int vano) {
+		String up="거절";
+		Map map=new HashMap();
+		map.put("up", up);
+		map.put("vano", vano);
+		mapper.updateRefuse(map);
 	}
 	
 	//신청 리스트 파일

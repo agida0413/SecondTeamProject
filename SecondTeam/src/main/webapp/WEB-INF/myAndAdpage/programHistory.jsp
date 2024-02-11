@@ -13,7 +13,9 @@
   
   
 <div class="conatainer">
-
+<c:if test="${size==0 }">
+<h3>신청내역이 존재하지 않습니다.</h3>
+</c:if>
 	<c:forEach var="vo" items="${list }">
 		<div class="row">
   				<div class="programName" style="margin-bottom:15px;">
@@ -22,10 +24,10 @@
 	  			<table class="table">
 	  				<tr  style="background-color:#f0f0f0">
 	  					<th width="30%">센터이름</th>
-	  					<th width="35%">봉사기간</th>
+	  					<th width="30%">봉사기간</th>
 	  					
-	  					<th width="25%">신청일시</th>
-	  					<th width="10%">신청상태</th>
+	  					<th width="20%">신청일시</th>
+	  					<th width="20%">신청상태</th>
 	  				</tr>
 	  				
 	  				<tr style="height:70px; vertical-align:middle;">

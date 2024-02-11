@@ -58,6 +58,7 @@ private CommonsFunction cf;
 		model.addAttribute("endpage",endpage);
 		model.addAttribute("page",curpage);
 		model.addAttribute("cate","programHistory");
+		model.addAttribute("size",list.size());
 		
 		return "myAndAdpage/programHistory";
 	}

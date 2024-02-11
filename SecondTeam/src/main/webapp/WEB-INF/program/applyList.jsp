@@ -19,6 +19,9 @@ padding:20px;
 <div class=""><span style="font-weight:bold; font-size:30px; color:black;">봉사프로그램 신청승인</span></div>
   <hr>
 <div class="conatainer" id="applyList">
+<div v-if="applyList.length==0">
+<h3>조회 결과가 없습니다.</h3>
+</div>
 		<div class="row appList" v-for="vo in applyList">
   				
 	  			<div class="col-10 applyLine" style="margin-bottom:20px;">
@@ -106,11 +109,11 @@ padding:20px;
 				<div class="col-2">
 				
 					<div style="margin-top:35px;">
-					<input type="button" class="btn btn-large btn-primary" value="참여승인">
+					<input type="button" class="btn btn-large btn-primary" value="참여승인" @click="access(vo.vano)">
 					</div>
 					
 					<div style="margin-top:10px;">
-					<input type="button" class="btn btn-large btn-danger" value="거절하기">
+					<input type="button" class="btn btn-large btn-danger" value="거절하기"  @click="refuse(vo.vano)">
 					</div>
 				</div>				
 				<hr>
@@ -270,11 +273,41 @@ let applyList=Vue.createApp({
 		        
 		        fileLists.forEach(list => {
 		        	
-		        	        // fileBtn이 아닌 경우에만 실행될 코드를 작성합니다.
+		        	        
 		        	       list.style.display='none'
 		        	  
 		        });
 		       
+		},
+		access(vano){
+			axios.get('../program/applyAccess_vue.do',
+					{
+							params:{
+								vano:vano	
+							}
+						}
+			).then(res=>{
+				if(res.data==='YES'){
+					alert('승인되었습니다.')
+					this.getList()
+				}
+				else{
+					alert('정원이 초과하였습니다.')
+				}
+				
+			})
+		},
+		refuse(vano){
+			axios.get('../program/applyRefuse_vue.do',
+					{
+							params:{
+								vano:vano	
+							}
+						}
+			).then(res=>{
+				alert('거절되었습니다.')
+				this.getList()
+			})
 		}
 	}
 }).mount('#applyList')

@@ -278,8 +278,22 @@ private CommonsFunction cf;
 		}
 		 
 		 
-		 
+		 //신청승인
+		 @GetMapping("program/applyAccess_vue.do")
+		 public String applyAccess(int vano) {
+			String result= service.updateAccess(vano);
+			
+			return result;
+			 
+		 }
 	
+		 
+		 //신청거절
+		 @GetMapping("program/applyRefuse_vue.do")
+		 public void applyRefuse(int vano) {
+			 service.updateRefuse(vano);
+			
+		 }
 	
 	//프로그램 자료실
 	

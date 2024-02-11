@@ -119,6 +119,41 @@ public interface ProgramListMapper {
 		public void updateEndSt(Map map);
 		
 		
+		//신청 승인
+		@Update("UPDATE V_PROGRAM_APPLY SET "
+				+"v_state=#{up} "
+				+"WHERE vano=#{vano}")
+		public void updateAcess(Map map);
+			
+		//VNO값 가져오기
+		@Select("SELECT VNO FROM V_PROGRAM_apply WHERE vano=#{vano}")
+		public int getVno(int vano);
+		
+		//신청승인 후 해당프로그램 신청인원증가 
+		@Update("UPDATE V_PROGRAM SET "
+				+"apply_num=apply_num+1 "
+				+"WHERE vno=#{vno}")
+		public void updateApplyNum(int vno);
+		
+		//신청인원이 정원보다 ㅁ많을시 처리
+		@Select("SELECT COLLECT_NUM,APPLY_NUM FROM v_program "
+				+"WHERE vno=#{vno}")
+		public ProgramVO getCollectnumApplynum(int vno);
+		
+		@Update("UPDATE v_program SET "
+				+"collect_state=#{st} "
+				+"WHERE vno=#{vno}")
+		public void updateCollectState(Map map);
+		
+		//신청 거절 
+		@Update("UPDATE V_PROGRAM_APPLY SET "
+				+"v_state=#{up} "
+				+"WHERE vano=#{vano}")
+		public void updateRefuse(Map map);
+			
+		
+		
+		
 		
 		
 }

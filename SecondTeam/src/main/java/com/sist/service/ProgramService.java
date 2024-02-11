@@ -35,6 +35,8 @@ public interface ProgramService {
 	public void updateRunSt(Map map);
 	public void updateEndSt(Map map);
 	
+	public String updateAccess(int vano);
+	public void updateRefuse(int vano);
 	//프로그램 자료실
 	public List<VdataboardVO> databoardListData(int start,int end);
 	

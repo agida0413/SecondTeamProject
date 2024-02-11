@@ -130,7 +130,17 @@ public class ProgramServiceImpl implements ProgramService {
 		pDao.updateEndSt(map);
 	}
 
-	
+	@Override
+	public String updateAccess(int vano) {
+		return  pDao.updateAccess(vano);
+		
+	}
+
+	@Override
+	public void updateRefuse(int vano) {
+		// TODO Auto-generated method stub
+		pDao.updateRefuse(vano);
+	}
 	
 	//프로그램 자료실
 	@Override
@@ -168,6 +178,8 @@ public class ProgramServiceImpl implements ProgramService {
 		// TODO Auto-generated method stub
 		return dbDAO.databoardFileInfoData(dno);
 	}
+
+	
 
 	
 	

@@ -125,6 +125,7 @@
 	            address: '${vo.centername}',
 	            sigu: '${vo.si}' + ' ' + '${vo.gu}',
 	            state: 'Y'
+	           
 	        }
 	    },
 	    mounted() {
@@ -208,6 +209,7 @@
 					alert('로그인 후 이용가능합니다')
 					return;
 				}
+				
 				else{
 					location.href="../program/apply.do?vno="+this.vno
 				}

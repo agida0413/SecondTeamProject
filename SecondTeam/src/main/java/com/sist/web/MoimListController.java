@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sist.dao.*;
 import com.sist.vo.MoimListVO;
-import com.sist.vo.OptionVO;
 
 @Controller
 public class MoimListController {
@@ -26,11 +25,5 @@ public class MoimListController {
 	{
 		model.addAttribute("rno",rno);
 		return "moim/detail";
-	}
-	
-	@GetMapping("sns/list.do")
-	public String sns_list() {
-		
-		return "sns/list";
 	}
 }

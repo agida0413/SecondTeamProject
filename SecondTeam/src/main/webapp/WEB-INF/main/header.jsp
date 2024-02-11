@@ -21,7 +21,7 @@
 				<div class="site-navigation">
 					<div class="row g-0 align-items-center">
 						<div class="col-2">
-						<a href="index.html" class="logo m-0 float-start">site<span class="text-primary">name</span></a>
+						<a href="../main/main.do" class="logo m-0 float-start">site<span class="text-primary">name</span></a>
 						</div>
 						<div class="col-8 text-center">
 							<div>
@@ -49,7 +49,7 @@
 										</li>
 									</ul>
 								</li>
-								<li><a href="../program/list.do">임시페이지</a></li>
+								<li><a href="../program/list.do">봉사프로그램</a></li>
 								<li><a href="../goods/goods_main.do">상품</a></li>
 								<li><a href="category.html">추가예정</a></li>
 								<li><a href="category.html">추가예정</a></li>
@@ -71,6 +71,7 @@
 							
 							 <c:if test="${sessionScope.id!=null }">
 								<span>${sessionScope.name } 님 환영합니다.</span>
+								<span><a href="../myAndAdpage/mypage.do" style="color:black;"><img src="../Projectimages/login.png" width="20px;">mypage</a></span>
 							<span><a href="../program/logout.do" style="color:black;"><img src="../Projectimages/login.png" width="20px;">Logout</a></span>
 							
 							</c:if>

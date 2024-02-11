@@ -5,7 +5,11 @@
 <html>
 <head>
 <style type="text/css">
-
+.applyLine{
+border: 1px solid #cccccc; 
+border-radius: 20px;
+padding:20px;
+}
 </style>
 	<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <meta charset="UTF-8">
@@ -17,12 +21,14 @@
 <div class="conatainer" id="applyList">
 		<div class="row appList" v-for="vo in applyList">
   				
-	  			<div class="col-10">
+	  			<div class="col-10 applyLine" style="margin-bottom:20px;">
 	  				<div class="programName">
-							<span style="font-size:20px; font-weight:bold;  color:black;">{{vo.pvo.title}}</span>
+							<span style="font-size:25px; font-weight:bold;  color:black;">{{vo.pvo.title}}</span>
 						</div>
 					<!-- 봉사프로그램정보 -->
 					<div class="row" style=" color:black; margin-top:10px;">
+					
+				
 					<div class="col-5"  >
 						
 						
@@ -72,7 +78,7 @@
 				
 				<div class="col-3">
 				<div style="margin-top:10px;">
-					<input type="button" class="btn btn-large btn-primary" value="첨부파일" @click="showFile(vo.vano)" :id="'fileBtn'+vo.vano" class="allCommon">
+					<input type="button" class="btn btn-large btn-success" value="첨부파일" @click="showFile(vo.vano)" :id="'fileBtn'+vo.vano" class="allCommon">
 					</div>
 					<div :id="'fileList'+vo.vano" style="display:none; " class="allCommon">
 					<table style="border:none;">
@@ -99,8 +105,12 @@
 				
 				<div class="col-2">
 				
-					<div style="margin-top:50px;">
-					<input type="button" class="btn btn-large btn-primary" value="검토하기">
+					<div style="margin-top:35px;">
+					<input type="button" class="btn btn-large btn-primary" value="참여승인">
+					</div>
+					
+					<div style="margin-top:10px;">
+					<input type="button" class="btn btn-large btn-danger" value="거절하기">
 					</div>
 				</div>				
 				<hr>

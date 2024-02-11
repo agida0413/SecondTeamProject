@@ -16,6 +16,13 @@
          <put-attribute name="footer" value="/WEB-INF/main/footer.jsp"/>
       </definition>
       
+        <definition name="mypage" template="/WEB-INF/myAndAdpage/myPageMain.jsp">
+         <put-attribute name="header" value="/WEB-INF/main/header.jsp"/>
+         <put-attribute name="myAdaside" value="/WEB-INF/myAndAdpage/myPageAside.jsp"/>
+         <put-attribute name="myAdcontent" value="/WEB-INF/myAndAdpage/myPageInform.jsp"/>
+         <put-attribute name="footer" value="/WEB-INF/main/footer.jsp"/>
+      </definition>
+      
        <definition name="goods" template="/WEB-INF/goods/goods_main.jsp">
          <put-attribute name="header" value="/WEB-INF/main/header.jsp"/>
          <put-attribute name="content" value="/WEB-INF/goods/goods_list.jsp"/>
@@ -29,6 +36,10 @@
    		 <definition name="program/*/*" extends="program"><!-- {1}/{2}/{3} -->
 			<put-attribute name="content" value="/WEB-INF/program/{1}/{2}.jsp"></put-attribute>
 		</definition>
+		
+		<definition name="myAndAdpage/*" extends="mypage">
+          <put-attribute name="myAdcontent" value="/WEB-INF/myAndAdpage/{1}.jsp"/>
+           </definition>
 		
 		 <definition name="goods/*" extends="goods">
           <put-attribute name="content" value="/WEB-INF/goods/{1}.jsp"/>

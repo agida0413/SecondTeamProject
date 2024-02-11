@@ -139,7 +139,7 @@
                 </table>
                </div>
                 
-               <div class="row findOpt">
+               <div class="row findOpt" style="margin-left:5px;">
     		<table class="table findTable">
     			<tr>
     				<td style="width:50%;" >
@@ -226,7 +226,7 @@
     		
     	
     	<!-- 검색결과갯수정보 -->	
-    	<div class="row findNum">	
+    	<div class="row findNum" style="margin-left:5px;">	
 				<!-- 검색 결과 숫자 카운트 -->
 				<div class="" v-if="size!=0">
 					<p>[전체 <em>{{size}}</em>건, 현재페이지 <em>{{curpage}}</em>/{{totalpage}}]</p>
@@ -242,7 +242,7 @@
   		
   		
   		<!-- 검색리스트 -->
-  		<div class="row nextline" v-for="vo in programList">
+  		<div class="row nextline" v-for="vo in programList" >
   			<a :href="'../program/detail.do?vno='+vo.vno" style="color:black">
   			<div class="row findList">
   				

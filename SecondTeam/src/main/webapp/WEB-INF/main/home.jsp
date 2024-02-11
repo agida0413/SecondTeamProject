@@ -85,7 +85,7 @@ cursor: pointer;
 				</div>
 				
 				<div class="col-md-2">
-					<a href="single.html" class="h-entry mb-30 v-height gradient">
+					<a href="../program/list.do" class="h-entry mb-30 v-height gradient">
 
 						<div class="featured-img" style="background-image: url('../Projectimages/volmain.jpg');"></div>
 

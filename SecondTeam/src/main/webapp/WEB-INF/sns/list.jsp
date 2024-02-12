@@ -56,11 +56,55 @@ li{
   padding-bottom: 10px;
   border-bottom: 1px solid #e6e6e6;"
 }
+
+.mycontent_list{
+  cursor:pointer;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e6e6e6;"
+}
+
+/*사이드 메뉴*/
+.res_submenu{
+	background-color: #214252;
+	text-align: center;
+	border-radius: 50%;
+	position: fixed;
+	right: 150px;
+	top: 500px;
+	width: 100px;
+	height: 100px;
+	z-index: 9999 !important;
+}
+.res_submenu a{
+	display: block;
+}
+.res_submenu i{
+	margin-top: 20px;
+	font-size: 25px;
+	color: #fff !important;
+}
+.res_submenu p{
+	color: #fff;
+}
+.res_submenu:hover{
+	 box-shadow: 0 10px 10px 10px rgba(147,160,168, 0.2);
+	 transition: all 0.4s ease-in-out;
+	 transform: translateY(-25px);
+}
 </style>
 </head>
 <body>
 	<div class="container" style="margin-top: 50px;">
+	<!-- 예약 사이드 매뉴 시작 -->
+   <div class="res_submenu" style="z-index: 9999 !important;">
+      <a href="insert.do"> <i class="xi-pen"></i>
+         <p>새글쓰기</p>
+      </a>
+   </div>
+   <!-- 예약 사이드 매뉴 종료 -->
 	   <div class="row">
+	   
 	    <div class="col-md-1" id="id_list">
 	      <h3 class="heading"
 	      style="font-size: 18px; text-align:center;
@@ -75,44 +119,51 @@ li{
 	          <span class="date">{{vo.name}}</span>
 	       </div>
 	    </div>
-		<div class="col-md-7" style="display: flex; flex-flow: column;">
-		   <div class="blog-entry">
-			<div style="display: flex; justify-content: space-between;">
-				<div style="display: flex;">
+	    
+		<div class="col-md-7" style="display: flex; flex-flow: column;" id="mycontent_list">
+		<div class="heading"
+	      style="color: #000;
+   				 margin-bottom: 22px;
+   				 padding-bottom: 12px;
+   				 border-bottom: 1px solid #e6e6e6;">
+   				 <span
+   				 style="font-size: 18px; font-weight: 400;"
+   				 >My Feed</span>
+   	    </div>
+		   <div class="blog-entry mycontent_list" v-for="(vo,index) in mycontent_list">
+
+				<div style="display: flex; justify-content: space-between;">
+				  <div style="display: flex;">
 					<i class="xi-profile"></i> &nbsp;
 					<div>
-						<span class="date">아이디명</span><br> 
-						<span class="date">Apr.14th, 2022</span>
+						<span class="date"><i class="xi-at"></i>{{vo.id}}</span><br> 
+						<span class="date">{{vo.name}}</span>
+					</div>
+				   </div>
+					<div style="display: flex; align-items: center;">
+					    <span><i class="xi-heart-o"></i>&nbsp;좋아요</span>&nbsp;
+					    <span><i class="xi-lightbulb-o"></i>&nbsp;신고하기</span>
 					</div>
 				</div>
+<!-- 			<p>
+				<img :src="vo.pic" class="img-fluid"
+				style="width: 100%; height: 400px;">
+			</p> -->
+			
+			<h6 style="display: flex; justify-content: space-between;">
+			    <p style="margin-top: 10px; width: 500px;">{{vo.content}}</p>
 				<div>
-					<ul>
-					  <li class="has-children">
-					    <a href="category.html" id="menuLink">menu</a>
-					    <ul class="dropdown" id="submenu">
-					      <li><a href="#">삭제</a></li>
-					      <li><a href="#">수정</a></li>
-					    </ul>
-					  </li>
-					</ul>
+				<a href="#"
+				style="border: 2px solid #93a0a8; border-radius: 2px; display:inline-block;
+				color: #93a0a8; padding: 5px; font-size: 13px;"><i class="xi-pen"></i>&nbsp;글수정하기</a>&nbsp;
+				<a href="#"
+				style="border: 2px solid #93a0a8; border-radius: 2px; display:inline-block;
+				color: #93a0a8; padding: 5px; font-size: 13px;"><i class="xi-close-circle"></i>&nbsp;글삭제하기</a>
 				</div>
-			</div>
-			<p>
-				<img src="../images/img_2_sq.jpg" alt="Image" class="img-fluid"
-				style="width: 100%; height: 500px;">
-			</p>
-			<p>
-			    <span>좋아요</span>
-			    <span>찜하요</span>
-			    <span>신고하기</span>
-			</p>
-			<h6>
-				<a href="single.html">Startup vs corporate: What job suits you
-					best?</a>
 			</h6>
-			<p class="title">Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde,
-				nobis ea quis inventore vel voluptas.</p>
-		</div>
+			<span>{{vo.regdate}}</span>
+			
+		</div><!-- blog-entry -->
 		</div>
     <div class="col-md-4" id="sns_keep">
          <div class="sidebar-box">
@@ -141,32 +192,6 @@ li{
     </div>
 		</div><!-- row -->
 	</div><!-- container -->
-	
-	<script>
-document.addEventListener("DOMContentLoaded", function() {
-  // 메뉴 링크 요소 가져오기
-  var menuLink = document.getElementById("menuLink");
-
-  // 서브 메뉴 요소 가져오기
-  var submenu = document.getElementById("submenu");
-
-  // 메뉴 링크 클릭 이벤트 처리
-  menuLink.addEventListener("click", function(event) {
-    // 기본 링크 동작 방지
-    event.preventDefault();
-
-    // 서브 메뉴가 보이는지 확인
-    var isVisible = submenu.classList.contains("show");
-
-    // 서브 메뉴가 보이지 않으면 표시, 보이면 숨기기
-    if (!isVisible) {
-      submenu.classList.add("show");
-    } else {
-      submenu.classList.remove("show");
-    }
-  });
-});
-</script>
 <script>
   let sns_keep=Vue.createApp({
 	  data(){
@@ -206,6 +231,31 @@ document.addEventListener("DOMContentLoaded", function() {
 		  }
 	  }
   }).mount('#id_list')
+</script>
+<script>
+  let mycontent_list=Vue.createApp({
+	  data(){
+		  return{
+			  mycontent_list:[],
+			  myid:'${id}'
+		  }
+	  },
+	  mounted(){
+		  this.dataRecv()
+	  },
+	  methods:{
+		  dataRecv(){
+			  axios.get('../sns/list_mycontent_vue.do',{
+				  params:{
+					  id:this.myid
+				  }
+			  }).then(res=>{
+				  console.log(res.data)
+				  this.mycontent_list=res.data
+			  })
+		  }
+	  }
+  }).mount('#mycontent_list')
 </script>
 </body>
 </html>

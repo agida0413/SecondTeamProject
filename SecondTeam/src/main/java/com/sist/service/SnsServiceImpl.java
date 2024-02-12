@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.sist.dao.SnsDAO;
 import com.sist.vo.SnsIdVO;
 import com.sist.vo.SnsKeepVO;
+import com.sist.vo.SnsMyContentVO;
 
 @Service
 public class SnsServiceImpl implements SnsService{
@@ -24,5 +25,17 @@ public class SnsServiceImpl implements SnsService{
 	public List<SnsIdVO> snsIdList() {
 		// TODO Auto-generated method stub
 		return dao.snsIdList();
+	}
+
+	@Override
+	public List<SnsMyContentVO> snsMyContentList(String id) {
+		// TODO Auto-generated method stub
+		return dao.snsMyContentList(id);
+	}
+
+	@Override
+	public void snsPageInsert(SnsMyContentVO vo) {
+		// TODO Auto-generated method stub
+		dao.snsPageInsert(vo);
 	}
 }

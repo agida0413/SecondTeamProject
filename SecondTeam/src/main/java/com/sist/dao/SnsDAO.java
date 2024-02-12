@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.sist.mapper.SnsMapper;
 import com.sist.vo.SnsIdVO;
 import com.sist.vo.SnsKeepVO;
+import com.sist.vo.SnsMyContentVO;
 
 @Repository
 public class SnsDAO {
@@ -20,9 +21,21 @@ public class SnsDAO {
 		return mapper.snsKeepList();
 	}
 	
+	//sns페이지 본인+팔로우 게시글 출력
+	public List<SnsMyContentVO> snsMyContentList(String id)
+	{
+		return mapper.snsMyContentList(id);
+	}
+	
 	//sns id 목록중 4명 랜덤출력
 	public List<SnsIdVO> snsIdList()
 	{
 		return mapper.snsIdList();
+	}
+	
+	/////////////////////////게시글 crud
+	public void snsPageInsert(SnsMyContentVO vo)
+	{
+		mapper.snsPageInsert(vo);
 	}
 }

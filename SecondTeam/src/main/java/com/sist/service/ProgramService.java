@@ -68,4 +68,7 @@ public interface ProgramService {
 	public void insertWishList(Map map);
 	
 	public String updateWishList(Map map);
+	
+	
+	
 }

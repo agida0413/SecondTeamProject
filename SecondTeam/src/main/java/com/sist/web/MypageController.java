@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sist.commons.CommonsFunction;
 import com.sist.service.MypageService;
+import com.sist.service.ProgramService;
+import com.sist.vo.ProgramVO;
 import com.sist.vo.VprogramApplyVO;
 
 @Controller
@@ -24,6 +26,8 @@ private MypageService service;
 @Autowired
 private CommonsFunction cf;
 
+@Autowired
+private ProgramService pService;
 
 //메인(개인정보)
 	@GetMapping("myAndAdpage/mypage.do")
@@ -166,5 +170,77 @@ private CommonsFunction cf;
 		model.addAttribute("vo",vo);
 		return "myAndAdpage/certifyPage";
 	}
+	
+	//프로그램 관심목록
+	@RequestMapping("myAndAdpage/programwishList.do")
+	public String programwishList(HttpSession session,String page, Model model) {
+		
+		if(page==null) {
+			page="1";
+		}
+		int curpage=Integer.parseInt(page);
+		String id=(String)session.getAttribute("id");
+		
+		
+		Map map=new HashMap();
+		map.put("id", id);
+		map.put("state", "YES");
+		
+		int totalpage=service.wishListTotalPage(map);
+		System.out.println(totalpage);
+		int rowsize=10;
+		int start=cf.start(rowsize, curpage);
+		int end=cf.end(rowsize, curpage);
+		
+		final int BLOCK=10;
+		int startpage=cf.startPage(BLOCK,curpage);
+		int endpage=cf.endPage(BLOCK, curpage, totalpage);
+		
+		map.put("start", start);
+		map.put("end", end);
+		
+		
+		List<ProgramVO>list=service.wishList(map);
+		
+		
+		model.addAttribute("list",list);
+		model.addAttribute("startpage",startpage);
+		model.addAttribute("endpage",endpage);
+		model.addAttribute("page",curpage);
+		model.addAttribute("cate","wishlist");
+		return "myAndAdpage/programwishList";
+	}
+	
+	
+	@GetMapping("program/Wishdetail.do")
+	public String programDetail(String vno,Model model,HttpSession session) {
+		
+		int intVno=Integer.parseInt(vno);
+		ProgramVO vo=pService.programDetailData(intVno);
+		String state="";
+		String id=(String)session.getAttribute("id");
+		
+		if(id!=null) {
+			Map map =new HashMap();
+			map.put("id", id);
+			map.put("vno", intVno);
+			
+			int count =pService.getWishCount(map);
+			
+			if(count==0) {
+				map.put("state", "NO");
+				pService.insertWishList(map);
+				state="NO";
+			}
+			else {
+				state =pService.getWishState(map);
+			}
+		}
+		model.addAttribute("vo",vo);	
+		model.addAttribute("cate","list");
+		model.addAttribute("state",state);
+		return "program/detail";
+	}
+	
 	
 }

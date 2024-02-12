@@ -1,5 +1,6 @@
 package com.sist.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,10 +9,11 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sist.mapper.ProgramZzimMapper;
+import com.sist.vo.ProgramVO;
 import com.sist.vo.WishListVO;
 
 @Repository
-public class ProgrmaZzimDAO {
+public class ProgramZzimDAO {
 
 	@Autowired
 	private ProgramZzimMapper mapper;
@@ -36,5 +38,15 @@ public class ProgrmaZzimDAO {
 		
 		return mapper.getWishState(map);
 		
+	}
+	
+	
+	//마이페이지 찜목록
+	public List<ProgramVO> wishList(Map map){
+		return mapper.wishList(map);
+	}
+	
+	public int wishListTotalPage(Map map) {
+		return mapper.wishListTotalPage(map);
 	}
 }

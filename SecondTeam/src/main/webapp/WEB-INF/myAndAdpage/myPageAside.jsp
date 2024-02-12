@@ -15,7 +15,7 @@
   
   <a href="../myAndAdpage/programHistory.do?state=WAIT"><li class="list-group-item ${cate == 'programHistory' ? 'active' : ''}" style="padding:18px;">봉사프로그램 신청현황</li></a>
   <a href="../myAndAdpage/programCertify.do?state=COMPLETE"><li class="list-group-item ${cate == 'programCertify' ? 'active' : ''}" style="padding:18px;">봉사완료프로그램 인증신청</li></a>
-  <li class="list-group-item" style="padding:18px;">???</li>
+   <a href="../myAndAdpage/programwishList.do"><li class="list-group-item ${cate == 'wishlist' ? 'active' : ''}" style="padding:18px;">봉사프로그램 관심목록</li></a>
   <li class="list-group-item" style="padding:18px;">???</li>
  
 </ul>

@@ -64,6 +64,7 @@ public class ProgramController {
 	
 	@GetMapping("program/detail.do")
 	public String programDetail(int vno,Model model,HttpSession session) {
+		
 		ProgramVO vo=service.programDetailData(vno);
 		String state="";
 		String id=(String)session.getAttribute("id");

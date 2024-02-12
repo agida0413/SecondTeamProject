@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.collections.map.HashedMap;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Autowired;import org.springframework.scheduling.quartz.JobDetailFactoryBean;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -293,6 +293,43 @@ private CommonsFunction cf;
 		 public void applyRefuse(int vano) {
 			 service.updateRefuse(vano);
 			
+		 }
+		 
+		 
+		 //센터인증승인
+		 @GetMapping(value="program/accessCertifyDetail_vue.do",produces = "text/plain;charset=UTF-8")
+		 public String accessCertifyDetail_vue(int vano,HttpServletRequest request) throws JsonProcessingException {
+//			 String path=request.getSession().getServletContext().getRealPath("/")+"applyCertifyUpload\\";
+//			   path=path.replace("\\", File.separator);// 운영체제의 호환 
+			 String path="../applyCertifyUpload/";
+			 
+			 VprogramApplyVO vo=service.centerCertifyAccess(vano);
+			System.out.println(path);
+			Map map =new HashMap();
+			map.put("vo", vo);
+			map.put("path", path);
+			
+			ObjectMapper mapper= new ObjectMapper();
+			String json=mapper.writeValueAsString(map);
+			System.out.println(json);
+			return json;
+			 
+		 }
+		 
+		 
+		 //센터 봉사인증 목록 디테일 승인
+		 @GetMapping("program/updateCertifyAccesss_vue.do")
+		 public String updateCertifyAccesss_vue(int vano) {
+			 String result="";
+			 try {
+				 service.updateInformAfCertify(vano);
+				 result="YES";
+			} catch (Exception e) {
+				// TODO: handle exception
+				result="NO";
+			}
+			 
+			 return result;
 		 }
 	
 	//프로그램 자료실

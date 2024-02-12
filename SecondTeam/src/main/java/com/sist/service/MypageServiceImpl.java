@@ -27,9 +27,9 @@ public class MypageServiceImpl implements MypageService {
 		return pDao.applyHistotyTotalPage(map);
 	}
 	@Override
-	public VprogramApplyVO certifyDetail(int vno) {
+	public VprogramApplyVO certifyDetail(Map map) {
 		// TODO Auto-generated method stub
-		return pDao.certifyDetail(vno);
+		return pDao.certifyDetail(map);
 	}
 	@Override
 	public void updateCertifyUpload(VprogramApplyVO vo) {

@@ -94,7 +94,9 @@
             			
             			<tr>
             			<td class="informObj" style="background-color:#f0f0f0;">활동구분</td>
-            			<td colspan="3">${vo.active_type }</td>
+            			<td >${vo.active_type }</td>
+            			<td class="informObj" style="background-color:#f0f0f0;">획득가능보상</td>
+            				<td>${vo.getwing }&nbsp;<img src="../Projectimages/wing3.png" width="20px;"></td>
             			</tr>
             		</table>
             	</div>
@@ -125,6 +127,7 @@
 	            address: '${vo.centername}',
 	            sigu: '${vo.si}' + ' ' + '${vo.gu}',
 	            state: 'Y'
+	            
 	           
 	        }
 	    },
@@ -196,17 +199,22 @@
 		data(){
 			return{
 				sessionId:'${sessionScope.id}',
-				vno:${vo.vno}
+				vno:${vo.vno},
+				ct:'${vo.collect_state}'
 			}
 		},
 		mounted(){
-		
+			console.log(this.ct)
 		},
 		methods:{
 			applyClick(){
 			
 				if(this.sessionId===''){
 					alert('로그인 후 이용가능합니다')
+					return;
+				}
+				else if(this.ct==='모집완료'){
+					alert('모집종료된 프로그램입니다.')
 					return;
 				}
 				

@@ -21,7 +21,7 @@
 <a href="../myAndAdpage/programHistory.do?state=RUN" class="btn btn-large ${state=='RUN'?'btn-danger':'btn-primary' }">봉사중</a> 
 <a href="../myAndAdpage/programHistory.do?state=COMPLETE" class="btn btn-large ${state=='COMPLETE'?'btn-danger':'btn-primary' }">봉사완료</a> 
 </div>
-<hr>
+
 <c:if test="${size==0 }">
 <h3>내역이 존재하지 않습니다.</h3>
 </c:if>
@@ -32,7 +32,8 @@
 </div>
 </c:if>
 	<c:forEach var="vo" items="${list }">
-		<div class="row">
+	
+		<div class="row" style="margin-top:20px; border: 1px solid #999999; padding:20px; border-radius:5px;">
   				<div class="programName" style="margin-bottom:15px;">
 							<span style="font-size:25px; font-weight:bold;  color:black;">${vo.pvo.title }</span>
 						</div>
@@ -59,7 +60,7 @@
 				
   		   </div>
   		   </c:forEach>
-  		   
+  		    <div style="height:20px;"></div>
   		   <div class="row">
   		   	 <ul class="pagination" >
   			 		<c:if test="${startpage>1 }">

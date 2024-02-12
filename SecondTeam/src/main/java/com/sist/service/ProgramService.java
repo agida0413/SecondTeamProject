@@ -37,6 +37,10 @@ public interface ProgramService {
 	
 	public String updateAccess(int vano);
 	public void updateRefuse(int vano);
+	
+	public VprogramApplyVO centerCertifyAccess(int vano);
+	
+	public void updateInformAfCertify(int vano);
 	//프로그램 자료실
 	public List<VdataboardVO> databoardListData(int start,int end);
 	

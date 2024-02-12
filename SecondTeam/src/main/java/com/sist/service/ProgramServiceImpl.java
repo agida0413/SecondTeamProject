@@ -142,6 +142,22 @@ public class ProgramServiceImpl implements ProgramService {
 		pDao.updateRefuse(vano);
 	}
 	
+	
+	@Override
+	public VprogramApplyVO centerCertifyAccess(int vano) {
+		// TODO Auto-generated method stub
+		return pDao.centerCertifyAccess(vano);
+	}
+	
+	
+	@Override
+	public void updateInformAfCertify(int vano) {
+		pDao.updateInformAfCertify(vano);
+		
+	}
+
+	
+	
 	//프로그램 자료실
 	@Override
 	public List<VdataboardVO> databoardListData(int start, int end) {
@@ -178,6 +194,9 @@ public class ProgramServiceImpl implements ProgramService {
 		// TODO Auto-generated method stub
 		return dbDAO.databoardFileInfoData(dno);
 	}
+
+	
+	
 
 	
 

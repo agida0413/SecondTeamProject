@@ -14,6 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.sist.commons.CommonsFunction;
+import com.sist.service.MypageService;
 import com.sist.service.ProgramService;
 import com.sist.vo.OptionVO;
 import com.sist.vo.ProgramVO;
@@ -24,6 +26,12 @@ public class ProgramController {
 
 	@Autowired
 	private ProgramService service;
+	
+	@Autowired 
+	private MypageService mService;
+	
+	@Autowired
+	private CommonsFunction cf;
 	
 	@GetMapping("program/list.do")
 	public String programList(OptionVO vo,Model model) {
@@ -109,6 +117,27 @@ public class ProgramController {
 	   }
 	
 	
+	//인증신청리스트
+	   
+	   @GetMapping("program/accessCertify.do")
+		public String programCertify(Model model) {
+			
+			model.addAttribute("cate","accessCertify");
+			
+			
+			return "program/accessCertify";
+		}
+	   
+	   @GetMapping("program/accessCertifyDetail.do")
+	 		public String accessCertifyDetail(Model model,int vano) {
+	 		
+	 			model.addAttribute("cate","accessCertify");
+	 			model.addAttribute("vano",vano);
+	 			
+	 			return "program/accessCertifyDetail";
+	 		}
+	   
+	 
 		
 	
 }

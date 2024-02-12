@@ -9,6 +9,6 @@ public interface MypageService {
 	//봉사프로그램 신청내역
 	public List<VprogramApplyVO> applyHistoryList(Map map);
 	public int applyHistotyTotalPage(Map map) ;
-	public VprogramApplyVO certifyDetail(int vno);
+	public VprogramApplyVO certifyDetail(Map map);
 	public void updateCertifyUpload(VprogramApplyVO vo);
 }

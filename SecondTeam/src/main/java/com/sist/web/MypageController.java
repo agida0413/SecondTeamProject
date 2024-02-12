@@ -155,8 +155,13 @@ private CommonsFunction cf;
 	
 	//프로그램 완료 인증신청 페이지(상세)
 	@RequestMapping("myAndAdpage/certifyPage.do")
-	public String certifyPage(int vno,Model model) {
-		VprogramApplyVO vo= service.certifyDetail(vno);
+	public String certifyPage(int vno,Model model,HttpSession session) {
+		String id=(String)session.getAttribute("id");
+		Map map=new HashMap();
+		map.put("id", id);
+		map.put("vno", vno);
+		
+		VprogramApplyVO vo= service.certifyDetail(map);
 		model.addAttribute("cate","programCertify");
 		model.addAttribute("vo",vo);
 		return "myAndAdpage/certifyPage";

@@ -2,6 +2,7 @@ package com.sist.web;
 
 import java.io.File;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -23,15 +24,17 @@ public class MypageRestController {
 	
 	
 	@PostMapping(value="myAndAdpage/certifyUpdate_vue.do",produces = "text/plain;charset=UTF-8")
-	   public String databoard_insert(VprogramApplyVO vo,HttpServletRequest request)
+	   public String certifyUpdate_vue(VprogramApplyVO vo,HttpServletRequest request)
 	   {
 		 
 		
 		   String result="";
 		   try
 		   {
-			   String path=request.getSession().getServletContext().getRealPath("/")+"applyCertifyUpload\\";
-			   path=path.replace("\\", File.separator);// 운영체제의 호환 
+//			   String path=request.getSession().getServletContext().getRealPath("/")+"applyCertifyUpload\\";
+//			   path=path.replace("\\", File.separator);// 운영체제의 호환 
+			   
+			   String path = request.getSession().getServletContext().getRealPath("/applyCertidy/");
 			   // Hosting => AWS(리눅스)
 			   File dir=new File(path);
 			   if(!dir.exists())
@@ -54,12 +57,16 @@ public class MypageRestController {
 				   String filesize="";
 				   for(MultipartFile mf:list)
 				   {
-					   String name=mf.getOriginalFilename();
-					   File file=new File(path+name);
-					   mf.transferTo(file);//  업로드
+					   String originalFilename = mf.getOriginalFilename();
+					   String extension = originalFilename.substring(originalFilename.lastIndexOf("."));
+					   String newFilename = UUID.randomUUID().toString() + extension; // 새로운 파일 이름 생성
+
+					   // 파일 저장
+					   File newFile = new File(path + newFilename);
+					   mf.transferTo(newFile); // 업로드된 파일을 새로운 이름으로 저장
 					   
-					   filename+=name+",";// a.jpg,b.jpg,
-					   filesize+=file.length()+",";
+					   filename+=newFilename+",";// a.jpg,b.jpg,
+					   filesize+=newFile.length()+",";
 				   }
 				   filename=filename.substring(0,filename.lastIndexOf(","));
 				   filesize=filesize.substring(0,filesize.lastIndexOf(","));

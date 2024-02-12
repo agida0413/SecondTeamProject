@@ -21,16 +21,19 @@
 
 
 </div>
-<hr>
+
 <c:if test="${size==0 }">
 <h3>내역이 존재하지 않습니다.</h3>
 </c:if>
 
 
 	<c:forEach var="vo" items="${list }">
-		<div class="row">
+		<div class="row" style="margin-top:20px; border: 1px solid #999999; padding:20px; border-radius:5px;">
   				<div class="programName" style="margin-bottom:15px;">
 							<span style="font-size:25px; font-weight:bold;  color:black;">${vo.pvo.title }</span>
+							<c:if test="${vo.v_state=='보상지급완료' }">
+							<span  style="font-size:25px; font-weight:bold;  color: #9370DB; float:right;">획득한 보상[${vo.pvo.getwing }&nbsp;<span><img src="../Projectimages/wing3.png" width="20px;"></span>]</span>
+								</c:if>
 						</div>
 	  			<table class="table">
 	  				<tr  style="background-color:#f0f0f0">
@@ -38,7 +41,13 @@
 	  					<th width="30%">봉사기간</th>
 	  					
 	  					<th width="20%">신청일시</th>
+	  					<c:if test="${vo.v_state=='봉사완료' }">
 	  					<th width="20%"></th>
+	  					</c:if>
+	  					
+	  					<c:if test="${vo.v_state!='봉사완료' }">
+	  					<th width="20%">상태</th>
+	  					</c:if>
 	  				</tr>
 	  				
 	  				<tr style="height:70px; vertical-align:middle;">
@@ -46,7 +55,13 @@
 	  					<td>${vo.pvo.dbV_start }&nbsp;~&nbsp;${vo.pvo.dbV_end }</td>
 	  					
 	  					<td>${vo.getVDbStateTime()}</td>
+	  					<c:if test="${vo.v_state=='봉사완료' }">
 	  					<td style="font-weight:bold; font-size:20px; color:blue;"><a href="../myAndAdpage/certifyPage.do?vno=${vo.pvo.vno }" class="btn btn-large btn-success">인증하러가기</a></td>
+	  					</c:if>
+	  					
+	  					<c:if test="${vo.v_state!='봉사완료' }">
+	  						<td style="font-weight:bold; font-size:18px; color:blue;">${vo.v_state }</td>
+	  					</c:if>
 	  				</tr>
 	  			</table>
 				
@@ -55,7 +70,7 @@
 				
   		   </div>
   		   </c:forEach>
-  		   
+  		   <div style="height:20px;"></div>
   		   <div class="row">
   		   	 <ul class="pagination" >
   			 		<c:if test="${startpage>1 }">

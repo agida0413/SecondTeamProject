@@ -51,6 +51,14 @@ public class ProgramListDAO {
 		return mapper.applyListTotalPage(map);
 	}
 	
+	
+	
+	//인증센터 승인
+	
+	public VprogramApplyVO centerCertifyAccess(int vano) {
+		return mapper.centerCertifyAccess(vano);
+	}
+	
 	//신청 승인
 	
 	
@@ -99,6 +107,33 @@ public class ProgramListDAO {
 		mapper.updateRefuse(map);
 	}
 	
+	
+	
+	//프로그램 승인완료 후 업데이트
+	
+	
+	 @Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
+	public void updateInformAfCertify(int vano) {
+		VprogramApplyVO vo=mapper.getCertifyIdVno(vano);
+		
+		String id=vo.getId();
+		int vno=vo.getVno();
+		
+		int wing=mapper.getCertifyWing(vno);
+		
+		Map map=new HashMap();
+		map.put("wing", wing);
+		map.put("id", id);
+		map.put("state", "보상지급완료");
+		map.put("vano", vano);
+		
+		mapper.updateProgramAfterState(map);
+		
+		mapper.updateProgramAfterWing(map);
+		
+		
+	}
+	
 	//신청 리스트 파일
 	public VprogramApplyVO getApplyFiles(int vano) {
 		return mapper.getApplyFiles(vano);
@@ -121,6 +156,7 @@ public class ProgramListDAO {
 	}
 	
 	
+	
 	//마이페이지 관련
 	
 	//봉사프로그램 신청내역
@@ -132,11 +168,15 @@ public class ProgramListDAO {
 			return mapper.applyHistotyTotalPage(map);
 		}
 		
-		public VprogramApplyVO certifyDetail(int vno) {
-			return mapper.certifyDetail(vno);
+		public VprogramApplyVO certifyDetail(Map map) {
+			return mapper.certifyDetail(map);
 		}
 		
 		public void updateCertifyUpload(VprogramApplyVO vo) {
 			mapper.updateCertifyUpload(vo);
 		}
+		
+		
+		
+		
 }

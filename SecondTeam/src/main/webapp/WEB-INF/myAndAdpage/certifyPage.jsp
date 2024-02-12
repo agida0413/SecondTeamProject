@@ -25,7 +25,14 @@
 <body>
 <div class=""><span style="font-weight:bold; font-size:30px; color:black;">봉사프로그램 완료인증신청</span></div>
   <hr>
+  <div class="row" style="margin-left:3px;" >
+          			
+            		<span><input type="button" class="btn btn-medium btn-primary" value="돌아가기" onClick="javascript:history.back()"></span>
+            		
+            	
+            </div>
 <div class="container" id="certify">
+			
 	<div class="row">
   				<div style="margin-top:20px;"></div>
 	  			<table class="table" >
@@ -62,7 +69,7 @@
 				<div class="col-4">
 					<div style="margin-bottom:20px;"><span style="color:black; font-size:20px; font-weight:bold;">* 인증완료시 획득 가능한 보상</span></div>
 					<div class="text-center">
-				<span style="font-size:40px; color:black; font-weight:bold; ">10&nbsp;<img src="../Projectimages/wing3.png" width="80px"> </span>
+				<span style="font-size:40px; color:black; font-weight:bold; ">${vo.pvo.getwing }&nbsp;<img src="../Projectimages/wing3.png" width="80px"> </span>
 				</div>
 				</div>
 			

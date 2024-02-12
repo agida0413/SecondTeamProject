@@ -248,9 +248,11 @@
   				
 	  			<div class="col-10">
 	  				<div class="" style="margin-top:15px; margin-bottom:10px;">
+	  				
+	  				<div style="margin-bottom:10px;"><span><span style="font-weight:bold; color:blue;">획득가능한 보상&nbsp;</span><span style="font-weight:bold;">[&nbsp;{{vo.getwing}}&nbsp;<img src="../Projectimages/wing3.png" width="20px;">]</span></span></div>
 						<!-- 봉사 분야 -->	
 						<span class="">
-						{{vo.active_type}} &nbsp;&nbsp;|&nbsp;&nbsp;{{vo.major_field}}&nbsp;&gt;&nbsp;{{vo.minor_field}}
+						{{vo.active_type}} &nbsp;&nbsp;|&nbsp;&nbsp;<span style="font-weight:bold;">{{vo.major_field}}</span>&nbsp;&gt;&nbsp;{{vo.minor_field}}
 						</span>
 					</div>
 					<!-- 봉사프로그램정보 -->
@@ -275,10 +277,16 @@
 				<div class="col-2">
 					<!-- 모집상태 -->
 					<div style="margin:30px;">
-						<div class="closeBox" style="height:60px; width:60px; border:1px black solid;">
-						<div style="padding:5px;" class="text-center">금일<br> 마감</div>
+						<div class="closeBox" :style="{ 
+            height: '100px', 
+            width: '100px', 
+            border: '1px black solid', 
+            borderRadius: '5px', 
+            backgroundColor: vo.collect_state === '모집완료' ? '#FF6347' : '#ADD8E6' 
+         }">
+						<div style="margin-top:35px; font-weight:bold; color:white;" class="text-center" >{{vo.collect_state}}</div>
 						</div>
-							<div style="margin-top:5px;">모집완료</div>
+							
 					</div>
 					
 				</div>				

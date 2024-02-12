@@ -20,6 +20,7 @@ import com.sist.service.ProgramService;
 import com.sist.vo.OptionVO;
 import com.sist.vo.ProgramVO;
 import com.sist.vo.VprogramApplyVO;
+import com.sist.vo.WishListVO;
 
 @Controller
 public class ProgramController {
@@ -62,10 +63,30 @@ public class ProgramController {
 	
 	
 	@GetMapping("program/detail.do")
-	public String programDetail(int vno,Model model) {
+	public String programDetail(int vno,Model model,HttpSession session) {
 		ProgramVO vo=service.programDetailData(vno);
+		String state="";
+		String id=(String)session.getAttribute("id");
+		
+		if(id!=null) {
+			Map map =new HashMap();
+			map.put("id", id);
+			map.put("vno", vno);
+			
+			int count =service.getWishCount(map);
+			
+			if(count==0) {
+				map.put("state", "NO");
+				service.insertWishList(map);
+				state="NO";
+			}
+			else {
+				state =service.getWishState(map);
+			}
+		}
 		model.addAttribute("vo",vo);	
 		model.addAttribute("cate","list");
+		model.addAttribute("state",state);
 		return "program/detail";
 	}
 	

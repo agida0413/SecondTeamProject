@@ -15,6 +15,7 @@ import java.util.StringTokenizer;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;import org.springframework.scheduling.quartz.JobDetailFactoryBean;
@@ -502,6 +503,26 @@ private CommonsFunction cf;
 		   return result;
 	   }
 	
-
+//관심목록 프로그램 담기
+	   
+	   @GetMapping(value="program/wishlistUpdate_vue.do",produces = "text/plain;charset=UTF-8")
+	   public String updateZzim(int vno,String zzimstate,HttpSession sesion) {
+		   String id=(String)sesion.getAttribute("id");
+		   Map map =new HashMap();
+		   map.put("id", id);
+		   map.put("vno", vno);
+		   if(zzimstate.equals("NO")) {
+			   map.put("state","YES");   
+		   }
+		   
+		   if(zzimstate.equals("YES")) {
+			   map.put("state","NO");   
+		   }
+		   
+		   String send=service.updateWishList(map);
+		   
+		   return send;
+		   
+	   }
 
 }

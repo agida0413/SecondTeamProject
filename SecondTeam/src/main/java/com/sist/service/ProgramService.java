@@ -7,6 +7,7 @@ import com.sist.vo.OptionVO;
 import com.sist.vo.ProgramVO;
 import com.sist.vo.VdataboardVO;
 import com.sist.vo.VprogramApplyVO;
+import com.sist.vo.WishListVO;
 
 public interface ProgramService {
 	//옵션
@@ -56,4 +57,15 @@ public interface ProgramService {
 	public VprogramApplyVO getApplyFiles(int vano);
 	
 	public int applyListTotalPage(Map map);
+	
+	
+	
+	
+	//위시리스트
+	
+	public int getWishCount(Map map);
+	public String getWishState(Map map);
+	public void insertWishList(Map map);
+	
+	public String updateWishList(Map map);
 }

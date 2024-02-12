@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
 
@@ -12,7 +13,14 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
+.zzim{
+margin-left:15px; margin-right:15px;  padding:10px; border-radius:4px; background-color:#87CEEB;
+            		
+}
 
+.zzim:hover{
+cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -25,7 +33,17 @@
             		<span><input type="button" class="btn btn-medium btn-primary" value="목록" onClick="javascript:history.back()"></span>
             		  <span style="float:right;">
             		  <input type="button" class="btn btn-medium btn-danger" value="신청하기" @click="applyClick()">
-            		<input type="button" class="btn btn-medium btn-info" value="관심목록담기" style="margin-left:15px; margin-right:15px;">
+            		  
+            		  <span class="zzim" @click="zzimBtnClick">
+            		  	<c:if test="${sessionScope.id==null }">
+            		  	 	<img src="../Projectimages/emptyHeart.png" width="25px">
+            		  	</c:if>
+            		  	<img v-if="zzimstate=='NO'" src="../Projectimages/emptyHeart.png" width="25px">
+            		  	<img v-if="zzimstate=='YES'" src="../Projectimages/fullHeart.png" width="25px">
+            		  	&nbsp;<span style="font-weight:bold; font-size:15px; color:white;">관심목록 담기</span>
+            		  	
+            		  </span>
+            		
             		  </span> 
             	
             </div>
@@ -200,11 +218,12 @@
 			return{
 				sessionId:'${sessionScope.id}',
 				vno:${vo.vno},
-				ct:'${vo.collect_state}'
+				ct:'${vo.collect_state}',
+				zzimstate:'${state}'
 			}
 		},
 		mounted(){
-			console.log(this.ct)
+			console.log(this.zzimstate)
 		},
 		methods:{
 			applyClick(){
@@ -221,6 +240,21 @@
 				else{
 					location.href="../program/apply.do?vno="+this.vno
 				}
+			},
+			zzimBtnClick(){
+				if(this.sessionId===''){
+					alert('로그인 후 이용가능합니다')
+					return;
+				}
+				
+				axios.get('../program/wishlistUpdate_vue.do',{
+					params:{
+						zzimstate:this.zzimstate,
+						vno:this.vno
+					}
+				}).then(res=>{
+					this.zzimstate=res.data
+				})
 			}
 		}
 	}).mount('#programDetailHeader')

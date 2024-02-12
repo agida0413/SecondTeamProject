@@ -9,10 +9,12 @@ import org.springframework.stereotype.Service;
 import com.sist.dao.OptionDAO;
 import com.sist.dao.ProgramDataboardDAO;
 import com.sist.dao.ProgramListDAO;
+import com.sist.dao.ProgrmaZzimDAO;
 import com.sist.vo.OptionVO;
 import com.sist.vo.ProgramVO;
 import com.sist.vo.VdataboardVO;
 import com.sist.vo.VprogramApplyVO;
+import com.sist.vo.WishListVO;
 
 @Service
 public class ProgramServiceImpl implements ProgramService {
@@ -23,6 +25,8 @@ public class ProgramServiceImpl implements ProgramService {
 	private OptionDAO oDao;
 	@Autowired
 	private ProgramDataboardDAO dbDAO;
+	@Autowired
+	private ProgrmaZzimDAO zDao;
 
 	@Override
 	public List<OptionVO> stateOption() {
@@ -197,11 +201,35 @@ public class ProgramServiceImpl implements ProgramService {
 
 	
 	
-
 	
 
 	
+	//위시리스트
 	
+	@Override
+	public int getWishCount(Map map) {
+		// TODO Auto-generated method stub
+		return zDao.getWishCount(map);
+	}
+
+	@Override
+	public String getWishState(Map map) {
+		// TODO Auto-generated method stub
+		return zDao.getWishState(map);
+	}
+
+	@Override
+	public void insertWishList(Map map) {
+		// TODO Auto-generated method stub
+		zDao.insertWishList(map);
+	}
+
+	@Override
+	public String updateWishList(Map map) {
+		// TODO Auto-generated method stub
+		return zDao.updateWishList(map);
+	}
+
 
 	
 	

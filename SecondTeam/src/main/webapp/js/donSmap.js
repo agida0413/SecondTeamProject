@@ -1,4 +1,4 @@
-	let search=Vue.createApp({
+let search=Vue.createApp({
 		data(){
 			return{
 				donStore_list:[],
@@ -50,6 +50,8 @@
 	         
 	        },
 	        search(){
+	        	
+	        		
 	        	   console.log('서치'+this.dno)
 	        	this.state='Y'
 				let sss=this.$refs.ss.value;
@@ -60,8 +62,6 @@
 				}
 				this.send()	
 	        	this.donMap()
-				
-	        	
 	        	this.count=this.count+1;
 			},
 			range(start,end){

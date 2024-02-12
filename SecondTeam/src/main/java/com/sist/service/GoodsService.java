@@ -10,4 +10,5 @@ public interface GoodsService {
 	public int goodsTotalpage(Map map);
 	public List<GoodsVO> goodsCategoryList(Map map);
 	public int goodsCategoryTotalpage(Map map);
+	public List<GoodsVO> goodsCateMinorList(String category);
 }

@@ -25,4 +25,7 @@ public List<GoodsVO> goodsCategoryList(Map map){
 public int goodsCategoryTotalpage(Map map){
 	return mapper.goodsCategoryTotalpage(map);
 }
+public List<GoodsVO> goodsCateMinorList(String category){
+	return mapper.goodsCateMinorList(category);
+}
 }

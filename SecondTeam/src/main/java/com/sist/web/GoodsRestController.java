@@ -97,4 +97,14 @@ public String goods_category_page_vue(int page,String category,String ss) throws
 	String json=mapper.writeValueAsString(map);
 	return json;
 }
+@RequestMapping(value="goods/goods_cateminor_list_vue.do",produces = "text/plain;charset=UTF-8")
+public String goods_category_list_vue(String category) throws Exception
+{	
+	if(category==null)
+		category="전체";
+	List<GoodsVO> list=gService.goodsCateMinorList(category);
+	ObjectMapper mapper=new ObjectMapper();
+	String json=mapper.writeValueAsString(list);
+	return json;
+}
 }

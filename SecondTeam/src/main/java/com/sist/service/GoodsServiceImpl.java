@@ -38,4 +38,10 @@ public int goodsCategoryTotalpage(Map map) {
 	return gDao.goodsCategoryTotalpage(map);
 }
 
+@Override
+public List<GoodsVO> goodsCateMinorList(String category) {
+	// TODO Auto-generated method stub
+	return gDao.goodsCateMinorList(category);
+}
+
 }

@@ -43,11 +43,11 @@ public int goodsTotalpage(Map map);
 //상품 카테고리 분류 리스트
 	@Select({
 	    "<script>",
-	    "SELECT DISTINCT gl.gno, gl.g_name, gl.g_price, gl.g_img, tn.type_names, tn.type_img, num ",
+	    "SELECT DISTINCT gl.gno, gl.g_name, gl.g_price, gl.g_img, gl.category_minor, tn.type_names, tn.type_img, num ",
 	    "FROM (",
-	    "   SELECT gno, g_name, g_price, g_img, ROWNUM AS num ",
+	    "   SELECT gno, g_name, g_price, g_img, category_minor, ROWNUM AS num ",
 	    "   FROM (",
-	    "       SELECT gno, g_name, g_price, g_img ",
+	    "       SELECT gno, g_name, g_price, g_img, category_minor ",
 	    "       FROM goodslist ",
 	    "       WHERE category LIKE #{category} AND g_name LIKE '%'||#{ss}||'%' ", 
 	    "       ORDER BY gno ASC",
@@ -63,4 +63,9 @@ public List<GoodsVO> goodsCategoryList(Map map);
 @Select("SELECT CEIL(COUNT(*)/12.0) FROM goodslist WHERE category LIKE #{category} AND g_name LIKE '%'||#{ss}||'%'")
 public int goodsCategoryTotalpage(Map map);
 
+//상품 카테고리 소분류
+@Select("SELECT DISTINCT category,category_minor FROM goodslist WHERE category LIKE #{category}")
+public List<GoodsVO> goodsCateMinorList(String category);
 }
+
+ 

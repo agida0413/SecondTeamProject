@@ -8,7 +8,8 @@ let goodsList=Vue.createApp({
 			startpage:0,
 			endpage:0,
 			category:'전체',
-			ss:''
+			ss:'',
+			cateminor_list: []
 		}
 	},
 	mounted(){
@@ -38,15 +39,18 @@ let goodsList=Vue.createApp({
             })
          
         },
-        CateListChange() {
-        	this.ss=''
-	        if (this.category === '전체') {
-	        	this.curpage=1
-	        	this.dataRecv();
-	        } else {
-	        	this.curpage=1
-	            this.listChange();
-	        }
+        CateListChange(category) {
+        	this.ss = ''
+        	this.category = category
+        	if (category === '전체') {
+                this.curpage = 1
+                this.cateminor_list=[]
+                this.dataRecv()
+            } else {
+                this.curpage = 1
+                this.cateMinorChange()
+                this.listChange()
+            }
 	    },
 		range(start,end){
 			let arr=[]
@@ -118,6 +122,26 @@ let goodsList=Vue.createApp({
 		        this.dataRecv();
 		    }
 		},
+		cateMinorChange() {
+		    if (this.category !== '전체') {
+		        axios.get("../goods/goods_cateminor_list_vue.do", {
+		            params:{
+		                category: this.category,
+		            },
+		            headers: {
+		                'Content-Type': 'application/json;charset=UTF-8'
+		            }
+		        }).then(res => {
+		            console.log(this.category);
+		            console.log("c:", res.data); 
+		            this.cateminor_list = res.data;
+		        }).catch(error => {
+		            console.error('error:', error);
+		        });
+		    } else {
+		        this.dataRecv();
+		    }
+		},
 		 search(){
 				let sss=this.$refs.ss.value;
 				if (this.category === '전체') {
@@ -125,6 +149,7 @@ let goodsList=Vue.createApp({
 		        } else {
 		            this.listChange();
 		        }
-			},
+		}
+        
 	  }
 }).mount("#goodsList")

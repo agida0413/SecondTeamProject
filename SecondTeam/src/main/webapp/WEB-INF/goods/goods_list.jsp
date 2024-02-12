@@ -7,36 +7,53 @@
 <title>Insert title here</title>
 <script src="https://unpkg.com/vue@3"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<style type="text/css">
+#goodsSearch:hover{
+cursor: pointer;
+}
+#goodsSearch{
+margin-right: 10px;
+}
+</style>
 </head>
 <body>
 <div class="container" id="goodsList" style="margin-top: 50px;">
     <div class="row mb-4">
         <div class="col-sm-6">
-            <h2 class="posts-entry-title">전체 상품</h2>
+            <h2 class="posts-entry-title">제품별 쇼핑</h2>
         </div>
         <div class="col-sm-6 text-sm-end"><a href="../main/main.do" class="read-more">Main Home</a></div>
     </div>
     <form @submit.prevent="listChange()">
-	<div class="text-end">
-			<select v-model="category" class="input-sm" @change="CateListChange">
-				<option value="전체">전체</option>
-				<option value="뷰티">뷰티</option>
-				<option value="라이프스타일">라이프스타일</option>
-				<option value="패션">패션</option>
-				<option value="식품">식품</option>
-				<option value="출산/유아동">출산/유아동</option>
-				<option value="반려동물">반려동물</option>	
-			</select>
-			<div style="position: relative;">
-							<input type="text" class="form-control" placeholder="Search..."
-								ref="ss" v-model="ss" @keyup.enter="search()"
-								style="background-color: black;"> 
-								<button class="bi bi-search" 
-								style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);" @click="search()"
-								></button>
-						</div>
-	</div>
-	</form>
+			<div class="text-end">
+				<div style="position: relative;">
+					<input type="text" class="form-control" placeholder="Search..."
+						ref="ss" v-model="ss" @keyup.enter="search()"
+						style="background-color: black;"> <span
+						class="bi bi-search" id="goodsSearch"
+						style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);"
+						@click="search()"></span>
+				</div>
+				<div class="goodsCate" v-model="category">
+					<div class="row" style="display: flex; margin-left: 2px;">
+						<input type="button" class="form-control" style="width: 105px; height: 40px;" value="전체" @click="CateListChange('전체')"> 
+						<input type="button" class="form-control" style="width: 105px; height: 40px;" value="뷰티" @click="CateListChange('뷰티')"> 
+						<input type="button" class="form-control" style="width: 150px; height: 40px;" value="라이프스타일" @click="CateListChange('라이프스타일')"> 
+						<input type="button" class="form-control" style="width: 105px; height: 40px;" value="패션" @click="CateListChange('패션')"> 
+						<input type="button" class="form-control" style="width: 105px; height: 40px;" value="식품" @click="CateListChange('식품')"> 
+						<input type="button" class="form-control" style="width: 125px; height: 40px;" value="출산/유아동" @click="CateListChange('출산/유아동')"> 
+						<input type="button" class="form-control" style="width: 105px; height: 40px;" value="반려동물" @click="CateListChange('반려동물')">
+					</div>
+				</div>
+				<div class="goodsCateMinor" style="text-align: left;">
+   				 <template v-for="vo in cateminor_list">
+       				 <div v-if="vo.category_minor !== null" style="display: inline-block;">
+           				 <input type="button" class="form-control" style="width: 200px; height: 40px;" :value="vo.category_minor"> 
+      				 </div>
+  			    </template>
+</div>
+			</div>
+		</form>
     <div class="row" v-if="category === '전체' && goods_list.length !== 0">
         <div class="col-lg-4 mb-4" v-for="(vo, index) in goods_list" :key="index">
             <div class="post-entry-alt">

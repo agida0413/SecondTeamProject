@@ -115,8 +115,8 @@ li{
    				 border-bottom: 1px solid #e6e6e6;">추천목록</h3>
 	       <div class="post-entry-sidebar follow_id_list" v-for="(vo,index) in id_list">
 	          <i class="xi-profile"></i><br>
-	          <span class="date"><i class="xi-at"></i>{{vo.id}}</span><br>
-	          <span class="date">{{vo.name}}</span>
+	          <span class="date"><i class="xi-at"></i>{{vo.userid}}</span><br>
+	          <span class="date">{{vo.username}}</span>
 	       </div>
 	    </div>
 	    
@@ -136,8 +136,8 @@ li{
 				  <div style="display: flex;">
 					<i class="xi-profile"></i> &nbsp;
 					<div>
-						<span class="date"><i class="xi-at"></i>{{vo.id}}</span><br> 
-						<span class="date">{{vo.name}}</span>
+						<span class="date"><i class="xi-at"></i>{{vo.userid}}</span><br> 
+						<span class="date">{{vo.username}}</span>
 					</div>
 				   </div>
 					<div style="display: flex; align-items: center;">
@@ -237,7 +237,7 @@ li{
 	  data(){
 		  return{
 			  mycontent_list:[],
-			  myid:'${id}'
+			  myid:'${userid}'
 		  }
 	  },
 	  mounted(){
@@ -247,7 +247,7 @@ li{
 		  dataRecv(){
 			  axios.get('../sns/list_mycontent_vue.do',{
 				  params:{
-					  id:this.myid
+					  userid:this.myid
 				  }
 			  }).then(res=>{
 				  console.log(res.data)

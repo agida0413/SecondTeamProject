@@ -7,10 +7,16 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+
+  
 <div class="container">
+
 <div class="row">
+
 <div class="section search-result-wrap">
 		<div class="container">
+		
 			
 			<div class="row posts-entry">
 				<div class="col-lg-8">
@@ -74,7 +80,7 @@
 						</div>
 					</div>
 
-					<div class="row text-start pt-5 border-top">
+					<div class="row text-start pt-5 border-top text-center">
 						<div class="col-md-12">
 							<div class="custom-pagination">
 								<span>1</span>
@@ -94,12 +100,31 @@
 					<div class="sidebar-box search-form-wrap mb-4">
 						<form action="#" class="sidebar-search-form">
 							<span class="bi-search"></span>
-							<input type="text" class="form-control" id="s" placeholder="Type a keyword and hit enter">
-						</form>
+							<div style="position: relative;">
+					<input type="text" class="form-control" placeholder="검색어 입력"
+						
+						style="background-color: black;"> <span class="bi bi-search" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);"></span>
+							</div></form>
 					</div>
 					<!-- END sidebar-box -->
+				
+					<!-- END sidebar-box -->
+
 					<div class="sidebar-box">
-						<h3 class="heading">Popular Posts</h3>
+						<h3 class="heading">카테고리</h3>
+						<ul class="categories">
+							<li><a href="#">전체<span>(12)</span></a></li>
+							<li><a href="#">공예<span>(22)</span></a></li>
+							<li><a href="#">요리<span>(37)</span></a></li>
+							<li><a href="#">미술<span>(42)</span></a></li>
+							<li><a href="#">뷰티<span>(14)</span></a></li>
+							<li><a href="#">체험 및 기타<span>(14)</span></a></li>
+						</ul>
+					</div>
+					<!-- END sidebar-box -->
+					
+						<div class="sidebar-box">
+						<h3 class="heading">최근본 원 데이 클래스</h3>
 						<div class="post-entry-sidebar">
 							<ul>
 								<li>
@@ -138,19 +163,6 @@
 							</ul>
 						</div>
 					</div>
-					<!-- END sidebar-box -->
-
-					<div class="sidebar-box">
-						<h3 class="heading">Categories</h3>
-						<ul class="categories">
-							<li><a href="#">Food <span>(12)</span></a></li>
-							<li><a href="#">Travel <span>(22)</span></a></li>
-							<li><a href="#">Lifestyle <span>(37)</span></a></li>
-							<li><a href="#">Business <span>(42)</span></a></li>
-							<li><a href="#">Adventure <span>(14)</span></a></li>
-						</ul>
-					</div>
-					<!-- END sidebar-box -->
 
 					<div class="sidebar-box">
 						<h3 class="heading">Tags</h3>

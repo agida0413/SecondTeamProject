@@ -43,10 +43,9 @@
 
  <tiles:insertAttribute name="header"/>
 
-<div class="container bg-white" style="margin-top:50px;">
-<div class="row">
+<div class="" style="margin-top:50px;">
 
- 
+<div class="row">
  
   <tiles:insertAttribute name="dcContent"/>
  

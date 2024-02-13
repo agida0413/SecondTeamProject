@@ -8,6 +8,6 @@ import com.sist.vo.MemberVO;
 
 public interface TemptLoginMapper {
 
-	@Select("SELECT * FROM MEMBER WHERE id=#{id}")
+	@Select("SELECT * FROM MEMBER WHERE userid=#{id}")
 	public MemberVO temptLogin(String id);
 }

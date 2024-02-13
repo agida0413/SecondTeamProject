@@ -44,7 +44,7 @@ public interface ProgramListMapper {
 	
 	//센터 프로그램 신청내역 리스트
 	
-		@Results({//변경요망
+		@Results({//변경완료
 				@Result(property = "pvo.vno" ,column="vno"),
 				@Result(property = "pvo.title" , column = "title"),
 				@Result(property = "pvo.centername",column = "centername"),
@@ -54,7 +54,7 @@ public interface ProgramListMapper {
 				@Result(property = "pvo.dbV_end",column = "dbV_end"),
 				@Result(property = "pvo.collect_state",column = "collect_state"),
 				@Result(property = "pvo.getwing",column = "getwing"),
-				@Result(property = "mvo.name",column = "name"),
+				@Result(property = "mvo.username",column = "username"),
 				@Result(property = "mvo.dbBirthday",column = "dbBirthday"),
 				@Result(property = "mvo.birth",column = "birth"),
 				@Result(property = "mvo.sex",column = "sex"),
@@ -63,19 +63,19 @@ public interface ProgramListMapper {
 				@Result(property = "mvo.email",column = "email"),
 				@Result(property = "mvo.phone",column = "phone")
 				
-		})//변경요망
-		@Select("SELECT vano,id,vno,v_state,v_filename,v_filesize,v_filecount,TO_CHAR(V_STATE_TIME,'YYYY-MM-DD HH24:MI:SS') as vDbStateTime,title,centername,name,TO_CHAR(birth,'YYYY-MM-DD') as dbBirthday,sex,"
+		})//변경완료
+		@Select("SELECT vano,id,vno,v_state,v_filename,v_filesize,v_filecount,TO_CHAR(V_STATE_TIME,'YYYY-MM-DD HH24:MI:SS') as vDbStateTime,title,centername,username,TO_CHAR(birth,'YYYY-MM-DD') as dbBirthday,sex,"
 				+"addr1,addr2,email,phone,TO_CHAR(v_start,'YYYY-MM-DD') as dbV_start,TO_CHAR(v_end,'YYYY-MM-DD') as dbV_end,collect_state,getwing,num FROM ("
-				+"SELECT vano,id,vno,v_state,v_filename,v_filesize,v_filecount,v_state_time,title,centername,name,birth,sex,"
+				+"SELECT vano,id,vno,v_state,v_filename,v_filesize,v_filecount,v_state_time,title,centername,username,birth,sex,"
 				+"addr1,addr2,email,phone,v_start,v_end,collect_state,getwing,rownum as num FROM ("
 				+"select /*+INDEX_DESC(V_PROGRAM_APPLY vano_pk)*/vano,a.id,a.vno,v_state,v_filename,v_filesize,v_filecount,v_state_time,title,b.centername,"
-				+"c.name,birth,sex,c.addr1,c.addr2,email,phone,"
+				+"c.username,birth,sex,c.addr1,c.addr2,email,phone,"
 				+"v_start,v_end,collect_state,getwing "
 				+"FROM V_PROGRAM_APPLY a "
 				+"JOIN V_PROGRAM b ON "
 				+"a.vno=b.vno "
 				+"JOIN MEMBER c ON "
-				+"a.id=c.id "
+				+"a.id=c.userid "
 				+"WHERE b.centername=#{centername} AND "
 				+"V_STATE=#{type})) "
 				+"WHERE num between #{start} and #{end}")
@@ -236,7 +236,7 @@ public interface ProgramListMapper {
 			@Result(property = "pvo.dbV_start",column = "dbV_start"),
 			@Result(property = "pvo.dbV_end",column = "dbV_end"),
 			@Result(property = "pvo.collect_state",column = "collect_state"),
-			@Result(property = "mvo.name",column = "name"),
+			@Result(property = "mvo.username",column = "username"),
 			@Result(property = "mvo.dbBirthday",column = "dbBirthday"),
 			@Result(property = "mvo.birth",column = "birth"),
 			@Result(property = "mvo.sex",column = "sex"),
@@ -247,13 +247,13 @@ public interface ProgramListMapper {
 	})
 	@Select(//변경요망
 			"select vano,a.id,a.vno,v_state,v_ok_filename,v_ok_filesize,v_ok_filecount,TO_CHAR(v_state_time,'YYYY-MM-DD HH24:MI:SS') as vDbStateTime,title,b.centername,"
-			+"c.name,TO_CHAR(birth,'YYYY-MM-DD') as dbBirthday,sex,c.addr1,c.addr2,email,phone,"
+			+"c.username,TO_CHAR(birth,'YYYY-MM-DD') as dbBirthday,sex,c.addr1,c.addr2,email,phone,"
 			+"TO_CHAR(v_start,'YYYY-MM-DD') as dbV_start,TO_CHAR(v_end,'YYYY-MM-DD') as dbV_end,collect_state "
 			+"FROM V_PROGRAM_APPLY a "
 			+"JOIN V_PROGRAM b ON "
 			+"a.vno=b.vno "
 			+"JOIN MEMBER c ON "
-			+"a.id=c.id "
+			+"a.id=c.userid "
 			+"WHERE vano=#{vano}")
 		public VprogramApplyVO centerCertifyAccess(int vano);
 			
@@ -276,8 +276,8 @@ public interface ProgramListMapper {
 		
 		//유저 wing 갯수 업데이트
 		@Update("UPDATE member SET "//변경요망
-				+"wing=#{wing} "
-				+"WHERE id=#{id}")
+				+"wing=wing+#{wing} "
+				+"WHERE userid=#{id}")
 		public void updateProgramAfterWing(Map map);
 		
 		//신청내역 보상지급완료로 업데이트

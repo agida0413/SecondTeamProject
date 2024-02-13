@@ -45,14 +45,11 @@
 
 <div class="container bg-white" style="margin-top:50px;">
 <div class="row">
- <div class="col-3">
-  <tiles:insertAttribute name="dcAside"/>
- </div>
 
  
- <div class="col-9">
+ 
   <tiles:insertAttribute name="dcContent"/>
- </div>
+ 
  </div>
 </div>
 

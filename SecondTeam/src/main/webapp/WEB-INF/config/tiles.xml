@@ -32,7 +32,6 @@
       
        <definition name="donateclass" template="/WEB-INF/donateclass/main.jsp">
          <put-attribute name="header" value="/WEB-INF/main/header.jsp"/>
-         <put-attribute name="dcAside" value="/WEB-INF/donateclass/aside.jsp"/>
          <put-attribute name="dcContent" value="/WEB-INF/donateclass/list.jsp"/>
          <put-attribute name="footer" value="/WEB-INF/main/footer.jsp"/>
       </definition>

@@ -35,7 +35,7 @@ cursor: pointer;
             		  <input type="button" class="btn btn-medium btn-danger" value="신청하기" @click="applyClick()">
             		  
             		  <span class="zzim" @click="zzimBtnClick">
-            		  	<c:if test="${sessionScope.id==null }">
+            		  	<c:if test="${sessionScope.id==null }"><!-- 변경요망 -->
             		  	 	<img src="../Projectimages/emptyHeart.png" width="25px">
             		  	</c:if>
             		  	<img v-if="zzimstate=='NO'" src="../Projectimages/emptyHeart.png" width="25px">
@@ -216,7 +216,7 @@ cursor: pointer;
 	let programDetailHeader=Vue.createApp({
 		data(){
 			return{
-				sessionId:'${sessionScope.id}',
+				sessionId:'${sessionScope.id}',<!--변경요망-->
 				vno:${vo.vno},
 				ct:'${vo.collect_state}',
 				zzimstate:'${state}'
@@ -228,7 +228,7 @@ cursor: pointer;
 		methods:{
 			applyClick(){
 			
-				if(this.sessionId===''){
+				if(this.sessionId===''){<!--변경요망-->
 					alert('로그인 후 이용가능합니다')
 					return;
 				}
@@ -242,7 +242,7 @@ cursor: pointer;
 				}
 			},
 			zzimBtnClick(){
-				if(this.sessionId===''){
+				if(this.sessionId===''){<!--변경요망-->
 					alert('로그인 후 이용가능합니다')
 					return;
 				}

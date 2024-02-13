@@ -58,7 +58,7 @@
          <tr > 
            <td colspan="4" class="align-right">
            <span style="margin-left:700px;  float: right;">
-         	 <c:if test="${sessionScope.admin==1 }">
+         	 <c:if test="${sessionScope.admin==1 }"><!--변경요망-->
              <button class="btn btn-small btn-danger" style="margin-right:10px;" @click="dataDelete()">삭제</button>
              </c:if>
              <button class="btn btn-small btn-success"  @click="dataList()">목록</button>

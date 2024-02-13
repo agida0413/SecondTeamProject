@@ -92,17 +92,17 @@ text-align:center;
 	            		  <table class="table">
 	            		  	<tr>
 	            		  		<td width="30%" class="applyTitle" style="background-color:#f2f2f2; font-weight:bold;">이름</td>
-	            		  		<td width="70%">${sessionScope.name }</td>
+	            		  		<td width="70%">${sessionScope.name }</td><!--변경요망-->
 	            		  	</tr>
 	            		  	
 	            		  	<tr>
 	            		  		<td width="30%" class="applyTitle" style="background-color:#f2f2f2;">전화번호</td>
-	            		  		<td width="70%">${sessionScope.phone }</td>
+	            		  		<td width="70%">${sessionScope.phone }</td><!--변경요망-->
 	            		  	</tr>
 	            		  	
 	            		  			<tr>
 	            		  		<td width="30%" class="applyTitle" style="background-color:#f2f2f2;">이메일</td>
-	            		  		<td width="70%">${sessionScope.email }</td>
+	            		  		<td width="70%">${sessionScope.email }</td><!--변경요망-->
 	            		  	</tr>
 	            		  </table>
 	            		  

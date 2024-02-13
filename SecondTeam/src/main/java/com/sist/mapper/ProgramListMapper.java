@@ -44,7 +44,7 @@ public interface ProgramListMapper {
 	
 	//센터 프로그램 신청내역 리스트
 	
-		@Results({
+		@Results({//변경요망
 				@Result(property = "pvo.vno" ,column="vno"),
 				@Result(property = "pvo.title" , column = "title"),
 				@Result(property = "pvo.centername",column = "centername"),
@@ -63,7 +63,7 @@ public interface ProgramListMapper {
 				@Result(property = "mvo.email",column = "email"),
 				@Result(property = "mvo.phone",column = "phone")
 				
-		})
+		})//변경요망
 		@Select("SELECT vano,id,vno,v_state,v_filename,v_filesize,v_filecount,TO_CHAR(V_STATE_TIME,'YYYY-MM-DD HH24:MI:SS') as vDbStateTime,title,centername,name,TO_CHAR(birth,'YYYY-MM-DD') as dbBirthday,sex,"
 				+"addr1,addr2,email,phone,TO_CHAR(v_start,'YYYY-MM-DD') as dbV_start,TO_CHAR(v_end,'YYYY-MM-DD') as dbV_end,collect_state,getwing,num FROM ("
 				+"SELECT vano,id,vno,v_state,v_filename,v_filesize,v_filecount,v_state_time,title,centername,name,birth,sex,"
@@ -227,7 +227,7 @@ public interface ProgramListMapper {
 		
 		
 		//봉사인증 센터승인상세페이지
-		@Results({
+		@Results({//변경요망
 			@Result(property = "pvo.vno" ,column="vno"),
 			@Result(property = "pvo.title" , column = "title"),
 			@Result(property = "pvo.centername",column = "centername"),
@@ -245,7 +245,7 @@ public interface ProgramListMapper {
 			@Result(property = "mvo.email",column = "email"),
 			@Result(property = "mvo.phone",column = "phone")
 	})
-	@Select(
+	@Select(//변경요망
 			"select vano,a.id,a.vno,v_state,v_ok_filename,v_ok_filesize,v_ok_filecount,TO_CHAR(v_state_time,'YYYY-MM-DD HH24:MI:SS') as vDbStateTime,title,b.centername,"
 			+"c.name,TO_CHAR(birth,'YYYY-MM-DD') as dbBirthday,sex,c.addr1,c.addr2,email,phone,"
 			+"TO_CHAR(v_start,'YYYY-MM-DD') as dbV_start,TO_CHAR(v_end,'YYYY-MM-DD') as dbV_end,collect_state "
@@ -275,7 +275,7 @@ public interface ProgramListMapper {
 		public int getCertifyWing(int vno);
 		
 		//유저 wing 갯수 업데이트
-		@Update("UPDATE member SET "
+		@Update("UPDATE member SET "//변경요망
 				+"wing=#{wing} "
 				+"WHERE id=#{id}")
 		public void updateProgramAfterWing(Map map);

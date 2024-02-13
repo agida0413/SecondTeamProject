@@ -25,7 +25,7 @@
   
    
     <div class="row">
-    <c:if test="${sessionScope.admin==1 }">
+    <c:if test="${sessionScope.admin==1 }"><!--변경요망-->
     <table>
     <tr>
     <td colspan="5" class="align-right">

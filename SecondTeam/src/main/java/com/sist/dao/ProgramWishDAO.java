@@ -8,15 +8,15 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sist.mapper.ProgramZzimMapper;
+import com.sist.mapper.ProgramWishMapper;
 import com.sist.vo.ProgramVO;
 import com.sist.vo.WishListVO;
 
 @Repository
-public class ProgramZzimDAO {
+public class ProgramWishDAO {
 
 	@Autowired
-	private ProgramZzimMapper mapper;
+	private ProgramWishMapper mapper;
 	
 	
 	public int getWishCount(Map map) {

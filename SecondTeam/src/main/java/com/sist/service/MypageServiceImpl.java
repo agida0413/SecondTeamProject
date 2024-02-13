@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.sist.dao.MypageDAO;
 import com.sist.dao.ProgramListDAO;
-import com.sist.dao.ProgramZzimDAO;
-import com.sist.mapper.ProgramZzimMapper;
+import com.sist.dao.ProgramWishDAO;
+import com.sist.mapper.ProgramWishMapper;
 import com.sist.vo.ProgramVO;
 import com.sist.vo.VprogramApplyVO;
 
@@ -20,7 +20,7 @@ public class MypageServiceImpl implements MypageService {
 	@Autowired
 	private ProgramListDAO pDao;
 	@Autowired
-	private ProgramZzimDAO zDAo;
+	private ProgramWishDAO zDAo;
 	@Override
 	public List<VprogramApplyVO> applyHistoryList(Map map) {
 		// TODO Auto-generated method stub

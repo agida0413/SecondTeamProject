@@ -12,7 +12,7 @@ import org.apache.ibatis.annotations.Update;
 import com.sist.vo.ProgramVO;
 import com.sist.vo.WishListVO;
 
-public interface ProgramZzimMapper {
+public interface ProgramWishMapper {
 
 	
 	@Select("SELECT COUNT(*) FROM wishlist WHERE typeno=1 AND "
@@ -58,7 +58,7 @@ public interface ProgramZzimMapper {
 			+ "TO_CHAR(v_end,'YYYY.MM.DD') as dbV_end,"
 			+ "runtime,si,gu,centername,collect_state,typeno,objno,state,id,num "
 			+ "FROM (SELECT getwing,vno,active_type,major_field,minor_field,title,collect_start,collect_end,v_start,v_end,runtime,si,gu,centername,collect_state,typeno,objno,state,id,rownum as num "
-			+ "FROM (SELECT /*+INDEX(wishlist wno_pk)*/getwing,vno,active_type,major_field,minor_field,title,collect_start,collect_end,v_start,v_end,runtime,si,gu,centername,collect_state,typeno,objno,state,id "
+			+ "FROM (SELECT /*+INDEX_DESC(wishlist wno_pk)*/getwing,vno,active_type,major_field,minor_field,title,collect_start,collect_end,v_start,v_end,runtime,si,gu,centername,collect_state,typeno,objno,state,id "
 			+ "FROM v_program "
 			+"JOIN wishlist ON "
 			+"vno=objno "

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.sist.dao.OptionDAO;
 import com.sist.dao.ProgramDataboardDAO;
 import com.sist.dao.ProgramListDAO;
-import com.sist.dao.ProgramZzimDAO;
+import com.sist.dao.ProgramWishDAO;
 import com.sist.vo.OptionVO;
 import com.sist.vo.ProgramVO;
 import com.sist.vo.VdataboardVO;
@@ -26,7 +26,7 @@ public class ProgramServiceImpl implements ProgramService {
 	@Autowired
 	private ProgramDataboardDAO dbDAO;
 	@Autowired
-	private ProgramZzimDAO zDao;
+	private ProgramWishDAO zDao;
 
 	@Override
 	public List<OptionVO> stateOption() {

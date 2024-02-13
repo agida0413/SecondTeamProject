@@ -29,33 +29,51 @@
 							<ul class="js-clone-nav d-none d-lg-inline-block text-start site-menu mx-auto">
 								<li class="active"><a href="index.html">Home</a></li>
 								<li class="has-children">
-									<a href="category.html">드롭다운예시</a>
+									<a href="category.html">봉사 프로그램</a>
 									<ul class="dropdown">
-										<li><a href="search-result.html">Search Result</a></li>
-										<li><a href="blog.html">Blog</a></li>
-										<li><a href="single.html">Blog Single</a></li>
-										<li><a href="category.html">Category</a></li>
-										<li><a href="about.html">About</a></li>
-										<li><a href="contact.html">Contact Us</a></li>
-										<li><a href="#">Menu One</a></li>
-										<li><a href="#">Menu Two</a></li>
-										<li class="has-children">
-											<a href="#">Dropdown</a>
-											<ul class="dropdown">
-												<li><a href="#">Sub Menu One</a></li>
-												<li><a href="#">Sub Menu Two</a></li>
-												<li><a href="#">Sub Menu Three</a></li>
-											</ul>
-										</li>
+										
+  
+											<li><a href="../program/list.do"> 봉사프로그램 조회</a></li>
+
+  
+ 											<li> <a href="../program/databoardList.do">자료실(양식다운)</a></li>
+ 												<li><a href="#">통계정보</a></li>
+  
+											 <c:if test="${sessionScope.centername!=null }"><!--변경요망-->
+											 <li><a href="../program/accessCertify.do">봉사활동인증 승인</a></li>
+											    <li ><a href="../program/applyList.do">봉사신청 승인</a></li>
+											  </c:if>
+											  
+											  <c:if test="${sessionScope.id!=null && sessionScope.centername==null }"><!--변경요망-->
+											  <li><a href="#">추천 봉사프로그램</a></li>
+											  </c:if>	
+										
 									</ul>
 								</li>
-								<li><a href="../program/list.do">봉사프로그램</a></li>
+								
+								
+								
+									<li class="has-children">
+									<a href="category.html">재능기부</a>
+									<ul class="dropdown">
+										
+  
+											<li><a href="#">???</a></li>
+											<li><a href="#">???</a></li>
+  											<li><a href="#">???</a></li>
+  											<li><a href="#">???</a></li>
+  											<li><a href="#">???</a></li>
+ 											
+										
+									</ul>
+								</li>
+								
 								<li><a href="../goods/goods_main.do">상품</a></li>
 								<li><a href="category.html">추가예정</a></li>
 								<li><a href="category.html">추가예정</a></li>
 								<li><a href="category.html">추가예정</a></li>
 								<li><a href="category.html">추가예정</a></li>
-								<li><a href="category.html">추가예정</a></li>
+							
 							</ul>
 							
 							<span style="float:right;"><a href="#"><img src="../Projectimages/shop.png" width="35px;"></a></span>

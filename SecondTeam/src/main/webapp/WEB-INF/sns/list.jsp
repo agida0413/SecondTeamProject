@@ -104,7 +104,8 @@ li{
    </div>
    <!-- 예약 사이드 매뉴 종료 -->
 	   <div class="row">
-	   
+<%-- 	   <p>${sessionScope.id }출력됨</p>
+	   <p>${sessionScope.userid }출력안됨</p> --%>
 	    <div class="col-md-1" id="id_list">
 	      <h3 class="heading"
 	      style="font-size: 18px; text-align:center;

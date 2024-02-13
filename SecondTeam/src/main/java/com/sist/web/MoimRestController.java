@@ -91,8 +91,8 @@ public class MoimRestController {
 	   @GetMapping(value = "detail_reply_insert_vue.do", produces = "text/plain;charset=UTF-8")
 	   public String detail_reply_insert_vue(int rno,String msg,HttpSession session) throws Exception
 	   {
-		   String userid=(String)session.getAttribute("userid");
-		   String username=(String)session.getAttribute("username");
+		   String userid=(String)session.getAttribute("id");
+		   String username=(String)session.getAttribute("name");
 		   MoimReplyVO vo=new MoimReplyVO();
 		   vo.setRno(rno);
 		   vo.setUserid(userid);

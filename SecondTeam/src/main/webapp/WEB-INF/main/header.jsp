@@ -29,7 +29,7 @@
 							<ul class="js-clone-nav d-none d-lg-inline-block text-start site-menu mx-auto">
 								<li class="active"><a href="index.html">Home</a></li>
 								<li class="has-children">
-									<a href="category.html">봉사 프로그램</a>
+									<a href="../program/list.do">봉사 프로그램</a>
 									<ul class="dropdown">
 										
   
@@ -54,7 +54,7 @@
 								
 								
 									<li class="has-children">
-									<a href="category.html">재능기부</a>
+									<a href="../donateclass/list.do">재능기부</a>
 									<ul class="dropdown">
 										
   

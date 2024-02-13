@@ -54,7 +54,7 @@
 								
 								
 									<li class="has-children">
-									<a href="../donateclass/list.do">재능기부</a>
+									<a href="../donateclass/list.do?type=A">재능기부</a>
 									<ul class="dropdown">
 										
   

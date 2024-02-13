@@ -20,6 +20,11 @@ public class SnsDAO {
 	{
 		return mapper.snsKeepList();
 	}
+	//임시보호동물게시글 5개 다이얼로그 디테일출력
+	public SnsKeepVO snsKeepDetailData(int kano)
+	{
+		return mapper.snsKeepDetailData(kano);
+	}
 	
 	//sns페이지 본인+팔로우 게시글 출력
 	public List<SnsMyContentVO> snsMyContentList(String userid)

@@ -33,4 +33,10 @@ public class SnsServiceImpl implements SnsService{
 		return dao.snsMyContentList(userid);
 	}
 
+	@Override
+	public SnsKeepVO snsKeepDetailData(int kano) {
+		// TODO Auto-generated method stub
+		return dao.snsKeepDetailData(kano);
+	}
+
 }

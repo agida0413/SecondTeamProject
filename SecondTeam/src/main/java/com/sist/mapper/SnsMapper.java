@@ -19,6 +19,11 @@ public interface SnsMapper {
 			+ "WHERE num BETWEEN 5 AND 9")
 	public List<SnsKeepVO> snsKeepList();
 	
+	//임시보호동물게시글 5개 다이얼로그 디테일출력
+	@Select("SELECT kano,keeploc,keeptitle,keepwriter,keepregdate,keepregdate,keepaddr,keepimage,keepcontent "
+			+ "FROM SNS_KEEP WHERE kano=#{kano} ")
+	public SnsKeepVO snsKeepDetailData(int kano);
+	
 	//sns페이지 본인+팔로우 게시글 출력
 	@Select("SELECT sno, userid, pic, username, regdate, content "
 			+ "FROM SNS_PAGE "

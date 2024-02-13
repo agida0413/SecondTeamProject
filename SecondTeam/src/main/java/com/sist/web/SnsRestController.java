@@ -40,6 +40,15 @@ public class SnsRestController {
 		String json=mapper.writeValueAsString(list);
 		return json;
 	}
+	//임시보호동물게시글 5개 다이얼로그 디테일출력
+	@GetMapping(value = "detail_keep_vue.do", produces = "text/plain;charset=UTF-8")
+	public String detail_keep_vue(int kano) throws Exception
+	{
+		SnsKeepVO vo=service.snsKeepDetailData(kano);
+		ObjectMapper mapper=new ObjectMapper();
+		String json=mapper.writeValueAsString(vo);
+		return json;
+	}
 	
 	//sns페이지 본인+팔로우 게시글 출력
 	//public List<SnsMyContentVO> snsMyContentList(String id)

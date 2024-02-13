@@ -6,6 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!-- 다이얼로그 -->
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+
 <script src="https://unpkg.com/vue@3"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <link rel="stylesheet"
@@ -172,7 +177,7 @@ li{
             <div class="post-entry-sidebar">
               <ul>
                 <li v-for="(vo,index) in list_keep" class="page-link"
-                style="display: flex; padding: 10px 0 5px 10px; border-radius: 10px;" >
+                style="display: flex; padding: 10px 0 5px 10px; border-radius: 10px;" @click="detail(vo.kano)">
                     <div class="img">
                        <img :src="vo.keepimage" 
                        style="width: 50px; height: 50px; border-radius: 100%;">
@@ -184,20 +189,62 @@ li{
                       <div class="post-meta">
                         <span class="mr-2" style="margin-top: 10px;">{{vo.keeploc}}</span>&nbsp;
                         <span class="mr-2" style="margin-top: 10px;">{{vo.keepregdate}}</span>
+                        <span>{{vo.kano}}</span>
                       </div>
                     </div>
                 </li>
               </ul>
             </div>
           </div>
+          <!-- 임시보호동물 상세정보 다이얼로그창 -->
+          <div id="dialog" title="임시보호 동물 상세보기" v-show="isShow">
+             <detail_dialog v-bind:keep_detail="keep_detail"></detail_dialog>
+          </div>
     </div>
 		</div><!-- row -->
 	</div><!-- container -->
 <script>
+  const detailComponent={
+		  props:['keep_detail'],
+		  template:`
+			  <table class="table">
+	             <tr>
+	                <td width="30%" class="text-center" rowspan="7">
+	                   <img :src="keep_detail.keepimage" style="width:100%">
+	                </td>
+	                <td colspan="2">
+	                   <h3>{{keep_detail.keeptitle}}</h3>
+	                </td>
+	             </tr>
+	             <tr>
+	                <th width="15%">보호장소</th>
+	                <td width="55%">{{keep_detail.keeploc}}</td>
+	             </tr>
+	             <tr>
+	                <th width="15%">작성자</th>
+	                <td width="55%">{{keep_detail.keepwriter}}</td>
+	             </tr>
+	             <tr>
+	                <th width="15%">발견날짜</th>
+	                <td width="55%">{{keep_detail.keepregdate}}</td>
+	             </tr>
+	             <tr>
+	                <th width="15%">발견장소</th>
+	                <td width="55%">{{keep_detail.keepaddr}}</td>
+	             </tr>
+	             <tr>
+	                <th width="15%">상세내용</th>
+	                <td width="55%">{{keep_detail.keepcontent}}</td>
+	             </tr>
+	          </table>
+		  `
+  }
   let sns_keep=Vue.createApp({
 	  data(){
 		  return{
-			  list_keep:[]
+			  list_keep:[],
+			  keep_detail:{},
+			  isShow:false
 		  }
 	  },
 	  mounted(){
@@ -209,7 +256,31 @@ li{
 				  console.log(res.data)
 				  this.list_keep=res.data
 			  })
-		  }
+		  },
+		//여기 kano는 지역변수임
+			 detail(kano){
+				 axios.get('../sns/detail_keep_vue.do',{
+					 params:{
+						 kano:kano
+					 }
+				 }).then(res=>{
+					 console.log(res.data)
+					 this.keep_detail=res.data
+					 this.isShow=true
+					 $('#dialog').dialog({
+						 autoOpen:false,
+						 modal:true,
+						 width:700,
+						 height:600
+					 }).dialog("open")
+				 }).catch(error=>{
+					 console.log(error.res)
+				 })
+				
+			 }
+	  },
+	  components:{
+		  'detail_dialog':detailComponent
 	  }
   }).mount('#sns_keep')
 </script>

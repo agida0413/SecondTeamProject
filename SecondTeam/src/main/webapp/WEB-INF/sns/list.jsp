@@ -237,7 +237,7 @@ li{
 	  data(){
 		  return{
 			  mycontent_list:[],
-			  myid:'${userid}'
+			  myid:'${id}'
 		  }
 	  },
 	  mounted(){

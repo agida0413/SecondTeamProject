@@ -23,7 +23,7 @@ public interface SnsMapper {
 	@Select("SELECT sno, userid, pic, username, regdate, content "
 			+ "FROM SNS_PAGE "
 			+ "WHERE userid = #{userid} "
-			+ "OR id IN ( "
+			+ "OR userid IN ( "
 			+ "SELECT sns_follow.f_id "
 			+ "FROM SNS_FOLLOW "
 			+ "WHERE sns_follow.userid = #{userid}) "

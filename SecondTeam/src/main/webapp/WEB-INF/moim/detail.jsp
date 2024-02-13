@@ -238,7 +238,7 @@ text-overflow: ellipsis;
 	   data(){
 		   return{
 			   rno:${rno},
-			   sessionId:'${userid}',
+			   sessionId:'${id}',
 			   reply_list:[],
 			   mrno:0,
 			   msg:'',

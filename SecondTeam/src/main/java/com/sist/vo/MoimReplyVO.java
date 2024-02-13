@@ -25,6 +25,6 @@ import lombok.Data;
 @Data
 public class MoimReplyVO {
 	private int mrno,rno;
-	private String name,id,msg,dbday;
+	private String username,userid,msg,dbday;
 	private Date regdate;
 }

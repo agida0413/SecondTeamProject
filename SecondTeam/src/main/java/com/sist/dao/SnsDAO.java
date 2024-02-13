@@ -22,9 +22,9 @@ public class SnsDAO {
 	}
 	
 	//sns페이지 본인+팔로우 게시글 출력
-	public List<SnsMyContentVO> snsMyContentList(String id)
+	public List<SnsMyContentVO> snsMyContentList(String userid)
 	{
-		return mapper.snsMyContentList(id);
+		return mapper.snsMyContentList(userid);
 	}
 	
 	//sns id 목록중 4명 랜덤출력
@@ -33,9 +33,4 @@ public class SnsDAO {
 		return mapper.snsIdList();
 	}
 	
-	/////////////////////////게시글 crud
-	public void snsPageInsert(SnsMyContentVO vo)
-	{
-		mapper.snsPageInsert(vo);
-	}
 }

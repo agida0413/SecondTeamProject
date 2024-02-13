@@ -20,28 +20,22 @@ public interface SnsMapper {
 	public List<SnsKeepVO> snsKeepList();
 	
 	//sns페이지 본인+팔로우 게시글 출력
-	@Select("SELECT sno, id, pic, name, regdate, content "
+	@Select("SELECT sno, userid, pic, username, regdate, content "
 			+ "FROM SNS_PAGE "
-			+ "WHERE id = #{id} "
+			+ "WHERE userid = #{userid} "
 			+ "OR id IN ( "
 			+ "SELECT sns_follow.f_id "
 			+ "FROM SNS_FOLLOW "
-			+ "WHERE sns_follow.id = #{id}) "
+			+ "WHERE sns_follow.userid = #{userid}) "
 			+ "ORDER BY sno DESC ")
-	public List<SnsMyContentVO> snsMyContentList(String id);
+	public List<SnsMyContentVO> snsMyContentList(String userid);
 	
 	//sns id 목록중 4명 랜덤출력
-	@Select("SELECT mno, id, name, num "
-			+ "FROM (SELECT mno, id, name, rownum AS num "
-			+ "FROM (SELECT mno, id, name "
+	@Select("SELECT mno, userid, username, num "
+			+ "FROM (SELECT mno, userid, username, rownum AS num "
+			+ "FROM (SELECT mno, userid, username "
 			+ "FROM MEMBER WHERE TYPENO =2 ORDER BY dbms_random.value )) "
 			+ "WHERE num BETWEEN 1 AND 4 ")
 	public List<SnsIdVO> snsIdList();
-	
-	//////////////////////////////게시글crud////////////////////////////////////
-	//insert
-	@Insert("INSERT INTO SNS_PAGE (sno, id, name, regdate, content, filename, filesize, filecount) "
-	        + "VALUES (sp_sno_seq.nextval, #{id}, #{name}, sysdate, #{content}, #{filename}, #{filesize}, #{filecount})")
-	public void snsPageInsert(SnsMyContentVO vo);
 
 }

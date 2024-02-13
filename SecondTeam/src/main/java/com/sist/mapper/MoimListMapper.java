@@ -33,14 +33,14 @@ public interface MoimListMapper {
 	public MoimListVO moimDetailData(int rno);
 	
 	//공간대여디테일_댓글
-	@Select("SELECT mrno,rno,id,name,msg,TO_CHAR(regdate,'YYYY-MM-DD')as dbday "
+	@Select("SELECT mrno,rno,userid,username,msg,TO_CHAR(regdate,'YYYY-MM-DD')as dbday "
 			+ "FROM MOIM_REPLY WHERE rno=#{rno} "
 			+ "ORDER BY mrno DESC")
 	public List<MoimReplyVO> MoimReplyData(int mrno);
 	
 	//추가
 	@Insert("INSERT INTO MOIM_REPLY VALUES( "
-			+ "mr_mrno_seq.nextval, #{rno}, #{id}, #{name}, #{msg}, SYSDATE) ")
+			+ "mr_mrno_seq.nextval, #{rno}, #{userid}, #{username}, #{msg}, SYSDATE) ")
 	public void MoimReplyInsert(MoimReplyVO vo);
 	
 	//수정

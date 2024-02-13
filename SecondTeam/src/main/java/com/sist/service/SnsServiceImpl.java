@@ -28,14 +28,9 @@ public class SnsServiceImpl implements SnsService{
 	}
 
 	@Override
-	public List<SnsMyContentVO> snsMyContentList(String id) {
+	public List<SnsMyContentVO> snsMyContentList(String userid) {
 		// TODO Auto-generated method stub
-		return dao.snsMyContentList(id);
+		return dao.snsMyContentList(userid);
 	}
 
-	@Override
-	public void snsPageInsert(SnsMyContentVO vo) {
-		// TODO Auto-generated method stub
-		dao.snsPageInsert(vo);
-	}
 }

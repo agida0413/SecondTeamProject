@@ -26,7 +26,7 @@ text-overflow: ellipsis;
       <div class="row same-height justify-content-center">
         <div class="col-md-6">
           <div class="post-entry text-center">
-            <h2 class="mb-4" style="color: #fff !important;">{{detail_data.loc}}</h2>
+            <h2 class="mb-4" style="color: #fff !important;" id="loc">{{detail_data.loc}}</h2>
             <div class="post-meta align-items-center text-center">
               <span class="d-inline-block mt-1">센터번호</span>
               <span>&nbsp;-&nbsp; {{detail_data.num}}</span>
@@ -118,13 +118,13 @@ text-overflow: ellipsis;
                       </div>
                     </div>
                 </li>
-                <li>
+                <li class="text-center">
 				<a href="#"
-				style="border: 2px solid #93a0a8; border-radius: 2px; display:inline-block;
-				color: #93a0a8; padding: 10px 20px;"><i class="xi-calendar-add"></i>&nbsp;애약하기</a>&nbsp;&nbsp;
+				style="border: 3px solid #214252; border-radius: 2px; display:inline-block;
+				color: #214252; padding: 10px 30px; font-weight: 600;"><i class="xi-calendar-add"></i>&nbsp;예약하기</a>&nbsp;&nbsp;
 				<a href="#"
-				style="border: 2px solid #93a0a8; border-radius: 2px; display:inline-block;
-				color: #93a0a8; padding: 10px 20px;"><i class="xi-credit-card"></i>&nbsp;결제하기</a>
+				style="border: 3px solid #214252; border-radius: 2px; display:inline-block;
+				color: #214252; padding: 10px 30px; font-weight: 600;"><i class="xi-credit-card"></i>&nbsp;결제하기</a>
 				</li>
               </ul>
             </div>
@@ -144,7 +144,7 @@ text-overflow: ellipsis;
 
           <div class="sidebar-box">
             <h3 class="heading">공간 상세 위치</h3>
-            <p>지도출력</p>
+            <div id="map" style="width:100%;height:350px;"></div>
           </div>
         </div>
         <!-- END sidebar -->
@@ -225,7 +225,64 @@ text-overflow: ellipsis;
 		   }).then(res=>{
 			   console.log(res.data)
 			   this.detail_data=res.data
+			   
+			   if(window.kakao && window.kakao.maps)
+		         {
+		            this.initMap()
+		         }
+		         else
+		         {
+		            this.addScript()
+		         }
 		   })
+	   },
+	   methods:{
+		   addScript(){
+		         const script=document.createElement("script") 
+		         
+		         /* global kakao */
+		         script.onload=()=>kakao.maps.load(this.initMap)
+		         script.src="https://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=23e8040d553778eeeb77f0900cb92322&libraries=services"
+		         document.head.appendChild(script)
+		      },
+		      initMap(){
+		         var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+		          mapOption = {
+		              center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+		              level: 3 // 지도의 확대 레벨
+		          };  
+
+		      // 지도를 생성합니다    
+		      var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+		      // 주소-좌표 변환 객체를 생성합니다
+		      var geocoder = new kakao.maps.services.Geocoder();
+
+		      // 주소로 좌표를 검색합니다
+		      geocoder.addressSearch(this.detail_data.addr1, function(result, status) {
+
+		          // 정상적으로 검색이 완료됐으면 
+		           if (status === kakao.maps.services.Status.OK) {
+
+		              var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+		              // 결과값으로 받은 위치를 마커로 표시합니다
+		              var marker = new kakao.maps.Marker({
+		                  map: map,
+		                  position: coords
+		              });
+
+		              // 인포윈도우로 장소에 대한 설명을 표시합니다
+		              var infowindow = new kakao.maps.InfoWindow({
+		                  content: '<div style="width:150px;text-align:center;padding:6px 0;">'+$("#loc").text()+'</div>'
+		              });
+		              infowindow.open(map, marker);
+
+		              // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+		              map.setCenter(coords);
+		          } 
+		      })
+		     }
 	   }
    }).mount('.moimDetail')
    

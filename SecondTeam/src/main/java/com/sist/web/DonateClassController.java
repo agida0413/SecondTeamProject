@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -24,7 +25,7 @@ private DonateClassService service;
 private CommonsFunction cf;
 	
 	@GetMapping("list.do")
-	public String dcList(String type,String ss,String page) {
+	public String dcList(String type,String ss,String page,Model model) {
 		String category="";
 		if(page==null) {
 			
@@ -56,7 +57,7 @@ private CommonsFunction cf;
 		}
 		
 		int curpage=Integer.parseInt(page);
-		int rowsize=10;
+		int rowsize=5;
 		int start=cf.start(rowsize, curpage);
 		int end=cf.end(rowsize, curpage);
 		
@@ -81,8 +82,19 @@ private CommonsFunction cf;
 		int Ecount=service.donateClassCategoryCount("뷰티");
 		int Fcount=service.donateClassCategoryCount("체험 및 기타");
 		
-		System.out.println(list.size());
-		
+		model.addAttribute("ss",ss);
+		model.addAttribute("page",curpage);
+		model.addAttribute("type",type);
+		model.addAttribute("startpage",startpage);
+		model.addAttribute("endpage",endpage);
+		model.addAttribute("totalpage",totalpage);
+		model.addAttribute("list",list);
+		model.addAttribute("Acount",Acount);
+		model.addAttribute("Bcount",Bcount);
+		model.addAttribute("Ccount",Ccount);
+		model.addAttribute("Dcount",Dcount);
+		model.addAttribute("Ecount",Ecount);
+		model.addAttribute("Fcount",Fcount);
 		return "donateclass";
 	}
 	

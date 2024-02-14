@@ -9,14 +9,14 @@
 <body>
 <div class="col-lg-4 sidebar">
 					
-					<div class="sidebar-box search-form-wrap mb-4">
-						<form action="#" class="sidebar-search-form">
-							<span class="bi-search"></span>
-							<div style="position: relative;">
-					<input type="text" class="form-control" placeholder="검색어 입력"
+					<div class="sidebar-box search-form-wrap mb-4" id="searchDc">
 						
-						style="background-color: black;"> <span class="bi bi-search" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);"></span>
-							</div></form>
+							
+							<div style="position: relative;">
+					<input type="text" class="form-control" placeholder="${ss==''?'검색어 입력':ss }" v-model="ss"
+					@keyup.enter="search()"	
+						style="background-color: black;"> <span class="bi bi-search" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);" @click="search()"></span>
+							</div>
 					</div>
 					<!-- END sidebar-box -->
 				
@@ -25,12 +25,12 @@
 					<div class="sidebar-box">
 						<h3 class="heading">카테고리</h3>
 						<ul class="categories">
-							<li><a href="#">전체<span>(12)</span></a></li>
-							<li><a href="#">공예<span>(22)</span></a></li>
-							<li><a href="#">요리<span>(37)</span></a></li>
-							<li><a href="#">미술<span>(42)</span></a></li>
-							<li><a href="#">뷰티<span>(14)</span></a></li>
-							<li><a href="#">체험 및 기타<span>(14)</span></a></li>
+							<li><a href="../donateclass/list.do?type=A" style="${type=='A'?'background-color: #CCCCCC; border-radius: 5px;':'' }">전체<span style="color:black;">(${Acount })</span></a></li>
+							<li><a href="../donateclass/list.do?type=B" style="${type=='B'?'background-color: #CCCCCC; border-radius: 5px;':'' }">공예<span style="color:black;">(${Bcount })</span></a></li>
+							<li><a href="../donateclass/list.do?type=C" style="${type=='C'?'background-color: #CCCCCC; border-radius: 5px;':'' }">요리<span style="color:black;">(${Ccount })</span></a></li>
+							<li><a href="../donateclass/list.do?type=D" style="${type=='D'?'background-color: #CCCCCC; border-radius: 5px;':'' }">미술<span style="color:black;">(${Dcount })</span></a></li>
+							<li><a href="../donateclass/list.do?type=E" style="${type=='E'?'background-color: #CCCCCC; border-radius: 5px;':'' }">뷰티<span style="color:black;">(${Ecount })</span></a></li>
+							<li><a href="../donateclass/list.do?type=F" style="${type=='F'?'background-color: #CCCCCC; border-radius: 5px;':'' }">체험 및 기타<span style="color:black;">(${Fcount })</span></a></li>
 						</ul>
 					</div>
 					<!-- END sidebar-box -->
@@ -95,5 +95,25 @@
 					</div>
 
 				</div>
+				
+				
+						
+			<script>
+			let donateList=Vue.createApp({
+				data(){
+					return{
+						ss:''
+						
+						
+					}
+				},
+				methods:{
+					search(){
+						
+						location.href="../donateclass/list.do?type=A&ss="+this.ss
+					}
+				}
+			}).mount('#searchDc')
+			</script>
 </body>
 </html>

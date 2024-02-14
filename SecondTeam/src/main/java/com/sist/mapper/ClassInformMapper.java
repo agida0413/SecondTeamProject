@@ -21,7 +21,7 @@ public interface ClassInformMapper {
 			+"WHERE num BETWEEN #{start} and #{end}")
 	public List<DonClassVO> donateClassList(Map map);
 	
-	@Select("SELECT CEIL(COUNT(*)/10.0) FROM donate_class "
+	@Select("SELECT CEIL(COUNT(*)/5.0) FROM donate_class "
 			+"WHERE name LIKE'%'||#{ss}||'%' AND "
 			+"category LIKE'%'||#{category}||'%'")
 	public int donateClassTotalPage(Map map);

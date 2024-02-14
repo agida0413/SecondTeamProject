@@ -64,7 +64,7 @@
   		   <div class="row">
   		   	 <ul class="pagination" >
   			 		<c:if test="${startpage>1 }">
-				  <li class="page-item"><a href="../myAndAdpage/programHistory.do?page=${endpage+1 }&state=${state}" class="link page-link">&lt;</a></li>
+				  <li class="page-item"><a href="../myAndAdpage/programHistory.do?page=${startpage-1 }&state=${state}" class="link page-link">&lt;</a></li>
 				  </c:if>
 				   <c:forEach var="i" begin="${startpage }" end="${endpage }">
 				  <li class="page-item ${page == i ? 'active' : ''}" aria-current="${page == i ? 'page' : 'null'}">
@@ -73,7 +73,7 @@
 				  </li>
 				   </c:forEach>
 				 <c:if test="${endpage<totalpage }">
-				  <li  class="page-item"><a href="../myAndAdpage/programHistory.do?page=${startpage-1 }&state=${state}" class="link page-link">&gt;</a></li>
+				  <li  class="page-item"><a href="../myAndAdpage/programHistory.do?page=${endpage+1 }&state=${state}" class="link page-link">&gt;</a></li>
 				   </c:if>
 				   
 				   

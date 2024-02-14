@@ -39,4 +39,16 @@ public class SnsServiceImpl implements SnsService{
 		return dao.snsKeepDetailData(kano);
 	}
 
+	@Override
+	public void SnsInsert(SnsMyContentVO vo) {
+		// TODO Auto-generated method stub
+		dao.SnsInsert(vo);
+	}
+
+	@Override
+	public void SnsDelete(int sno) {
+		// TODO Auto-generated method stub
+		dao.SnsDelete(sno);
+	}
+
 }

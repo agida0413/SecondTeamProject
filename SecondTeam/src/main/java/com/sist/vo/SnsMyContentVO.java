@@ -9,8 +9,7 @@ import lombok.Data;
 
 @Data
 public class SnsMyContentVO {
-	private int sno,filecount;
-	private String userid,pic,username,regdate,filename,filesize,dbday,content;
-	//private Date regdate;
-	private List<MultipartFile> files;
+	private int sno;
+	private String userid,username,dbday,content;
+	private Date regdate;
 }

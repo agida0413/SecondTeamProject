@@ -15,5 +15,10 @@ public interface SnsService {
 	public List<SnsMyContentVO> snsMyContentList(String userid);
 	//sns id 목록중 4명 랜덤출력
 	public List<SnsIdVO> snsIdList();
+	
+	//sns insert
+	public void SnsInsert(SnsMyContentVO vo);
+	//sns delete
+	public void SnsDelete(int sno);
 
 }

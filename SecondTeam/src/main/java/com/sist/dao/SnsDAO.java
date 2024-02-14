@@ -26,16 +26,30 @@ public class SnsDAO {
 		return mapper.snsKeepDetailData(kano);
 	}
 	
+	//sns id 목록중 4명 랜덤출력
+	public List<SnsIdVO> snsIdList()
+	{
+		return mapper.snsIdList();
+	}
+	
+	//sns crud
 	//sns페이지 본인+팔로우 게시글 출력
 	public List<SnsMyContentVO> snsMyContentList(String userid)
 	{
 		return mapper.snsMyContentList(userid);
 	}
 	
-	//sns id 목록중 4명 랜덤출력
-	public List<SnsIdVO> snsIdList()
+	//insert
+	public void SnsInsert(SnsMyContentVO vo)
 	{
-		return mapper.snsIdList();
+		mapper.SnsInsert(vo);
 	}
+    //update
+	//delete
+	public void SnsDelete(int sno)
+	{
+		mapper.SnsDelete(sno);
+	}
+	
 	
 }

@@ -134,8 +134,21 @@ li{
    				 border-bottom: 1px solid #e6e6e6;">
    				 <span
    				 style="font-size: 18px; font-weight: 400;"
-   				 >My Feed</span>
+   				 >My Feed ({{count}})</span>
    	    </div>
+   	    
+   	     <!-- sns insert 부분 시작 -->
+               <div style="color: #000;
+   				 margin-bottom: 30px;
+   				 padding-bottom: 20px;
+   				 border-bottom: 1px solid #e6e6e6;" v-show="myId!=''">
+			       <textarea style="float: left; width: 80%; height: 100%;
+			       " v-model="content" ref="content"  @keyup.enter="snsInsert()"></textarea>
+			       <input type=button value="새글쓰기" style="float: right;height: 100%; background: #848d92;" 
+			       class="btn" @click="snsInsert()">
+			   </div>
+            <!-- sns insert 부분 종료 -->
+   	    
 		   <div class="blog-entry mycontent_list" v-for="(vo,index) in mycontent_list">
 
 				<div style="display: flex; justify-content: space-between;">
@@ -158,13 +171,13 @@ li{
 			
 			<h6 style="display: flex; justify-content: space-between;">
 			    <p style="margin-top: 10px; width: 500px;">{{vo.content}}</p>
-				<div>
+				<div v-if="vo.userid===myid">
 				<a href="#"
 				style="border: 2px solid #93a0a8; border-radius: 2px; display:inline-block;
 				color: #93a0a8; padding: 5px; font-size: 13px;"><i class="xi-pen"></i>&nbsp;글수정하기</a>&nbsp;
 				<a href="#"
 				style="border: 2px solid #93a0a8; border-radius: 2px; display:inline-block;
-				color: #93a0a8; padding: 5px; font-size: 13px;"><i class="xi-close-circle"></i>&nbsp;글삭제하기</a>
+				color: #93a0a8; padding: 5px; font-size: 13px;" @click="snsDelete(vo.sno)"><i class="xi-close-circle"></i>&nbsp;글삭제하기</a>
 				</div>
 			</h6>
 			<span>{{vo.regdate}}</span>
@@ -309,7 +322,10 @@ li{
 	  data(){
 		  return{
 			  mycontent_list:[],
-			  myid:'${id}'
+			  myid:'${id}',
+			  content:'',
+			  bCheck:true,
+			  count:0
 		  }
 	  },
 	  mounted(){
@@ -324,6 +340,34 @@ li{
 			  }).then(res=>{
 				  console.log(res.data)
 				  this.mycontent_list=res.data
+				  this.count=res.data.length
+			  })
+		  },
+		  // 삭제 
+		  snsDelete(sno){
+			  axios.get("../sns/delete_vue.do",{
+				  params:{
+					  sno:sno
+				  }
+			  }).then(response=>{
+				  this.mycontent_list=response.data
+			  })
+		  },
+		// 추가
+		  snsInsert(){
+			  if(this.content==="")
+			  {
+				  this.$refs.content.focus()
+				  return
+			  }
+			  
+			  axios.get('../sns/insert_vue.do',{
+				  params:{
+					  content:this.content
+				  }
+			  }).then(response=>{
+				  this.mycontent_list=response.data
+				  this.content=""
 			  })
 		  }
 	  }

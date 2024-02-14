@@ -71,5 +71,33 @@ public class SnsRestController {
 		return json;
 	}
 	
+	//sns crud
+	//sns insert
+	@GetMapping(value = "insert_vue.do", produces = "text/plain;charset=UTF-8")
+	public String sns_insert_vue(String content, HttpSession session) throws Exception
+	{
+		String userid=(String)session.getAttribute("id");
+		String username=(String)session.getAttribute("name");
+		SnsMyContentVO vo=new SnsMyContentVO();
+		vo.setUserid(userid);
+		vo.setUsername(username);
+		vo.setContent(content);
+		service.SnsInsert(vo);
+		List<SnsMyContentVO> list=service.snsMyContentList(userid);
+		ObjectMapper mapper=new ObjectMapper();
+		String json=mapper.writeValueAsString(list);
+		return json;
+	}
+	//sns delete
+	@GetMapping(value = "delete_vue.do", produces = "text/plain;charset=UTF-8")
+	public String sns_delete_vue(int sno, HttpSession session) throws Exception
+	{
+		service.SnsDelete(sno);
+		String userid=(String)session.getAttribute("id");
+		List<SnsMyContentVO> list=service.snsMyContentList(userid);
+		ObjectMapper mapper=new ObjectMapper();
+		String json=mapper.writeValueAsString(list);
+		return json;
+	}
 	
 }

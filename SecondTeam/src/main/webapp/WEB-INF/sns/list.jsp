@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!-- 수정버튼 -->
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <!-- 다이얼로그 -->
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
@@ -141,7 +143,7 @@ li{
                <div style="color: #000;
    				 margin-bottom: 30px;
    				 padding-bottom: 20px;
-   				 border-bottom: 1px solid #e6e6e6;" v-show="myId!=''">
+   				 border-bottom: 1px solid #e6e6e6;" v-show="myid!=''">
 			       <textarea style="float: left; width: 80%; height: 100%;
 			       " v-model="content" ref="content"  @keyup.enter="snsInsert()"></textarea>
 			       <input type=button value="새글쓰기" style="float: right;height: 100%; background: #848d92;" 
@@ -172,7 +174,7 @@ li{
 			<h6 style="display: flex; justify-content: space-between;">
 			    <p style="margin-top: 10px; width: 500px;">{{vo.content}}</p>
 				<div v-if="vo.userid===myid">
-				<a href="#"
+				<a href="#" :id="'up'+vo.sno" @click="snsUpdateForm(vo.sno)" class="updates"
 				style="border: 2px solid #93a0a8; border-radius: 2px; display:inline-block;
 				color: #93a0a8; padding: 5px; font-size: 13px;"><i class="xi-pen"></i>&nbsp;글수정하기</a>&nbsp;
 				<a href="#"
@@ -181,6 +183,12 @@ li{
 				</div>
 			</h6>
 			<span>{{vo.regdate}}</span>
+			 <div :id="'u'+vo.sno" class="ups" style="margin: 20px 0; display: none;">
+			        <textarea style="float: left; width: 80%; height: 100%;" :id="'content'+vo.sno">{{vo.content}}</textarea>
+			        <input type=button value="글 수정" style="float: right;height: 100%; background: #848d92;" 
+			        class="btn" @click="snsUpdate(vo.sno)">
+             </div>
+			
 			
 		</div><!-- blog-entry -->
 		</div>
@@ -343,16 +351,56 @@ li{
 				  this.count=res.data.length
 			  })
 		  },
+		  //수정
+		  snsUpdateForm(sno){
+			   $('.ups').hide();
+				 $('.updates').attr("value","수정")
+				 if(this.bCheck===true)
+				 {
+					$('#u'+sno).show();
+					$('#up'+sno).attr("value","취소")
+					this.bCheck=false
+				 }
+				 else
+				 {
+					 $('#u'+sno).hide();
+					 $('#up'+sno).text("수정")
+					 this.bCheck=true
+				 }
+				  
+			  },
+			  snsUpdate(sno){
+					let content=$('#content'+sno).val();
+					axios.get('../sns/update_vue.do',{
+						params:{
+							sno:sno,
+							content:content
+						}
+					}).then(response=>{
+						// 상태 관리 => 데이터 변경 
+						this.mycontent_list=response.data
+						$('#u'+sno).hide()
+						$('#up'+sno).attr("value","수정")
+						// 페이지 새로고침
+				        window.location.reload();
+					})
+				  },
 		  // 삭제 
-		  snsDelete(sno){
-			  axios.get("../sns/delete_vue.do",{
-				  params:{
-					  sno:sno
-				  }
-			  }).then(response=>{
-				  this.mycontent_list=response.data
-			  })
-		  },
+		 snsDelete(sno) {
+    // 확인 대화상자 띄우기
+    if (confirm("정말로 삭제하시겠습니까?")) {
+        axios.get("../sns/delete_vue.do", {
+            params: {
+                sno: sno
+            }
+        }).then(response => {
+            this.mycontent_list = response.data;
+        });
+    } else {
+        // 사용자가 No를 선택한 경우
+        console.log("삭제 취소");
+    }
+},
 		// 추가
 		  snsInsert(){
 			  if(this.content==="")

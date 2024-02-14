@@ -5,7 +5,9 @@ import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
+import com.sist.vo.MoimReplyVO;
 import com.sist.vo.SnsIdVO;
 import com.sist.vo.SnsKeepVO;
 import com.sist.vo.SnsMyContentVO;
@@ -53,5 +55,14 @@ public interface SnsMapper {
 	//sns delete
 	@Delete("DELETE FROM sns_page WHERE sno=#{sno}")
 	public void SnsDelete(int sno);
+	
+	//sns update
+	@Update("UPDATE sns_page SET content=#{content} WHERE sno=#{sno} ")
+	public void SnsUpdate(SnsMyContentVO vo);
+	//update sno ÇÏ³ª ´õ ¸¸µë
+		@Select("SELECT sno, userid, username, content,TO_CHAR(regdate,'YYYY-MM-DD')as dbday "
+				+ "FROM sns_page WHERE sno=#{sno} "
+				+ "ORDER BY sno DESC")
+		public List<SnsMyContentVO> snsMyContentList2(int sno);
 
 }

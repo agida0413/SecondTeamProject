@@ -45,6 +45,14 @@ public class SnsDAO {
 		mapper.SnsInsert(vo);
 	}
     //update
+	public void SnsUpdate(SnsMyContentVO vo)
+	{
+		mapper.SnsUpdate(vo);
+	}
+	public List<SnsMyContentVO> snsMyContentList2(int sno)
+	{
+		return mapper.snsMyContentList2(sno);
+	}
 	//delete
 	public void SnsDelete(int sno)
 	{

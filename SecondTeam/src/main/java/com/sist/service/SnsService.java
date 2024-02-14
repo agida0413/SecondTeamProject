@@ -20,5 +20,9 @@ public interface SnsService {
 	public void SnsInsert(SnsMyContentVO vo);
 	//sns delete
 	public void SnsDelete(int sno);
+	//sns update
+	public void SnsUpdate(SnsMyContentVO vo);
+	//update용으로 하나 더 만듬
+	public List<SnsMyContentVO> snsMyContentList2(int sno);
 
 }

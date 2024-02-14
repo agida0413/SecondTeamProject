@@ -99,5 +99,23 @@ public class SnsRestController {
 		String json=mapper.writeValueAsString(list);
 		return json;
 	}
-	
+	//sns update
+//	@GetMapping(value = "update_vue.do", produces = "text/plain;charset=UTF-8")
+//	public String sns_update_vue(SnsMyContentVO vo) throws Exception
+//	{
+//		service.SnsUpdate(vo);
+//		List<SnsMyContentVO> list=service.snsMyContentList(String.valueOf(vo.getSno()));
+//		ObjectMapper mapper=new ObjectMapper();
+//		String json=mapper.writeValueAsString(list);
+//		return json;
+//	}
+	@GetMapping(value = "update_vue.do", produces = "text/plain;charset=UTF-8")
+	public String sns_update_vue(SnsMyContentVO vo) throws Exception
+	{
+		service.SnsUpdate(vo);
+		List<SnsMyContentVO> list=service.snsMyContentList2(vo.getSno());
+		ObjectMapper mapper=new ObjectMapper();
+		String json=mapper.writeValueAsString(list);
+		return json;
+	}
 }

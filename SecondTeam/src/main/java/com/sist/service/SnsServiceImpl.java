@@ -51,4 +51,16 @@ public class SnsServiceImpl implements SnsService{
 		dao.SnsDelete(sno);
 	}
 
+	@Override
+	public void SnsUpdate(SnsMyContentVO vo) {
+		// TODO Auto-generated method stub
+		dao.SnsUpdate(vo);
+	}
+
+	@Override
+	public List<SnsMyContentVO> snsMyContentList2(int sno) {
+		// TODO Auto-generated method stub
+		return dao.snsMyContentList2(sno);
+	}
+
 }

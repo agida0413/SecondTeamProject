@@ -11,4 +11,6 @@ public interface DonateClassService {
 	public List<DonClassVO> donateClassList(Map map);
 	public int donateClassTotalPage(Map map);
 	public int donateClassCategoryCount(String category);
+	//쿠키
+	public DonClassVO cookieList(int dcno);
 }

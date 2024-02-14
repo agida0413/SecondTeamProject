@@ -55,12 +55,12 @@
 				<div class="col-lg-8" id="donateClassList">
 					<c:forEach var="vo" items="${list }">
 					<div class="blog-entry d-flex blog-entry-search-item">
-						<a href="single.html" class="img-link me-4">
+						<a href="../donateclass/detail_cookie.do?dcno=${vo.dcno }" class="img-link me-4">
 							<img src="${vo.image }" alt="Image" class="img-fluid">
 						</a>
 						<div >
-							<span class="date" style="margin-left:5px;">${vo.address }&bullet; ${vo.category } | &nbsp;<a href="#">${vo.id }</a></span>
-							<h2 style="margin-left:5px; margin-top:5px;" class="overff"><a href="single.html">${vo.name }</a></h2>
+							<span class="date" style="margin-left:5px;">${vo.address }&bullet; ${vo.category } | &nbsp;${vo.id }</span>
+							<h2 style="margin-left:5px; margin-top:5px;" class="overff"><a href="../donateclass/detail_cookie.do?dcno=${vo.dcno }">${vo.name }</a></h2>
 									<div class="rating" style="margin-left:5px;"> 
 									    <span class="star">⭐️</span>	
 									    <span class="star">⭐️</span>	

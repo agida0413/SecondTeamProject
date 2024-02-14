@@ -29,4 +29,12 @@ public interface ClassInformMapper {
 	@Select("SELECT COUNT(*) FROM donate_class "
 			+"WHERE category LIKE'%'||#{category}||'%'")
 	public int donateClassCategoryCount(String category);
+	
+	
+	
+	//쿠키정보 
+	@Select("SELECT dcno,name,id,cls_level,time,full_num,image,address,category,wing,score "
+			+"FROM donate_class "
+			+"WHERE dcno=#{dcno}")
+	public DonClassVO cookieList(int dcno);
 }

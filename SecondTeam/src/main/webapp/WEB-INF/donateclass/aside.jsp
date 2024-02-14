@@ -1,8 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+.fixedImg img {
+        width: 300px;
+                height: 100px;
+        
+    }
+    .overffcookie {
+    white-space: nowrap; /* 텍스트가 한 줄을 넘어가지 않도록 설정합니다 */
+    overflow: hidden; /* 넘치는 텍스트를 숨깁니다 */
+    text-overflow: ellipsis; /* 넘치는 텍스트를 "..."으로 대체합니다 */
+    width: 220px; /* 텍스트 컨테이너의 너비를 설정하세요 */
+}
+</style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -13,7 +27,7 @@
 						
 							
 							<div style="position: relative;">
-					<input type="text" class="form-control" placeholder="${ss==''?'검색어 입력':ss }" v-model="ss"
+					<input type="text" class="form-control" placeholder="${ss==''||ss==null?'검색어 입력':ss }" v-model="ss"
 					@keyup.enter="search()"	
 						style="background-color: black;"> <span class="bi bi-search" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);" @click="search()"></span>
 							</div>
@@ -39,39 +53,30 @@
 						<h3 class="heading">최근본 원 데이 클래스</h3>
 						<div class="post-entry-sidebar">
 							<ul>
+							<c:forEach var="vo" items="${clist }">
 								<li>
-									<a href="">
-										<img src="images/img_1_sq.jpg" alt="Image placeholder" class="me-4 rounded">
+									<a href="" class="fixedImg">
+										<img  src="${vo.image }" alt="Image placeholder" class="me-4 rounded">
+										
 										<div class="text">
-											<h4>There’s a Cool New Way for Men to Wear Socks and Sandals</h4>
-											<div class="post-meta">
-												<span class="mr-2">March 15, 2018 </span>
-											</div>
+										
+											<h4 class="overffcookie">${vo.name }</h4>
+												<div class="rating"> 
+									    <span class="star">⭐️</span>	
+									    <span class="star">⭐️</span>	
+									    <span class="star">⭐️</span>	
+									    <span class="star">⭐️</span>	
+									    <span class="half-star">⭐️</span>
+									
+									</div>
+									<div><span  style="font-weight:bold; font-size:25px; color:black;">${vo.wing }&nbsp;<img src="../Projectimages/wing3.png" style="width:30px;height:30px; display:inline;" ></span></div>
+										
+											
 										</div>
 									</a>
 								</li>
-								<li>
-									<a href="">
-										<img src="images/img_2_sq.jpg" alt="Image placeholder" class="me-4 rounded">
-										<div class="text">
-											<h4>There’s a Cool New Way for Men to Wear Socks and Sandals</h4>
-											<div class="post-meta">
-												<span class="mr-2">March 15, 2018 </span>
-											</div>
-										</div>
-									</a>
-								</li>
-								<li>
-									<a href="">
-										<img src="images/img_3_sq.jpg" alt="Image placeholder" class="me-4 rounded">
-										<div class="text">
-											<h4>There’s a Cool New Way for Men to Wear Socks and Sandals</h4>
-											<div class="post-meta">
-												<span class="mr-2">March 15, 2018 </span>
-											</div>
-										</div>
-									</a>
-								</li>
+								</c:forEach>
+							
 							</ul>
 						</div>
 					</div>

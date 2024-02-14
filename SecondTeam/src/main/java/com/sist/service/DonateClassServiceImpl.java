@@ -33,6 +33,12 @@ public int donateClassCategoryCount(String category) {
 	// TODO Auto-generated method stub
 	return cIdao.donateClassCategoryCount(category);
 }
+
+@Override
+public DonClassVO cookieList(int dcno) {
+	// TODO Auto-generated method stub
+	return cIdao.cookieList(dcno);
+}
 	
 
 }

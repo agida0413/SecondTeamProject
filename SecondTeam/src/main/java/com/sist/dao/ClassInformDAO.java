@@ -26,4 +26,9 @@ private ClassInformMapper mapper;
 	public int donateClassCategoryCount(String category) {
 		return mapper.donateClassCategoryCount(category);
 	}
+	
+	//쿠키
+	public DonClassVO cookieList(int dcno){
+	return mapper.cookieList(dcno);	
+	}
 }

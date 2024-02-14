@@ -1,14 +1,22 @@
 package com.sist.web;
 
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sist.commons.CommonsFunction;
 import com.sist.service.DonateClassService;
@@ -75,12 +83,7 @@ private CommonsFunction cf;
 		int startpage=cf.startPage(BLOCK, curpage);
 		int endpage=cf.endPage(BLOCK, curpage, totalpage);
 		
-		int Acount=service.donateClassCategoryCount("");
-		int Bcount=service.donateClassCategoryCount("공예");
-		int Ccount=service.donateClassCategoryCount("요리");
-		int Dcount=service.donateClassCategoryCount("미술");
-		int Ecount=service.donateClassCategoryCount("뷰티");
-		int Fcount=service.donateClassCategoryCount("체험 및 기타");
+	
 		
 		model.addAttribute("ss",ss);
 		model.addAttribute("page",curpage);
@@ -89,13 +92,34 @@ private CommonsFunction cf;
 		model.addAttribute("endpage",endpage);
 		model.addAttribute("totalpage",totalpage);
 		model.addAttribute("list",list);
-		model.addAttribute("Acount",Acount);
-		model.addAttribute("Bcount",Bcount);
-		model.addAttribute("Ccount",Ccount);
-		model.addAttribute("Dcount",Dcount);
-		model.addAttribute("Ecount",Ecount);
-		model.addAttribute("Fcount",Fcount);
+		
 		return "donateclass";
+	}
+	
+	//쿠키저장
+	@GetMapping("detail_cookie.do")
+	public String  dcDetail_cookie(int dcno,HttpServletResponse response,HttpSession session,RedirectAttributes rs) {
+		
+		
+		String id=(String)session.getAttribute("id");
+		//비로그인 예외처리 쿠키전송
+		if(id!=null) {
+			Cookie cookie=new Cookie(id+"_dcno_"+dcno,String.valueOf(dcno) );
+			 cookie.setPath("/");
+	         cookie.setMaxAge(60*60*24);
+	         response.addCookie(cookie);
+		}
+		rs.addAttribute("dcno",dcno);
+		return "redirect:../donateclass/detail.do";
+		
+	}
+	
+	@GetMapping("detail.do")
+	public String dcDetail(int dcno) {
+		
+		System.out.println(dcno);
+		return "donateclass/detail";
+		
 	}
 	
 	

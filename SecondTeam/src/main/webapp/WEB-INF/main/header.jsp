@@ -37,7 +37,7 @@
 
   
  											<li> <a href="../program/databoardList.do">자료실(양식다운)</a></li>
- 												<li><a href="#">통계정보</a></li>
+ 												<li><a href="../program/statistics.do">통계정보</a></li>
   
 											 <c:if test="${sessionScope.centername!=null }"><!--변경요망-->
 											 <li><a href="../program/accessCertify.do">봉사활동인증 승인</a></li>

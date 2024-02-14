@@ -16,7 +16,9 @@
   
   <a href="../program/databoardList.do"><li class="list-group-item ${cate == 'databoard' ? 'active' : ''}" style="padding:18px;">자료실(양식다운)</li></a>
  
-  <li class="list-group-item" style="padding:18px;">통계정보</li>
+   <a href="../program/statistics.do"><li class="list-group-item ${cate == 'statistics' ? 'active' : ''}" style="padding:18px;">통계정보</li></a>
+
+
  <c:if test="${sessionScope.centername!=null }"><!--변경요망-->
  <a href="../program/accessCertify.do"><li class="list-group-item ${cate == 'accessCertify' ? 'active' : ''}" style="padding:18px;">봉사활동인증 승인</li></a> 
     <a href="../program/applyList.do"><li class="list-group-item ${cate == 'applyList' ? 'active' : ''}"  style="padding:18px;">봉사신청 승인</li></a>

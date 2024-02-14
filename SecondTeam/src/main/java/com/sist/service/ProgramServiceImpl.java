@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 import com.sist.dao.OptionDAO;
 import com.sist.dao.ProgramDataboardDAO;
 import com.sist.dao.ProgramListDAO;
+import com.sist.dao.ProgramRcAverageDAO;
 import com.sist.dao.ProgramWishDAO;
 import com.sist.vo.OptionVO;
+import com.sist.vo.ProgramStatisticsVO;
 import com.sist.vo.ProgramVO;
 import com.sist.vo.VdataboardVO;
 import com.sist.vo.VprogramApplyVO;
@@ -27,6 +29,8 @@ public class ProgramServiceImpl implements ProgramService {
 	private ProgramDataboardDAO dbDAO;
 	@Autowired
 	private ProgramWishDAO zDao;
+	@Autowired
+	private ProgramRcAverageDAO rDao;
 
 	@Override
 	public List<OptionVO> stateOption() {
@@ -230,10 +234,14 @@ public class ProgramServiceImpl implements ProgramService {
 		return zDao.updateWishList(map);
 	}
 
-
 	
 	
 
+
+	
+	//통계정보
+
+	
 	
 
 

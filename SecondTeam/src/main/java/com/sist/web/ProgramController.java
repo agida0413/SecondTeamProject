@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sist.commons.CommonsFunction;
+import com.sist.manager.ProgramManager;
 import com.sist.service.MypageService;
 import com.sist.service.ProgramService;
 import com.sist.vo.OptionVO;
+import com.sist.vo.ProgramStatisticsVO;
 import com.sist.vo.ProgramVO;
 import com.sist.vo.VprogramApplyVO;
 import com.sist.vo.WishListVO;
@@ -34,6 +36,8 @@ public class ProgramController {
 	@Autowired
 	private CommonsFunction cf;
 	
+	@Autowired
+	private ProgramManager mgr;
 	@GetMapping("program/list.do")
 	public String programList(OptionVO vo,Model model) {
 		
@@ -160,6 +164,16 @@ public class ProgramController {
 	 		}
 	   
 	 
-		
+		//통계정보
+	   
+	   @GetMapping("program/statistics.do")
+	   public String statistics(Model model) {
+		   List<ProgramStatisticsVO> siList =mgr.siList();
+		   
+		   model.addAttribute("siList",siList);
+		   model.addAttribute("cate","statistics");
+		   return "program/statistics";
+	   }
+	   
 	
 }

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.sist.vo.OptionVO;
+import com.sist.vo.ProgramStatisticsVO;
 import com.sist.vo.ProgramVO;
 import com.sist.vo.VdataboardVO;
 import com.sist.vo.VprogramApplyVO;
@@ -68,7 +69,6 @@ public interface ProgramService {
 	public void insertWishList(Map map);
 	
 	public String updateWishList(Map map);
-	
 	
 	
 }

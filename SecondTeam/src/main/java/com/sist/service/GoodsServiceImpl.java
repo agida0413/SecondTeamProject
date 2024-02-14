@@ -44,4 +44,16 @@ public List<GoodsVO> goodsCateMinorList(String category) {
 	return gDao.goodsCateMinorList(category);
 }
 
+@Override
+public GoodsVO goodsDetailData(int gno) {
+	// TODO Auto-generated method stub
+	return gDao.goodsDetailData(gno);
+}
+
+@Override
+public List<GoodsVO> goodsDetailImg(int gno) {
+	// TODO Auto-generated method stub
+	return gDao.goodsDetailImg(gno);
+}
+
 }

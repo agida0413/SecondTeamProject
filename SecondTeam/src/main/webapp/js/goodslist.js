@@ -9,7 +9,8 @@ let goodsList=Vue.createApp({
 			endpage:0,
 			category:'전체',
 			ss:'',
-			cateminor_list: []
+			cateminor_list:[],
+			category_minor:''
 		}
 	},
 	mounted(){
@@ -86,13 +87,14 @@ let goodsList=Vue.createApp({
 	            this.listChange();
 	        }
 		},
-		listChange()  {
+		listChange() {
 		    if (this.category !== '전체') {
 		        axios.get("../goods/goods_category_list_vue.do", {
-		            params:{
+		            params: {
 		                page: this.curpage,
 		                category: this.category,
-		                ss:this.ss
+		                ss: this.ss,
+		                category_minor: this.category_minor
 		            },
 		            headers: {
 		                'Content-Type': 'application/json;charset=UTF-8'
@@ -105,7 +107,8 @@ let goodsList=Vue.createApp({
 		                params: {
 		                    page: this.curpage,
 		                    category: this.category,
-		                    ss:this.ss
+		                    ss: this.ss,
+		                    category_minor: this.category_minor
 		                }
 		            }).then(res => {
 		                this.curpage = res.data.curpage;
@@ -122,6 +125,7 @@ let goodsList=Vue.createApp({
 		        this.dataRecv();
 		    }
 		},
+		//카테고리 소분류 리스트 체인지
 		cateMinorChange() {
 		    if (this.category !== '전체') {
 		        axios.get("../goods/goods_cateminor_list_vue.do", {
@@ -141,6 +145,14 @@ let goodsList=Vue.createApp({
 		    } else {
 		        this.dataRecv();
 		    }
+		},
+		//상품 목록 체인지
+		selectCateMinor(category_minor){
+		    console.log("cateminor:"+this.category_minor)
+		    console.log(this.find_list)
+		    this.category=''
+		    this.category_minor=category_minor
+		    this.listChange()
 		},
 		 search(){
 				let sss=this.$refs.ss.value;

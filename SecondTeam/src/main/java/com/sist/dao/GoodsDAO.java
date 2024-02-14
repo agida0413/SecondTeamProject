@@ -28,4 +28,10 @@ public int goodsCategoryTotalpage(Map map){
 public List<GoodsVO> goodsCateMinorList(String category){
 	return mapper.goodsCateMinorList(category);
 }
+public GoodsVO goodsDetailData(int gno) {
+	return mapper.goodsDetailData(gno);
+}
+public List<GoodsVO> goodsDetailImg(int gno){
+	return mapper.goodsDetailImg(gno);
+}
 }

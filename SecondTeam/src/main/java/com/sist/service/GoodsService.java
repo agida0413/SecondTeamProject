@@ -11,4 +11,6 @@ public interface GoodsService {
 	public List<GoodsVO> goodsCategoryList(Map map);
 	public int goodsCategoryTotalpage(Map map);
 	public List<GoodsVO> goodsCateMinorList(String category);
+	public GoodsVO goodsDetailData(int gno);
+	public List<GoodsVO> goodsDetailImg(int gno);
 }

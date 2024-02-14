@@ -52,10 +52,13 @@
 						<div class="sidebar-box">
 						<h3 class="heading">최근본 원 데이 클래스</h3>
 						<div class="post-entry-sidebar">
+						<c:if test="${csize==0 }">
+						<span style="font-weight:bold;  font-size:25px;">최근 본 클래스가 없습니다.</span>
+						</c:if>
 							<ul>
 							<c:forEach var="vo" items="${clist }">
 								<li>
-									<a href="" class="fixedImg">
+									<a href="../donateclass/detail.do?dcno=${vo.dcno }" class="fixedImg">
 										<img  src="${vo.image }" alt="Image placeholder" class="me-4 rounded">
 										
 										<div class="text">

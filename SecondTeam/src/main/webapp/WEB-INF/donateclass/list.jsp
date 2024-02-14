@@ -82,7 +82,7 @@
 										</tr>
 										<tr style=" font-weight:bold;">
 											<td style="border:none;">수업인원</td>
-											<td style="border:none;">${vo.full_num }</td>
+											<td style="border:none;">${vo.full_num }&nbsp;명</td>
 										</tr>
 										<tr style=" font-weight:bold;">
 											<td style="border:none;">난이도</td>

@@ -47,7 +47,7 @@ public class DonateClassAOP {
 			request.setAttribute("Fcount",Fcount);
 			
 			HttpSession session=request.getSession();
-			String id=(String)session.getAttribute("id");
+			String mno=(String)session.getAttribute("mno");
 			
 			 Cookie[] cookies=request.getCookies();
 		  
@@ -56,7 +56,7 @@ public class DonateClassAOP {
 	               int  count =0;
 	               for(int i=cookies.length-1;i>=0;i--) {
 	                  
-	                  if (cookies[i].getName().startsWith(id+"_dcno_")) {
+	                  if (cookies[i].getName().startsWith(mno+"_dcno_")) {
 	                     String cvalue=cookies[i].getValue();
 	                     
 	                     int cpno=Integer.parseInt(cvalue);
@@ -78,6 +78,7 @@ public class DonateClassAOP {
 	               }
 			 
 			  request.setAttribute("clist", list);
+			  request.setAttribute("csize", list.size());
 		
 				   
 	   }

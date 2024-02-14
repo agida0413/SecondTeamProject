@@ -25,6 +25,7 @@ public class TemptLoginController {
 			session.setAttribute("admin", vo.getAdmin());
 			session.setAttribute("email", vo.getEmail());
 			session.setAttribute("phone", vo.getPhone());
+			session.setAttribute("mno", String.valueOf(vo.getMno()));
 			
 			
 		}

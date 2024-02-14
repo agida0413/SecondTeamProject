@@ -101,10 +101,11 @@ private CommonsFunction cf;
 	public String  dcDetail_cookie(int dcno,HttpServletResponse response,HttpSession session,RedirectAttributes rs) {
 		
 		
-		String id=(String)session.getAttribute("id");
+		String mno=(String)session.getAttribute("mno");
+		System.out.println(mno);
 		//비로그인 예외처리 쿠키전송
-		if(id!=null) {
-			Cookie cookie=new Cookie(id+"_dcno_"+dcno,String.valueOf(dcno) );
+		if(mno!=null) {
+			Cookie cookie=new Cookie(mno+"_dcno_"+dcno,String.valueOf(dcno) );
 			 cookie.setPath("/");
 	         cookie.setMaxAge(60*60*24);
 	         response.addCookie(cookie);

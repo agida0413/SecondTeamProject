@@ -118,6 +118,14 @@ text-overflow: ellipsis;
                       </div>
                     </div>
                 </li>
+                <li>
+				<a href="#"
+				style="border: 2px solid #93a0a8; border-radius: 2px; display:inline-block;
+				color: #93a0a8; padding: 10px 20px;"><i class="xi-calendar-add"></i>&nbsp;애약하기</a>&nbsp;&nbsp;
+				<a href="#"
+				style="border: 2px solid #93a0a8; border-radius: 2px; display:inline-block;
+				color: #93a0a8; padding: 10px 20px;"><i class="xi-credit-card"></i>&nbsp;결제하기</a>
+				</li>
               </ul>
             </div>
           </div>
@@ -135,21 +143,8 @@ text-overflow: ellipsis;
           <!-- END sidebar-box -->
 
           <div class="sidebar-box">
-            <h3 class="heading">아직 못정한 부분</h3>
-            <ul class="tags">
-              <li><a href="#">Travel</a></li>
-              <li><a href="#">Adventure</a></li>
-              <li><a href="#">Food</a></li>
-              <li><a href="#">Lifestyle</a></li>
-              <li><a href="#">Business</a></li>
-              <li><a href="#">Freelancing</a></li>
-              <li><a href="#">Travel</a></li>
-              <li><a href="#">Adventure</a></li>
-              <li><a href="#">Food</a></li>
-              <li><a href="#">Lifestyle</a></li>
-              <li><a href="#">Business</a></li>
-              <li><a href="#">Freelancing</a></li>
-            </ul>
+            <h3 class="heading">공간 상세 위치</h3>
+            <p>지도출력</p>
           </div>
         </div>
         <!-- END sidebar -->

@@ -37,7 +37,7 @@ cursor: pointer;
 		<div class="container" >
 		<div class="row mb-4">
 				<div class="col-sm-6">
-					<h2 class="posts-entry-title">공간대여리스트</h2>
+					<h3 class="heading">공간 대여 리스트</h3>
 				</div>
 				<div class="col-sm-6 text-sm-end">
                     <!-- ref:기본검색어 / v-model:input에 검색기능 연결 / @keyup.enter:엔터치면해당함수실행 -->
@@ -46,13 +46,14 @@ cursor: pointer;
                     &nbsp;<input type="button" class="btn-sm btn addr1button" value="주소검색" @click="find()">
                 </div>
 			</div>
+			<hr>
 			
 			<!-- 본문시작 -->
 			
 			<div class="row">
 			<div class="col-lg-4 mb-4" v-for="(vo,index) in moim_list">
 					<div class="post-entry-alt">
-						<a :href="'detail.do?rno='+vo.rno" class="img-link"
+						<a :href="'before_detail.do?rno='+vo.rno" class="img-link"
 						style="display: inline-block;
 						max-width: 370px; width:100%; height:100%; max-height: 225px; min-height: 225px;">
 						   <img :src="vo.img" :title="vo.loc" class="img-fluid" 
@@ -64,7 +65,7 @@ cursor: pointer;
 						    &nbsp;<span><i class="xi-desktop"></i> {{vo.pc}}</span>
 						    &nbsp;<span><i class="xi-print"></i> {{vo.printer}}</span>
 						    &nbsp;<span><i class="xi-microphone"></i> {{vo.mic}}</span><br>
-							<h2 class="title"><a :href="'detail.do?rno='+vo.rno">{{vo.loc}}</a></h2>
+							<h2 class="title"><a :href="'before_detail.do?rno='+vo.rno">{{vo.loc}}</a></h2>
 							<div class="post-meta align-items-center text-left clearfix">
 								<p class="title" style="font-weight: 600;">{{vo.time}}</p>
 								<p>{{vo.addr1}}</p>
@@ -79,8 +80,18 @@ cursor: pointer;
           		  <li v-if="endPage<totalpage" class="page-item"><a class="page-link" @click="next()">&raquo;</a></li>
 			    </ul>
 		     </div>
-		    </div> 
-		    
+		    </div>
+		    <!-- 쿠키부분 --> 
+		    <div>
+		    <h3 class="heading">최근 방문 게시글</h3>
+		    <hr>
+		    <span v-for="vo in cookie_list">
+		     <a :href="'../moim/detail.do?rno='+vo.rno">
+ 		      <img :src="vo.img" :title="vo.loc"
+		      style="border-radius: 10px; width: 100px; height: 100px;">
+		     </a>
+		    </span>
+		    </div>
 		</div><!-- .container -->
 </section>
 <script>
@@ -95,6 +106,7 @@ cursor: pointer;
  			 totalpage:0,
  			 startPage:0,
  			 endPage:0,
+ 			 cookie_list:[]
 		 }
 	 },
 	 mounted(){
@@ -124,6 +136,12 @@ cursor: pointer;
  				this.totalpage=response.data.totalpage
  				this.startPage=response.data.startPage
  				this.endPage=response.data.endPage
+ 			})
+ 			
+ 			//쿠키
+ 			axios.get('../moim/moim_cookie_vue.do').then(res=>{
+ 				console.log(res.data)
+ 				this.cookie_list=res.data
  			})
  		},
  		range(start,end){

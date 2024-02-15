@@ -212,11 +212,6 @@ text-overflow: ellipsis;
 			   rno:${rno}
 		   }
 	   },
-	   methods:{
-		   dataList(){
-			   location.href="../moim/list.do"
-		   }
-	   },
 	   mounted(){
 		   axios.get('../moim/detail_vue.do',{
 			   params:{
@@ -237,6 +232,9 @@ text-overflow: ellipsis;
 		   })
 	   },
 	   methods:{
+		   dataList(){
+			   location.href="../moim/list.do"
+		   },
 		   addScript(){
 		         const script=document.createElement("script") 
 		         

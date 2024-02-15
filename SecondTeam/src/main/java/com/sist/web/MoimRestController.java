@@ -1,9 +1,12 @@
 package com.sist.web;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -114,6 +117,34 @@ public class MoimRestController {
 	   {
 		   service.MoimReplyUpdate(vo);
 		   return commonsData(vo.getRno());
+	   }
+	   
+	   //list.jsp cookie
+	   @GetMapping(value = "moim_cookie_vue.do", produces = "text/plain;charset=UTF-8")
+	   public String moim_cookie(HttpServletRequest request) throws Exception
+	   {
+		   Cookie[] cookies=request.getCookies();
+		   List<MoimListVO> list=new ArrayList<MoimListVO>();
+		   int k=0;
+		   if(cookies!=null)
+		   {
+			   for(int i=cookies.length-1;i>=0;i--)
+			   {
+			       if(k<9)
+			       {
+			    	   if(cookies[i].getName().startsWith("moim_"))
+			    	   {
+			    		   String rno=cookies[i].getValue();
+			    		   MoimListVO vo=service.moimDetailData(Integer.parseInt(rno));
+			    		   list.add(vo);
+			    	   }
+			    	   k++;
+			       }
+			   }
+		   }
+		   ObjectMapper mapper=new ObjectMapper();
+		   String json=mapper.writeValueAsString(list);
+		   return json;
 	   }
 
 }

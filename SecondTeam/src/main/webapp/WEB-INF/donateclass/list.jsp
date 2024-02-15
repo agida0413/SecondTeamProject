@@ -5,31 +5,7 @@
 <html>
 <head>
 <style type="text/css">
- .star {
-        color: #ffd700;
-        margin-right: 5px;
-      }
-      
-       .half-star {
-  position: relative;
-  display: inline-block;
-  width: 12px; /* 별 크기에 따라 조절 */
-  overflow: hidden;
-}
-
-.half-star::before {
-  content: '⭐️'; /* 별 아이콘 */
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 50%; /* 반개 별을 나타내는 크기 조절 */
-  overflow: hidden;
-}
-.rating {
-        display: flex;
-        align-items: center;
-        
-      }
+ 
   
 .overff {
     white-space: nowrap; /* 텍스트가 한 줄을 넘어가지 않도록 설정합니다 */
@@ -54,7 +30,7 @@
 
 				<div class="col-lg-8" id="donateClassList">
 					<c:forEach var="vo" items="${list }">
-					<div class="blog-entry d-flex blog-entry-search-item">
+					<div class="blog-entry d-flex blog-entry-search-item" >
 						<a href="../donateclass/detail_cookie.do?dcno=${vo.dcno }" class="img-link me-4">
 							<img src="${vo.image }" alt="Image" class="img-fluid">
 						</a>

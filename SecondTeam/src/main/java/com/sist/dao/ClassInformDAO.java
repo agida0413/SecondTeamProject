@@ -31,4 +31,15 @@ private ClassInformMapper mapper;
 	public DonClassVO cookieList(int dcno){
 	return mapper.cookieList(dcno);	
 	}
+	
+	
+	//상세정보 관련
+	
+	public List<String> classSubimageList(int dcno){
+		return mapper.classSubimageList(dcno);
+	}
+	
+	public DonClassVO classDetailData(int dcno) {
+		return mapper.classDetailData(dcno);
+	}
 }

@@ -13,4 +13,8 @@ public interface DonateClassService {
 	public int donateClassCategoryCount(String category);
 	//쿠키
 	public DonClassVO cookieList(int dcno);
+	
+	//상새정보
+	public List<String> classSubimageList(int dcno);
+	public DonClassVO classDetailData(int dcno) ;
 }

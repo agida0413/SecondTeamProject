@@ -39,6 +39,20 @@ public DonClassVO cookieList(int dcno) {
 	// TODO Auto-generated method stub
 	return cIdao.cookieList(dcno);
 }
+
+
+//상세정보
+@Override
+public List<String> classSubimageList(int dcno) {
+	// TODO Auto-generated method stub
+	return cIdao.classSubimageList(dcno);
+}
+
+@Override
+public DonClassVO classDetailData(int dcno) {
+	// TODO Auto-generated method stub
+	return cIdao.classDetailData(dcno);
+}
 	
 
 }

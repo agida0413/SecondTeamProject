@@ -37,4 +37,18 @@ public interface ClassInformMapper {
 			+"FROM donate_class "
 			+"WHERE dcno=#{dcno}")
 	public DonClassVO cookieList(int dcno);
+	
+	
+	//상세정보
+	@Select("SELECT dcno,name,id,cls_level,time,full_num,image,address,category,wing,score,goal_price,now_price,TO_CHAR(create_date,'YYYY-MM-DD') as dbCreate_date,"
+			+"int_time,create_state "
+			+"FROM donate_class "
+			+"WHERE dcno=#{dcno}")
+	public DonClassVO classDetailData(int dcno);
+	
+	//서브 이미지 목록
+	@Select("SELECT subimage FROM donate_class_subimg "
+			+"WHERE dcno=#{dcno}")
+	public List<String> classSubimageList(int dcno);
+	
 }

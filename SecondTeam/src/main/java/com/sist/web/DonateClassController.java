@@ -116,9 +116,16 @@ private CommonsFunction cf;
 	}
 	
 	@GetMapping("detail.do")
-	public String dcDetail(int dcno) {
+	public String dcDetail(int dcno,Model model) {
+		DonClassVO vo = service.classDetailData(dcno);
+		List<String> subImgList= service.classSubimageList(dcno);
 		
-		System.out.println(dcno);
+		model.addAttribute("subImglist",subImgList);
+		model.addAttribute("vo",vo);
+		
+		
+		
+		
 		return "donateclass/detail";
 		
 	}

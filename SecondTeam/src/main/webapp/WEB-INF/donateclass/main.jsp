@@ -36,17 +36,24 @@
 	<link rel="stylesheet" href="css/flatpickr.min.css">
 	<link rel="stylesheet" href="../css/button.css">
 	<link rel="stylesheet" href="../css/Program.css">
+	<link rel="stylesheet" href="../css/star.css">
+	
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 <tiles:insertAttribute name="header"/>
-<div class="container" style="margin-top:50px;">
+<div class="container" style="">
 
    <div class="row">
-
+ 
 		<div class="section search-result-wrap">
+		
 			<div class="container">
+			<div class=""><span style="font-weight:bold; font-size:40px;">재능기부 원데이 클래스</span></div>
+
+            		<hr>
+            		<div style="height:20px;"></div>
 				<div class="row posts-entry">
 				<tiles:insertAttribute name="dcContent"/>
 				<tiles:insertAttribute name="dcAside"/>

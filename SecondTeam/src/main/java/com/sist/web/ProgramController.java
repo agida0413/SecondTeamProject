@@ -169,8 +169,11 @@ public class ProgramController {
 	   @GetMapping("program/statistics.do")
 	   public String statistics(Model model) {
 		   List<ProgramStatisticsVO> siList =mgr.siList();
-		   
+		   List<ProgramStatisticsVO> monthList=mgr.monthList();
+		   List<ProgramStatisticsVO> siCompleteList=mgr.siCompleteList();
 		   model.addAttribute("siList",siList);
+		   model.addAttribute("monthList",monthList);
+		   model.addAttribute("siCompleteList",siCompleteList);
 		   model.addAttribute("cate","statistics");
 		   return "program/statistics";
 	   }

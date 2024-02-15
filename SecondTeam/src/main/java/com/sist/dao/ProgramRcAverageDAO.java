@@ -2,6 +2,7 @@ package com.sist.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,10 +39,17 @@ public class ProgramRcAverageDAO {
 		
 	}
 	
+	
+	public int monthCount(Map map) {
+		return mapper.monthCount(map);
+	}
+	
 		
 		
 	
-		
+	public int siCompleteCount(ProgramStatisticsVO vo) {
+		return mapper.siCompleteCount(vo);
+	}
 		
 		
 	

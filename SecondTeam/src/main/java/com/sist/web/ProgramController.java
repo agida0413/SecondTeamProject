@@ -167,14 +167,52 @@ public class ProgramController {
 		//통계정보
 	   
 	   @GetMapping("program/statistics.do")
-	   public String statistics(Model model) {
+	   public String statistics(String type,Model model) {
 		   List<ProgramStatisticsVO> siList =mgr.siList();
 		   List<ProgramStatisticsVO> monthList=mgr.monthList();
 		   List<ProgramStatisticsVO> siCompleteList=mgr.siCompleteList();
+		   List<ProgramStatisticsVO> stateList=mgr.stateList();
+		   List<ProgramStatisticsVO> ageTypeList=mgr.ageTypeList();
+		   
+		   int sListTotal=0;
+		   int monthListTotal=0;
+		   int siCompleteListTotal=0;
+		   int stateTotal=0;
+		   int ageTypeTotal=0;
+		   
+		   for (ProgramStatisticsVO svo : siList) {
+			sListTotal+=svo.getCount();
+		   }
+		   for (ProgramStatisticsVO svo : monthList) {
+				monthListTotal+=svo.getCount();
+			   }
+		   for (ProgramStatisticsVO svo : siCompleteList) {
+				siCompleteListTotal+=svo.getCount();
+			   }
+		   
+		   for (ProgramStatisticsVO svo : stateList) {
+			   stateTotal+=svo.getCount();
+		   }
+		   
+		   for(ProgramStatisticsVO svo : ageTypeList) {
+			   ageTypeTotal+=svo.getCount();
+		   }
+		   
+		   
 		   model.addAttribute("siList",siList);
 		   model.addAttribute("monthList",monthList);
 		   model.addAttribute("siCompleteList",siCompleteList);
 		   model.addAttribute("cate","statistics");
+		   model.addAttribute("stateList",stateList);
+		   model.addAttribute("ageTypeList",ageTypeList);
+		   
+		   model.addAttribute("ageTypeTotal",ageTypeTotal);
+		   model.addAttribute("stateTotal",stateTotal);
+		   model.addAttribute("sListTotal",sListTotal);
+		   model.addAttribute("monthListTotal",monthListTotal);
+		   model.addAttribute("siCompleteListTotal",siCompleteListTotal);
+		   
+		   model.addAttribute("type",type);
 		   return "program/statistics";
 	   }
 	   

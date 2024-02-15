@@ -22,7 +22,7 @@ cursor:pointer;
   
   <a href="../program/databoardList.do"><li class="list-group-item ${cate == 'databoard' ? 'active' : ''}" style="padding:18px;">자료실(양식다운)</li></a>
  
-   <a href="../program/statistics.do"><li class="list-group-item ${cate == 'statistics' ? 'active' : ''}" style="padding:18px;">통계정보</li></a>
+   <a href="../program/statistics.do?type=A"><li class="list-group-item ${cate == 'statistics' ? 'active' : ''}" style="padding:18px;">통계정보</li></a>
 
 
 

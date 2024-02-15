@@ -23,17 +23,22 @@ public class ProgramRcAverageDAO {
 	public List<ProgramStatisticsVO> siList(){
 		List<ProgramStatisticsVO> list=mapper.siList();
 		List<ProgramStatisticsVO> returnList=new ArrayList<ProgramStatisticsVO>();
+		
 		for (ProgramStatisticsVO vo : list) {
 			ProgramStatisticsVO returnVo=new ProgramStatisticsVO();
 			
 			int count=mapper.siCount(vo);
 			
+			
+			
 			returnVo.setSi(vo.getSi());
 			returnVo.setCount(count);
+			
 			
 			returnList.add(returnVo);
 			
 		}
+		
 		
 		return returnList;
 		
@@ -50,7 +55,13 @@ public class ProgramRcAverageDAO {
 	public int siCompleteCount(ProgramStatisticsVO vo) {
 		return mapper.siCompleteCount(vo);
 	}
+	
+	public int stateCount(String state) {
+		return mapper.stateCount(state);
+	}
 		
-		
+	public int ageTypeCount(int start,int end) {
+		return mapper.ageTypeCount(start, end);
+	}
 	
 }

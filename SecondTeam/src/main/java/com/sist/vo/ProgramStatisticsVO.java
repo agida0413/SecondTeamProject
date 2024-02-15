@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class ProgramStatisticsVO {
 
-	private String si,month;
-	private int count;
+	private String si,month,state,ageType;
+	private int count,total;
 	
 }

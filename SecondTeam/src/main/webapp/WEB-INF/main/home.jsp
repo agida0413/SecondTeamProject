@@ -270,7 +270,7 @@ cursor: pointer;
 		<div class="container">
 			<div class="row mb-4">
 				<div class="col-sm-6">
-					<h2 class="posts-entry-title">유나</h2>
+					<h2 class="posts-entry-title">공간대여 리스트</h2>
 				</div>
 				<div class="col-sm-6 text-sm-end"><a href="../moim/list.do" class="read-more">View All</a></div>
 			</div>
@@ -286,7 +286,6 @@ cursor: pointer;
 								<span class="date">${mvo.time }</span>
 								<h2><a href="single.html">${mvo.loc }</a><span class="date" style="font-size: 19px; font-weight: 650;">${mvo.type }</span></h2>
 								<p>${mvo.content }</p>
-								<p><a href="single.html" class="btn btn-sm btn-outline-primary">더보기</a></p>
 							</div>
 						</div>
 					  </c:forEach>

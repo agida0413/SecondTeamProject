@@ -185,7 +185,7 @@ li{
 				color: #93a0a8; padding: 5px; font-size: 13px;" @click="snsDelete(vo.sno)"><i class="xi-close-circle"></i>&nbsp;글삭제하기</a>
 				</div>
 			</h6>
-			<span>{{vo.regdate}}</span>
+			<span>{{vo.dbday}}</span>
 			 <div :id="'u'+vo.sno" class="ups" style="margin: 20px 0; display: none;">
 			        <textarea style="float: left; width: 80%; height: 100%;" :id="'content'+vo.sno">{{vo.content}}</textarea>
 			        <input type=button value="글 수정" style="float: right;height: 100%; background: #848d92;" 

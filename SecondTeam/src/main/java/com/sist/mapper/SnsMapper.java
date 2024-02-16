@@ -37,7 +37,7 @@ public interface SnsMapper {
 	
 	//sns crud
 	//sns페이지 본인+팔로우 게시글 출력
-		@Select("SELECT sno, userid, username, regdate, content "
+		@Select("SELECT sno, userid, username, TO_CHAR(regdate,'YYYY-MM-DD') as dbday, content "
 				+ "FROM SNS_PAGE "
 				+ "WHERE userid = #{userid} "
 				+ "OR userid IN ( "
@@ -64,5 +64,7 @@ public interface SnsMapper {
 				+ "FROM sns_page WHERE sno=#{sno} "
 				+ "ORDER BY sno DESC")
 		public List<SnsMyContentVO> snsMyContentList2(int sno);
+	
+	
 
 }

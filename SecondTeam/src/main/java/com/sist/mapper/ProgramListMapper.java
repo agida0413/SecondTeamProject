@@ -286,4 +286,34 @@ public interface ProgramListMapper {
 				+"WHERE vano=#{vano}")
 		public void updateProgramAfterState(Map map);
 
+		
+		
+		//센터의등록된 프로그램 
+		@Select("SELECT getwing,vno,active_Type,major_field,minor_field,title,"
+				+ "TO_CHAR(collect_start,'YYYY.MM.DD') as dbCollect_start,"
+				+ "TO_CHAR(collect_end,'YYYY.MM.DD') as dbCollect_end,"
+				+ "TO_CHAR(v_start,'YYYY.MM.DD') as dbV_start,"
+				+ "TO_CHAR(v_end,'YYYY.MM.DD') as dbV_end,"
+				+ "runtime,si,gu,centername,collect_state,num "
+				+ "FROM (SELECT getwing,vno,active_type,major_field,minor_field,title,collect_start,collect_end,v_start,v_end,runtime,si,gu,centername,collect_state,rownum as num "
+				+ "FROM (SELECT /*+INDEX_DESC(v_program vno_pk)*/getwing,vno,active_type,major_field,minor_field,title,collect_start,collect_end,v_start,v_end,runtime,si,gu,centername,collect_state "
+				+ "FROM v_program "
+				+"WHERE centername =#{centername}))"
+				+"WHERE num BETWEEN #{start} AND #{end}")
+		public List<ProgramVO> centerProgramList(Map map);
+		
+		
+		//센터 등록된 프로그램 토탈페이지 
+		@Select("SELECT CEIL(COUNT(*)/10.0) FROM v_program "
+				+"WHERE centername=#{centername}")
+		public int centerProgramTotalPage(String centername);
+		
+		
+		//센터 프로그램 인서트 
+		@Insert("INSERT INTO V_PROGRAM VALUES("
+				+"V_PROGRAM_SEQ.nextval,#{title},#{major_field},#{minor_field},#{collect_start},#{collect_end},#{v_start},#{v_end},"
+				+ "#{runtime},#{rundate},#{int_runtime},#{collect_num},#{apply_num},#{volunteer_type},#{centername},#{si},#{gu},"
+				+ "#{address},#{target},#{active_type},#{hit},#{stack_apply},#{collect_state},#{getwing})"
+				)
+		public void insertCenterProgram(ProgramVO vo);
 }

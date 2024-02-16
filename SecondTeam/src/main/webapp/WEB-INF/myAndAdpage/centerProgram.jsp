@@ -26,17 +26,12 @@
 <title>Insert title here</title>
 </head>
 <body>
- <div class=""><span style="font-weight:bold; font-size:30px; color:black;">봉사프로그램 관심 목록</span></div>
- 
- <c:if test="${size==0 }">
- 	<hr>
-  			<div><h3>관심 프로그램이 존재하지 않습니다.</h3></div>
-  			</c:if>
+ <div class=""><span style="font-weight:bold; font-size:30px; color:black;">센터's 프로그램</span></div>
   
 <div class="container">
 
 		<div class="row">
-		
+	
   			
   			
   			
@@ -97,16 +92,16 @@
   		 <div class="row">
   		   	 <ul class="pagination" >
   			 		<c:if test="${startpage>1 }">
-				  <li class="page-item"><a href="../myAndAdpage/programwishList.do?page=${startpage-1 }" class="link page-link">&lt;</a></li>
+				  <li class="page-item"><a href="../myAndAdpage/centerProgram.do?page=${startpage-1 }" class="link page-link">&lt;</a></li>
 				  </c:if>
 				   <c:forEach var="i" begin="${startpage }" end="${endpage }">
 				  <li class="page-item ${page == i ? 'active' : ''}" aria-current="${page == i ? 'page' : 'null'}">
 				 
-				  <a class="link page-link" href="../myAndAdpage/programwishList.do?page=${i }">${i }</a> 
+				  <a class="link page-link" href="../myAndAdpage/centerProgram.do?page=${i }">${i }</a> 
 				  </li>
 				   </c:forEach>
 				 <c:if test="${endpage<totalpage }">
-				  <li  class="page-item"><a href="../myAndAdpage/programwishList.do?page=${endpage+1 }" class="link page-link">&gt;</a></li>
+				  <li  class="page-item"><a href="../myAndAdpage/centerProgram.do?page=${endpage+1 }" class="link page-link">&gt;</a></li>
 				   </c:if>
 				   
 				   

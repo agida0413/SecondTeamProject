@@ -208,6 +208,7 @@ private ProgramService pService;
 		model.addAttribute("endpage",endpage);
 		model.addAttribute("page",curpage);
 		model.addAttribute("cate","wishlist");
+		model.addAttribute("size",list.size());
 		return "myAndAdpage/programwishList";
 	}
 	
@@ -242,5 +243,44 @@ private ProgramService pService;
 		return "program/detail";
 	}
 	
+	@RequestMapping("myAndAdpage/centerProgram.do")
+	public String centerProgram(HttpSession session,String page, Model model) {
+		
+		if(page==null) {
+			page="1";
+		}
+		int curpage=Integer.parseInt(page);
+		String centername=(String)session.getAttribute("centername");
+		
+		
+		Map map=new HashMap();
+		map.put("centername", centername);
+		
+		
+		int totalpage=service.centerProgramTotalPage(centername);
+		
+		int rowsize=10;
+		int start=cf.start(rowsize, curpage);
+		int end=cf.end(rowsize, curpage);
+		
+		final int BLOCK=10;
+		int startpage=cf.startPage(BLOCK,curpage);
+		int endpage=cf.endPage(BLOCK, curpage, totalpage);
+		
+		map.put("start", start);
+		map.put("end", end);
+		
+		
+		List<ProgramVO>list=service.centerProgramList(map);
+		
+		
+		model.addAttribute("list",list);
+		model.addAttribute("startpage",startpage);
+		model.addAttribute("endpage",endpage);
+		model.addAttribute("page",curpage);
+		model.addAttribute("cate","centerProgram");
+		return "myAndAdpage/centerProgram";
+	}
 	
+
 }

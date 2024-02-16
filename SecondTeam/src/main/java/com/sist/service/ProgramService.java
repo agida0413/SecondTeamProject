@@ -71,4 +71,7 @@ public interface ProgramService {
 	public String updateWishList(Map map);
 	
 	
+	//센터프로그램 인서트
+	public void insertCenterProgram(ProgramVO vo);
+	
 }

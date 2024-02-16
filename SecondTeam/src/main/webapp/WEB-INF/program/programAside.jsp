@@ -28,7 +28,7 @@ cursor:pointer;
 
  <li class="list-group-item focusLink ${cate == 'accessCertify' ? 'active' : ''}" style="padding:18px;" @click="moveCertify()">봉사활동인증 승인</li>
    <li class="list-group-item focusLink ${cate == 'applyList' ? 'active' : ''}"  style="padding:18px;" @click="moveApplyList()">봉사신청 승인</li>
-  
+  <li class="list-group-item focusLink ${cate == 'newProgram' ? 'active' : ''}"  style="padding:18px;" @click="moveNewProgram()">새로운 프로그램 등록</li>
   
  
 </ul>
@@ -68,7 +68,16 @@ let programAside=Vue.createApp({
 			}else{
 				location.href="../program/applyList.do"
 			}
+		},
+		moveNewProgram(){
+			if(this.centername==='' ){
+				alert('센터회원만 접근 가능합니다.')
+				return;
+			}else{
+				location.href="../program/newprogram.do"
+			}
 		}
+		
 	}
 }).mount('#programAside')
 

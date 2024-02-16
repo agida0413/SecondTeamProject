@@ -235,11 +235,19 @@ public class ProgramServiceImpl implements ProgramService {
 	}
 
 	
+	//센터 프로그램 인서트
+	@Override
+	public void insertCenterProgram(ProgramVO vo) {
+		// TODO Auto-generated method stub
+		pDao.insertCenterProgram(vo);
+	}
+
+	
 	
 
 
 	
-	//통계정보
+	
 
 	
 	

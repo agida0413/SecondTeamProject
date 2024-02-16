@@ -524,5 +524,35 @@ private CommonsFunction cf;
 		   return send;
 		   
 	   }
+	   
+	   
+	   
+	   //새프로그램
+	   @PostMapping(value="program/newprogramForm.do",produces = "text/plain;charset=UTF-8")
+		  public String insertNewProgram(ProgramVO vo,HttpSession session) {
+			
+			  
+			 String result="";
+			  vo.setInt_runtime(0);
+			  vo.setApply_num(0);
+			  vo.setHit(0);
+			  vo.setStack_apply(0);
+			  vo.setStack_apply(0);
+			  vo.setCollect_state("모집중");
+			  String centername=(String)session.getAttribute("centername");
+			  vo.setCentername(centername);
+			  
+			  try {
+				  service.insertCenterProgram(vo);
+				  result="OK";
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+				  result="NO";
+			}
+			
+			  
+			  return result;
+		  }
 
 }

@@ -176,7 +176,17 @@ public class ProgramListDAO {
 			mapper.updateCertifyUpload(vo);
 		}
 		
+		//센터 프로그램 정보
+		public List<ProgramVO> centerProgramList(Map map){
+			return mapper.centerProgramList(map);
+		}
 		
-		
-		
+		public int centerProgramTotalPage(String centername) {
+			return mapper.centerProgramTotalPage(centername);
+		}
+
+		//센터프로그램 등록
+		public void insertCenterProgram(ProgramVO vo) {
+			 mapper.insertCenterProgram(vo);
+		}
 }

@@ -43,6 +43,7 @@ public class MypageServiceImpl implements MypageService {
 		pDao.updateCertifyUpload(vo);
 	}
 	
+	
 	//프로그램 찜목록
 	@Override
 	public List<ProgramVO> wishList(Map map) {
@@ -53,6 +54,18 @@ public class MypageServiceImpl implements MypageService {
 	public int wishListTotalPage(Map map) {
 		// TODO Auto-generated method stub
 		return zDAo.wishListTotalPage(map);
+	}
+	
+	//센터 프로그램 정보
+	@Override
+	public List<ProgramVO> centerProgramList(Map map) {
+		// TODO Auto-generated method stub
+		return pDao.centerProgramList(map);
+	}
+	@Override
+	public int centerProgramTotalPage(String centername) {
+		// TODO Auto-generated method stub
+		return pDao.centerProgramTotalPage(centername);
 	}
 
 }

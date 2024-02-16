@@ -15,4 +15,8 @@ public interface MypageService {
 	//프로그램 위시리스트
 	public List<ProgramVO> wishList(Map map);
 	public int wishListTotalPage(Map map);
+
+	//센터 프로그램 정보
+	public List<ProgramVO> centerProgramList(Map map);
+	public int centerProgramTotalPage(String centername);
 }

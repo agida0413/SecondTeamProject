@@ -57,7 +57,6 @@ li{
 }
 
 .follow_id_list{
-  cursor:pointer;
   text-align: center;
   margin-bottom: 20px;
   padding-bottom: 10px;
@@ -103,13 +102,13 @@ li{
 </head>
 <body>
 	<div class="container" style="margin-top: 50px;">
-	<!-- 예약 사이드 매뉴 시작 -->
+	<!-- 일정 사이드 매뉴 시작 -->
    <div class="res_submenu" style="z-index: 9999 !important;">
-      <a href="insert.do"> <i class="xi-pen"></i>
-         <p>새글쓰기</p>
+      <a href="schedule.do"> <i class="xi-calendar-list"></i>
+         <p>나의 일정표</p>
       </a>
    </div>
-   <!-- 예약 사이드 매뉴 종료 -->
+   <!-- 일정 사이드 매뉴 종료 -->
 	   <div class="row">
 <%-- 	   <p>${sessionScope.id }출력됨</p>
 	   <p>${sessionScope.userid }출력안됨</p> --%>
@@ -125,6 +124,10 @@ li{
 	          <i class="xi-profile"></i><br>
 	          <span class="date"><i class="xi-at"></i>{{vo.userid}}</span><br>
 	          <span class="date">{{vo.username}}</span>
+	          <a style="border: 2px solid #93a0a8; border-radius: 2px; display:block;
+	                   width:80px; margin: 0 auto; cursor:pointer;
+				        color: #93a0a8; padding: 5px; font-size: 13px;" @click="snsDelete(vo.sno)">
+				        <i class="xi-user-plus"></i>&nbsp;follow</a>
 	       </div>
 	    </div>
 	    
@@ -192,7 +195,9 @@ li{
 			
 		</div><!-- blog-entry -->
 		</div>
-    <div class="col-md-4" id="sns_keep">
+    <div class="col-md-4" >
+    
+        <div id="sns_keep">
          <div class="sidebar-box">
             <h3 class="heading">임시보호 반려동물</h3>
             <div class="post-entry-sidebar">
@@ -221,9 +226,36 @@ li{
           <div id="dialog" title="임시보호 동물 상세보기" v-show="isShow">
              <detail_dialog v-bind:keep_detail="keep_detail"></detail_dialog>
           </div>
+        </div>
+        
+        <!-- 태그 부분 시작 -->
+       <div style="margin-left: 20px;" id="moim_tag" class="sidebar-box"
+       >
+       <h3 class="heading">tag list</h3>
+           <ul class="tags" >
+              <li><a class="link">예시자료</a></li>
+            </ul>
+       </div>
     </div>
+   
 		</div><!-- row -->
 	</div><!-- container -->
+<script>
+   let moimlist=Vue.createApp({
+	   data(){
+		   return{
+			   
+		   }
+	   },
+	   mounted(){
+		   axios.get("",{
+			   params:{
+				   
+			   }
+		   })
+	   }
+   }).mount('#moim_tag')
+</script>
 <script>
   const detailComponent={
 		  props:['keep_detail'],
@@ -292,7 +324,7 @@ li{
 						 autoOpen:false,
 						 modal:true,
 						 width:700,
-						 height:600
+						 height:400
 					 }).dialog("open")
 				 }).catch(error=>{
 					 console.log(error.res)

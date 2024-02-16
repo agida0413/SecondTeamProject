@@ -42,4 +42,10 @@ public class MoimListController {
 		ra.addAttribute("rno", rno);
 		return "redirect:../moim/detail.do";
 	}
+	
+	@GetMapping("moim/schedule.do")
+	public String sns_insert() {
+		
+		return "moim/schedule";
+	}
 }

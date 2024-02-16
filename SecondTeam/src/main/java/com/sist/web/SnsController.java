@@ -11,10 +11,4 @@ public class SnsController {
 		
 		return "sns/list";
 	}
-	
-	@GetMapping("sns/insert.do")
-	public String sns_insert() {
-		
-		return "sns/insert";
-	}
 }

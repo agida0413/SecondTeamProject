@@ -17,4 +17,10 @@ public interface DonateClassService {
 	//상새정보
 	public List<String> classSubimageList(int dcno);
 	public DonClassVO classDetailData(int dcno) ;
+	
+	//찜하기
+	public int getWishCount(Map map) ;
+	public String getWishState(Map map);
+	public void insertWishList(Map map);
+	public String updateWishList(Map map);
 }

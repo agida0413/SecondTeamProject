@@ -2,8 +2,11 @@ package com.sist.web;
 
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
@@ -116,14 +119,37 @@ private CommonsFunction cf;
 	}
 	
 	@GetMapping("detail.do")
-	public String dcDetail(int dcno,Model model) {
+	public String dcDetail(int dcno,Model model,HttpSession session) {
 		DonClassVO vo = service.classDetailData(dcno);
 		List<String> subImgList= service.classSubimageList(dcno);
 		
+		 DecimalFormat df = (DecimalFormat) NumberFormat.getCurrencyInstance(Locale.KOREA); // 원화 형식으로 DecimalFormat 생성
+	        String formattedPrice = df.format(vo.getGoal_price()); // 포맷 적용
+	        
+	        String id=(String)session.getAttribute("id");
+	        String state="NO";
+	        if(id!=null) {
+				Map map =new HashMap();
+				map.put("id", id);
+				map.put("dcno", dcno);
+				
+				int count =service.getWishCount(map);
+				
+				if(count==0) {
+					map.put("state", "NO");
+					service.insertWishList(map);
+					state="NO";
+				}
+				else {
+					state =service.getWishState(map);
+				}
+			}
+	        
+	        
 		model.addAttribute("subImglist",subImgList);
 		model.addAttribute("vo",vo);
-		
-		
+		model.addAttribute("formattedPrice",formattedPrice);
+		model.addAttribute("state",state);
 		
 		
 		return "donateclass/detail";

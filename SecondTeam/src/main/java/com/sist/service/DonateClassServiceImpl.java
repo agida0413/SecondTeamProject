@@ -53,6 +53,32 @@ public DonClassVO classDetailData(int dcno) {
 	// TODO Auto-generated method stub
 	return cIdao.classDetailData(dcno);
 }
+
+
+//찜하기
+@Override
+public int getWishCount(Map map) {
+	// TODO Auto-generated method stub
+	return cIdao.getWishCount(map);
+}
+
+@Override
+public String getWishState(Map map) {
+	// TODO Auto-generated method stub
+	return cIdao.getWishState(map);
+}
+
+@Override
+public void insertWishList(Map map) {
+	// TODO Auto-generated method stub
+	cIdao.insertWishList(map);
+}
+
+@Override
+public String updateWishList(Map map) {
+	// TODO Auto-generated method stub
+	return cIdao.updateWishList(map);
+}
 	
 
 }

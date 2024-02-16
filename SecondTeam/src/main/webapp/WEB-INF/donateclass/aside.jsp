@@ -52,8 +52,12 @@
 						<div class="sidebar-box">
 						<h3 class="heading">최근본 원 데이 클래스</h3>
 						<div class="post-entry-sidebar">
-						<c:if test="${csize==0 }">
+						<c:if test="${csize==0 && sessionScope.id!=null}">
 						<span style="font-weight:bold;  font-size:25px;">최근 본 클래스가 없습니다.</span>
+						</c:if>
+						
+						<c:if test="${sessionScope.id==null }">
+						<span style="font-weight:bold;  font-size:25px;">로그인 후 이용가능합니다.</span>
 						</c:if>
 							<ul>
 							<c:forEach var="vo" items="${clist }">

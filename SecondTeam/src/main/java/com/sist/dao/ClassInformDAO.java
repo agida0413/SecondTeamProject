@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sist.mapper.ClassInformMapper;
 import com.sist.vo.DonClassVO;
@@ -41,5 +43,28 @@ private ClassInformMapper mapper;
 	
 	public DonClassVO classDetailData(int dcno) {
 		return mapper.classDetailData(dcno);
+	}
+	
+	//찜하기
+	
+	public int getWishCount(Map map) {
+		return mapper.getWishCount(map);
+	}
+	
+	public String getWishState(Map map) {
+		return mapper.getWishState(map);
+	}
+	
+	public void insertWishList(Map map) {
+		 mapper.insertWishList(map);
+	}
+	
+	
+	@Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
+	public String updateWishList(Map map) {
+		mapper.updateWishList(map);
+		
+		return mapper.getWishState(map);
+		
 	}
 }

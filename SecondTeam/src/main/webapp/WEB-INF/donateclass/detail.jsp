@@ -4,8 +4,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <style type="text/css">
-
+.dCzzimBtnClick{
+cursor:pointer;
+}
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -22,20 +25,26 @@
         <div class="col-md-12 col-lg-8 main-content">
         <div style="margin-bottom:5px;"><span class="date" style="margin-left:5px;">${vo.address }&bullet; ${vo.category } | &nbsp;${vo.id }</span></div>
 	<div class="docTitle" style="margin-bottom:15px;"><span style="font-size:40px; font-weight:bold; color:black;">${vo.name }</span></div>
-          <div class="post-content-body">
+          <div class="post-content-body" id="dcDetailControll">
            
            <div class="row" style="height:500px;">
            <img src="${vo.image }"  style="border-radius:30px; width:100%; height:100%;">
            </div>
            
-            <div class="row" style="margin-top:10px;">
-             
+            <div class="row" style="margin-top:10px;  border-bottom:0.7px lightgray solid; padding-top:10px; padding-bottom:15px;">
+          
               <c:forEach var="ivo" items="${subImglist }">
             	<div class="col-4" style="width:210px; height:150px; margin-top:10px;">
             	<img src="${ivo }" style="border-radius:20px; width:100%; height:100%;">
             	</div>
              </c:forEach>
-              <div class="rating" style="margin-top:10px;"> 
+           
+           
+								
+							
+            </div>
+            
+               <div class="rating" style="margin-top:10px;"> 
 									    <span class="star" style="font-size:70px;">⭐️</span>	
 									    <span class="star" style="font-size:70px;">⭐️</span>	
 									    <span class="star" style="font-size:70px;">⭐️</span>	
@@ -45,16 +54,14 @@
 										
 										
 									</div>
-								
-							
-            </div>
+            
             
             <hr>
             <div class="row">
             <div class="col-6">
         		 
 					<table  class="table" >
-					<tr style="border-right:1px #f2f2f2 solid ;"><td style="font-size:60px; color:black; font-weight:bold;">차감</td></tr>
+					<tr style="border-right:1px #f2f2f2 solid ;"><td style="font-size:60px;color:gray;">예상차감</td></tr>
 						<tr style="border-right:1px #f2f2f2 solid ;">
 							<td>
 								<span style="font-size:100px; color:black; font-weight:bold; margin-left:10px;">${vo.wing }<img src="../Projectimages/wing3.png" width=80px;></span>	
@@ -76,7 +83,17 @@
   			<tr>
   				
 	  			<td width="25%" style="font-size:25px; color:black; font-weight:bold;">난이도</td>
+	  			<c:if test="${vo.cls_level=='상' }">
+	  			<td width="25%" style="font-size:25px; color:red; font-weight:bold;">${vo.cls_level }</td>
+	  			</c:if>
+	  			
+	  			<c:if test="${vo.cls_level=='중' }">
 	  			<td width="25%" style="font-size:25px; color:blue; font-weight:bold;">${vo.cls_level }</td>
+	  			</c:if>
+	  			
+	  			<c:if test="${vo.cls_level=='하' }">
+	  			<td width="25%" style="font-size:25px; color:green; font-weight:bold;">${vo.cls_level }</td>
+	  			</c:if>
   			</tr>
   				
   				<tr>
@@ -91,7 +108,7 @@
   			
   				<tr>
 	  			<td style="font-size:25px; color:black; font-weight:bold;">창설금액</td>
-	  			<td style="font-size:25px; color:black; font-weight:bold;">${vo.goal_price }</td>
+	  			<td style="font-size:25px; color:black; font-weight:bold;">${formattedPrice }</td>
   			</tr>
   			
   			</table>
@@ -100,20 +117,33 @@
   			
   			<div class="reserveAndZzim">
   			
-  			<span><button>예약하기</button></span>
-  			<span><button>관심목록담기</button></span>
+  					<div class=" text-center dCzzimBtnClick" @click="dCzzimBtnClick()"
+						style="width: 200px; height: 60px; float:right;font-weight: bold; border:0.4px gray solid; background-color:#f2f2f2; border-radius:5px; padding:7px;">
+						
+						<span ><img v-if="zzimstate=='NO'" src="../Projectimages/emptyHeart.png" width="45px">
+								<img v-if="zzimstate=='YES'"src="../Projectimages/fullHeart.png" width="45px">
+						</span>
+							
+					</div>
+					
+				
+  			<span style="margin-left:400px;"><button class="btn btn-xlarge btn-primary" style="width:210px;">예약하기</button></span>
+  		
   			</div>
-          </div>
-
-
-
-
-
-          <div class="pt-5" style="margin-left:400px;">
-           <span style="font-size:20px; font-weight:bold;">Host:&nbsp;</span> ${vo.id }
+       
+          <div class="pt-5" style="margin-left:600px;">
+         
             <span style="font-size:20px; font-weight:bold; margin-left:10px;">Created Day:&nbsp;</span>${vo.dbCreate_date }
           </div>
           
+           
+          </div>
+
+
+
+
+
+       
           
 
 
@@ -170,6 +200,33 @@
 
         </div>
 
-     
+     <script>
+     let dcDetailControll=Vue.createApp({
+    	 data(){
+    		 return{
+    			 sessionId:'${sessionScope.id}',
+    			 dcno:${vo.dcno},	
+ 				 zzimstate:'${state}'
+    		 }
+    	 },
+    	 methods:{
+    		 dCzzimBtnClick(){
+ 				if(this.sessionId===''){<!--변경요망-->
+ 					alert('로그인 후 이용가능합니다')
+ 					return;
+ 				}
+ 				
+ 				axios.get('../donateclass/wishlistUpdate_vue.do',{
+ 					params:{
+ 						zzimstate:this.zzimstate,
+ 						dcno:this.dcno
+ 					}
+ 				}).then(res=>{
+ 					this.zzimstate=res.data
+ 				})
+ 			}
+    	 }
+     }).mount('#dcDetailControll')
+     </script>
 </body>
 </html>

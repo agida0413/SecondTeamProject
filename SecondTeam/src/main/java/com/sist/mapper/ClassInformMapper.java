@@ -3,7 +3,9 @@ package com.sist.mapper;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.sist.vo.DonClassVO;
 
@@ -50,5 +52,33 @@ public interface ClassInformMapper {
 	@Select("SELECT subimage FROM donate_class_subimg "
 			+"WHERE dcno=#{dcno}")
 	public List<String> classSubimageList(int dcno);
+	
+	
+	//찜하기
+	
+	@Select("SELECT COUNT(*) FROM wishlist WHERE typeno=2 AND "
+			+"id=#{id} "
+			+"AND objno=#{dcno}")
+	
+	public int getWishCount(Map map);
+	
+	@Select("SELECT state FROM  wishlist "
+			+"WHERE typeno=2 AND "
+			+"id=#{id} AND "
+			+"objno=#{dcno}")
+	public String getWishState(Map map);
+	
+	@Insert("INSERT INTO wishlist VALUES("
+			+"wishlist_seq.nextval,2,#{dcno},#{state},#{id})")
+	public void insertWishList(Map map);
+	
+	
+	@Update("UPDATE wishlist SET "
+			+"state=#{state} "
+			+"WHERE id=#{id} AND "
+			+"typeno=2 AND "
+			+"objno=#{dcno}"
+			)
+	public void updateWishList(Map map);
 	
 }

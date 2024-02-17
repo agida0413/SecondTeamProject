@@ -6,6 +6,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://unpkg.com/vue@3"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <style type="text/css">

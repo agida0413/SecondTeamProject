@@ -7,12 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sist.dao.ClassInformDAO;
+import com.sist.dao.DonClassReviewDAO;
+import com.sist.vo.DonClassReviewVO;
 import com.sist.vo.DonClassVO;
 
 @Service
 public class DonateClassServiceImpl implements DonateClassService{
 @Autowired
 private ClassInformDAO cIdao;
+
+@Autowired
+private DonClassReviewDAO rDao;
 
 //재능기부 클래스 리스트 관련
 
@@ -79,6 +84,16 @@ public String updateWishList(Map map) {
 	// TODO Auto-generated method stub
 	return cIdao.updateWishList(map);
 }
+
+//리뷰
+
+@Override
+public void insertReview(DonClassReviewVO vo) {
+	// TODO Auto-generated method stub
+	rDao.insertReview(vo);
+}
 	
+
+
 
 }

@@ -305,7 +305,7 @@ private CommonsFunction cf;
 			 String path="../applyCertifyUpload/";
 			 
 			 VprogramApplyVO vo=service.centerCertifyAccess(vano);
-			System.out.println(path);
+			
 			Map map =new HashMap();
 			map.put("vo", vo);
 			map.put("path", path);

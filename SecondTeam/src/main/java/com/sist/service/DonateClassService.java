@@ -3,6 +3,7 @@ package com.sist.service;
 import java.util.List;
 import java.util.Map;
 
+import com.sist.vo.DonClassReviewVO;
 import com.sist.vo.DonClassVO;
 
 public interface DonateClassService {
@@ -23,4 +24,8 @@ public interface DonateClassService {
 	public String getWishState(Map map);
 	public void insertWishList(Map map);
 	public String updateWishList(Map map);
+
+	//리뷰
+	
+	public void insertReview(DonClassReviewVO vo);
 }

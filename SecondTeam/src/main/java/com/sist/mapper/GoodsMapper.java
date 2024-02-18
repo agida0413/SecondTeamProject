@@ -3,9 +3,12 @@ package com.sist.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
+import com.sist.vo.GoodsReviewVO;
 import com.sist.vo.GoodsVO;
+
 import java.util.*;
 
 public interface GoodsMapper {
@@ -73,10 +76,33 @@ public List<GoodsVO> goodsCateMinorList(String category);
 public GoodsVO goodsDetailData(int gno);
 
 // 상품 디테일 이미지
-@Select("SELECT gl.gno, gs.g_subimg FROM goodslist gl "
-		+ "JOIN goods_sub_img gs ON gl.gno=gs.gno WHERE gl.gno=#{gno}")
+@Select("SELECT gl.gno, gs.g_subimg, tn.type_img FROM goodslist gl "
+		+ "JOIN goods_sub_img gs ON gl.gno=gs.gno "
+		+ "JOIN typename tn ON gl.gno=tn.gno "
+		+ "WHERE gl.gno=#{gno}")
 public List<GoodsVO> goodsDetailImg(int gno);
+
+//상품 리뷰 insert
+@Insert("INSERT INTO goodsReview "
+		+ "VALUES(gr_gno_seq.nextval,#{gno},#{userid},#{username},#{subject},#{content},SYSDATE,#{score})")
+public void gReviewInsert(GoodsReviewVO vo);
+
+// 상품 리뷰 리스트
+@Select("SELECT rno,gno,userid,username,subject,content,TO_CHAR(regdate,'YYYY-MM-DD HH24:MI:SS') as dbday,score "
+		+ "FROM goodsReview "
+		+ "WHERE gno=#{gno} ORDER BY rno DESC")
+public List<GoodsReviewVO> gReviewListData(int gno);
+
+// 상품 리뷰 삭제
+@Delete("DELETE FROM goodsReview WHERE rno=#{rno}")
+public void gReviewDelete(int rno);
+
+//상품 리뷰 업데이트
+@Delete("UPDATE goodsReview SET content=#{content},regdate=SYSDATE,score=#{score} WHERE rno=#{rno}")
+public void gReviewUpdate(GoodsReviewVO vo);
 }
+
+
 
 
 

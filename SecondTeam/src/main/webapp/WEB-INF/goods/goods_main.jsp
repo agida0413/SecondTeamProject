@@ -40,7 +40,7 @@
  
 <div class="container bg-white">
 <div class="row"> 
- <div class="col-10">
+ <div class="col-12">
   <tiles:insertAttribute name="content"/>
  </div>
  </div>

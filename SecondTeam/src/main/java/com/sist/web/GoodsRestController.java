@@ -1,8 +1,13 @@
 package com.sist.web;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +22,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sist.commons.CommonsFunction;
 import com.sist.service.GoodsService;
 import com.sist.vo.DonStoreVO;
+import com.sist.vo.GoodsReviewVO;
 import com.sist.vo.GoodsVO;
 
 @RestController
@@ -59,6 +65,32 @@ public String don_page_vue(int page,String ss) throws Exception
 	map.put("curpage", page);
 	ObjectMapper mapper=new ObjectMapper();
 	String json=mapper.writeValueAsString(map);
+	return json;
+}
+// 쿠키
+@GetMapping(value = "goods/goods_cookie_vue.do",produces = "text/plain;charset=UTF-8")
+public String goods_cookie_vue(HttpServletRequest request) throws Exception {
+	Cookie[] cookies=request.getCookies();
+	List<GoodsVO> list=new ArrayList<GoodsVO>();
+	int k=0;
+	if(cookies!=null)
+	{
+		for(int i=cookies.length-1;i>=0;i--)
+		{
+			if(k<5)
+			{
+				if(cookies[i].getName().startsWith("goods_"))
+				{
+					String gno=cookies[i].getValue();
+					GoodsVO vo=gService.goodsDetailData(Integer.parseInt(gno));
+					list.add(vo);
+				}
+				k++;
+			}
+		}
+	}
+	ObjectMapper mapper=new ObjectMapper();
+	String json=mapper.writeValueAsString(list);
 	return json;
 }
 // 카테고리 별 리스트
@@ -115,18 +147,66 @@ public String goods_category_list_vue(String category) throws Exception
 	String json=mapper.writeValueAsString(list);
 	return json;
 }
-// 상세페이지
+// 상세페이지, 리뷰 리스트
 @GetMapping(value="goods/goods_detail_vue.do",produces = "text/plain;charset=UTF-8")
-public String goods_detail_vue(int gno) throws Exception
+public String goods_detail_vue(int gno,HttpSession session) throws Exception
 {
+	String userid=(String)session.getAttribute("id");
+	String username=(String)session.getAttribute("name");
+	GoodsVO vo=new GoodsVO();
 	
 	List<GoodsVO> list=gService.goodsDetailImg(gno);
-	GoodsVO vo =gService.goodsDetailData(gno);
+	vo =gService.goodsDetailData(gno);
+	vo.setIntprice(Integer.parseInt(vo.getG_price().replaceAll(",", "")));
+	List<GoodsReviewVO> rList=gService.gReviewListData(gno);
 	Map map=new HashMap();
+	map.put("rList", rList);
 	map.put("goodsdetail_img", list);
 	map.put("goodsdetail", vo);
+	map.put("userid", userid);
+	map.put("username", username);
 	ObjectMapper mapper=new ObjectMapper();
 	String json=mapper.writeValueAsString(map);
+	return json;
+}
+
+// 리뷰 insert
+@RequestMapping(value="goods/reviewInsert_vue.do",produces = "text/plain;charset=UTF-8")
+public String goods_reviewInsert_vue(int gno,String subject,String content,int score,HttpSession session) throws Exception
+{
+	String userid=(String)session.getAttribute("id");
+	String username=(String)session.getAttribute("name");
+	GoodsReviewVO vo=new GoodsReviewVO();
+	vo.setUserid(userid);
+	vo.setUsername(username);
+	vo.setGno(gno);
+	vo.setContent(content);
+	vo.setSubject(subject);
+	vo.setScore(score);
+	gService.gReviewInsert(vo);
+	ObjectMapper mapper=new ObjectMapper();
+	String json=mapper.writeValueAsString(vo);
+	return json;
+}
+//리뷰 update
+@RequestMapping(value="goods/reviewUpdate_vue.do",produces = "text/plain;charset=UTF-8")
+public String goods_reviewUpdate_vue(GoodsReviewVO vo) throws Exception
+{
+	
+	gService.gReviewUpdate(vo);
+	List<GoodsReviewVO> rList=gService.gReviewListData(vo.getGno());
+	ObjectMapper mapper=new ObjectMapper();
+	String json=mapper.writeValueAsString(rList);
+	return json;
+}
+// 리뷰 delete
+@GetMapping(value="goods/reviewDelete_vue.do",produces = "text/plain;charset=UTF-8")
+public String goods_reviewDelete_vue(int rno,int gno) throws Exception
+{
+	gService.gReviewDelete(rno);
+	List<GoodsReviewVO> rList=gService.gReviewListData(gno);
+	ObjectMapper mapper=new ObjectMapper();
+	String json=mapper.writeValueAsString(rList);
 	return json;
 }
 }

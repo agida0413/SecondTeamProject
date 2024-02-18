@@ -3,10 +3,12 @@ package com.sist.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.sist.mapper.GoodsMapper;
+import com.sist.vo.GoodsReviewVO;
 import com.sist.vo.GoodsVO;
 
 @Repository
@@ -33,5 +35,17 @@ public GoodsVO goodsDetailData(int gno) {
 }
 public List<GoodsVO> goodsDetailImg(int gno){
 	return mapper.goodsDetailImg(gno);
+}
+public void gReviewInsert(GoodsReviewVO vo) {
+	mapper.gReviewInsert(vo);
+}
+public List<GoodsReviewVO> gReviewListData(int gno){
+	return mapper.gReviewListData(gno);
+}
+public void gReviewDelete(int rno) {
+	mapper.gReviewDelete(rno);
+}
+public void gReviewUpdate(GoodsReviewVO vo) {
+	mapper.gReviewUpdate(vo);
 }
 }

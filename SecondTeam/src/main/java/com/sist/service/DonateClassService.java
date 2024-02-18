@@ -33,4 +33,7 @@ public interface DonateClassService {
 	public int reviewNum(DonClassReviewVO vo);
 	public void deleteReview(DonClassReviewVO vo);
 	public String getFilename(DonClassReviewVO vo);
+	
+	
+	
 }

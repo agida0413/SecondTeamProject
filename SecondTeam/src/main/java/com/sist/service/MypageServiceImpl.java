@@ -6,10 +6,12 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sist.dao.ClassInformDAO;
 import com.sist.dao.MypageDAO;
 import com.sist.dao.ProgramListDAO;
 import com.sist.dao.ProgramWishDAO;
 import com.sist.mapper.ProgramWishMapper;
+import com.sist.vo.DonClassVO;
 import com.sist.vo.ProgramVO;
 import com.sist.vo.VprogramApplyVO;
 
@@ -21,6 +23,9 @@ public class MypageServiceImpl implements MypageService {
 	private ProgramListDAO pDao;
 	@Autowired
 	private ProgramWishDAO zDAo;
+	
+	@Autowired
+	private ClassInformDAO cDao;
 	@Override
 	public List<VprogramApplyVO> applyHistoryList(Map map) {
 		// TODO Auto-generated method stub
@@ -66,6 +71,19 @@ public class MypageServiceImpl implements MypageService {
 	public int centerProgramTotalPage(String centername) {
 		// TODO Auto-generated method stub
 		return pDao.centerProgramTotalPage(centername);
+	}
+	
+	
+	//클래스 위시리스트
+	@Override
+	public List<DonClassVO> donClassWishList(Map map) {
+		// TODO Auto-generated method stub
+		return cDao.donClassWishList(map);
+	}
+	@Override
+	public int donClassWishTotalpage(Map map) {
+		// TODO Auto-generated method stub
+		return cDao.donClassWishTotalpage(map);
 	}
 
 }

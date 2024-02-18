@@ -3,6 +3,7 @@ package com.sist.service;
 import java.util.List;
 import java.util.Map;
 
+import com.sist.vo.DonClassVO;
 import com.sist.vo.ProgramVO;
 import com.sist.vo.VprogramApplyVO;
 
@@ -19,4 +20,8 @@ public interface MypageService {
 	//센터 프로그램 정보
 	public List<ProgramVO> centerProgramList(Map map);
 	public int centerProgramTotalPage(String centername);
+	
+	//클래스 위시리스트
+	public List<DonClassVO> donClassWishList(Map map);
+	public int donClassWishTotalpage(Map map);
 }

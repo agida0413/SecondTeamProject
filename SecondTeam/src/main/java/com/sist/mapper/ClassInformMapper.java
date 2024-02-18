@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -80,5 +82,27 @@ public interface ClassInformMapper {
 			+"objno=#{dcno}"
 			)
 	public void updateWishList(Map map);
+	
+	
+	
+	@Select("SELECT dcno,name,id,cls_level,time,full_num,image,address,category,wing,score,num "
+			+ "	FROM (SELECT dcno,name,id,cls_level,time,full_num,image,address,category,wing,score,ROWNUM as num "
+			+ "	FROM (SELECT dcno,name,a.id,cls_level,time,full_num,image,address,category,wing,score "
+			+ "	FROM donate_class a "
+			+"JOIN wishlist b ON "
+			+"dcno=objno "
+			+"WHERE typeno=2 "
+			+"AND b.id=#{id} "
+			+"AND state=#{state} )) "
+			+"WHERE num between #{start} AND #{end}"
+			)
+	public List<DonClassVO> donClassWishList(Map map);
+	
+	
+	@Select("SELECT CEIL(COUNT(*)/5.0) FROM wishlist "
+			+"WHERE typeno=2 "
+			+"AND id=#{id} "
+			+"AND state=#{state}")
+	public int donClassWishTotalpage(Map map);
 	
 }

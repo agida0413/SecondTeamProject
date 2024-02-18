@@ -67,4 +67,14 @@ private ClassInformMapper mapper;
 		return mapper.getWishState(map);
 		
 	}
+	
+	
+	//위시리스트
+	public List<DonClassVO> donClassWishList(Map map){
+		return mapper.donClassWishList(map);
+	}
+	
+	public int donClassWishTotalpage(Map map) {
+		return mapper.donClassWishTotalpage(map);
+	}
 }

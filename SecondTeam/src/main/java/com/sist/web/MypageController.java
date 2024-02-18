@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.sist.commons.CommonsFunction;
 import com.sist.service.MypageService;
 import com.sist.service.ProgramService;
+import com.sist.vo.DonClassVO;
 import com.sist.vo.ProgramVO;
 import com.sist.vo.VprogramApplyVO;
 
@@ -280,6 +282,49 @@ private ProgramService pService;
 		model.addAttribute("page",curpage);
 		model.addAttribute("cate","centerProgram");
 		return "myAndAdpage/centerProgram";
+	}
+	
+	
+	//클래스 위시리스트 
+	
+	@RequestMapping("myAndAdpage/donClassWishList.do")
+	public String donClassWishList(HttpSession session,String page,Model model) {
+		String id=(String)session.getAttribute("id");
+		if(page==null) {
+			page="1";
+		}
+		int curpage=Integer.parseInt(page);
+		
+		String state="YES";
+		
+		Map map =new HashMap();
+		map.put("id", id);
+		map.put("state", state);
+		
+		int totalpage=service.donClassWishTotalpage(map);
+		
+		int rowsize=5;
+		int start=cf.start(rowsize, curpage);
+		int end=cf.end(rowsize, curpage);
+		
+		map.put("start", start);
+		map.put("end", end);
+		
+		List<DonClassVO>list= service.donClassWishList(map);
+		
+		final int BLOCK=10;
+		int startpage=cf.startPage(BLOCK, curpage);
+		int endpage=cf.endPage(BLOCK, curpage, totalpage);
+	
+	
+		model.addAttribute("list",list);
+		model.addAttribute("page",curpage);
+		model.addAttribute("startpage",startpage);
+		model.addAttribute("endpage",endpage);
+		model.addAttribute("totalpage",totalpage);
+		model.addAttribute("cate","classWishList");
+		model.addAttribute("size",list.size());
+		return "myAndAdpage/donClassWishList";
 	}
 	
 

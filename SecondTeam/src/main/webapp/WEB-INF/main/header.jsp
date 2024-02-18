@@ -69,7 +69,7 @@
 								</li>
 								
 								<li><a href="../goods/goods_main.do">상품</a></li>
-								<li><a href="category.html">추가예정</a></li>
+								<li><a href="../donation/donationMain.do">후원캠페인</a></li>
 								<li><a href="category.html">추가예정</a></li>
 								<li><a href="category.html">추가예정</a></li>
 								<li><a href="category.html">추가예정</a></li>

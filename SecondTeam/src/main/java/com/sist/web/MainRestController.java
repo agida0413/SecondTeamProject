@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sist.commons.CommonsFunction;
 import com.sist.service.DonStoreService;
+import com.sist.service.DonationService;
 import com.sist.vo.DonStoreVO;
+import com.sist.vo.DonationVO;
 
 @RestController
 public class MainRestController {
@@ -22,6 +24,8 @@ public class MainRestController {
 private DonStoreService service;
 @Autowired
 private CommonsFunction comm;
+@Autowired
+private DonationService dService;
 
 @GetMapping(value="donstore/search_vue.do",produces="text/plain;charset=UTF-8")
 public String donstore_search_vue(String ss,int page) throws Exception
@@ -67,4 +71,14 @@ public String donstore_detail_vue(int dno) throws Exception
 	String json=mapper.writeValueAsString(vo);
 	return json;
 }
+
+@GetMapping(value = "donation/donationHomeList.do",produces = "text/plain;charset=UTF-8")
+	public String main_vue() throws Exception{
+		List<DonationVO> list=dService.homeDonationListData();
+		
+		ObjectMapper mapper=new ObjectMapper();
+		String json=mapper.writeValueAsString(list);
+		
+		return json;
+	}
 }

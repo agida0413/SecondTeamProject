@@ -44,13 +44,13 @@ cursor: pointer;
 					</a>
 				</div>
 				<div class="col-md-4">
-					<a href="single.html" class="h-entry img-5 h-100 gradient">
+					<a href="../donation/donationMain.do" class="h-entry img-5 h-100 gradient">
 
-						<div class="featured-img" style="background-image: url('../Projectimages/test1.jpg');"></div>
+						<div class="featured-img" style="background-image: url('https://happybean-phinf.pstatic.net/20240131_131/17066743734562m5Qy_PNG/%EC%9C%84%EC%8A%A4%ED%83%80%ED%8A%B8_%EA%B5%90%EC%9C%A1%EC%A7%80%EC%9B%90_%EC%83%88%ED%95%99%EA%B8%B0_%ED%95%99%EC%9A%A9%ED%92%88_%EC%A7%80%EC%9B%90_2024_%EC%8D%B8%EB%84%A4%EC%9D%BC_(2)png?type=w720');"></div>
 
 						<div class="text">
-							<span class="date">Apr. 14th, 2022</span>
-							<h2>나현쨩</h2>
+							<span class="date">나눔을 실천하는 가장 쉬운 시작</span>
+							<h2>작은 도움의 손길이 큰 도움이 됩니다.</h2>
 						</div>
 					</a>
 				</div>
@@ -296,53 +296,18 @@ cursor: pointer;
 	</section>
 	<!-- End posts-entry -->
 
-	<!-- Start posts-entry -->
+	<!-- 후원캠페인 홈배너 -->
 	<section class="section posts-entry posts-entry-sm bg-light">
-		<div class="container">
-		<h1>나현</h1><!-- 지워도됌 -->
+		<div class="container" id="donateCamApp">
 			<div class="row">
-				<div class="col-md-6 col-lg-3">
+				<div class="col-md-6 col-lg-3" v-for="vo in donatecam_list">
 					<div class="blog-entry">
-						<a href="single.html" class="img-link">
-							<img src="../images/img_1_horizontal.jpg" alt="Image" class="img-fluid">
+						<a href="#" class="img-link">
+							<img :src="vo.d_image" alt="Image" class="img-fluid">
 						</a>
 						<span class="date">Apr. 14th, 2022</span>
-						<h2><a href="single.html">Thought you loved Python? Wait until you meet Rust</a></h2>
-						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-						<p><a href="#" class="read-more">Continue Reading</a></p>
-					</div>
-				</div>
-				<div class="col-md-6 col-lg-3">
-					<div class="blog-entry">
-						<a href="single.html" class="img-link">
-							<img src="../images/img_2_horizontal.jpg" alt="Image" class="img-fluid">
-						</a>
-						<span class="date">Apr. 14th, 2022</span>
-						<h2><a href="single.html">Startup vs corporate: What job suits you best?</a></h2>
-						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-						<p><a href="#" class="read-more">Continue Reading</a></p>
-					</div>
-				</div>
-				<div class="col-md-6 col-lg-3">
-					<div class="blog-entry">
-						<a href="single.html" class="img-link">
-							<img src="../images/img_3_horizontal.jpg" alt="Image" class="img-fluid">
-						</a>
-						<span class="date">Apr. 14th, 2022</span>
-						<h2><a href="single.html">UK sees highest inflation in 30 years</a></h2>
-						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-						<p><a href="#" class="read-more">Continue Reading</a></p>
-					</div>
-				</div>
-				<div class="col-md-6 col-lg-3">
-					<div class="blog-entry">
-						<a href="single.html" class="img-link">
-							<img src="../images/img_4_horizontal.jpg" alt="Image" class="img-fluid">
-						</a>
-						<span class="date">Apr. 14th, 2022</span>
-						<h2><a href="single.html">Don’t assume your user data in the cloud is safe</a></h2>
-						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-						<p><a href="#" class="read-more">Continue Reading</a></p>
+						<h2><a href="#">{{vo.d_title}}</a></h2>
+						<p>{{vo.d_goal}}</p>
 					</div>
 				</div>
 			</div>
@@ -404,9 +369,10 @@ cursor: pointer;
 
 	<!-- Start posts-entry -->
 	<!-- Start posts-entry -->
-		<script src="../js/donSmap.js"></script>
 	
-
+	
+	<script src="../js/donSmap.js"></script>
+	<script src="../js/donationHome.js"></script>
 	
 
 </body>

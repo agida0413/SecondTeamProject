@@ -23,6 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sist.commons.CommonsFunction;
 import com.sist.service.DonateClassService;
+import com.sist.vo.DonClassReviewVO;
 import com.sist.vo.DonClassVO;
 
 @Controller
@@ -144,8 +145,7 @@ private CommonsFunction cf;
 					state =service.getWishState(map);
 				}
 			}
-	        
-	        
+	      
 		model.addAttribute("subImglist",subImgList);
 		model.addAttribute("vo",vo);
 		model.addAttribute("formattedPrice",formattedPrice);

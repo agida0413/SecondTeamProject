@@ -28,4 +28,9 @@ public interface DonateClassService {
 	//리뷰
 	
 	public void insertReview(DonClassReviewVO vo);
+	public int reviewTotalpage(Map map);
+	public List<DonClassReviewVO> reviewList(Map map);
+	public int reviewNum(DonClassReviewVO vo);
+	public void deleteReview(DonClassReviewVO vo);
+	public String getFilename(DonClassReviewVO vo);
 }

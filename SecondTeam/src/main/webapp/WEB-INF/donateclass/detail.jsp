@@ -15,6 +15,7 @@
 .dCzzimBtnClick{
 cursor:pointer;
 }
+
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -144,17 +145,25 @@ cursor:pointer;
 
 		<div>
   			 <div class="rating" style="margin-top:30px;"> 
-									    <span class="star" style="font-size:70px;">⭐️</span>	
-									    <span class="star" style="font-size:70px;">⭐️</span>	
-									    <span class="star" style="font-size:70px;">⭐️</span>	
-									    <span class="star" style="font-size:70px;">⭐️</span>	
-									    <span class="half-star" style="font-size:70px; width:55px;">⭐️</span>
-										<span style="font-weight:bold;color:orange; font-size:70px; margin-left:20px; font-style: italic;">4.5</span>
-										
-										
+									   
 									
 										
+									
+								  <c:forEach begin="1" end="${vo.score}" var="i">
+								        <span class="star" style="font-size: 70px;">⭐️</span>
+								    </c:forEach>
+								    <c:if test="${vo.score % 1 >= 0.5}">
+								        <span class="half-star" style="font-size: 70px; width:45px;">⭐️</span>
+								    </c:if>	
+									
+									
+										
+									<span style="font-weight:bold;color:orange; font-size:70px; margin-left:20px; font-style: italic;">${vo.score }</span>
+								
+								
 									</div>
+									
+									 
   			
   			
   	</div>		
@@ -163,36 +172,49 @@ cursor:pointer;
 
 
           <div class="pt-5 comment-wrap" id="reviewApp">
-            <h3 class="mb-5 heading">6 Reviews <span style="float:right;"><button class="btn btn-small btn-primary" @click="dcReviewForm()">리뷰 등록하기</button></span></h3>
+          <div>
+          <h3 style="margin-bottom:20px;">{{rNum}}&nbsp;Reviews</h3>
+          </div>
+            <h3 class="mb-5 heading">
+            <span style="margin-right:5px;"><button :class="type === 'A' ? 'btn btn-small btn-danger' : 'btn btn-small btn-primary'" @click="descDate()">최신순</button></span>
+            <span style="margin-right:5px;"><button :class="type === 'B' ? 'btn btn-small btn-danger' : 'btn btn-small btn-primary'" @click="ascDate()">오래된순</button></span>
+             <span style="margin-right:5px;"><button :class="type === 'C' ? 'btn btn-small btn-danger' : 'btn btn-small btn-primary'" @click="descScore()">높은평점순</button></span>
+              <span style="margin-right:5px;"><button :class="type === 'D' ? 'btn btn-small btn-danger' : 'btn btn-small btn-primary'" @click="ascScore()">낮은평점순</button></span>
+             <span style="float:right;"><button class="btn btn-small btn-primary" @click="dcReviewForm()">리뷰 등록하기</button></span></h3>
+          
+         <div style="margin-bottom:10px;">
+              </div> 
+              <h2 v-if="rNum==0">아직 작성된 리뷰가 없습니다.</h2>
+            <ul class="comment-list" v-if="rNum>0">
+          
+   
+              <li class="comment" v-for="vo in reviewList">
             
-            <ul class="comment-list">
-            
-           
-              <li class="comment">
               <div class="row">
-              	<div class="col-4">
-                <div>
-                  <img src="../Projectimages/file.png" alt="Image placeholder" style="width:100%; height:100%;">
-                </div>
+              	<div class="col-4" style="width:250px; height:200px;">
+              
+                  <img :src="'../reviewImg/'+vo.filename" v-if="vo.filename!==null" alt="Image placeholder" style="width:100%; height:100%;">
+               		<img src="../Projectimages/noImg.png" v-if="vo.filename===null" style="width:100%; height:100%;">
                 </div>
                 <div class="col-8">
-                <div class="comment-body">
-                  <h3>김용준</h3>
-                  <div class="meta">January 9, 2018 at 2:21pm</div>
+                <div class="comment-body" style="word-wrap: break-word;">
+                  <h3>{{vo.name}}</h3>
+                  <div class="meta">{{vo.dbDay}}</div>
                    <div class="meta">
                     <div class="rating" style="margin-top:5px; margin-bottom:5px;"> 
-									    <span class="star" style="font-size:15px;">⭐️</span>	
 									  
-									    <span class="half-star" style="font-size:15px;">⭐️</span>
-										<span style="font-weight:bold;color:orange; font-size:15px; margin-left:20px; font-style: italic;">4.5</span>
+								        <span v-for="i in Math.floor(vo.score)" class="star" style="font-size: 15px;">⭐️</span>
+     								    <span v-if="vo.score % 1 >= 0.5" class="half-star" style="font-size: 15px; width: 10px;">⭐️</span>
+								   
+										<span style="font-weight:bold;color:orange; font-size:15px; margin-left:20px; font-style: italic;">{{vo.score}}</span>
 										
 										
 									
 										
 									</div>
                    </div>
-                  <p>Lorem ipsum dolor sitasdd짜증나sitasdd짜증나sitasdd짜증나sitasdd짜증ㅁㄴㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ나sitasdd짜증나sitasdd짜증나sitasdd짜증나sitasdd짜증나sitasdd짜증나sitasdd짜증나sitasdd짜증나sitasdd짜증나sitasdd짜증나sitasdd짜증나 amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                  <p><a href="#" class="reply rounded">Reply</a></p>
+                  <p>{{vo.content}}</p>
+                  <p style="float:right;" v-if="vo.id==='${sessionScope.id }'"><a class="reply rounded" style="cursor:pointer; color:#ff9999;" @click="deleteReview(vo.revno)">삭제</a></p>
                 </div>
                 </div>
                 </div>
@@ -200,8 +222,24 @@ cursor:pointer;
 
            
 
-              
+            
             </ul>
+              <div class="row text-center">
+  			 <ul class="pagination" v-if="totalpage!=0">
+  			 		 
+				  <li @click="prev()" class="page-item"><a v-if="startpage>1" class="link page-link">&lt;</a></li>
+				  <li v-for="i in range(startpage,endpage)" @click="move(i)"  class="page-item" 
+				  :class="{ 'active': curpage === i }" 
+   				 :aria-current="curpage === i ? 'page' : null">
+				  <a class="link page-link">{{i}}</a>
+				  </li>
+				 
+				  <li @click="next()" class="page-item"><a v-if="endpage<totalpage" class="link page-link">&gt;</a></li>
+				
+				   
+				   
+				</ul> 
+  			</div>
             <!-- END comment-list -->
 
           <div id="rdialog" v-show="isShow">
@@ -360,10 +398,92 @@ cursor:pointer;
     	 data(){
     		 return{
     			 dcno:${vo.dcno},
-    			 isShow:false
+    			 isShow:false,
+    			 type:'A',
+    			 curpage:1,
+    			 totalpage:0,
+    			 startpage:0,
+    			 endpage:0,
+    			 reviewList:[],
+    			 rNum:0
+    			 
     		 }
     	 },
+    	 mounted(){
+    		 this.dcReviewList()
+    	 },
     	 methods:{
+    		 dcReviewList(){
+    			 axios.get('../donateclass/reviewList_vue.do',{
+        			 params:{
+        				 dcno:this.dcno,
+        				 type:this.type,
+        				 page:this.curpage
+        			 }
+        		 }).then(res=>{
+        			
+        			 this.reviewList=res.data
+        			 console.log(this.reviewList)
+        		 })
+        		 this.paging()
+    		 },
+    		 paging(){
+    			 axios.get('../donateclass/reviewList_vue_page.do',{
+        			 params:{
+        				 dcno:this.dcno,
+        				 page:this.curpage
+        				
+        			 }
+        		 }).then(res=>{
+        			 this.totalpage=res.data.totalpage;
+        		 	this.curpage=res.data.page;
+        		 	this.startpage=res.data.startpage;
+        		 	this.endpage=res.data.endpage;
+        		 	this.rNum=res.data.rNum;
+        		 })
+    		 },
+    		 range(start,end){
+    				let arr=[]
+    				
+    				let size=end-start;
+    				for(let i=0;i<=size;i++){
+    					arr[i]=start;
+    					start++;
+    				}
+    				return arr;
+    			},
+    			next(){
+    				this.curpage=this.endpage+1
+    				this.dcReviewList()
+    			},
+    			prev(){
+    				this.curpage=this.startpage-1
+    				this.dcReviewList()
+    			},
+    			move(page){
+    				this.curpage=page
+    				this.dcReviewList()
+    			},
+    			ascDate(){
+    				this.curpage=1
+    				this.type='B'
+    				this.dcReviewList()
+    			},
+    			descDate(){
+    				this.curpage=1
+    				this.type='A'
+        				this.dcReviewList()
+    			},
+    			ascScore(){
+    				this.curpage=1
+    				this.type='D'
+        				this.dcReviewList()
+    			},
+    			descScore(){
+    				this.curpage=1
+    				this.type='C'
+        				this.dcReviewList()
+    			},
     		 dcReviewForm(){
     			 this.isShow=true
     			 $('#rdialog').dialog({
@@ -405,6 +525,7 @@ cursor:pointer;
 		    		.then(response=>{
 		    			if(response.data==='YES'){
 		    				$('#rdialog').dialog('close');
+		    				this.dcReviewList()
 		    			}
 		    			else{
 		    				alert('로그인후 이용가능합니다.')
@@ -413,9 +534,21 @@ cursor:pointer;
 		    		}).catch(error=>{
 		    			console.log(error.response)
 		    		})
+        	 },
+        	 deleteReview(revno){
+        		axios.get('../donateclass/deleteReview_vue.do',{
+        			params:{
+        				revno:revno,
+        				objno:this.dcno
+        			}
+        		}).then(res=>{
+        			this.dcReviewList()
+        		})
         	 }
+        	 
     		
     	 },
+    	
     	 components:{
     		 'dc-review-form': dcReview
          }

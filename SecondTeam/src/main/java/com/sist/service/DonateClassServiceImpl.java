@@ -92,6 +92,37 @@ public void insertReview(DonClassReviewVO vo) {
 	// TODO Auto-generated method stub
 	rDao.insertReview(vo);
 }
+
+@Override
+public int reviewTotalpage(Map map) {
+	// TODO Auto-generated method stub
+	return rDao.reviewTotalpage(map);
+}
+
+@Override
+public List<DonClassReviewVO> reviewList(Map map) {
+	// TODO Auto-generated method stub
+	return rDao.reviewList(map);
+}
+
+@Override
+public int reviewNum(DonClassReviewVO vo) {
+	// TODO Auto-generated method stub
+	return rDao.reviewNum(vo);
+}
+
+@Override
+public void deleteReview(DonClassReviewVO vo) {
+	// TODO Auto-generated method stub
+	rDao.deleteReview(vo);
+	
+}
+
+@Override
+public String getFilename(DonClassReviewVO vo) {
+	// TODO Auto-generated method stub
+	return rDao.getFilename(vo);
+}
 	
 
 

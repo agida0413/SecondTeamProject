@@ -38,11 +38,16 @@
 							<span class="date" style="margin-left:5px;">${vo.address }&bullet; ${vo.category } | &nbsp;${vo.id }</span>
 							<h2 style="margin-left:5px; margin-top:5px;" class="overff"><a href="../donateclass/detail_cookie.do?dcno=${vo.dcno }">${vo.name }</a></h2>
 									<div class="rating" style="margin-left:5px;"> 
-									    <span class="star">⭐️</span>	
-									    <span class="star">⭐️</span>	
-									    <span class="star">⭐️</span>	
-									    <span class="star">⭐️</span>	
-									    <span class="half-star">⭐️</span>
+									    <c:forEach begin="1" end="${vo.score}" var="i">
+								        <span class="star">⭐️</span>
+								    </c:forEach>
+								    <c:if test="${vo.score % 1 >= 0.5}">
+								        <span class="half-star">⭐️</span>
+								    </c:if>	
+									
+									
+										
+									<span style="font-weight:bold;color:orange;  margin-left:20px; font-style: italic;">${vo.score }</span>
 									
 									</div>
 							

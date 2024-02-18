@@ -68,12 +68,17 @@
 										<div class="text">
 										
 											<h4 class="overffcookie">${vo.name }</h4>
-												<div class="rating"> 
-									    <span class="star">⭐️</span>	
-									    <span class="star">⭐️</span>	
-									    <span class="star">⭐️</span>	
-									    <span class="star">⭐️</span>	
-									    <span class="half-star">⭐️</span>
+											<div class="rating" style="margin-left:5px;"> 
+									    <c:forEach begin="1" end="${vo.score}" var="i">
+								        <span class="star">⭐️</span>
+								    </c:forEach>
+								    <c:if test="${vo.score % 1 >= 0.5}">
+								        <span class="half-star">⭐️</span>
+								    </c:if>	
+									
+									
+										
+									<span style="font-weight:bold;color:orange;  margin-left:20px; font-style: italic;">${vo.score }</span>
 									
 									</div>
 									<div><span  style="font-weight:bold; font-size:25px; color:black;">${vo.wing }&nbsp;<img src="../Projectimages/wing3.png" style="width:30px;height:30px; display:inline;" ></span></div>

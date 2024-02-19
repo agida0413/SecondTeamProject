@@ -18,20 +18,16 @@ public class TemptLoginController {
 	@PostMapping("program/login_ok.do")
 	public String TemptLogin_ok(String id , String pwd,HttpSession session) {
 		MemberVO vo = dao.temptLogin(id);
-		if(vo.getUserid().equals(id) && vo.getUserpwd().equals(pwd)) {
-			session.setAttribute("id", vo.getUserid());
-			session.setAttribute("centername", vo.getCentername());
-			session.setAttribute("name", vo.getUsername());
+		if(vo.getUserId().equals(id) 
+				&& vo.getUserPwd().equals(pwd)) {
+			session.setAttribute("id", vo.getUserId());
+			session.setAttribute("centername", vo.getCenterName());
+			session.setAttribute("name", vo.getUserName());
 			session.setAttribute("admin", vo.getAdmin());
 			session.setAttribute("email", vo.getEmail());
 			session.setAttribute("phone", vo.getPhone());
 			session.setAttribute("mno", String.valueOf(vo.getMno()));
-			
-			
 		}
-		
-		
-		
 		return "main";
 	}
 	

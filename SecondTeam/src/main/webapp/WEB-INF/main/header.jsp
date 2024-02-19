@@ -83,14 +83,24 @@
 						<div class="col-2 text-end">
 						   <div>
 						   <c:if test="${sessionScope.id==null }">
-							<span><a href="../program/login.do" style="color:black;"><img src="../Projectimages/login.png" width="20px;">Login</a></span>
-							<span><a href="#" style="color:black;"><img src="../Projectimages/login.png" width="20px;">Join</a></span>
+						   <span><a href="../member/login.do">일반로그인</a></span>
+						   <ul class="js-clone-nav d-none d-lg-inline-block text-start site-menu mx-auto">
+						   <li class="has-children">
+									<a href="../donateclass/list.do?type=A">회원가입</a>
+									<ul class="dropdown">
+											<li><a href="../member/join_u.do">일반회원가입</a></li>
+											<li><a href="../member/join_c.do">센터회원가입</a></li>
+									</ul>
+								</li>
+							</ul>
+							<span><a href="../member/login.do" style="color:black;"><img src="../Projectimages/login.png" width="20px;">(신)로그인</a></span>
+							<span><a href="../program/login.do" style="color:black;"><img src="../Projectimages/login.png" width="20px;">(구)Login</a></span>
 							</c:if>
 							
 							 <c:if test="${sessionScope.id!=null }">
 								<span>${sessionScope.name } 님 환영합니다.</span>
 								<span><a href="../myAndAdpage/mypage.do" style="color:black;"><img src="../Projectimages/login.png" width="20px;">mypage</a></span>
-							<span><a href="../program/logout.do" style="color:black;"><img src="../Projectimages/login.png" width="20px;">Logout</a></span>
+							<span><a href="../member/logout.do" style="color:black;"><img src="../Projectimages/login.png" width="20px;">로그아웃</a></span>
 							
 							</c:if>
 						   </div>

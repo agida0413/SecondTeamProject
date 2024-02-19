@@ -24,6 +24,9 @@
 .do_category_item:hover{
 	background-color: #e3e3e3;
 }
+.do_category_list li.active{
+	background-color: #e3e3e3;
+}
 .do_category_item{
 	display: block;
     height: 48px;
@@ -58,8 +61,16 @@
 }
 .category_support_label:hover {
 	text-decoration: underline;
-	color: red;
+	color: #00ab33;
+	font-weight: bold;
 }
+
+.do_category_sublist li.active .category_support_label{
+	text-decoration: underline;
+	color: #00ab33;
+	font-weight: bold;
+}
+
 input[type=radio] {
     overflow: hidden;
     position: absolute;
@@ -133,68 +144,68 @@ input[type=radio] {
   	<!-- 카테고리 출력 -->
   	<div class="do_category_list">
   	  <ul class="do_category_theme_list" id="doThemeList">
-  	    <li class="do_category_item">
-  	      <a class="dlink">
+  	    <li :class="cate===1?'do_category_item active':'do_category_item'">
+  	      <a class="dlink" @click="docate(1)">
   	        <i class="fa-solid fa-heart"></i>
   	        <span class="text">전체</span>
   	      </a>
   	    </li>
-  	    <li class="do_category_item">
-  	      <a class="dlink">
+  	    <li :class="cate===2?'do_category_item active':'do_category_item'">
+  	      <a class="dlink" @click="docate(2)">
   	        <i class="fa-solid fa-child"></i>
   	        <span class="text">아동/청소년</span>
   	      </a>
   	    </li>
-  	    <li class="do_category_item">
-  	      <a class="dlink">
+  	    <li :class="cate===3?'do_category_item active':'do_category_item'">
+  	      <a class="dlink" @click="docate(3)">
   	        <i class="fa-solid fa-person-cane"></i>
   	        <span class="text">어르신</span>
   	      </a>
   	    </li>
-  	    <li class="do_category_item">
-  	      <a class="dlink">
+  	    <li :class="cate===4?'do_category_item active':'do_category_item'">
+  	      <a class="dlink" @click="docate(4)">
   	        <i class="fa-solid fa-wheelchair"></i>
   	        <span class="text">장애인</span>
   	      </a>
   	    </li>
-  	    <li class="do_category_item">
-  	      <a class="dlink">
+  	    <li :class="cate===5?'do_category_item active':'do_category_item'">
+  	      <a class="dlink" @click="docate(5)">
   	        <i class="fa-regular fa-handshake"></i>
   	        <span class="text">다문화</span>
   	      </a>
   	    </li>
-  	    <li class="do_category_item">
-  	      <a class="dlink">
+  	    <li :class="cate===6?'do_category_item active':'do_category_item'">
+  	      <a class="dlink" @click="docate(6)">
   	        <i class="fa-solid fa-earth-americas"></i>
   	        <span class="text">지구촌</span>
   	      </a>
   	    </li>
-  	    <li class="do_category_item">
-  	      <a class="dlink">
+  	    <li :class="cate===7?'do_category_item active':'do_category_item'">
+  	      <a class="dlink" @click="docate(7)">
   	        <i class="fa-solid fa-people-roof"></i>
   	        <span class="text">가족/여성</span>
   	      </a>
   	    </li>
-  	    <li class="do_category_item">
-  	      <a class="dlink">
+  	    <li :class="cate===8?'do_category_item active':'do_category_item'">
+  	      <a class="dlink" @click="docate(8)">
   	        <i class="fa-solid fa-comments"></i>
   	        <span class="text">시민사회</span>
   	      </a>
   	    </li>
-  	    <li class="do_category_item">
-  	      <a class="dlink">
+  	    <li :class="cate===9?'do_category_item active':'do_category_item'">
+  	      <a class="dlink" @click="docate(9)">
   	        <i class="fa-solid fa-paw"></i>
   	        <span class="text">동물</span>
   	      </a>
   	    </li>
-  	    <li class="do_category_item">
-  	      <a class="dlink">
+  	    <li :class="cate===10?'do_category_item active':'do_category_item'">
+  	      <a class="dlink" @click="docate(10)">
   	        <i class="fa-solid fa-seedling"></i>
   	        <span class="text">환경</span>
   	      </a>
   	    </li>
-  	    <li class="do_category_item">
-  	      <a class="dlink">
+  	    <li :class="cate===11?'do_category_item active':'do_category_item'">
+  	      <a class="dlink" @click="docate(11)">
   	        <i class="fa-solid fa-ellipsis"></i>
   	        <span class="text">기타</span>
   	      </a>
@@ -203,39 +214,39 @@ input[type=radio] {
   	</div>
   	
   	<!-- 서브카테고리 -->
-  	<div class="do_category_sublist">
+  	<div class="do_category_sublist" v-show="isShow">
   	  <ul class="do_category_supportlist">
-  	  	<li class="do_category_subitem">
-  	  	  <input type="radio" name="category_support" id="category_support13" class="category_support_radio">
-  	  	  <label for="category_support13" class="category_support_label">전체</label>
+  	  	<li :class="smallCateSelected==='1'?'do_category_subitem active':'do_category_subitem'">
+  	  	  <input type="radio" value="1" v-model="smallCateSelected" id="category_support1" class="category_support_radio" @change="smallcateChange()">
+  	  	  <label for="category_support1" class="category_support_label">전체</label>
   	    </li>
-  	    <li class="do_category_subitem">
-  	      <input type="radio" name="category_support" id="category_support14" class="category_support_radio">
-  	      <label for="category_support14" class="category_support_label">문화예술</label>
+  	    <li :class="smallCateSelected==='2'?'do_category_subitem active':'do_category_subitem'">
+  	      <input type="radio" value="2" v-model="smallCateSelected" id="category_support2" class="category_support_radio" @change="smallcateChange()">
+  	      <label for="category_support2" class="category_support_label">문화예술</label>
   	    </li>
-  	    <li class="do_category_subitem">
-  	      <input type="radio" name="category_support" id="category_support15" class="category_support_radio">
-  	      <label for="category_support15" class="category_support_label">교육지원</label>
+  	    <li :class="smallCateSelected==='3'?'do_category_subitem active':'do_category_subitem'">
+  	      <input type="radio" value="3" v-model="smallCateSelected" id="category_support3" class="category_support_radio" @change="smallcateChange()">
+  	      <label for="category_support3" class="category_support_label">교육지원</label>
   	    </li>
-  	    <li class="do_category_subitem">
-  	      <input type="radio" name="category_support" id="category_support16" class="category_support_radio">
-  	      <label for="category_support16" class="category_support_label">연구조사</label>
+  	    <li :class="smallCateSelected==='4'?'do_category_subitem active':'do_category_subitem'">
+  	      <input type="radio" value="4" v-model="smallCateSelected" id="category_support4" class="category_support_radio" @change="smallcateChange()">
+  	      <label for="category_support4" class="category_support_label">연구조사</label>
   	    </li>
-  	    <li class="do_category_subitem">
-  	      <input type="radio" name="category_support" id="category_support17" class="category_support_radio">
-  	      <label for="category_support17" class="category_support_label">건강한 삶</label>
+  	    <li :class="smallCateSelected==='5'?'do_category_subitem active':'do_category_subitem'">
+  	      <input type="radio" value="5" v-model="smallCateSelected" id="category_support5" class="category_support_radio" @change="smallcateChange()">
+  	      <label for="category_support5" class="category_support_label">건강한 삶</label>
   	    </li>
-  	    <li class="do_category_subitem">
-  	      <input type="radio" name="category_support" id="category_support18" class="category_support_radio">
-  	      <label for="category_support18" class="category_support_label">생계안정</label>
+  	    <li :class="smallCateSelected==='6'?'do_category_subitem active':'do_category_subitem'">
+  	      <input type="radio" value="6" v-model="smallCateSelected" id="category_support6" class="category_support_radio" @change="smallcateChange()">
+  	      <label for="category_support6" class="category_support_label">생계안정</label>
   	    </li>
-  	    <li class="do_category_subitem">
-  	      <input type="radio" name="category_support" id="category_support19" class="category_support_radio">
-  	      <label for="category_support19" class="category_support_label">주거/환경개선</label>
+  	    <li :class="smallCateSelected==='7'?'do_category_subitem active':'do_category_subitem'">
+  	      <input type="radio" value="7" v-model="smallCateSelected" id="category_support7" class="category_support_radio" @change="smallcateChange()">
+  	      <label for="category_support7" class="category_support_label">주거/환경개선</label>
   	    </li>
-  	    <li class="do_category_subitem">
-  	      <input type="radio" name="category_support" id="category_support20" class="category_support_radio">
-  	      <label for="category_support20" class="category_support_label">더 나은 사회</label>
+  	    <li :class="smallCateSelected==='8'?'do_category_subitem active':'do_category_subitem'">
+  	      <input type="radio" value="8" v-model="smallCateSelected" id="category_support8" class="category_support_radio" @change="smallcateChange()">
+  	      <label for="category_support8" class="category_support_label">더 나은 사회</label>
   	    </li>
   	  </ul>
   	</div>
@@ -261,18 +272,7 @@ input[type=radio] {
         </div>
     </div>
  	
-			<!-- <div class="row">
-				<div class="col-lg-4 mb-4" v-for="vo in do_list">
-					<div>
-						<a href="#">
-							<img :src="vo.d_image">
-						</a>
-						<span class="date">Apr. 14th, 2022</span>
-						<h2><a href="#">{{vo.d_title}}</a></h2>
-						<p>{{vo.d_goal}}</p>
-					</div>
-				</div>
-			</div> -->
+			
 	
 	
 	<!-- pagination -->
@@ -296,7 +296,10 @@ input[type=radio] {
 			 curpage:1,
 			 totalpage:0,
 			 startPage:0,
-			 endPage:0
+			 endPage:0,
+			 cate:1,
+			 smallCateSelected:'1',
+			 isShow:false
 		 }  
 	  },
 	  mounted(){
@@ -306,7 +309,10 @@ input[type=radio] {
 		  doRecv(){
 			  axios.get('../donation/donation_list_vue.do',{
 				  params:{
-					  page:this.curpage
+					  page:this.curpage,
+					  cateno:this.cate,
+					  smallcateno:this.smallCateSelected
+					  
 				  }
 			  }).then(res=>{
 				  console.log(res.data)
@@ -336,7 +342,24 @@ input[type=radio] {
 			pageChange(page){
 				this.curpage=page
 				this.doRecv()
+			},
+			docate(ca){
+				if(ca===1){
+					this.cate=ca
+					this.isShow=false
+					this.doRecv()
+				}else{
+					this.cate=ca
+					this.smallCateSelected='1'
+					this.isShow=true
+					this.doRecv()
+				}
+			},
+			smallcateChange(){
+				this.curpage=1
+				this.doRecv()
 			}
+			
 	  }
   }).mount('#donationList')
 </script>

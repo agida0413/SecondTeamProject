@@ -17,29 +17,106 @@ public class DonationRestController {
 	@Autowired
 	private DonationService service;
 	
+	String[] cateList= {
+			"","전체","아동","어르신","장애인","다문화","지구촌","가족","시민사회","동물","환경","기타"
+	};
+	String[] smallcateList= {
+			"","전체","문화예술","교육지원","연구조사","의료","생계","주거","인식"
+	};
+	
+	
 	@GetMapping(value="donation_list_vue.do",produces = "text/plain;charset=UTF-8")
-	public String donation_list_vue(int page) throws JsonProcessingException {
-		int rowSize=12;
-		int start=(rowSize*page)-(rowSize-1);
-		int end=(rowSize*page);
-		List<DonationVO> list=service.donationListData(start, end);
+	public String donation_list_vue(int page,int cateno,int smallcateno) throws JsonProcessingException {
 		
-		final int BLOCK=10;
-		int startPage=((page-1)/BLOCK*BLOCK)+1;
-		int endPage=((page-1)/BLOCK*BLOCK)+BLOCK;
-		int totalpage=service.donationListTotalPage();
-		if(endPage>totalpage)
-			endPage=totalpage;
+		// cate: 전체, small: 전체
+		String d_cate=cateList[cateno];
+		String d_smallcate=smallcateList[smallcateno];
+		String json="";
 		
-		Map map=new HashMap();
-		map.put("startPage", startPage);
-		map.put("endPage", endPage);
-		map.put("totalpage", totalpage);
-		map.put("curpage", page);
-		map.put("list", list);
+		if(cateno==1) {
+			int rowSize=12;
+			int start=(rowSize*page)-(rowSize-1);
+			int end=(rowSize*page);
+			List<DonationVO> list=service.donationListData(start, end);
+			
+			final int BLOCK=10;
+			int startPage=((page-1)/BLOCK*BLOCK)+1;
+			int endPage=((page-1)/BLOCK*BLOCK)+BLOCK;
+			int totalpage=service.donationListTotalPage();
+			if(endPage>totalpage)
+				endPage=totalpage;
+			
+			Map map=new HashMap();
+			map.put("startPage", startPage);
+			map.put("endPage", endPage);
+			map.put("totalpage", totalpage);
+			map.put("curpage", page);
+			map.put("list", list);
+			
+			ObjectMapper mapper=new ObjectMapper();
+			json=mapper.writeValueAsString(map);
+		}
+		else if(smallcateno==1 && cateno!=1){
+			int rowSize=12;
+			int start=(rowSize*page)-(rowSize-1);
+			int end=(rowSize*page);
+			
+			Map map=new HashMap();
+			map.put("start", start);
+			map.put("end", end);
+			map.put("d_cate", d_cate);
+			map.put("d_smallcate", d_smallcate);
+			List<DonationVO> list=service.donationOnlyCateListData(map);
+			
+			final int BLOCK=10;
+			int startPage=((page-1)/BLOCK*BLOCK)+1;
+			int endPage=((page-1)/BLOCK*BLOCK)+BLOCK;
+			int totalpage=service.donationOnlyCateListTotalPage(map);
+			if(endPage>totalpage)
+				endPage=totalpage;
+			
+			map=new HashMap();
+			map.put("startPage", startPage);
+			map.put("endPage", endPage);
+			map.put("totalpage", totalpage);
+			map.put("curpage", page);
+			map.put("list", list);
+			
+			ObjectMapper mapper=new ObjectMapper();
+			json=mapper.writeValueAsString(map);
+		}
+		else {
+			int rowSize=12;
+			int start=(rowSize*page)-(rowSize-1);
+			int end=(rowSize*page);
+			
+			Map map=new HashMap();
+			map.put("start", start);
+			map.put("end", end);
+			map.put("d_cate", d_cate);
+			map.put("d_smallcate", d_smallcate);
+			List<DonationVO> list=service.donationCateListData(map);
+			
+			final int BLOCK=10;
+			int startPage=((page-1)/BLOCK*BLOCK)+1;
+			int endPage=((page-1)/BLOCK*BLOCK)+BLOCK;
+			int totalpage=service.donationCateListTotalPage(map);
+			if(endPage>totalpage)
+				endPage=totalpage;
+			
+			map=new HashMap();
+			map.put("startPage", startPage);
+			map.put("endPage", endPage);
+			map.put("totalpage", totalpage);
+			map.put("curpage", page);
+			map.put("list", list);
+			
+			ObjectMapper mapper=new ObjectMapper();
+			json=mapper.writeValueAsString(map);
+			
+		}
 		
-		ObjectMapper mapper=new ObjectMapper();
-		String json=mapper.writeValueAsString(map);
+		
 		
 		return json;
 		

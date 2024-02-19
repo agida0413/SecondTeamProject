@@ -5,26 +5,57 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+.detail_cate{
+	padding-bottom: 16px;
+    font-size: 17px;
+    font-weight: 400;
+    color: #00ab33;
+    letter-spacing: -.06em;
+    line-height: 1;
+}
+.detail_title{
+	font-size: 36px;
+    font-weight: 400;
+    color: #222;
+    letter-spacing: .4px;
+    line-height: 40px;
+}
+.detail_body{
+	padding: 40px 50px 50px;
+	float: left
+}
+.detail_subtit{
+	color: #444444; 
+	font-size: 19px;
+	padding-top: 10px;
+}
+.detail_subcon{
+	 padding-top: 10px;
+	 color: #444444;
+	 font-size: 16px;
+}
+</style>
 </head>
 <body>
 <div class="container" id="donationDetailApp">
 
       <div class="row blog-entries element-animate">
 
-        <div class="main-content">
+        <div class="main-content" style="border: 1px solid #e3e3e3">
 
-          <div class="post-content-body">
-            <h2>{{detail_data.d_cate}} > {{detail_data.d_smallcate}}</h2>
-            <h3>{{detail_data.d_title}}</h3>
+          <div class="post-content-body detail_body">
+            <h2 class="detail_cate">{{detail_data.d_cate}} > {{detail_data.d_smallcate}}</h2>
+            <h3 class="detail_title">{{detail_data.d_title}}</h3>
             <h4>캠페인 소개</h4>
-            <ul>
+            <ul style="list-style: none; padding: 0">
               <div class="col-md-12 mb-4">
-                <img src="#" class="img-fluid rounded">
+                <img :src="detail_data.d_image" style="width: 700px;height: 400px;">
               </div>
-              <li>
+              <li v-for="(subtitle,index) in content_title">
                 <dl>
-                  <dt>{{detail_data.d_subtitle}}</dt>
-                  <dd>{{detail_data.d_content}}</dd>
+                  <dt class="detail_subtit">{{subtitle}}</dt>
+                  <dd class="detail_subcon">{{content_content[index]}}</dd>
                 </dl>
               </li>
             </ul>
@@ -243,7 +274,9 @@
     	 data(){
     		return{
     			detail_data:{},
-    			dno:${dno}
+    			dno:${dno},
+    			content_title:{},
+    			content_content:{}
     		} 
     	 },
     	 mounted(){
@@ -254,6 +287,11 @@
     		 }).then(res=>{
     			console.log(res.data) 
     			this.detail_data=res.data
+    			this.content_title=res.data.d_subtitle.split('|')
+    			this.content_content=res.data.d_content.split('|')
+    			console.log(this.content_title)
+    			console.log(this.content_content)
+    			
     		 })
     	 },
     	 methods:{

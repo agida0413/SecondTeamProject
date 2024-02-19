@@ -34,6 +34,6 @@ public interface DonateClassService {
 	public void deleteReview(DonClassReviewVO vo);
 	public String getFilename(DonClassReviewVO vo);
 	
-	
+	//댓글
 	
 }

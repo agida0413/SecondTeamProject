@@ -21,6 +21,25 @@ margin-left:15px; margin-right:15px;  padding:10px; border-radius:4px; backgroun
 .zzim:hover{
 cursor: pointer;
 }
+.textareaStyle{
+ width: 100%; /* 너비를 부모 요소에 맞게 설정 */
+        height: auto; /* 높이를 자동으로 조정 */
+        padding: 10px; /* 안쪽 여백 */
+        border: 1px solid #ddd; /* 테두리 스타일 및 색상 */
+        border-radius: 5px; /* 테두리 둥글게 */
+        resize: none; /* 크기 조정 비활성화 */
+        outline: none; /* 포커스 효과 제거 */
+        font-size: 16px; /* 글꼴 크기 */
+        font-family: Arial, sans-serif; /* 글꼴 설정 */
+        color: #333; /* 글꼴 색상 */
+}
+.insert{
+ padding: 5px 20px;
+        background: #f2f2f2;
+        color: #000;
+        font-size: 15px;
+         border-radius: 0.25rem !important;
+}
 </style>
 </head>
 <body>
@@ -127,14 +146,123 @@ cursor: pointer;
 				
 				<!-- 댓글 -->
 				<div class="row">
-				
+				     <div class="pt-5 comment-wrap">
+            <h3 class="mb-5 heading">6 Comments</h3>
+           
+           
+          
+             
+
+             	
+                <div class="comment-body">
+                
+                <div style="margin-bottom:10px;">
+               <img src="../Projectimages/userIcon.jpg" alt="Image placeholder" width="40px">
+              <span style="font-weight:bold;color:black; font-size:20px; margin-left:5px;">김용준</span>
+                   </div>
+                   
+                <textarea rows="3" cols="98" class="textareaStyle" placeholder="새로운 댓글을  작성해 주세요."></textarea>
+                   <p style="float:right; margin-top:10px;">
+                 <a href="#" class="insert rounded">등록하기</a>
+                  </p>
+               
+                
+                </div>
+     
+          		  <div  style="margin-top:50px;">
+		            	 <p >
+		            	 <span style="margin-right:5px;"><a href="#" class="insert rounded">최신순</a></span>
+		                 <span style="margin-right:5px;"><a href="#" class="insert rounded">순공감순</a></span>
+		                <span ><a href="#" class="insert rounded">공감비율순</a></span>   
+		                  </p>
+                  </div>
+            <div style=" margin-bottom:30px;border-top:2px #999 solid;"></div>
+            <!-- 댓글리스트 -->
+              <ul class="comment-list" >
+             
+			
+              <li class="comment" style="border-bottom:2px #999 solid;">
+                <div class="vcard">
+                  <img src="../Projectimages/userIcon.jpg" alt="Image placeholder">
+                </div>
+                <div class="comment-body">
+                  <h3>Jean Doe
+                   
+                 <span style="float:right;">
+                   <span style="margin-right:10px;"><a style= "color:#ff9999;"class="reply rounded">삭제</a></span>
+                        <span style="margin-right:10px;"> <a style="color:#8470FF;" class="reply rounded">수정</a> </span>
+                 <a class="reply rounded">신고하기</a>
+                 
+                 </span> 
+                  </h3>
+                  <div class="meta">January 9, 2018 at 2:21pm</div>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
+                  <p>
+                  <a href="#" class="reply rounded">답변(10)</a>
+                  <span style="float:right; margin-right:10px;">
+                
+                   
+                
+                  <span style="margin-right:10px;"><img src="../Projectimages/notup.png" width="20px;">
+	                  <span>
+	                  20
+	                  </span>
+                  </span>
+                    <span>
+                    <img src="../Projectimages/dislike.png" width="20px;">
+                    	  <span>
+			                  20
+			               </span>
+                     </span>
+                    </span> 
+                  </p>
+                </div>
+
+                <ul class="children" style="background-color:#f8f8f8; border-top:2px #999 solid;">
+                  <li class="comment">
+                    <div class="vcard">
+                      <img src="../Projectimages/userIcon.jpg" alt="Image placeholder">
+                    </div>
+                    <div class="comment-body">
+                      <h3>Jean Doe</h3>
+                      <div class="meta">January 9, 2018 at 2:21pm</div>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
+                        <p>
+               
+                  <span style="float:right; margin-right:10px;">
+                
+                   
+                
+                  <span style="margin-right:10px;"><img src="../Projectimages/notup.png" width="20px;">
+	                  <span>
+	                  20
+	                  </span>
+                  </span>
+                    <span>
+                    <img src="../Projectimages/dislike.png" width="20px;">
+                    	  <span>
+			                  20
+			               </span>
+                     </span>
+                    </span> 
+                  </p>
+                    </div>
+
+
+                  </li>
+                </ul>
+                </li>
+
+            
+            </ul>
+          
+            <!-- END comment-list -->
+
+        
+          </div>
 				
 				</div>
-          
-		
-			
-		
-		</div>
+ 		</div>
 		
 		
 	</div>

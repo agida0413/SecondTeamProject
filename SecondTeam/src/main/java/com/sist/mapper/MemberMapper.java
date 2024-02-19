@@ -26,7 +26,7 @@ public interface MemberMapper {
     //2-1.ID존재여부 확인
 	//전에만든 1-1 가져다 쓰면 됨
 	//2-2.비밀번호 확인
-	@Select("SELECT userId,userName,userPwd,enabled "
+	@Select("SELECT userId,userName,userPwd,enabled,centerName,admin,email,phone,mno "
 			+ "FROM member "
 			+ "WHERE userId=#{userId} ")
 	public MemberVO memberLogin(String userId);

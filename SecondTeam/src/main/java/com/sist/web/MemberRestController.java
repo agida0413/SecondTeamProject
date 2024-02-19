@@ -34,6 +34,7 @@ public class MemberRestController {
     	{
     		session.setAttribute("id", vo.getUserId());
     		session.setAttribute("centername", vo.getCenterName());
+    		session.setAttribute("username", vo.getUserName());
     		session.setAttribute("enabled", vo.getEnabled());
     		session.setAttribute("name", vo.getUserName());
 			session.setAttribute("admin", vo.getAdmin());

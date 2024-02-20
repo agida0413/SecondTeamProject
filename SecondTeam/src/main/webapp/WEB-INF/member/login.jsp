@@ -20,7 +20,7 @@
 <body>
 <div class="wrapper row3" id="loginApp">
     <main class="container clear"> 
-      <h2 class="sectiontitle">로그인111</h2>
+      <h2 class="sectiontitle">로그인</h2>
       <h2 class="sectiontitle">${sessionScope.id }</h2>
       <h2 class="sectiontitle">{{id}}</h2>
       <div class="row row1 rowrow">
@@ -60,7 +60,6 @@
  let loginApp=Vue.createApp({
 	 data(){
 		return{
-			//쿠키사용해서 로그인창 뜨기 전에 아이디값 가져오려고 이렇게 초기값 적용함
 			id:'${id}',
 			pwd:'',
 			ck:true

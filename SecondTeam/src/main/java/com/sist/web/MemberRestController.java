@@ -48,6 +48,11 @@ public class MemberRestController {
     	        cookie.setPath("/");
     	        cookie.setMaxAge(60*60*24);
     	        response.addCookie(cookie);
+    	        
+    	        Cookie cookie2=new Cookie("loginId",vo.getUserId());
+    	        cookie2.setPath("/");
+    	        cookie2.setMaxAge(60*60*24);
+    	        response.addCookie(cookie2);
     		}
     	}
     	return vo.getMsg();

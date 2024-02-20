@@ -21,13 +21,13 @@ public class AutoLoginInterceptor extends HandlerInterceptorAdapter{
 		   for(int i=0;i<cookies.length;i++)
 		   {
 			   String key=cookies[i].getName();
-			   if(key.equals("userId"))
+			   if(key.equals("loginId"))
 			   {
 				   String id=cookies[i].getValue();
 				   
-				  
-				   HttpSession session = request.getSession();
-				   session.setAttribute("id", id);
+				   request.setAttribute("id", id);
+				   //HttpSession session = request.getSession();
+				   //session.setAttribute("id", id);
 				   break;
 			   }
 		   }

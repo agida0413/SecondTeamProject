@@ -81,15 +81,27 @@ public class MemberController {
 		
 		// 로그아웃 이동
 		@GetMapping("member/logout.do")
-		public String member_logout(HttpSession session, HttpServletResponse response) {
+		public String member_logout(HttpSession session, 
+				HttpServletResponse response, HttpServletRequest request) {
 
 			// 세션정보 해제
 			session.invalidate();
 
 			// 쿠키 삭제
-			Cookie id = new Cookie("userid", null); // userid(쿠키 이름)에 대한 값을 null로 지정
-			id.setMaxAge(0);
-			response.addCookie(id);
+			Cookie[] cookies=request.getCookies();
+	    	if(cookies!=null)
+	    	{
+	    	    for(int i=0;i<cookies.length;i++)
+	    	    {
+	    	    	if(cookies[i].getName().equals("userId"))
+	    	    	{
+	    	    		cookies[i].setPath("/");
+	    	    		cookies[i].setMaxAge(0);
+	    	    		response.addCookie(cookies[i]);
+	    	    		break;
+	    	    	}
+	    	    }
+	    	}
 
 			return "redirect:../main/main.do";
 		}

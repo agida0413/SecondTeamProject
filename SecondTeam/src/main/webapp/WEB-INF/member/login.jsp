@@ -6,49 +6,104 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://unpkg.com/vue@3"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <style type="text/css">
+#loginApp{
+   color:#fff;
+   margin: 200px auto;
+}
+main{
+  background-color: rgba(41,65,80,1);
+  width: 500px;
+  margin: 0 auto;
+  padding: 50px 0;
+  border-radius: 10px;
+}
 .rowrow{
-   margin: 0 auto;
+   margin: 50px auto 0;
    width: 400px;
+}
+.table{
+   color:#fff !important;
+}
+td,th{
+   padding: 15px !important;
+   border-top: none !important;
+   border-bottom: none !important;
+}
+#last_tr{
+   border-bottom: none !important;
+}
+.inputinput{
+   width : 300px;
+   color: #fff !important;
+   border: none;
+   background: none;
+   border-bottom: 1px solid #fff;
+   font-size: 15px;
+}
+input:focus {
+   outline:none;
+}
+.inputbutton{
+   width : 100px;
+   color: #fff;
+   background-color: #93a0a8;
+   font-size: 15px;
 }
 </style>
 </head>
 
 <body>
-<div class="wrapper row3" id="loginApp">
-    <main class="container clear"> 
-      <h2 class="sectiontitle">로그인</h2>
-      <h2 class="sectiontitle">${sessionScope.id }</h2>
-      <h2 class="sectiontitle">{{id}}</h2>
+<div class="container" id="loginApp">
+    <main> 
+      <h2 class="sectiontitle text-center"><i class="xi-command"></i></h2>
+      <h2 class="sectiontitle text-center">Welcome</h2>
       <div class="row row1 rowrow">
          <table class="table">
             <tr>
-               <td width="20%" class="text-right">아이디</td>
-               <td width="80%" class="text-right">
-                  <input type="text" ref="id" class="input-sm"
+               <td width="30%" class="text-left">ID</td>
+               <td width="70%" class="text-center">
+                  <input type="text" ref="id" class="input-sm inputinput"
                   v-model="id">
                </td>
             </tr>
             <tr>
-               <td width="20%" class="text-right">비밀번호</td>
-               <td width="80%" class="text-right">
-                  <input type="password" ref="pwd" class="input-sm"
-                  v-model="pwd" @keyup.enter="login()">
+               <td width="30%" class="text-left">PW</td>
+               <td width="70%" class="text-center">
+                  <input type="password" ref="pwd" class="input-sm inputinput"
+                  v-model="pwd">
                </td>
             </tr>
             <tr>
-               <td colspan="2" class="inline">
+               <td colspan="2" class="text-center">
+                  <span>
                   <input type="checkbox" ref="ck"
                   v-model="ck">&nbsp;&nbsp;ID저장
+                  </span>
+                  &nbsp;&nbsp;&nbsp;
+                  &nbsp;&nbsp;&nbsp;
+                  &nbsp;&nbsp;&nbsp;
+                  <span><a href="../member/join_c.do" style="color: #fff !important;">
+                    <i class="xi-city"></i>
+                     센터회원가입</a></span>
+                  &nbsp;&nbsp;&nbsp;
+                  <span><a href="../member/join_u.do" style="color: #fff !important;">
+                    <i class="xi-user-o"></i>
+                     일반회원가입</a></span>
                </td>
             </tr>
             <tr>
-               <td colspan="2" class="text-center inline">
-                  <input type="button" value="로그인" class="btn btn-sm" @click="login()">
-                  <input type="button" value="취소" class="btn btn-sm" 
+               <td colspan="2"></td>
+            </tr>
+            <tr>
+               <td colspan="2" class="text-center inline" id="last_tr">
+                  <input type="button" value="로그인" class="btn btn-sm inputbutton" @click="login()">
+                  &nbsp;&nbsp;&nbsp;
+                  <input type="button" value="취소" class="btn btn-sm inputbutton" 
                   onclick="javascript:history.back()">
                </td>
             </tr>

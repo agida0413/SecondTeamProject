@@ -9,6 +9,7 @@
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 </head>
 <body>
 <!-- 모바일 -->
@@ -83,32 +84,28 @@
 						<div class="col-2 text-end">
 						   <div>
 						   <c:if test="${sessionScope.id==null }">
-						   <span><a href="../member/login.do">일반로그인</a></span>
 						   <ul class="js-clone-nav d-none d-lg-inline-block text-start site-menu mx-auto">
 						   <li class="has-children">
-									<a href="../donateclass/list.do?type=A">회원가입</a>
+									<a href="#" style="color:#fff;"><i class="xi-user-plus"></i> JOIN</a>
 									<ul class="dropdown">
 											<li><a href="../member/join_u.do">일반회원가입</a></li>
 											<li><a href="../member/join_c.do">센터회원가입</a></li>
 									</ul>
 								</li>
 							</ul>
-							<span><a href="../member/login.do" style="color:black;"><img src="../Projectimages/login.png" width="20px;">(신)로그인</a></span>
-							<span><a href="../program/login.do" style="color:black;"><img src="../Projectimages/login.png" width="20px;">(구)Login</a></span>
+							&nbsp;
+							<span><a href="../member/login.do" style="color:#fff; font-size: 14px;"><i class="xi-key"></i> LOGIN</a></span>
+							<span style="position: absolute;"><a href="../program/login.do" style="color:black;"><img src="../Projectimages/login.png" width="20px;">(구)Login</a></span>
 							</c:if>
 							
 							 <c:if test="${sessionScope.id!=null }">
-								<span>${sessionScope.name } 님 환영합니다.</span>
-								<span><a href="../myAndAdpage/mypage.do" style="color:black;"><img src="../Projectimages/login.png" width="20px;">mypage</a></span>
-							<span><a href="../member/logout.do" style="color:black;"><img src="../Projectimages/login.png" width="20px;">로그아웃</a></span>
+								<span style="color:#fff; font-size: 14px;">${sessionScope.name } 님 환영합니다.</span><br>
+								<span><a href="../myAndAdpage/mypage.do" style="color:#fff; font-size: 14px;"><i class="xi-home"></i> MYPAGE</a></span>
+							&nbsp;
+							<span><a href="../member/logout.do" style="color:#fff; font-size: 14px;"><i class="xi-log-out"></i> LOGOUT</a></span>
 							
 							</c:if>
 						   </div>
-						   
-						   <div style=" float:right; margin-top:10px;">
-						   	<span>보유 윙:0개..</span>
-						   </div>
-						</div>
 					</div>
 				</div>
 			</div>

@@ -33,6 +33,19 @@ cursor: pointer;
         font-family: Arial, sans-serif; /* 글꼴 설정 */
         color: #333; /* 글꼴 색상 */
 }
+
+.answerTextarea{
+width: 95%; /* 너비를 부모 요소에 맞게 설정 */
+        height: auto; /* 높이를 자동으로 조정 */
+        padding: 10px; /* 안쪽 여백 */
+        border: 1px solid #ddd; /* 테두리 스타일 및 색상 */
+        border-radius: 5px; /* 테두리 둥글게 */
+        resize: none; /* 크기 조정 비활성화 */
+        outline: none; /* 포커스 효과 제거 */
+        font-size: 16px; /* 글꼴 크기 */
+        font-family: Arial, sans-serif; /* 글꼴 설정 */
+        color: #333; /* 글꼴 색상 */
+}
 .insert{
  padding: 5px 20px;
         background: #f2f2f2;
@@ -145,16 +158,19 @@ cursor: pointer;
 				</div>
 				
 				<!-- 댓글 -->
-				<div class="row">
+		
+ 		</div>
+		
+		
+	</div>
+			<div class="row" id="programReplyApp">
 				     <div class="pt-5 comment-wrap">
+				     <!-- 댓글 갯수 -->
             <h3 class="mb-5 heading">6 Comments</h3>
-           
-           
-          
-             
-
-             	
-                <div class="comment-body">
+               	
+              
+              <!-- 새댓글 작성 -->
+                <div class="comment-body" v-if="sessionId!==''">
                 
                 <div style="margin-bottom:10px;">
                <img src="../Projectimages/userIcon.jpg" alt="Image placeholder" width="40px">
@@ -168,7 +184,9 @@ cursor: pointer;
                
                 
                 </div>
-     
+      <!-- 새댓글 작성  끝-->
+      
+      		 <!-- 조건별 -->
           		  <div  style="margin-top:50px;">
 		            	 <p >
 		            	 <span style="margin-right:5px;"><a href="#" class="insert rounded">최신순</a></span>
@@ -176,19 +194,30 @@ cursor: pointer;
 		                <span ><a href="#" class="insert rounded">공감비율순</a></span>   
 		                  </p>
                   </div>
+                   <!-- 조건별 끝 -->
+                  
+                  
+               <!-- 보더-->   
             <div style=" margin-bottom:30px;border-top:2px #999 solid;"></div>
+            
+            
+            
+            
             <!-- 댓글리스트 -->
               <ul class="comment-list" >
              
 			
               <li class="comment" style="border-bottom:2px #999 solid;">
+               
+               
+               <!-- 일반댓글 -->
                 <div class="vcard">
                   <img src="../Projectimages/userIcon.jpg" alt="Image placeholder">
                 </div>
                 <div class="comment-body">
                   <h3>Jean Doe
                    
-                 <span style="float:right;">
+                 <span style="float:right; margin-right:10px;">
                    <span style="margin-right:10px;"><a style= "color:#ff9999;"class="reply rounded">삭제</a></span>
                         <span style="margin-right:10px;"> <a style="color:#8470FF;" class="reply rounded">수정</a> </span>
                  <a class="reply rounded">신고하기</a>
@@ -198,7 +227,7 @@ cursor: pointer;
                   <div class="meta">January 9, 2018 at 2:21pm</div>
                   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
                   <p>
-                  <a href="#" class="reply rounded">답변(10)</a>
+                  <a class="reply rounded" @click="showAnswers()">답변(10)</a>
                   <span style="float:right; margin-right:10px;">
                 
                    
@@ -217,14 +246,24 @@ cursor: pointer;
                     </span> 
                   </p>
                 </div>
+  <!-- 일반댓글 끝-->
 
-                <ul class="children" style="background-color:#f8f8f8; border-top:2px #999 solid;">
+
+				<!-- 답변댓글 -->
+                <ul class="children" style="background-color:#f8f8f8; border-top:2px #999 solid; display:none;" ref="answer5">
                   <li class="comment">
                     <div class="vcard">
                       <img src="../Projectimages/userIcon.jpg" alt="Image placeholder">
                     </div>
                     <div class="comment-body">
-                      <h3>Jean Doe</h3>
+                      <h3>Jean Doe
+                        <span style="float:right; margin-right:10px;">
+                   <span style="margin-right:10px;"><a style= "color:#ff9999;"class="reply rounded">삭제</a></span>
+                        <span style="margin-right:10px;"> <a style="color:#8470FF;" class="reply rounded">수정</a> </span>
+                 <a class="reply rounded">신고하기</a>
+                 
+                 </span> 
+                      </h3>
                       <div class="meta">January 9, 2018 at 2:21pm</div>
                       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
                         <p>
@@ -250,7 +289,27 @@ cursor: pointer;
 
 
                   </li>
+                   
                 </ul>
+                <!-- 답변댓글 끝 -->
+                
+                
+                <!-- 답변달기 -->
+                   <ul class="children" style="background-color:#f8f8f8; border-top:2px #999 solid; display:none;">
+		               	<li >
+		               		   <textarea  class="answerTextarea" placeholder="새로운 답변을  작성해 주세요."></textarea>
+		               		   
+		                   <p style="float:right; margin-top:10px; margin-right:42px;">
+		                <span style="margin-right:5px;"><a href="#" class="insert rounded"><img src="../Projectimages/upSide.png" width=15px>&nbsp;답글접기</a></span>
+		                  <span><a href="#" class="insert rounded" style="color:#8470FF; font-weight:bold;">등록하기</a></span>
+		                  </p>
+		                  
+		                   
+		               	</li>
+                 
+              	  </ul>
+                <!-- 답변달기 끝 -->
+              
                 </li>
 
             
@@ -262,10 +321,6 @@ cursor: pointer;
           </div>
 				
 				</div>
- 		</div>
-		
-		
-	</div>
 	
 	<script>
 	let programDetail = Vue.createApp({
@@ -388,6 +443,33 @@ cursor: pointer;
 		}
 	}).mount('#programDetailHeader')
 	
+	
+	
+	let programReplyApp=Vue.createApp({
+		data(){
+			return{
+				sessionId:'${sessionScope.id}',
+				vno:${vo.vno}
+				
+			}
+		},
+		mounted(){
+			
+		},
+		methods:{
+			showAnswers(){
+				
+				if(this.$refs.answer5.style.display === 'block'){
+					this.$refs.answer5.style.display = 'none';
+				}else{
+					this.$refs.answer5.style.display = 'block';
+				}
+				
+				
+				
+			}
+		}
+	}).mount('#programReplyApp')
 	</script>
 </body>
 </html>

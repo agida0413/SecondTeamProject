@@ -20,6 +20,8 @@ import org.springframework.web.servlet.view.UrlBasedViewResolver;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 
+import com.sist.interceptor.AutoLoginInterceptor;
+
 @Configuration
 @ComponentScan(basePackages = "com.sist.*")
 @EnableAspectJAutoProxy
@@ -74,19 +76,15 @@ public class ContextConfig implements WebMvcConfigurer {
 	
 	
 	
-/*
- * 인터셉터 예시 	인터셉터 등록후 addInterceptors에 registry 할것
- */
-//	@Bean
-//    public FoodInterceptor foodInterceptor() {
-//        return new FoodInterceptor();
-//    }
-	
-	
-	 @Override
+	 @Bean
+	    public AutoLoginInterceptor autoLoginInterceptor() {
+	        return new AutoLoginInterceptor();
+	    }
+
+	    @Override
 	    public void addInterceptors(InterceptorRegistry registry) {
-//	        registry.addInterceptor(foodInterceptor())
-//	                .addPathPatterns("/**"); <--예시
+	        registry.addInterceptor(autoLoginInterceptor())
+	                .addPathPatterns("/**"); // 모든 경로에 인터셉터를 적용하도록 설정
 	    }
 	
 	

@@ -18,6 +18,7 @@
 #goodsDetail{
 margin-top: 50px;
 }
+
 </style>
 </head>
 <body>
@@ -31,7 +32,7 @@ margin-top: 50px;
 					<a href="#" class="read-more" @click="goback()">Return List</a>
 				</div>
 			</div>
-<table class="goodsDetailtab" style="width: 100%;">
+<table class="goodsDetailtab" style="width: 100%;" @submit="goCart()">
     <tr>
         <td width="40%" class="text-center" rowspan="3">
             <img :src="goodsdetail.g_img" style="max-width: 100%; height: auto;">
@@ -69,10 +70,12 @@ margin-top: 50px;
     <tr>
         <td colspan="2" style="padding-left: 20px;">
             <div style="margin-top: 20px; display: flex;">
-                <input type="button" class="form-control" value="장바구니" style="width: 180px; height: 50px; font-weight: bold; margin-right: 5px;">
+                <input type="button" class="form-control" value="장바구니" style="width: 180px; height: 50px; font-weight: bold; margin-right: 5px;" @click="goCart(goodsdetail.gno)">
                 <input type="button" class="form-control" value="바로구매" style="width: 180px; height: 50px; font-weight: bold; margin-right: 5px;">
-                <button class="form-control" style="width: 50px; height: 50px; margin-left: 1px; font-weight: bold; padding: 5px; display: flex; align-items: center; justify-content: center;">
-                    <span style="font-size: 27px;"><i class="xi-heart-o"></i></span>
+                <button class="form-control" style="width: 50px; height: 50px; margin-left: 1px; font-weight: bold; padding: 5px; display: flex; align-items: center; 
+                justify-content: center;" @click="goWish(goodsdetail.gno)">
+                    <span style="font-size: 27px;" v-if="!like"><i class="xi-heart-o"></i></span>
+                    <span style="font-size: 27px;" v-if="like"><i class="xi-heart"></i></span>
                 </button>
             </div>
         </td>
@@ -111,7 +114,7 @@ margin-top: 50px;
 				</div>	
 			</div>
 			<div class="col-sm-3 text-sm-end"
-				style="margin-top: 50px; display: none; height: 400px;" id="dialog" >
+				style="margin-top: 50px; display: none; height: 400px;" id="dialog" @submit="write">
 				  <h3 class="text-center" style="margin-top: -5px;">상품 리뷰 작성</h3>
 		        <table class="table" style="text-align: left; border-collapse: collapse;">
 		            <tr>
@@ -130,6 +133,12 @@ margin-top: 50px;
 		                <th width="10%">내용</th>
 		                <td width="90%"><textarea rows="15" cols="70" ref="content" v-model="content"></textarea></td>
 		            </tr>
+					<tr >
+						<th width="15%" class="text-center">첨부파일</th>
+						<td width="85%">
+						<input type="file" ref="upfiles" class="input-sm" :readonly="upfiles">
+						</td>
+					</tr>
 					<tr>
 						<th width="10%">별점</th>
 						<td width="90%"><select v-model="score" class="form-control" @change="updateScore">
@@ -163,7 +172,12 @@ margin-top: 50px;
 		</div>
 		
 			<div class="text-left" style="margin-top: 30px;" v-else>
-				<table class="review-table" v-for="vo in rList" style="width: 100%">
+				<table class="review-table" v-for="vo in rList" style="width: 100%; margin-top: 20px; margin-bottom: 20px;">
+					<tr>
+						<td rowspan="6" width="50%" style="margin-top: 20px;">
+						<img :src="'../goodsReview/' + vo.filename" style="width: 200px; height: 200px;">
+					</td>
+					</tr>
 					<tr>
 						<td width="20%">{{displayStars(vo.score)}}</td>
 					</tr>
@@ -172,12 +186,12 @@ margin-top: 50px;
 					</tr>
 					<tr>
 						<td width="50%">
-							<p>{{vo.subject}}</p>
+							<p style="font-weight: bold">{{vo.subject}}</p>
 							<p>{{vo.content}}</p>
 						</td>
-					</tr>
-					<tr>
-						<td colspan="3" style="display: flex; justify-content: flex-end;" v-if="vo.userid===userid">
+				</tr>
+				<tr style="border-bottom: grey">
+						<td colspan="2" style="display: flex; justify-content: flex-end;" v-if="vo.userid===userid">
 							<button class="form-control" @click="upReview(vo.rno)" style="width: 60px; height: 40px;">수정</button>
 							<button class="form-control" @click="delReview(vo.rno)" style="width: 60px; height: 40px;">삭제</button>
 						</td>
@@ -219,7 +233,11 @@ let goodsDetail=Vue.createApp({
 			maxScore:5,
 			userid:'',
 			username:'',
-			editMode:false
+			editMode:false,
+			upfiles:'',
+			like:false,
+			cartlist:{},
+			intprice:0
 		}
 	},
 	mounted(){
@@ -238,7 +256,18 @@ let goodsDetail=Vue.createApp({
 				this.goodsdetail_img=res.data.goodsdetail_img
 				this.rList=res.data.rList,
 				this.userid=res.data.userid,
-				this.username=res.data.username
+				this.username=res.data.username,
+				this.intprice=res.data.goodsdetail.intprice
+				let leng = res.data.rList.filecount;
+				if (leng > 0) {
+				    for (let i = 0; i < leng; i++) {
+				        this.rList.push({
+				            filename: res.data.rList.filename.split(",")[i],
+				            filesize: res.data.rList.filesize.split(",")[i]
+				        });
+				    }
+				}
+				
 			})
 		},
 		subImgShow(){
@@ -278,7 +307,7 @@ let goodsDetail=Vue.createApp({
 		        autoOpen:false,
 		        modal:true,
 		        width:900,
-		        height:720,
+		        height:900,
 		        open: function(event, ui) {
 		            $("body").css("top", -scrollTop); 
 		            $("body").addClass("dialog-open"); 
@@ -339,7 +368,7 @@ let goodsDetail=Vue.createApp({
 		        autoOpen:false,
 		        modal:true,
 		        width:900,
-		        height:720,
+		        height:900,
 		        open: function(event, ui) {
 		            $("body").css("top", -scrollTop); 
 		            $("body").addClass("dialog-open"); 
@@ -361,39 +390,62 @@ let goodsDetail=Vue.createApp({
                this.$refs.content.focus();
                return;
            }
+          	
+          
+
+           let form=new FormData()
+       	form.append("gno",this.gno)
+       	form.append("subject",this.subject)
+       	form.append("content",this.content)
+       	form.append("score",this.score)
+       	
+  	  	   let leng=this.$refs.upfiles.files.length
+   	   if(leng>0)
+     	 	{
+      	   for(let i=0;i<leng;i++)
+      		  {
+      		   	form.append("files["+i+"]",this.$refs.upfiles.files[i])
+      		  }
+      		}
+           
+           let form2=new FormData()
+          	form2.append("rno",this.uprno)
+      	 	form2.append("gno",this.gno)
+       		form2.append("subject",this.subject)
+       		form2.append("content",this.content)
+       		form2.append("score",this.score)
+      
+       		
+   
+
            if(this.editMode===false)
-           {
-           axios.get("../goods/reviewInsert_vue.do", {
-               params:{
-               gno: this.gno,
-               subject: this.subject,
-               content: this.content,
-               score: this.score
-               },
-               headers: {
-	                'Content-Type': 'application/json;charset=UTF-8'
+           { 
+           axios.post("../goods/reviewInsert_vue.do",form,{
+        	   headers: {
+        		   'Content-Type': 'multipart/form-data' 
 	            }
            }).then(res => {
-               alert("리뷰작성이 완료되었습니다");
-               $("#dialog").dialog("close");
-               this.detaildata()
+        	   console.log(res.data)
+        	   if(res.data=="yes")
+        		{
+        		   alert("리뷰작성이 완료되었습니다");
+                   $("#dialog").dialog("close");
+                   this.detaildata()
+        		}
+        	   else
+        		 {
+        		   alert(res.data);
+        		 }
            }).catch(error => {
                console.error("Error occurred while sending review:", error);
            });
            }
            else
            {
-           	axios.get("../goods/reviewUpdate_vue.do",{
-           		params:{
-           		    rno: this.uprno,
-           			gno: this.gno,
-                    subject: this.subject,
-                    content: this.content,
-                    score: this.score
-           		},
-                   headers: {
-   	                'Content-Type': 'application/json;charset=UTF-8'
-   	            }
+           	axios.post("../goods/reviewUpdate_vue.do",form2,{
+           		headers: {
+         		   'Content-Type': 'multipart/form-data' 
+ 	            }
            	}).then(res=>{
            		console.log("up:"+res.data)
            		this.rList=res.data
@@ -405,6 +457,25 @@ let goodsDetail=Vue.createApp({
                })
            	
            }
+       },
+       goWish(gno){
+    	   this.like=true
+       },
+       goCart(gno){
+    	   let form=new FormData()
+    	   form.append("gno",this.gno)
+    	   form.append("userid",this.userid)
+    	   form.append("cart_price",this.intprice*this.quantity)
+    	   form.append("cart_count",this.quantity)
+    	   axios.post("../goods/cartInsert_vue.do",form,{
+    		   headers:{
+    			   'Content-Type': 'multipart/form-data' 
+    		   }
+    	   }).then(res=>{
+    		   console.log(res.data)
+    		   alert("상품이 장바구니에 담겼습니다")
+    		   this.cartlist=res.data
+    	   })
        }
 	}
 }).mount("#goodsDetail")

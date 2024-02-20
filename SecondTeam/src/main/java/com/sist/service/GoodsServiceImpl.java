@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sist.dao.GoodsDAO;
+import com.sist.vo.CartVO;
 import com.sist.vo.GoodsReviewVO;
 import com.sist.vo.GoodsVO;
 
@@ -57,11 +58,6 @@ public List<GoodsVO> goodsDetailImg(int gno) {
 	return gDao.goodsDetailImg(gno);
 }
 
-@Override
-public void gReviewInsert(GoodsReviewVO vo) {
-	// TODO Auto-generated method stub
-	gDao.gReviewInsert(vo);
-}
 
 @Override
 public List<GoodsReviewVO> gReviewListData(int gno) {
@@ -80,5 +76,18 @@ public void gReviewUpdate(GoodsReviewVO vo) {
 	// TODO Auto-generated method stub
 	gDao.gReviewUpdate(vo);
 }
+
+@Override
+public void gReviewInsert(GoodsReviewVO vo) {
+	// TODO Auto-generated method stub
+	gDao.gReviewInsert(vo);
+}
+
+@Override
+public void cartInsert(CartVO vo) {
+	// TODO Auto-generated method stub
+	gDao.cartInsert(vo);
+}
+
 
 }

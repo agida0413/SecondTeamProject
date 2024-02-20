@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
+import com.sist.vo.CartVO;
 import com.sist.vo.GoodsReviewVO;
 import com.sist.vo.GoodsVO;
 
@@ -84,11 +85,11 @@ public List<GoodsVO> goodsDetailImg(int gno);
 
 //상품 리뷰 insert
 @Insert("INSERT INTO goodsReview "
-		+ "VALUES(gr_gno_seq.nextval,#{gno},#{userid},#{username},#{subject},#{content},SYSDATE,#{score})")
+		+ "VALUES(gr_gno_seq.nextval,#{gno},#{userid},#{username},#{subject},#{content},SYSDATE,#{score},#{filename},#{filesize},#{filecount})")
 public void gReviewInsert(GoodsReviewVO vo);
 
 // 상품 리뷰 리스트
-@Select("SELECT rno,gno,userid,username,subject,content,TO_CHAR(regdate,'YYYY-MM-DD HH24:MI:SS') as dbday,score "
+@Select("SELECT rno,gno,userid,username,subject,content,TO_CHAR(regdate,'YYYY-MM-DD HH24:MI:SS') as dbday,score,filename,filesize,filecount "
 		+ "FROM goodsReview "
 		+ "WHERE gno=#{gno} ORDER BY rno DESC")
 public List<GoodsReviewVO> gReviewListData(int gno);
@@ -98,8 +99,14 @@ public List<GoodsReviewVO> gReviewListData(int gno);
 public void gReviewDelete(int rno);
 
 //상품 리뷰 업데이트
-@Delete("UPDATE goodsReview SET content=#{content},regdate=SYSDATE,score=#{score} WHERE rno=#{rno}")
+@Delete("UPDATE goodsReview SET content=#{content},regdate=SYSDATE,score=#{score} "
+		+ "WHERE rno=#{rno}")
 public void gReviewUpdate(GoodsReviewVO vo);
+// 장바구니 이동
+@Insert("INSERT INTO goods_cart(gcno,gno,userid,cart_price,cart_count) "
+		+ " VALUES(gct_gcno_seq.nextval,#{gno},#{userid},#{cart_price},#{cart_count})")
+public void cartInsert(CartVO vo);
+
 }
 
 

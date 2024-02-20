@@ -3,6 +3,7 @@ package com.sist.service;
 import java.util.List;
 import java.util.Map;
 
+import com.sist.vo.CartVO;
 import com.sist.vo.GoodsReviewVO;
 import com.sist.vo.GoodsVO;
 
@@ -15,8 +16,10 @@ public interface GoodsService {
 	public GoodsVO goodsDetailData(int gno);
 	public List<GoodsVO> goodsDetailImg(int gno);
 	//리뷰
-	public void gReviewInsert(GoodsReviewVO vo);
 	public List<GoodsReviewVO> gReviewListData(int gno);
 	public void gReviewDelete(int rno);
 	public void gReviewUpdate(GoodsReviewVO vo);
+	public void gReviewInsert(GoodsReviewVO vo);
+	// 장바구니
+	public void cartInsert(CartVO vo);
 }

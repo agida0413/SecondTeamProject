@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.sist.mapper.GoodsMapper;
+import com.sist.vo.CartVO;
 import com.sist.vo.GoodsReviewVO;
 import com.sist.vo.GoodsVO;
 
@@ -47,5 +48,8 @@ public void gReviewDelete(int rno) {
 }
 public void gReviewUpdate(GoodsReviewVO vo) {
 	mapper.gReviewUpdate(vo);
+}
+public void cartInsert(CartVO vo) {
+	mapper.cartInsert(vo);
 }
 }

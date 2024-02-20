@@ -77,7 +77,7 @@
 							
 							</ul>
 							
-							<span style="float:right;"><a href="#"><img src="../Projectimages/shop.png" width="35px;"></a></span>
+							<span style="float:right;"><a href="../cart/cart_main.do"><img src="../Projectimages/shop.png" width="35px;"></a></span>
 							</div>
 						
 						</div>

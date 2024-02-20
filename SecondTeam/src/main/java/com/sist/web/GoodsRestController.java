@@ -1,5 +1,6 @@
 package com.sist.web;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,10 +18,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sist.commons.CommonsFunction;
+import com.sist.service.CartService;
 import com.sist.service.GoodsService;
+import com.sist.vo.CartVO;
 import com.sist.vo.DonStoreVO;
 import com.sist.vo.GoodsReviewVO;
 import com.sist.vo.GoodsVO;
@@ -31,6 +35,8 @@ public class GoodsRestController {
 private GoodsService gService;
 @Autowired
 private CommonsFunction comm;
+@Autowired
+private CartService cService;
 
 // 전체 리스트
 @GetMapping(value="goods/goods_list_vue.do",produces = "text/plain;charset=UTF-8")
@@ -171,30 +177,73 @@ public String goods_detail_vue(int gno,HttpSession session) throws Exception
 }
 
 // 리뷰 insert
-@RequestMapping(value="goods/reviewInsert_vue.do",produces = "text/plain;charset=UTF-8")
-public String goods_reviewInsert_vue(int gno,String subject,String content,int score,HttpSession session) throws Exception
+
+@PostMapping(value="goods/reviewInsert_vue.do",produces = "text/plain;charset=UTF-8")
+public String goods_reviewInsert_vue(GoodsReviewVO vo, HttpServletRequest request,HttpSession session) throws Exception
 {
-	String userid=(String)session.getAttribute("id");
-	String username=(String)session.getAttribute("name");
-	GoodsReviewVO vo=new GoodsReviewVO();
-	vo.setUserid(userid);
-	vo.setUsername(username);
-	vo.setGno(gno);
-	vo.setContent(content);
-	vo.setSubject(subject);
-	vo.setScore(score);
-	gService.gReviewInsert(vo);
-	ObjectMapper mapper=new ObjectMapper();
-	String json=mapper.writeValueAsString(vo);
-	return json;
+
+	String result="";
+	try
+	{
+		String userid=(String)session.getAttribute("id");
+		String username=(String)session.getAttribute("name");
+		vo.setUserid(userid);
+		vo.setUsername(username);
+		String path=request.getSession().getServletContext().getRealPath("/")+"goodsReview\\";
+		path=path.replace("\\", File.separator); 
+		File dir=new File(path);
+		if(!dir.exists())
+		{
+			dir.mkdir(); 
+		}
+		
+		List<MultipartFile> list=vo.getFiles(); 
+
+		if(list==null)
+		{
+			vo.setFilename("");
+			vo.setFilesize("");
+			vo.setFilecount(0);
+		}
+		else 
+		{
+			String filename="";
+			String filesize="";
+			for(MultipartFile mf:list)
+			{
+				String name=mf.getOriginalFilename();
+				File file=new File(path+name);
+				mf.transferTo(file); 
+				
+				filename+=name+","; 
+				filesize+=file.length()+",";	
+			}
+			filename=filename.substring(0,filename.lastIndexOf(","));
+			filesize=filesize.substring(0,filesize.lastIndexOf(","));
+			vo.setFilename(filename);
+			
+			vo.setFilesize(filesize);
+			vo.setFilecount(list.size());
+		}
+		gService.gReviewInsert(vo);
+		result="yes";
+	}
+	catch(Exception ex) 
+	{
+		result=ex.getMessage();
+	}
+	return result;
+
 }
+
 //리뷰 update
-@RequestMapping(value="goods/reviewUpdate_vue.do",produces = "text/plain;charset=UTF-8")
+@PostMapping(value="goods/reviewUpdate_vue.do",produces = "text/plain;charset=UTF-8")
 public String goods_reviewUpdate_vue(GoodsReviewVO vo) throws Exception
 {
 	
 	gService.gReviewUpdate(vo);
 	List<GoodsReviewVO> rList=gService.gReviewListData(vo.getGno());
+	
 	ObjectMapper mapper=new ObjectMapper();
 	String json=mapper.writeValueAsString(rList);
 	return json;
@@ -207,6 +256,15 @@ public String goods_reviewDelete_vue(int rno,int gno) throws Exception
 	List<GoodsReviewVO> rList=gService.gReviewListData(gno);
 	ObjectMapper mapper=new ObjectMapper();
 	String json=mapper.writeValueAsString(rList);
+	return json;
+}
+// 장바구니 insert
+@PostMapping(value="goods/cartInsert_vue.do",produces="text/plain;charset=UTF-8")
+public String goods_cartInsert_vue(CartVO vo) throws Exception
+{
+	gService.cartInsert(vo);
+	ObjectMapper mapper=new ObjectMapper();
+	String json=mapper.writeValueAsString(vo);
 	return json;
 }
 }

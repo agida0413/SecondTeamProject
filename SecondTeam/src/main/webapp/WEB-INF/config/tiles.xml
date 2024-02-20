@@ -42,6 +42,12 @@
          <put-attribute name="dcAside" value="/WEB-INF/donateclass/aside.jsp"/>
          <put-attribute name="footer" value="/WEB-INF/main/footer.jsp"/>
       </definition>
+      
+       <definition name="cart" template="/WEB-INF/cart/cart_main.jsp">
+         <put-attribute name="header" value="/WEB-INF/main/header.jsp"/>
+         <put-attribute name="content" value="/WEB-INF/cart/cart_list.jsp"/>
+         <put-attribute name="footer" value="/WEB-INF/main/footer.jsp"/>
+      </definition>
      	
        <definition name="program/*" extends="program">
           <put-attribute name="content" value="/WEB-INF/program/{1}.jsp"/>
@@ -70,10 +76,16 @@
         <definition name="donation/*" extends="donation">
           <put-attribute name="dcontent" value="/WEB-INF/donation/{1}.jsp"/>
        	</definition>
+       	
+       	<definition name="cart/*" extends="cart">
+          <put-attribute name="content" value="/WEB-INF/cart/{1}.jsp"/>
+           </definition>
            
    		 <definition name="program/*/*" extends="program"><!-- {1}/{2}/{3} -->
 			<put-attribute name="content" value="/WEB-INF/program/{1}/{2}.jsp"></put-attribute>
 		</definition>
+		
+		
    		
       <definition name="*/*" extends="main"><!-- {1}/{2} -->
          <put-attribute name="home" value="/WEB-INF/{1}/{2}.jsp"></put-attribute>

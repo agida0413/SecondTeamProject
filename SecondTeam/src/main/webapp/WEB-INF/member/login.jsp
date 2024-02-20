@@ -36,7 +36,7 @@
                <td width="20%" class="text-right">비밀번호</td>
                <td width="80%" class="text-right">
                   <input type="password" ref="pwd" class="input-sm"
-                  v-model="pwd">
+                  v-model="pwd" @keyup.enter="login()">
                </td>
             </tr>
             <tr>

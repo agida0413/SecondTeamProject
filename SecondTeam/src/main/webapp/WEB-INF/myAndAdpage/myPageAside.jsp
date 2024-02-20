@@ -24,8 +24,9 @@ cursor:pointer;
   <a href="../myAndAdpage/programCertify.do?state=COMPLETE"><li class="list-group-item ${cate == 'programCertify' ? 'active' : ''}" style="padding:18px;">봉사완료프로그램 인증신청</li></a>
    <a href="../myAndAdpage/programwishList.do"><li class="list-group-item ${cate == 'wishlist' ? 'active' : ''}" style="padding:18px;">봉사프로그램 관심목록</li></a>
    <a class="aLink" @click="centerCheck()"><li class="list-group-item ${cate == 'centerProgram' ? 'active' : ''}" style="padding:18px;">센터's 프로그램</li></a>
+ 
   <a href="../myAndAdpage/donClassWishList.do"> <li class="list-group-item ${cate == 'classWishList' ? 'active' : ''}" style="padding:18px;">클래스 관심목록</li></a>
-
+	
 </ul>
 
 

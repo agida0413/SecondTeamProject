@@ -25,7 +25,7 @@ public class AutoLoginInterceptor extends HandlerInterceptorAdapter{
 			   {
 				   String id=cookies[i].getValue();
 				   
-				   request.setAttribute("id", id);
+				  
 				   HttpSession session = request.getSession();
 				   session.setAttribute("id", id);
 				   break;

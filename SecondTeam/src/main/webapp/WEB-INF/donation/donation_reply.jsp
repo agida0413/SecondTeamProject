@@ -69,7 +69,7 @@ h3.plan strong{
 </style>
 </head>
 <body>
-<div class="container" id="donationDetailApp">
+<div class="container" id="donationReplyApp">
 
       <div class="row blog-entries element-animate">
 
@@ -93,85 +93,7 @@ h3.plan strong{
               </li>
             </ul>
             
-            <div class="container mt-3">
-			  <ul class="nav nav-tabs">
-			    <li class="nav-item">
-			      <a class="nav-link active" href="#">Active</a>
-			    </li>
-			    <li class="nav-item">
-			      <a class="nav-link" href="../donation/donation_reply.do">Link</a>
-			    </li>
-			    <li class="nav-item">
-			      <a class="nav-link" href="#">Link</a>
-			    </li>
-			    <li class="nav-item">
-			      <a class="nav-link disabled" href="#">Disabled</a>
-			    </li>
-			  </ul>
-			</div>
-            <!-- 기부금 사용계획 -->
 
-    <div class="use_lst">
-        <div class="heading">
-            <h3>
-                <strong class="detail_subtit">기부금 사용계획</strong>
-            </h3>
-        </div>
-        <table cellspacing="0" border="1" summary="모금사용계획리스트입니다.">
-            <col style="width:160px">
-            <col>
-            <col style="width:160px">
-            <thead>
-            </thead>
-            <tbody>
-            <tr class="total">
-                <td class="use"><strong>총 집행금액</strong></td>
-                <td colspan="2"><em>{{detail_data.d_goal}}</em> 원 (목표금액 {{detail_data.d_goal}} 원)</td>
-            </tr>
-            
-                <tr v-for="(pur,index) in content_purpose">
-                    <td class="use">사업비</td>
-                    <td>{{pur}} </td>
-                    <td class="amount"><em>{{content_cost[index]}}</em>원</td>
-                </tr>
-            
-            </tbody>
-        </table>
-        
-        
-            <div class="use_goal">
-				<h3><strong class="detail_subtit">사업대상 및 기대효과</strong></h3>
-				<table cellspacing="0" border="1" summary="사업 기간, 사업 대상, 대상 수, 기대효과" class="ex_lst">
-					<col width="126">
-					<col>
-					<tbody>
-					<tr>
-					    <th scope="row">사업 기간</th>
-					    <td>
-					    	{{detail_data.d_startdate}}
-							~
-							{{detail_data.d_enddate}}
-					    </td>
-					</tr>
-					
-					<tr>
-					    <th scope="row">사업 대상</th>
-					    <td>{{detail_data.d_towho}}</td>
-					</tr>
-					
-					
-					<tr>
-					    <th scope="row">대상 수</th>
-					    <td>{{detail_data.d_person}}</td>
-					</tr>
-					
-					</tbody>
-				</table>
-				<!-- //[D] 수정 후 개설된 모금함 버전 -->
-            </div>
-        
-    	  </div>
-            
          </div>
 
           <div class="pt-5 comment-wrap">
@@ -323,7 +245,7 @@ h3.plan strong{
     	 methods:{
     		 
     	 }
-     }).mount('#donationDetailApp')
+     }).mount('#donationReplyApp')
    </script>
 </body>
 </html>

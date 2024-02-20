@@ -18,5 +18,10 @@ public class DonationController {
 		return "donation/donation_detail";
 	}
 	
+	@GetMapping("donation/donation_reply.do")
+	public String donation_reply() {
+		return "donation/donation_reply";
+	}
+	
 	
 }

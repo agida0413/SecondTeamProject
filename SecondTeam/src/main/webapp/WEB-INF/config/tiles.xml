@@ -62,6 +62,11 @@
           <put-attribute name="dcContent" value="/WEB-INF/donateclass/{1}.jsp"/>
            </definition>
            
+        <definition name="donation/donation_detail" extends="donation">
+          <put-attribute name="dcontent" value="/WEB-INF/donation/donation_detail.jsp"/>
+          <put-attribute name="daside" value="/WEB-INF/donation/donation_detail_side.jsp"/>
+       	</definition>
+           
         <definition name="donation/*" extends="donation">
           <put-attribute name="dcontent" value="/WEB-INF/donation/{1}.jsp"/>
        	</definition>

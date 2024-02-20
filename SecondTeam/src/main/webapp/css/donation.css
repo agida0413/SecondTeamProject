@@ -1,0 +1,186 @@
+.detail_cate{
+	padding-bottom: 16px;
+    font-size: 17px;
+    font-weight: 400;
+    color: #00ab33;
+    letter-spacing: -.06em;
+    line-height: 1;
+}
+.detail_title{
+	font-size: 36px;
+    font-weight: 400;
+    color: #222;
+    letter-spacing: .4px;
+    line-height: 40px;
+}
+.detail_body{
+	padding: 40px 50px 50px;
+	float: left
+}
+.detail_subtit{
+	color: #444444; 
+	font-size: 19px;
+	padding-top: 10px;
+}
+.detail_subcon{
+	 padding-top: 10px;
+	 color: #444444;
+	 font-size: 16px;
+}
+h3.plan strong{
+	float: left;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 1.1;
+    color: #222;
+    letter-spacing: .01em;
+}
+.use_lst table {
+    width: 100%;
+    margin: 0;
+    border: 1px solid #ccc;
+    border-top-color: #ccc;
+    border-width: 1px 0;
+    font-size: 16px;
+    color: #222222;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.use_lst table td{
+    height: 56px;
+    padding: 16px 0 15px 19px;
+    border: none;
+    border-top: 1px solid #ebebeb;
+    color: #222;
+    text-align: left;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.do_category_theme_list{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    position: relative;
+    white-space: nowrap;
+    list-style: none;
+}
+.dlink, input[type=radio]+label{
+	cursor: pointer;
+}
+.do_category_item:hover{
+	background-color: #e3e3e3;
+}
+.do_category_list li.active{
+	background-color: #e3e3e3;
+}
+.do_category_item{
+	display: block;
+    height: 48px;
+    padding: 12px 11px 0;
+    border: 1px solid #e3e3e3;
+    border-radius: 30px;
+    cursor: pointer;
+    margin-left: 9px;
+}
+.do_category_sublist{
+	padding: 12px 14px;
+    background-color: #f6f6f6;
+    border-radius: 30px;
+    font-size: 0;
+    text-align: center;
+    margin-left: 40px;
+ 	width: 1085px;   
+}
+.do_category_supportlist{
+	overflow: auto;
+    margin-bottom: -15px;
+    padding-bottom: 15px;
+    white-space: nowrap;
+}
+.category_support_label {
+    display: inline-block;
+    position: relative;
+    height: 31px;
+    padding: 7px 16px 0;
+    font-size: 15px;
+    color: #333;
+}
+.category_support_label:hover {
+	text-decoration: underline;
+	color: #00ab33;
+	font-weight: bold;
+}
+
+.do_category_sublist li.active .category_support_label{
+	text-decoration: underline;
+	color: #00ab33;
+	font-weight: bold;
+}
+
+input[type=radio] {
+    overflow: hidden;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    clip: rect(0 0 0 0);
+}
+.do_category_subitem {
+    display: inline-block;
+}
+.donaTitle{
+   white-space: nowrap; /* 텍스트가 줄바꿈되지 않도록 함 */ 
+   overflow: hidden; /* 초과된 텍스트를 감추기위해 오버플로우를 숨김 */
+   text-overflow: ellipsis; /* 말줄임표 만드는 속성 */
+   font-size: 15px;
+   letter-spacing: -.5px;
+}
+.card_bar {
+    height: 5px;
+    margin-top: 13px;
+    background-color: #e8e8e8;
+}
+.card_bar_collection {
+    display: inline-block;
+    height: 100%;
+    background-color: #10c838;
+    text-align: right;
+    vertical-align: top;
+}
+.card_content{
+ 	padding: 21px 20px 0;
+ 	border: 1px;
+}
+.card_form{
+	float: left;
+    position: relative;
+    width: 267px;
+    height: 250px;
+    margin: 0 0 24px 24px;
+    background-color: #fff;
+    font-family:"Work Sans", sans-serif;;
+    border: 1px solid rgba(0,0,0,.11);
+    border-radius: 5px;
+}
+.card_percent{
+	display: inline-block;
+    margin-top: 11px;
+    font-size: 17px;
+    letter-spacing: -.2px;
+    color: #00ab33;
+    font-family:"Work Sans", sans-serif;;
+}
+.card_money {
+    float: right;
+    margin-top: 11px;
+    font-size: 17px;
+    color: #333;
+    font-family:"Work Sans", sans-serif;;
+}
+.pagination li.active a{
+	background-color: #214252;
+    color: #fff;
+}

@@ -31,7 +31,7 @@
 	<link rel="stylesheet" href="../css/aos.css">
 	<link rel="stylesheet" href="../css/glightbox.min.css">
 	<link rel="stylesheet" href="../css/style.css">
-
+	<link rel="stylesheet" href="../css/donation.css">
 	<link rel="stylesheet" href="../css/flatpickr.min.css">
 <meta charset="UTF-8">
 <title>Insert title here</title>

@@ -10,8 +10,10 @@ import com.sist.dao.OptionDAO;
 import com.sist.dao.ProgramDataboardDAO;
 import com.sist.dao.ProgramListDAO;
 import com.sist.dao.ProgramRcAverageDAO;
+import com.sist.dao.ProgramReplyDAO;
 import com.sist.dao.ProgramWishDAO;
 import com.sist.vo.OptionVO;
+import com.sist.vo.ProgramReplyVO;
 import com.sist.vo.ProgramStatisticsVO;
 import com.sist.vo.ProgramVO;
 import com.sist.vo.VdataboardVO;
@@ -29,8 +31,9 @@ public class ProgramServiceImpl implements ProgramService {
 	private ProgramDataboardDAO dbDAO;
 	@Autowired
 	private ProgramWishDAO zDao;
+
 	@Autowired
-	private ProgramRcAverageDAO rDao;
+	private ProgramReplyDAO rDao;
 
 	@Override
 	public List<OptionVO> stateOption() {
@@ -243,13 +246,31 @@ public class ProgramServiceImpl implements ProgramService {
 	}
 
 	
-	
-
 
 	
 	
 
+
 	
+	
+//댓글
+	@Override
+	public void insertReply(ProgramReplyVO vo) {
+		// TODO Auto-generated method stub
+		rDao.insertReply(vo);
+	}
+
+	@Override
+	public List<ProgramReplyVO> replyList(Map map) {
+		// TODO Auto-generated method stub
+		return rDao.replyList(map);
+	}
+
+	@Override
+	public int replyTotalPage(ProgramReplyVO vo) {
+		// TODO Auto-generated method stub
+		return rDao.replyTotalPage(vo);
+	}
 	
 
 

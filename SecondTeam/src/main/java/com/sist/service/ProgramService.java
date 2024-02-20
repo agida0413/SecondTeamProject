@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.sist.vo.OptionVO;
+import com.sist.vo.ProgramReplyVO;
 import com.sist.vo.ProgramStatisticsVO;
 import com.sist.vo.ProgramVO;
 import com.sist.vo.VdataboardVO;
@@ -76,4 +77,9 @@ public interface ProgramService {
 	
 	
 	
+	
+	//댓글
+	public void insertReply(ProgramReplyVO vo);
+	public List<ProgramReplyVO> replyList(Map map);
+	public int replyTotalPage(ProgramReplyVO vo);
 }

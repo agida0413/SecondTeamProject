@@ -36,7 +36,7 @@ padding:20px;
   				
 	  			<div class="col-12 applyLine" style="margin-bottom:20px;">
 	  				<div class="programName">
-							<span style="font-size:25px; font-weight:bold;  color:black;">{{vo.pvo.title}}<span style="color:blue;">[{{vo.mvo.username}}&nbsp;님]</span></span>
+							<span style="font-size:25px; font-weight:bold;  color:black;">{{vo.pvo.title}}<span style="color:blue;">[{{vo.mvo.userName}}&nbsp;님]</span></span>
 							
 						</div>
 					<!-- 봉사프로그램정보 -->
@@ -48,7 +48,7 @@ padding:20px;
 						
 						<div style="margin-top:7px;">
 						<div>
-						<span class="programSubinformAll"><span style="font-weight:bold;">[이름]</span><span class="programSubinform">{{vo.mvo.username}}</span></span>
+						<span class="programSubinformAll"><span style="font-weight:bold;">[이름]</span><span class="programSubinform">{{vo.mvo.userName}}</span></span>
 						
 						<div>
 						

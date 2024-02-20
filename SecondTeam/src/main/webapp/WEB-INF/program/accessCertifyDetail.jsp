@@ -17,14 +17,14 @@
      <div class="row appList" style=" border: 1px solid #999999; padding:20px; border-radius:5px;">
     <div class="col-12 applyLine" style="margin-bottom:20px;">
         <div class="programName">
-            <span style="font-size:25px; font-weight:bold; color:black;">{{ vo && vo.pvo && vo.pvo.title }}<span style="color:blue;">[{{ vo && vo.mvo && vo.mvo.username }}&nbsp;님]</span></span>
+            <span style="font-size:25px; font-weight:bold; color:black;">{{ vo && vo.pvo && vo.pvo.title }}<span style="color:blue;">[{{ vo && vo.mvo && vo.mvo.userName }}&nbsp;님]</span></span>
         </div>
         <!-- 봉사프로그램정보 -->
         <div class="row" style="color:black; margin-top:10px;">
             <div class="col-4">
                 <div style="margin-top:7px;">
                     <div>
-                        <span class="programSubinformAll"><span style="font-weight:bold;">[이름]</span><span class="programSubinform">{{ vo && vo.mvo && vo.mvo.username }}</span></span>
+                        <span class="programSubinformAll"><span style="font-weight:bold;">[이름]</span><span class="programSubinform">{{ vo && vo.mvo && vo.mvo.userName }}</span></span>
                     </div>
                     <div>
                         <span class="programSubinformAll"><span style="font-weight:bold;">[성별]</span><span class="programSubinform">{{ vo && vo.mvo && vo.mvo.sex }}</span></span>

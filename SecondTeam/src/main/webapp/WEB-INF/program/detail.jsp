@@ -52,6 +52,7 @@ width: 95%; /* 너비를 부모 요소에 맞게 설정 */
         color: #000;
         font-size: 15px;
          border-radius: 0.25rem !important;
+         cursor:pointer;
 }
 </style>
 </head>
@@ -177,9 +178,9 @@ width: 95%; /* 너비를 부모 요소에 맞게 설정 */
               <span style="font-weight:bold;color:black; font-size:20px; margin-left:5px;">김용준</span>
                    </div>
                    
-                <textarea rows="3" cols="98" class="textareaStyle" placeholder="새로운 댓글을  작성해 주세요."></textarea>
+                <textarea rows="3" cols="98" class="textareaStyle" placeholder="새로운 댓글을  작성해 주세요." v-model="content"></textarea>
                    <p style="float:right; margin-top:10px;">
-                 <a href="#" class="insert rounded">등록하기</a>
+                 <a class="insert rounded" @click="replyNormalInsert()">등록하기</a>
                   </p>
                
                 
@@ -204,7 +205,7 @@ width: 95%; /* 너비를 부모 요소에 맞게 설정 */
             
             
             <!-- 댓글리스트 -->
-              <ul class="comment-list" >
+              <ul class="comment-list" v-for="vo in replyListData">
              
 			
               <li class="comment" style="border-bottom:2px #999 solid;">
@@ -215,7 +216,7 @@ width: 95%; /* 너비를 부모 요소에 맞게 설정 */
                   <img src="../Projectimages/userIcon.jpg" alt="Image placeholder">
                 </div>
                 <div class="comment-body">
-                  <h3>Jean Doe
+                  <h3>{{vo.username}}
                    
                  <span style="float:right; margin-right:10px;">
                    <span style="margin-right:10px;"><a style= "color:#ff9999;"class="reply rounded">삭제</a></span>
@@ -224,10 +225,10 @@ width: 95%; /* 너비를 부모 요소에 맞게 설정 */
                  
                  </span> 
                   </h3>
-                  <div class="meta">January 9, 2018 at 2:21pm</div>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
+                  <div class="meta">{{vo.dbDay}}</div>
+                  <p>{{vo.content}}</p>
                   <p>
-                  <a class="reply rounded" @click="showAnswers()">답변(10)</a>
+                  <a class="reply rounded" @click="showAnswers()">답변({{vo.depth}})</a>
                   <span style="float:right; margin-right:10px;">
                 
                    
@@ -449,12 +450,22 @@ width: 95%; /* 너비를 부모 요소에 맞게 설정 */
 		data(){
 			return{
 				sessionId:'${sessionScope.id}',
-				vno:${vo.vno}
+				vno:${vo.vno},
+				content:'',
+				rtype:1,
+				root:0,
+				replyListData:[],
+				condition:1,
+				 curpage:1,
+   			 totalpage:0,
+   			 startpage:0,
+   			 endpage:0
+				
 				
 			}
 		},
 		mounted(){
-			
+			this.replyNormalList();
 		},
 		methods:{
 			showAnswers(){
@@ -467,6 +478,45 @@ width: 95%; /* 너비를 부모 요소에 맞게 설정 */
 				
 				
 				
+			},
+			replyNormalInsert(){
+				this.rtype=1
+				this.root=0
+				axios.get('../program/replyInsert_vue.do',{
+					params:{
+						content:this.content,
+						rtype:this.rtype,
+						root:this.root,
+						objno:this.vno,
+						typeno:1
+					
+						
+						
+						
+					}
+				}).then(res=>{
+					this.content=''
+					alert('성공')
+				})
+			},
+			replyNormalList(){
+				this.rtype=1
+				this.root=0
+				axios.get('../program/replyList_vue.do',{
+				
+					
+					params:{
+						condition:this.condition,
+						rtype:this.rtype,
+						root:this.root,
+						objno:this.vno,
+						page:this.curpage
+					}
+				}).then(res=>{
+					this.replyListData=res.data
+					console.log(this.replyListData)
+					alert('성공')
+				})
 			}
 		}
 	}).mount('#programReplyApp')

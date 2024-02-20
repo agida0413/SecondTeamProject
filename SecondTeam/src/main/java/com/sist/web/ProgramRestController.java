@@ -4,6 +4,7 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.net.URLEncoder;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +20,7 @@ import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 
 import org.apache.commons.collections.map.HashedMap;
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;import org.springframework.scheduling.quartz.JobDetailFactoryBean;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,6 +39,7 @@ import com.sist.commons.CommonsFunction;
 import com.sist.service.ProgramService;
 
 import com.sist.vo.OptionVO;
+import com.sist.vo.ProgramReplyVO;
 import com.sist.vo.ProgramVO;
 import com.sist.vo.VdataboardVO;
 import com.sist.vo.VprogramApplyVO;
@@ -188,17 +192,49 @@ private CommonsFunction cf;
 				  
 					   String filename="";
 					   String filesize="";
-					   for(MultipartFile mf:list)
-					   {
-						   String name=mf.getOriginalFilename();
-						   File file=new File(path+name);
-						   mf.transferTo(file);//  업로드
-						   
-						   filename+=name+",";// a.jpg,b.jpg,
-						   filesize+=file.length()+",";
-					   }
+					   for (MultipartFile file : list) {
+				            
+			                String originalFilename = file.getOriginalFilename();
+			                String name = originalFilename;
+			               
+			                File uploadedFile = new File(path+name);
+			                int scount = 1;
+			                while (uploadedFile.exists()) {
+			                    // 파일명 뒤에 숫자를 붙여줌
+			                    String extension = "";
+			                    int dotIndex = originalFilename.lastIndexOf('.');
+			                    if (dotIndex != -1) {
+			                        extension = originalFilename.substring(dotIndex);
+			                        name = originalFilename.substring(0, dotIndex) + "(" + scount + ")" + extension;
+			                      
+			                    } else {
+			                        name = originalFilename + "(" + scount + ")";
+			                    
+			                    }
+			                    name= name.replace("+", "");
+					               name= name.replace("-", "");
+			                    uploadedFile = new File(path+name);
+			                   scount++;
+			                }
+
+			                try {
+			                  
+			                    file.transferTo(uploadedFile);
+			                    filesize+=uploadedFile.length()+",";
+			                    filename+=name+",";// a.jpg,b.jpg,
+			                } catch (IOException e) {
+			                   
+			                    e.printStackTrace();
+			                }
+			                
+							
+			           
+			           
+			            
+			        }
 					   filename=filename.substring(0,filename.lastIndexOf(","));
 					   filesize=filesize.substring(0,filesize.lastIndexOf(","));
+					   filename.replace("+", "");
 					   vo.setV_filename(filename);
 					   vo.setV_filesize(filesize);
 					   vo.setV_filecount(list.size());
@@ -387,17 +423,53 @@ private CommonsFunction cf;
 			   {
 				   String filename="";
 				   String filesize="";
-				   for(MultipartFile mf:list)
-				   {
-					   String name=mf.getOriginalFilename();
-					   File file=new File(path+name);
-					   mf.transferTo(file);//  업로드
-					   
-					   filename+=name+",";// a.jpg,b.jpg,
-					   filesize+=file.length()+",";
-				   }
+				   for (MultipartFile file : list) {
+			            
+			                String originalFilename = file.getOriginalFilename();
+			                String name = originalFilename;
+			               
+			                File uploadedFile = new File(path+name);
+			                int count = 1;
+			                while (uploadedFile.exists()) {
+			                    // 파일명 뒤에 숫자를 붙여줌
+			                    String extension = "";
+			                    int dotIndex = originalFilename.lastIndexOf('.');
+			                    if (dotIndex != -1) {
+			                        extension = originalFilename.substring(dotIndex);
+			                        name = originalFilename.substring(0, dotIndex) + "(" + count + ")" + extension;
+			                      
+			                    } else {
+			                    	
+			                        name = originalFilename + "(" + count + ")";
+			                       
+			                    }
+			                    name= name.replace("+", "");
+					               name= name.replace("-", "");
+			                    uploadedFile = new File(path+name);
+			                    count++;
+			                }
+
+			                try {
+			                	 
+			                    file.transferTo(uploadedFile);
+			                    filesize+=uploadedFile.length()+",";
+			                    filename+=name+",";// a.jpg,b.jpg,
+			                } catch (IOException e) {
+			                   
+			                    e.printStackTrace();
+			                }
+			                
+							
+			           
+			           
+			            
+			        }
+				   
+				  
+				   
 				   filename=filename.substring(0,filename.lastIndexOf(","));
 				   filesize=filesize.substring(0,filesize.lastIndexOf(","));
+				   
 				   vo.setFilename(filename);
 				   vo.setFilesize(filesize);
 				   vo.setV_filecount(list.size());
@@ -432,14 +504,16 @@ private CommonsFunction cf;
 	   public void databoard_download(String fn,String type,HttpServletRequest request,
 			   HttpServletResponse response)
 	   {
-		   
+		 
 		   String dir="databoardUpload\\";
 		   if(type.equals("apply")) {
 			   dir="applyUpload\\";
 		   }
+		  
 		   String path=request.getSession().getServletContext().getRealPath("/")+dir;
 		   path=path.replace("\\", File.separator);
-		   
+		   System.out.println(path);
+		   System.out.println(fn);
 		   try
 		   {
 			   File file=new File(path+fn);
@@ -554,5 +628,59 @@ private CommonsFunction cf;
 			  
 			  return result;
 		  }
-
+	   
+	   
+	   
+	   
+	   
+	   //댓글 입력
+	   @GetMapping(value="program/replyInsert_vue.do",produces = "text/plain;charset=UTF-8")
+	   public void replyInsert(ProgramReplyVO vo , HttpSession session) {
+		   String userid= (String)session.getAttribute("id");
+		   String username= (String)session.getAttribute("name");
+		   vo.setUserid(userid);
+		   vo.setUsername(username);
+		   vo.setTypeno(1);
+		   
+		   service.insertReply(vo);
+	   }
+	   
+	   
+	   
+	   @GetMapping(value="program/replyList_vue.do",produces = "text/plain;charset=UTF-8")
+	   public String replyList(ProgramReplyVO vo , int condition,int page) throws JsonProcessingException {
+		  String index="";
+		  
+		  int rowsize=5;
+		  int start = cf.start(rowsize, page);
+		  int end=cf.end(rowsize, page);
+		  
+		  if(condition==1) {
+			  index="reply_regdate";
+		  }
+		  
+		 if(condition==2) {
+			 index="reply_like_count"; 
+				  }
+		 if(condition==3) {
+			 index="reply_like_percent";
+		 }
+		   Map map = new HashMap();
+		   map.put("index", index);
+		   map.put("start", start);
+		   map.put("end", end);
+		   map.put("rtype", vo.getRtype());
+		   map.put("root", vo.getRoot());
+		   map.put("objno", vo.getObjno());
+		
+		List<ProgramReplyVO> list = service.replyList(map);
+	
+		ObjectMapper mapper=  new ObjectMapper();
+		String json = mapper.writeValueAsString(list);
+		   
+		
+		return json;
+	   }
+	   
+	  
 }

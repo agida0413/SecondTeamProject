@@ -1,5 +1,8 @@
 package com.sist.web;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,11 +71,30 @@ public class MemberController {
 		}
 		
 		//로그아웃 이동
+//		@GetMapping("member/logout.do")
+//		public String member_logout(HttpSession session)
+//		{
+//			//세션정보 해제
+//			session.invalidate();
+//			return "redirect:../main/main.do";
+//		}
+		
+		// 로그아웃 이동
 		@GetMapping("member/logout.do")
-		public String member_logout(HttpSession session)
-		{
-			//세션정보 해제
+		public String member_logout(HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+
+			// 세션정보 해제
 			session.invalidate();
+
+			// 쿠키 삭제
+			Cookie[] cookies = request.getCookies();
+			if (cookies != null) {
+				for (Cookie cookie : cookies) {
+					cookie.setMaxAge(0);
+					response.addCookie(cookie);
+				}
+			}
+
 			return "redirect:../main/main.do";
 		}
 }

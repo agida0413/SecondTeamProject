@@ -3,11 +3,12 @@ package com.sist.interceptor;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-// »çÀÌÆ® Á¢¼Ó ½Ã ÀÚµ¿ ·Î±×ÀÎ
+// ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Úµï¿½ ï¿½Î±ï¿½ï¿½ï¿½
 public class AutoLoginInterceptor extends HandlerInterceptorAdapter{
 
    @Override
@@ -20,10 +21,13 @@ public class AutoLoginInterceptor extends HandlerInterceptorAdapter{
 		   for(int i=0;i<cookies.length;i++)
 		   {
 			   String key=cookies[i].getName();
-			   if(key.equals("id"))
+			   if(key.equals("userId"))
 			   {
 				   String id=cookies[i].getValue();
+				   
 				   request.setAttribute("id", id);
+				   HttpSession session = request.getSession();
+				   session.setAttribute("id", id);
 				   break;
 			   }
 		   }

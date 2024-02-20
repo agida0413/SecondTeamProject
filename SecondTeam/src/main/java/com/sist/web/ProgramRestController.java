@@ -649,6 +649,7 @@ private CommonsFunction cf;
 	   
 	   @GetMapping(value="program/replyList_vue.do",produces = "text/plain;charset=UTF-8")
 	   public String replyList(ProgramReplyVO vo , int condition,int page) throws JsonProcessingException {
+		  
 		  String index="";
 		  
 		  int rowsize=5;
@@ -666,6 +667,11 @@ private CommonsFunction cf;
 			 index="reply_like_percent";
 		 }
 		   Map map = new HashMap();
+		   if(vo.getRtype()==2) {
+			   start=1;
+			   end=30;
+		   }
+		   
 		   map.put("index", index);
 		   map.put("start", start);
 		   map.put("end", end);
@@ -673,14 +679,45 @@ private CommonsFunction cf;
 		   map.put("root", vo.getRoot());
 		   map.put("objno", vo.getObjno());
 		
-		List<ProgramReplyVO> list = service.replyList(map);
+			String json ="";
+		   try {
+			List<ProgramReplyVO> list = service.replyList(map);
+			ObjectMapper mapper=  new ObjectMapper();
+			json= mapper.writeValueAsString(list);
+			System.out.println(list.size());
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
 	
-		ObjectMapper mapper=  new ObjectMapper();
-		String json = mapper.writeValueAsString(list);
+		
 		   
 		
 		return json;
 	   }
 	   
 	  
+		   
+		   
+		   @GetMapping(value="program/replyListPage_vue.do.do",produces = "text/plain;charset=UTF-8")
+	   public String replyListPage(ProgramReplyVO vo,int page) throws JsonProcessingException {
+	System.out.println("실행");
+			   int totalpage=service.replyTotalPage(vo);
+			   final int BLOCK=10;
+			   int startpage=cf.startPage(BLOCK, page);
+			   int endpage=cf.endPage(BLOCK, page, totalpage);
+			   
+			   Map map = new HashMap(); 
+			   map.put("totalpage", totalpage);
+			   map.put("startpage", startpage);
+			   map.put("endpage", endpage);
+			   map.put("curpage", page);
+			   
+		ObjectMapper mapper=  new ObjectMapper();
+		String json = mapper.writeValueAsString(map);
+		   
+		
+		return json;
+	   }
 }

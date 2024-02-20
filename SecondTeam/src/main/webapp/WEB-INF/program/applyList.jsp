@@ -322,23 +322,28 @@ let applyList=Vue.createApp({
 		waitList(){
 			this.type='신청승인대기중'
 			this.getList()
+			this.resetFile();
 		},
 		completeList(){
 			this.type='봉사활동 대기중'
 				this.getList()
+				this.resetFile();
 
 		},
 		runList(){
 			this.type='봉사중'
 				this.getList()
+				this.resetFile();
 		},
 		doneList(){
 			this.type='봉사완료'
 				this.getList()
+				this.resetFile();
 		},
 		refuseList(){
 			this.type='거절'
 				this.getList()
+				this.resetFile();
 		}
 	}
 }).mount('#applyList')

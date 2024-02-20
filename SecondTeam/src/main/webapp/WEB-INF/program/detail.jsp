@@ -54,6 +54,14 @@ width: 95%; /* 너비를 부모 요소에 맞게 설정 */
          border-radius: 0.25rem !important;
          cursor:pointer;
 }
+.rpoint{
+cursor:pointer;
+}
+.act{
+font-weight:bold;
+color:blue;
+}
+
 </style>
 </head>
 <body>
@@ -180,7 +188,7 @@ width: 95%; /* 너비를 부모 요소에 맞게 설정 */
                    
                 <textarea rows="3" cols="98" class="textareaStyle" placeholder="새로운 댓글을  작성해 주세요." v-model="content"></textarea>
                    <p style="float:right; margin-top:10px;">
-                 <a class="insert rounded" @click="replyNormalInsert()">등록하기</a>
+                 <a class="insert rounded" @click="replyNormalInsert(1,0)">등록하기</a>
                   </p>
                
                 
@@ -190,9 +198,9 @@ width: 95%; /* 너비를 부모 요소에 맞게 설정 */
       		 <!-- 조건별 -->
           		  <div  style="margin-top:50px;">
 		            	 <p >
-		            	 <span style="margin-right:5px;"><a href="#" class="insert rounded">최신순</a></span>
-		                 <span style="margin-right:5px;"><a href="#" class="insert rounded">순공감순</a></span>
-		                <span ><a href="#" class="insert rounded">공감비율순</a></span>   
+		            	 <span style="margin-right:5px;" @click="replyNewlyList()"><a class="insert rounded" :class="condition==1?'act':''" >최신순</a></span>
+		                 <span style="margin-right:5px;" @click="replyLikeList()"><a  class="insert rounded" :class="condition==2?'act':''">순공감순</a></span>
+		                <span @click="replyLikePercentList()"><a class="insert rounded" :class="condition==3?'act':''">공감비율순</a></span>   
 		                  </p>
                   </div>
                    <!-- 조건별 끝 -->
@@ -219,16 +227,16 @@ width: 95%; /* 너비를 부모 요소에 맞게 설정 */
                   <h3>{{vo.username}}
                    
                  <span style="float:right; margin-right:10px;">
-                   <span style="margin-right:10px;"><a style= "color:#ff9999;"class="reply rounded">삭제</a></span>
-                        <span style="margin-right:10px;"> <a style="color:#8470FF;" class="reply rounded">수정</a> </span>
-                 <a class="reply rounded">신고하기</a>
+                   <span style="margin-right:10px;"><a style= "color:#ff9999;"class="reply rounded rpoint">삭제</a></span>
+                        <span style="margin-right:10px;"> <a style="color:#8470FF;" class="reply rounded rpoint">수정</a> </span>
+                 <a class="reply rounded rpoint">신고하기</a>
                  
                  </span> 
                   </h3>
                   <div class="meta">{{vo.dbDay}}</div>
                   <p>{{vo.content}}</p>
                   <p>
-                  <a class="reply rounded" @click="showAnswers()">답변({{vo.depth}})</a>
+                  <a class="reply rounded rpoint" @click="replyNormalList(2,vo.rno,vo.userid)">답변({{vo.depth}})</a>
                   <span style="float:right; margin-right:10px;">
                 
                    
@@ -249,24 +257,34 @@ width: 95%; /* 너비를 부모 요소에 맞게 설정 */
                 </div>
   <!-- 일반댓글 끝-->
 
-
+		 <ul class="children hideA" style="background-color:#f8f8f8; border-top:2px #999 solid; display:none;" :id="'noAnswer'+vo.rno" >
+		 <li class="comment">
+		 등록된 답변이 없습니다.
+		 </li>
+		 </ul>
 				<!-- 답변댓글 -->
-                <ul class="children" style="background-color:#f8f8f8; border-top:2px #999 solid; display:none;" ref="answer5">
-                  <li class="comment">
+				
+                <ul class="children hideA" style=" border-top:2px #999 solid; display:none;" :id="'answer'+vo.rno" >
+               
+                  <li class="comment" v-for="avo in answerList" style="border:1px #999 solid; padding:20px;border-radius:15px; background-color:#f8f8f8;   ">
+                   	 
+                   	
                     <div class="vcard">
                       <img src="../Projectimages/userIcon.jpg" alt="Image placeholder">
+                      
                     </div>
-                    <div class="comment-body">
-                      <h3>Jean Doe
+                    <div class="comment-body" >
+                 
+                      <h3>{{avo.username}}
                         <span style="float:right; margin-right:10px;">
-                   <span style="margin-right:10px;"><a style= "color:#ff9999;"class="reply rounded">삭제</a></span>
-                        <span style="margin-right:10px;"> <a style="color:#8470FF;" class="reply rounded">수정</a> </span>
-                 <a class="reply rounded">신고하기</a>
+                   <span style="margin-right:10px;"><a style= "color:#ff9999;"class="reply rounded rpoint">삭제</a></span>
+                        <span style="margin-right:10px;"> <a style="color:#8470FF;" class="reply rounded rpoint">수정</a> </span>
+                 <a class="reply rounded rpoint">신고하기</a>
                  
                  </span> 
                       </h3>
-                      <div class="meta">January 9, 2018 at 2:21pm</div>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
+                      <div class="meta">{{avo.dbDay}}</div>
+                      <p>{{avo.content}}</p>
                         <p>
                
                   <span style="float:right; margin-right:10px;">
@@ -292,17 +310,20 @@ width: 95%; /* 너비를 부모 요소에 맞게 설정 */
                   </li>
                    
                 </ul>
+              
+              
                 <!-- 답변댓글 끝 -->
                 
                 
                 <!-- 답변달기 -->
-                   <ul class="children" style="background-color:#f8f8f8; border-top:2px #999 solid; display:none;">
+             	
+                   <ul class="children hideA" style="background-color:#f8f8f8; border-top:2px #999 solid; display:none;" :id="'Form'+vo.rno" v-if="sessionId!==vo.userid && sessionId!==''">
 		               	<li >
-		               		   <textarea  class="answerTextarea" placeholder="새로운 답변을  작성해 주세요."></textarea>
+		               		   <textarea  class="answerTextarea" placeholder="새로운 답변을  작성해 주세요." v-model="answerContent"></textarea>
 		               		   
 		                   <p style="float:right; margin-top:10px; margin-right:42px;">
-		                <span style="margin-right:5px;"><a href="#" class="insert rounded"><img src="../Projectimages/upSide.png" width=15px>&nbsp;답글접기</a></span>
-		                  <span><a href="#" class="insert rounded" style="color:#8470FF; font-weight:bold;">등록하기</a></span>
+		                <span style="margin-right:5px;"><a class="insert rounded" @click="hideAnswer(vo.rno)"><img src="../Projectimages/upSide.png" width=15px >&nbsp;답글접기</a></span>
+		                  <span @click="replyNormalInsert(2,vo.rno)"><a  class="insert rounded" style="color:#8470FF; font-weight:bold;">등록하기</a></span>
 		                  </p>
 		                  
 		                   
@@ -311,7 +332,7 @@ width: 95%; /* 너비를 부모 요소에 맞게 설정 */
               	  </ul>
                 <!-- 답변달기 끝 -->
               
-                </li>
+               
 
             
             </ul>
@@ -320,6 +341,24 @@ width: 95%; /* 너비를 부모 요소에 맞게 설정 */
 
         
           </div>
+          
+          
+          <div class="row text-center">
+  			 <ul class="pagination" v-if="totalpage!=0">
+  			 		
+				  <li @click="prev()" class="page-item"><a v-if="startpage>1" class="link page-link">&lt;</a></li>
+				  <li v-for="i in range(startpage,endpage)" @click="move(i)"  class="page-item" 
+				  :class="{ 'active': curpage === i }" 
+   				 :aria-current="curpage === i ? 'page' : null">
+				  <a class="link page-link">{{i}}</a>
+				  </li>
+				 
+				  <li @click="next()" class="page-item"><a v-if="endpage<totalpage" class="link page-link">&gt;</a></li>
+				   
+				   
+				   
+				</ul> 
+  			</div>
 				
 				</div>
 	
@@ -457,34 +496,112 @@ width: 95%; /* 너비를 부모 요소에 맞게 설정 */
 				replyListData:[],
 				condition:1,
 				 curpage:1,
-   			 totalpage:0,
-   			 startpage:0,
-   			 endpage:0
+	   			 totalpage:0,
+	   			 startpage:0,
+	   			 endpage:0,
+	   			answerContent:'',
+	   			answerList:[],
+	   			answerSize:0
+	   			
+	   		
 				
 				
 			}
 		},
 		mounted(){
-			this.replyNormalList();
+			console.log(this.sessionId)
+			this.replyNormalList(1,0);
 		},
 		methods:{
-			showAnswers(){
+			showAnswers(rno){
+				this.answerContent=''
+					
+			
 				
-				if(this.$refs.answer5.style.display === 'block'){
-					this.$refs.answer5.style.display = 'none';
-				}else{
-					this.$refs.answer5.style.display = 'block';
-				}
+				 	let answer = 'answer' + rno;
 				
+			        let showAnswer = $('#' + answer).css('display');
+			        
+			        let Form ='Form'+rno
+			        let showAnswerForm = $('#' +Form).css('display');
+			        
+			        if (showAnswer === 'none') {
+			         
+			            console.log('1실행')
+			            
+			             $('#' + answer).css('display', 'block');
+			           
+			           
+			            
+			        } else {
+			        	   $('#' + answer).css('display', 'none');
+				         
+				            console.log('2실행')
+						 
+			        }
+			        
+			        if (showAnswerForm === 'none') {
+				         
+			          
+			            
+			           
+			            $('#' +Form).css('display', 'block');
+			           
+			            
+			        } else {
+			        	  
+				            $('#' + Form).css('display', 'none');
+				          
+						 
+			        }
+			        
+			        
+			        
+			        
+			        $('[id^="answer"]').each(function(index, element) {
+			            if (element.id !== 'answer' + rno) {
+			                $(element).css('display', 'none'); // 해당 ID가 아닌 경우 display를 none으로 설정
+			            }
+			        });
 				
-				
+			        
+			        $('[id^="Form"]').each(function(index, element) {
+			            if (element.id !== 'Form' + rno) {
+			                $(element).css('display', 'none'); // 해당 ID가 아닌 경우 display를 none으로 설정
+			            }
+			        });
+			        
+			    
+			       
+			    	
+			    	
+			  
+			    	
 			},
-			replyNormalInsert(){
-				this.rtype=1
-				this.root=0
+			hideAnswer(rno){
+				this.answerContent=''
+					 let answer = 'answer' + rno;
+			         
+			        
+			        let Form ='Form'+rno
+			      	
+			        
+			        $('#' + answer).css('display', 'none');
+			        $('#' + Form).css('display', 'none');
+			},
+			replyNormalInsert(type,root){
+				this.rtype=type
+				this.root=root
+				let content = '';
+				if(type===1){
+					content=this.content
+				}
+				else{
+					content=this.answerContent	
+				}
 				axios.get('../program/replyInsert_vue.do',{
 					params:{
-						content:this.content,
+						content:content,
 						rtype:this.rtype,
 						root:this.root,
 						objno:this.vno,
@@ -496,12 +613,25 @@ width: 95%; /* 너비를 부모 요소에 맞게 설정 */
 					}
 				}).then(res=>{
 					this.content=''
-					alert('성공')
+					if(type==1){
+						this.condition=1
+						this.curpage=1
+						this.replyNormalList(1,0,'a')
+					}
+					if(type==2){
+					
+						this.replyNormalList(2,root,'open')
+						
+						
+					}
+						
 				})
+				
 			},
-			replyNormalList(){
-				this.rtype=1
-				this.root=0
+			replyNormalList(type,root,userid){
+				this.rtype=type
+				this.root=root
+			
 				axios.get('../program/replyList_vue.do',{
 				
 					
@@ -513,11 +643,109 @@ width: 95%; /* 너비를 부모 요소에 맞게 설정 */
 						page:this.curpage
 					}
 				}).then(res=>{
-					this.replyListData=res.data
-					console.log(this.replyListData)
-					alert('성공')
+					
+					
+					if(type===1){
+						this.replyListData=res.data
+						this.paging()
+						console.log('주리스트')
+					}
+					else{
+						console.log('서브리스트')
+						this.answerList=res.data
+						this.answerSize=this.answerList.length
+						this.showAnswers(root)
+					
+						
+						if(this.answerSize===0){
+							
+							let answer = 'answer' + root;
+							   $('#' + answer).css('display', 'none');
+							if(userid===this.sessionId){
+								alert('아직등록된 답변이 없으며,본인 댓글엔 답변할수 없습니다.')
+							}
+							if(this.sessionId===''){
+								alert('아직등록된 답변이 없으며,답변은 로그인 후 가능합니다.')
+							}
+							
+						}
+						
+						if(userid==='open'){
+							let answer = 'answer' + root;
+							 let Form ='Form'+root
+							 $('#' + answer).css('display', 'block');
+							  $('#' +Form).css('display', 'block');
+						}
+						
+						
+						
+						
+						
+					}
+					
+					
+					
 				})
-			}
+			},
+			paging(){
+				$('.hideA').hide()
+				axios.get("../program/replyListPage_vue.do.do", {
+				    params: {
+				     objno:this.vno,
+				     page:this.curpage
+				    }
+				}).then(response => {
+				 this.totalpage=response.data.totalpage
+				 this.startpage=response.data.startpage
+				 this.endpage=response.data.endpage
+				 this.curpage=response.data.curpage
+				 
+				 
+				
+				
+				}).catch(error => {
+				   
+				});
+				
+			},
+			
+			range(start,end){
+				let arr=[]
+			
+				let size=end-start;
+				for(let i=0;i<=size;i++){
+					arr[i]=start;
+					start++;
+				}
+				return arr;
+			},
+			next(){
+				this.curpage=this.end+1
+				this.replyNormalList(1,0);
+			},
+			prev(){
+				this.curpage=this.start-1
+				this.replyNormalList(1,0);
+			},
+			move(page){
+				this.curpage=page
+				this.replyNormalList(1,0);
+			},
+			replyNewlyList(){
+				this.condition=1
+				this.curpage=1
+				this.replyNormalList(1,0);
+			},
+			replyLikeList(){
+				this.condition=2
+				this.curpage=1
+				this.replyNormalList(1,0);
+			},
+			replyLikePercentList(){
+				this.condition=3
+				this.curpage=1
+				this.replyNormalList(1,0);
+			}	
 		}
 	}).mount('#programReplyApp')
 	</script>

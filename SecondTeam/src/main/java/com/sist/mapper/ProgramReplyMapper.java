@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.sist.vo.ProgramReplyVO;
 
@@ -26,4 +27,9 @@ public interface ProgramReplyMapper {
 	@Select("SELECT CEIL(COUNT(*)/5.0) FROM REPLY "
 			+"WHERE rtype=1 AND typeno=1 AND objno=#{objno} ")
 	public int replyTotalPage(ProgramReplyVO vo);
+	
+	@Update("UPDATE REPLY SET "
+			+"depth=depth+1 "
+			+"WHERE rno=#{root}")
+	public void updateDepth(ProgramReplyVO vo);
 }

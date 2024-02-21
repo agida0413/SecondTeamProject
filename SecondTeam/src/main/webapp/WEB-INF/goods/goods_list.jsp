@@ -287,7 +287,7 @@ let goodsList=Vue.createApp({
 		    if (this.category !== '전체') {
 		        axios.get("../goods/goods_cateminor_list_vue.do", {
 		            params:{
-		                category: this.category,
+		                category: this.category
 		            },
 		            headers: {
 		                'Content-Type': 'application/json;charset=UTF-8'

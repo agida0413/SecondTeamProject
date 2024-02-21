@@ -20,5 +20,17 @@ public class CartServiceImpl implements CartService{
 		return cDao.cartListData(userid);
 	}
 
+	@Override
+	public void cartDelete(int gcno) {
+		// TODO Auto-generated method stub
+		cDao.cartDelete(gcno);
+	}
+
+	@Override
+	public void cartAllDelete(String userid) {
+		// TODO Auto-generated method stub
+		cDao.cartAllDelete(userid);
+	}
+
 
 }

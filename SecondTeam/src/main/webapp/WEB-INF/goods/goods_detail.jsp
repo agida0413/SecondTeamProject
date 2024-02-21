@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="../css/shopping.css">
 <!-- dialog -->
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -55,10 +56,10 @@ margin-top: 50px;
         <td colspan="2" style="padding-left: 20px; vertical-align: top;">
             <div style="margin-top: 20px; display: flex; align-items: center;">
                 <span style="margin-right: 20px; font-size: 16px;">수량</span>
-                <div class="quantity-input" style="margin-right: 20px;">
-                    <input type="text" id="quantity" name="quantity" v-model="quantity" min="1" style="width: 90px; height: 35px; padding: 5px; text-align: center;" readonly>
-                   <button @click="increaseQuantity" style="width: 35px; height: 35px;"><i class="fas fa-arrow-up"></i></button>
-<button @click="decreaseQuantity" style="width: 35px; height: 35px;"><i class="fas fa-arrow-down"></i></button>
+                <div class="v" style="margin-right: 20px;" >
+                <button class="kyj_shoppingDecreseBtn" @click="decreaseQuantity" >-</button>
+                    <input class="kyj_shoppingCal" type="text" id="quantity" name="quantity" v-model="quantity" min="1" readonly>
+                   <button class="kyj_shoppingIncreseBtn" @click="increaseQuantity">+</button>
                 </div>
             </div>
             <div style="margin-top: 10px;">
@@ -474,7 +475,7 @@ let goodsDetail=Vue.createApp({
     	   }).then(res=>{
     		   console.log(res.data)
     		   alert("상품이 장바구니에 담겼습니다")
-    		   this.cartlist=res.data
+    		   location.href="../cart/cart_list.do"
     	   })
        }
 	}

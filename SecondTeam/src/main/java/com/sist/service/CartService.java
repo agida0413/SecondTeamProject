@@ -7,4 +7,6 @@ import com.sist.vo.CartVO;
 
 public interface CartService {
 	public List<CartVO> cartListData(String userid);
+	public void cartDelete(int gcno);
+	public void cartAllDelete(String userid);
 }

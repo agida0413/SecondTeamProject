@@ -21,15 +21,31 @@ public class CartRestController {
 @Autowired
 private CartService cService;
 
-@GetMapping(value="cart/cart_list_vue.do",produces =  "application/json;charset=UTF-8")
-public String cart_list_vue(HttpSession session) throws Exception
+public String cart_commonsList(HttpSession session) throws Exception
 {
 	String userid=(String) session.getAttribute("id");
-	System.out.println(userid);
 	List<CartVO> cList=cService.cartListData(userid);
 	ObjectMapper mapper=new ObjectMapper();
 	String json=mapper.writeValueAsString(cList);
 	return json;
 }
 
+@GetMapping(value="cart/cart_list_vue.do",produces =  "application/json;charset=UTF-8")
+public String cart_list_vue(HttpSession session) throws Exception
+{
+	return cart_commonsList(session);
+}
+@GetMapping(value="cart/cart_delete_vue.do",produces =  "application/json;charset=UTF-8")
+public String cart_delete_vue(int gcno,HttpSession session) throws Exception
+{
+	cService.cartDelete(gcno);
+	return cart_commonsList(session);
+}
+@GetMapping(value="cart/cart_alldelete_vue.do",produces =  "application/json;charset=UTF-8")
+public String cart_alldelete_vue(String userid,HttpSession session) throws Exception
+{
+	System.out.println((String)session.getAttribute("id"));
+	cService.cartAllDelete((String)session.getAttribute("id"));
+	return cart_commonsList(session);
+}
 }

@@ -3,6 +3,7 @@ package com.sist.mapper;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
@@ -35,7 +36,13 @@ public interface CartMapper {
 })//변경완료	
 	
 // 장바구니 목록
-@Select("SELECT gc.gno,g_name,g_img,g_price,cart_price,cart_count FROM goodslist gl JOIN goods_cart gc "
+@Select("SELECT gc.gno,g_name,g_img,g_price,cart_price,cart_count,gcno FROM goodslist gl JOIN goods_cart gc "
 		+ "ON gl.gno=gc.gno WHERE userid=#{userid}")
 public List<CartVO> cartListData(String userid);
+// 장바구니 비우기 (부분삭제)
+@Delete("DELETE FROM goods_cart WHERE gcno=#{gcno}")
+public void cartDelete(int gcno);
+//장바구니 비우기 (전체삭제)
+@Delete("DELETE FROM goods_cart WHERE userid=#{userid}")
+public void cartAllDelete(String userid);
 }

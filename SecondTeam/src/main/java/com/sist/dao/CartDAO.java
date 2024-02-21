@@ -17,4 +17,10 @@ private CartMapper mapper;
 public List<CartVO> cartListData(String userid){
 	return mapper.cartListData(userid);
 }
+public void cartDelete(int gcno) {
+	mapper.cartDelete(gcno);
+}
+public void cartAllDelete(String userId) {
+	mapper.cartAllDelete(userId);
+}
 }

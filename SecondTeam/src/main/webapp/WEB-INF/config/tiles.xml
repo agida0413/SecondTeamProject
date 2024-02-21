@@ -31,7 +31,6 @@
       
        <definition name="donation" template="/WEB-INF/donation/donationMain.jsp">
          <put-attribute name="dheader" value="/WEB-INF/main/header.jsp"/>
-         <put-attribute name="daside" value="/WEB-INF/donation/aside.jsp"/>
          <put-attribute name="dcontent" value="/WEB-INF/donation/list.jsp"/>
          <put-attribute name="dfooter" value="/WEB-INF/main/footer.jsp"/>
       </definition>
@@ -67,11 +66,6 @@
             <definition name="donateclass/*" extends="donateclass">
           <put-attribute name="dcContent" value="/WEB-INF/donateclass/{1}.jsp"/>
            </definition>
-           
-        <definition name="donation/donation_detail" extends="donation">
-          <put-attribute name="dcontent" value="/WEB-INF/donation/donation_detail.jsp"/>
-          <put-attribute name="daside" value="/WEB-INF/donation/donation_detail_side.jsp"/>
-       	</definition>
            
         <definition name="donation/*" extends="donation">
           <put-attribute name="dcontent" value="/WEB-INF/donation/{1}.jsp"/>

@@ -271,6 +271,42 @@ public class ProgramServiceImpl implements ProgramService {
 		// TODO Auto-generated method stub
 		return rDao.replyTotalPage(vo);
 	}
+
+	@Override
+	public ProgramReplyVO updateInfoData(int rno) {
+		// TODO Auto-generated method stub
+		return rDao.updateInfoData(rno);
+	}
+
+	@Override
+	public void updateReply(ProgramReplyVO vo) {
+		// TODO Auto-generated method stub
+		rDao.updateReply(vo);
+	}
+
+	@Override
+	public void deleteReply(ProgramReplyVO vo) {
+		// TODO Auto-generated method stub
+		rDao.deleteReply(vo);
+	}
+
+	@Override
+	public void replyHateInsert(Map map) {
+		// TODO Auto-generated method stub
+		rDao.replyHateInsert(map);
+	}
+
+	@Override
+	public void replyLikeInsert(Map map) {
+		// TODO Auto-generated method stub
+		rDao.replyLikeInsert(map);
+	}
+
+	@Override
+	public void updateReplyLikeState(Map map) {
+		// TODO Auto-generated method stub
+		rDao.updateReplyLikeState(map);
+	}
 	
 
 

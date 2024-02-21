@@ -82,4 +82,10 @@ public interface ProgramService {
 	public void insertReply(ProgramReplyVO vo);
 	public List<ProgramReplyVO> replyList(Map map);
 	public int replyTotalPage(ProgramReplyVO vo);
+	public ProgramReplyVO updateInfoData(int rno);
+	public void updateReply(ProgramReplyVO vo);
+	public void deleteReply(ProgramReplyVO vo);
+	 public void replyHateInsert(Map map);
+		public void replyLikeInsert(Map map); 
+		public void updateReplyLikeState(Map map);
 }

@@ -41,6 +41,7 @@ import com.sist.service.ProgramService;
 import com.sist.vo.OptionVO;
 import com.sist.vo.ProgramReplyVO;
 import com.sist.vo.ProgramVO;
+import com.sist.vo.ReplyLikeStateVO;
 import com.sist.vo.VdataboardVO;
 import com.sist.vo.VprogramApplyVO;
 
@@ -648,23 +649,27 @@ private CommonsFunction cf;
 	   
 	   
 	   @GetMapping(value="program/replyList_vue.do",produces = "text/plain;charset=UTF-8")
-	   public String replyList(ProgramReplyVO vo , int condition,int page) throws JsonProcessingException {
-		  
-		  String index="";
+	   public String replyList(ProgramReplyVO vo , int condition,int page,HttpSession session) throws JsonProcessingException {
+		 
+		   String id=(String)session.getAttribute("id");
+		  if(id==null) {
+			  id="NOID";
+		  }
+		   String index="ORDER BY ";
 		  
 		  int rowsize=5;
 		  int start = cf.start(rowsize, page);
 		  int end=cf.end(rowsize, page);
 		  
 		  if(condition==1) {
-			  index="reply_regdate";
+			  index=index+"rno DESC";
 		  }
 		  
 		 if(condition==2) {
-			 index="reply_like_count"; 
+			 index=index+"like_count DESC"; 
 				  }
 		 if(condition==3) {
-			 index="reply_like_percent";
+			 index=index+"likepercent DESC";
 		 }
 		   Map map = new HashMap();
 		   if(vo.getRtype()==2) {
@@ -678,13 +683,14 @@ private CommonsFunction cf;
 		   map.put("rtype", vo.getRtype());
 		   map.put("root", vo.getRoot());
 		   map.put("objno", vo.getObjno());
+		   map.put("id", id);
 		
 			String json ="";
 		   try {
 			List<ProgramReplyVO> list = service.replyList(map);
 			ObjectMapper mapper=  new ObjectMapper();
 			json= mapper.writeValueAsString(list);
-			System.out.println(list.size());
+		
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -702,7 +708,7 @@ private CommonsFunction cf;
 		   
 		   @GetMapping(value="program/replyListPage_vue.do.do",produces = "text/plain;charset=UTF-8")
 	   public String replyListPage(ProgramReplyVO vo,int page) throws JsonProcessingException {
-	System.out.println("실행");
+	
 			   int totalpage=service.replyTotalPage(vo);
 			   final int BLOCK=10;
 			   int startpage=cf.startPage(BLOCK, page);
@@ -720,4 +726,111 @@ private CommonsFunction cf;
 		
 		return json;
 	   }
+
+		   @GetMapping(value="program/getUpdateInfo_vue.do",produces = "text/plain;charset=UTF-8")
+		   public String getUpdateInfo(int rno) throws JsonProcessingException {
+			   ProgramReplyVO vo =service.updateInfoData(rno);
+				   
+			ObjectMapper mapper=  new ObjectMapper();
+			String json = mapper.writeValueAsString(vo);
+			   
+			
+			return json;
+		   }
+
+		   @GetMapping(value="program/replyUpdate_vue.do",produces = "text/plain;charset=UTF-8")
+		   public void replyUpdate_vue(ProgramReplyVO vo) throws JsonProcessingException {
+			  
+			   service.updateReply(vo);
+			
+			
+		   }
+		   
+		   
+		   @GetMapping(value="program/replyDelete_vue.do",produces = "text/plain;charset=UTF-8")
+		   public void replyDelete(ProgramReplyVO vo) throws JsonProcessingException {
+			 
+			  service.deleteReply(vo);
+			
+			
+		   }
+		   @GetMapping(value="program/replyLikeUpdate_vue.do",produces = "text/plain;charset=UTF-8")
+		   public void replyLikeUpdate(ReplyLikeStateVO vo ,String type,HttpSession session) throws JsonProcessingException {
+			    String state="";
+			    String stateColum="";
+			    String replyColum="";
+			    String id=(String)session.getAttribute("id");
+			    
+			    Map map = new HashMap();
+			    map.put("id", id);
+			    map.put("rno", vo.getRno());
+			   if(type.equals("1")) {
+				   stateColum="like_state";
+				   replyColum="like_count";
+				  
+				   map.put("stateColum", stateColum);
+				   map.put("replyColum",replyColum);
+				   
+				   
+				   if(vo.getLike_state()==null) {
+					   map.put("state","YES");
+					   if(vo.getHate_state()==null) {
+						   service.replyLikeInsert(map);
+					   }else {
+						   
+						   service.updateReplyLikeState(map);
+					   }
+					 
+					   
+					   
+				   }
+				   else if (vo.getLike_state().equals("YES")) {
+					state="NO";
+					  map.put("state","NO");
+					  service.updateReplyLikeState(map);
+				   }
+				   else {
+					state="YES";   
+					  map.put("state","YES");
+					  service.updateReplyLikeState(map);
+				   }
+			   }
+			   
+			   if(type.equals("2")) {
+				   stateColum="hate_state";
+				   replyColum="hate_count";
+				   
+				   map.put("stateColum", stateColum);
+				   map.put("replyColum",replyColum);
+				   
+				   if(vo.getHate_state()==null) {
+					   map.put("state","YES");
+					   if(vo.getLike_state()==null) {
+						   service.replyHateInsert(map);
+					   }else {
+						   service.updateReplyLikeState(map);
+					   }
+					   
+					 
+				   }
+				   else if (vo.getHate_state().equals("YES")) {
+					state="NO";
+					 map.put("state","NO");
+					 service.updateReplyLikeState(map);
+				   }
+				   else {
+					state="YES";   
+					 map.put("state","YES");
+					 service.updateReplyLikeState(map);
+				   }
+			   
+			   }
+			   
+			   
+			  
+			   
+		   }
+	
+		   
+		  
 }

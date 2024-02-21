@@ -5,10 +5,10 @@
 <html>
 <head>
 
-
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 <script src="https://unpkg.com/vue@3"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+
 
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -173,6 +173,8 @@ color:blue;
 		
 	</div>
 			<div class="row" id="programReplyApp">
+			
+			
 				     <div class="pt-5 comment-wrap">
 				     <!-- 댓글 갯수 -->
             <h3 class="mb-5 heading">6 Comments</h3>
@@ -183,7 +185,7 @@ color:blue;
                 
                 <div style="margin-bottom:10px;">
                <img src="../Projectimages/userIcon.jpg" alt="Image placeholder" width="40px">
-              <span style="font-weight:bold;color:black; font-size:20px; margin-left:5px;">김용준</span>
+              <span style="font-weight:bold;color:black; font-size:20px; margin-left:5px;">{{sessionName}}</span>
                    </div>
                    
                 <textarea rows="3" cols="98" class="textareaStyle" placeholder="새로운 댓글을  작성해 주세요." v-model="content"></textarea>
@@ -210,7 +212,8 @@ color:blue;
             <div style=" margin-bottom:30px;border-top:2px #999 solid;"></div>
             
             
-            
+        
+          </div>
             
             <!-- 댓글리스트 -->
               <ul class="comment-list" v-for="vo in replyListData">
@@ -223,38 +226,47 @@ color:blue;
                 <div class="vcard">
                   <img src="../Projectimages/userIcon.jpg" alt="Image placeholder">
                 </div>
-                <div class="comment-body">
+                <div class="comment-body" >
                   <h3>{{vo.username}}
-                   
+                 
                  <span style="float:right; margin-right:10px;">
-                   <span style="margin-right:10px;"><a style= "color:#ff9999;"class="reply rounded rpoint">삭제</a></span>
-                        <span style="margin-right:10px;"> <a style="color:#8470FF;" class="reply rounded rpoint">수정</a> </span>
-                 <a class="reply rounded rpoint">신고하기</a>
+                   <span style="margin-right:10px;" @click="replyDelete(vo.rno,vo.root)" v-if="vo.content!=='삭제된 댓글입니다.'"><a style= "color:#ff9999;"class="reply rounded rpoint" v-if="vo.userid===sessionId">삭제</a></span>
+                        <span style="margin-right:10px;" @click="updateForm(vo.rno)" v-if="vo.content!=='삭제된 댓글입니다.'"> <a style="color:#8470FF;" class="reply rounded rpoint" v-if="vo.userid===sessionId" >수정</a> </span>
+                 <a class="reply rounded rpoint" v-if="vo.userid!==sessionId">신고하기</a>
                  
                  </span> 
                   </h3>
                   <div class="meta">{{vo.dbDay}}</div>
-                  <p>{{vo.content}}</p>
+                  <p style="margin-top:8px; font-weight:bold; color:black;">{{vo.content}}</p>
                   <p>
                   <a class="reply rounded rpoint" @click="replyNormalList(2,vo.rno,vo.userid)">답변({{vo.depth}})</a>
+                 
                   <span style="float:right; margin-right:10px;">
                 
                    
                 
-                  <span style="margin-right:10px;"><img src="../Projectimages/notup.png" width="20px;">
-	                  <span>
-	                  20
+                  <span style="margin-right:10px;">
+                  
+                  <img src="../Projectimages/notup.png" width="20px;" v-if="vo.rvo.like_state!=='YES'" @click="replyLike(vo.rno,vo.rvo.like_state,vo.rvo.hate_state,1,vo.root)">
+                  <img src="../Projectimages/up.png" width="20px;" v-if="vo.rvo.like_state==='YES'" @click="replyLike(vo.rno,vo.rvo.like_state,vo.rvo.hate_state,1,vo.root)">
+	                  <span style="margin-left:4px;">
+	                {{vo.like_count}}
 	                  </span>
                   </span>
                     <span>
-                    <img src="../Projectimages/dislike.png" width="20px;">
-                    	  <span>
-			                  20
+                   
+                     <img src="../Projectimages/notdislike.png" width="20px;" v-if="vo.rvo.hate_state!=='YES'" @click="replyLike(vo.rno,vo.rvo.like_state,vo.rvo.hate_state,2,vo.root)">
+                  <img src="../Projectimages/dislike.png" width="20px;" v-if="vo.rvo.hate_state==='YES'" @click="replyLike(vo.rno,vo.rvo.like_state,vo.rvo.hate_state,2,vo.root)">
+                    	  <span style="margin-left:2px;">
+			               {{vo.hate_count}}
 			               </span>
                      </span>
                     </span> 
                   </p>
                 </div>
+                
+                
+                  
   <!-- 일반댓글 끝-->
 
 		 <ul class="children hideA" style="background-color:#f8f8f8; border-top:2px #999 solid; display:none;" :id="'noAnswer'+vo.rno" >
@@ -269,42 +281,52 @@ color:blue;
                   <li class="comment" v-for="avo in answerList" style="border:1px #999 solid; padding:20px;border-radius:15px; background-color:#f8f8f8;   ">
                    	 
                    	
-                    <div class="vcard">
+                    <div class="vcard" >
                       <img src="../Projectimages/userIcon.jpg" alt="Image placeholder">
                       
                     </div>
-                    <div class="comment-body" >
+                    <div class="comment-body">
                  
                       <h3>{{avo.username}}
                         <span style="float:right; margin-right:10px;">
-                   <span style="margin-right:10px;"><a style= "color:#ff9999;"class="reply rounded rpoint">삭제</a></span>
-                        <span style="margin-right:10px;"> <a style="color:#8470FF;" class="reply rounded rpoint">수정</a> </span>
-                 <a class="reply rounded rpoint">신고하기</a>
+                   <span style="margin-right:10px;" @click="replyDelete(avo.rno,avo.root)"><a style= "color:#ff9999;"class="reply rounded rpoint" v-if="avo.userid===sessionId">삭제</a></span>
+                        <span style="margin-right:10px;" @click="updateForm(avo.rno)"> <a style="color:#8470FF;" class="reply rounded rpoint" v-if="avo.userid===sessionId" >수정</a> </span>
+                 <a class="reply rounded rpoint" >신고하기</a>
                  
                  </span> 
                       </h3>
                       <div class="meta">{{avo.dbDay}}</div>
-                      <p>{{avo.content}}</p>
+                      <p style="margin-top:8px; font-weight:bold; color:black;">{{avo.content}}</p>
                         <p>
                
-                  <span style="float:right; margin-right:10px;">
+                <span style="float:right; margin-right:10px;">
                 
                    
                 
-                  <span style="margin-right:10px;"><img src="../Projectimages/notup.png" width="20px;">
-	                  <span>
-	                  20
+                  <span style="margin-right:10px;">
+                  
+                  <img src="../Projectimages/notup.png" width="20px;" v-if="avo.rvo.like_state!=='YES'" @click="replyLike(avo.rno,avo.rvo.like_state,avo.rvo.hate_state,1,avo.root)">
+                  <img src="../Projectimages/up.png" width="20px;" v-if="avo.rvo.like_state==='YES'" @click="replyLike(avo.rno,avo.rvo.like_state,avo.rvo.hate_state,1,avo.root)">
+	                  <span style="margin-left:4px;">
+	                {{avo.like_count}}
 	                  </span>
                   </span>
                     <span>
-                    <img src="../Projectimages/dislike.png" width="20px;">
-                    	  <span>
-			                  20
+                   
+                     <img src="../Projectimages/notdislike.png" width="20px;" v-if="avo.rvo.hate_state!=='YES'" @click="replyLike(avo.rno,avo.rvo.like_state,avo.rvo.hate_state,2,avo.root)">
+                  <img src="../Projectimages/dislike.png" width="20px;" v-if="avo.rvo.hate_state==='YES'" @click="replyLike(avo.rno,avo.rvo.like_state,avo.rvo.hate_state,2,avo.root)">
+                    	  <span style="margin-left:2px;">
+			               {{avo.hate_count}}
 			               </span>
                      </span>
                     </span> 
+                   
                   </p>
                     </div>
+                    
+                    
+                    
+                 
 
 
                   </li>
@@ -317,7 +339,7 @@ color:blue;
                 
                 <!-- 답변달기 -->
              	
-                   <ul class="children hideA" style="background-color:#f8f8f8; border-top:2px #999 solid; display:none;" :id="'Form'+vo.rno" v-if="sessionId!==vo.userid && sessionId!==''">
+                   <ul class="children hideA" style="background-color:#f8f8f8; border-top:2px #999 solid; display:none;" :id="'Form'+vo.rno" v-if=" sessionId!==''">
 		               	<li >
 		               		   <textarea  class="answerTextarea" placeholder="새로운 답변을  작성해 주세요." v-model="answerContent"></textarea>
 		               		   
@@ -338,10 +360,18 @@ color:blue;
             </ul>
           
             <!-- END comment-list -->
-
-        
-          </div>
-          
+                <div  v-show="isShow" id="replyDialog" >
+		<div class="comment-body">
+		            <div style="margin-bottom:10px;">
+		                <img src="../Projectimages/userIcon.jpg" alt="Image placeholder" width="40px">
+		                <span style="font-weight:bold;color:black; font-size:20px; margin-left:15px;">{{updateName}}</span>
+		            </div>
+		            <textarea rows="5" cols="98" class="textareaStyle" v-model="updateContent">{{updateContent}}</textarea>
+		            <p style="float:right; margin-top:10px;">
+		                <a class="insert rounded" style="color:blue;" @click ="replyUpdate(updateRno,updateRoot)">수정하기</a>
+		            </p>
+		        </div>
+        </div>
           
           <div class="row text-center">
   			 <ul class="pagination" v-if="totalpage!=0">
@@ -359,10 +389,18 @@ color:blue;
 				   
 				</ul> 
   			</div>
+  			
+  			
 				
 				</div>
+				
+				
+          
 	
 	<script>
+
+	
+	
 	let programDetail = Vue.createApp({
 	    data() {
 	        return {
@@ -489,6 +527,7 @@ color:blue;
 		data(){
 			return{
 				sessionId:'${sessionScope.id}',
+				sessionName:'${sessionScope.name}',
 				vno:${vo.vno},
 				content:'',
 				rtype:1,
@@ -501,7 +540,13 @@ color:blue;
 	   			 endpage:0,
 	   			answerContent:'',
 	   			answerList:[],
-	   			answerSize:0
+	   			answerSize:0,
+	   			updateContent:'',
+	   			updateName:'',
+	   			updateRno:0,
+	   			updateRoot:0,
+	   			isShow:false
+	   	
 	   			
 	   		
 				
@@ -513,9 +558,141 @@ color:blue;
 			this.replyNormalList(1,0);
 		},
 		methods:{
+			replyLike(rno,ls,hs,rtype,updateRoot){
+					
+				let type=0;
+				
+				if(updateRoot===0){
+					type=1;
+				}
+				else{
+					type=2;	
+				}
+			
+				if(this.sessionId===''){
+					alert('로그인 후 이용가능합니다.')
+					return;
+				}
+				axios.get('../program/replyLikeUpdate_vue.do',{
+					params:{
+						rno:rno,
+						like_state:ls,
+						hate_state:hs,
+						type:rtype
+					}
+				}).then(res=>{
+					if(type==1){
+						
+						this.replyNormalList(1,0,'a')
+					}
+					if(type==2){
+					
+						this.replyNormalList(2,updateRoot,'open')
+						
+						
+					}
+				})
+			},
+			
+			replyDelete(rno,updateRoot){
+				let type=0;
+				
+				if(updateRoot===0){
+					type=1;
+				}
+				else{
+					type=2;	
+				}
+				axios.get('../program/replyDelete_vue.do',{
+					params:{
+						rno:rno,
+						root:updateRoot
+					}
+				}).then(res=>{
+						
+					
+						if(type==1){
+						
+						this.replyNormalList(1,0,'a')
+					}
+					if(type==2){
+					
+						this.replyNormalList(2,updateRoot,'open')
+						
+						
+					}
+					alert('댓글 삭제가 완료되었습니다.')
+				})
+			},
+			replyUpdate(rno,updateRoot){
+				console.log('asdasdasd'+rno)
+				let type=0;
+				if(updateRoot===0){
+					type=1;
+				}
+				else{
+					type=2;	
+				}
+				console.log(rno)
+				if(this.updateContent.trim()===''){
+					alert('내용을 입력해주세요.')
+					return;
+				}
+				
+				axios.get('../program/replyUpdate_vue.do',{
+					params:{
+						rno:rno,
+						content:this.updateContent
+					}
+				}).then(res=>{
+					
+					if(type==1){
+						
+						this.replyNormalList(1,0,'a')
+					}
+					if(type==2){
+					
+						this.replyNormalList(2,updateRoot,'open')
+						
+						
+					}
+					 this.isShow=false
+					 $('#replyDialog').dialog('close');
+					 alert('수정이 완료되었습니다.')
+				})
+			},
+			
+			updateForm(rno){
+				axios.get('../program/getUpdateInfo_vue.do',{
+					params:{
+						rno:rno
+					}
+				}).then(res=>{
+					
+					 this.updateContent=res.data.content
+					 this.updateName=res.data.username
+					 this.updateRno=res.data.rno
+					 
+					 this.updateRoot=res.data.root
+					
+	    			 this.isShow=true
+					 $('#replyDialog').dialog({
+	    				 autoOpen:false,
+	    				 modal:true,
+	    				 width:600,
+	    				 height:300,
+	    				 position: {
+	    				        my: "center",
+	    				        at: "center",
+	    				        of: window
+	    				    }
+	    			 }).dialog('open')
+	    			 
+				})
+			},
 			showAnswers(rno){
 				this.answerContent=''
-					
+				
 			
 				
 				 	let answer = 'answer' + rno;
@@ -578,6 +755,7 @@ color:blue;
 			  
 			    	
 			},
+			
 			hideAnswer(rno){
 				this.answerContent=''
 					 let answer = 'answer' + rno;
@@ -594,9 +772,18 @@ color:blue;
 				this.root=root
 				let content = '';
 				if(type===1){
+					if(this.content.trim()===''){
+						alert('내용을 입력해주세요.')
+						return;
+					}
 					content=this.content
 				}
 				else{
+					if(this.answerContent.trim()===''){
+						alert('내용을 입력해주세요.')
+						return;
+					}
+					
 					content=this.answerContent	
 				}
 				axios.get('../program/replyInsert_vue.do',{
@@ -631,7 +818,7 @@ color:blue;
 			replyNormalList(type,root,userid){
 				this.rtype=type
 				this.root=root
-			
+				
 				axios.get('../program/replyList_vue.do',{
 				
 					
@@ -648,24 +835,24 @@ color:blue;
 					if(type===1){
 						this.replyListData=res.data
 						this.paging()
-						console.log('주리스트')
+						
+						
 					}
 					else{
-						console.log('서브리스트')
+					
 						this.answerList=res.data
+						
 						this.answerSize=this.answerList.length
+						
 						this.showAnswers(root)
+						
 					
 						
 						if(this.answerSize===0){
-							
 							let answer = 'answer' + root;
-							   $('#' + answer).css('display', 'none');
-							if(userid===this.sessionId){
-								alert('아직등록된 답변이 없으며,본인 댓글엔 답변할수 없습니다.')
-							}
+							 $('#' + answer).css('display', 'none');
 							if(this.sessionId===''){
-								alert('아직등록된 답변이 없으며,답변은 로그인 후 가능합니다.')
+								alert('등록된 답변이 없으며,답변은 로그인 후 가능합니다.')
 							}
 							
 						}

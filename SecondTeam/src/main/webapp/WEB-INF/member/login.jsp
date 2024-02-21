@@ -35,6 +35,7 @@ td,th{
    border-bottom: none !important;
 }
 #last_tr{
+   padding-top: 30px;
    border-bottom: none !important;
 }
 .inputinput{
@@ -53,6 +54,7 @@ input:focus {
    color: #fff;
    background-color: #93a0a8;
    font-size: 15px;
+   border-radius: 20px;
 }
 </style>
 </head>

@@ -12,11 +12,34 @@
 
 <script src="https://unpkg.com/vue@3"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<style type="text/css">
+.mainmain{
+   margin: 100px auto;
+   width: 800px;
+}
+table{
+   color: #333 !important;
+}
+#last_tr{
+   padding-top: 50px;
+   border-bottom: none !important;
+}
+.sectiontitle{
+    margin-bottom: 50px;
+}
+.inputbutton{
+   width : 100px;
+   color: #fff;
+   background-color: #93a0a8;
+   font-size: 15px;
+   border-radius: 20px;
+}
+</style>
 </head>
 <body>
 <div class="wrapper row3" id="memberApp">
-    <main class="container clear"> 
-      <h2 class="sectiontitle">센터 회원가입</h2>
+    <main class="container mainmain"> 
+      <h2 class="sectiontitle text-center">센터 회원가입</h2>
       <form method="post" action="../member/join_ok_c.do" @submit="submitForm()">
       <table class="table">
        <tr>
@@ -25,7 +48,8 @@
           <input type=text ref=userId size=15 class="input-sm" v-model="userId"
             v-bind:readonly="isReadOnly" name="userId"
           >
-          <input type=button value="아이디중복체크" class="btn-sm btn"
+          &nbsp;
+          <input type=button value="아이디중복체크" class="btn-sm"
            @click="idCheck"
           >
           <p>{{idOk}}</p>
@@ -36,6 +60,7 @@
           <input type=password ref=userPwd size=15 class="input-sm" v-model="userPwd"
             @keyup="pwdValidate" name="userPwd"
           >
+          &nbsp;
           <input type=password ref=userPwd1 size=15 class="input-sm" placeholder="비밀번호재입력" v-model="userPwd1"
            @keyup="pwdValidate2" 
           >
@@ -46,7 +71,7 @@
         <th width=15% class="text-center">이름</th>
         <td width=85% class="inline">
           <input type=text ref=centerName size=15 class="input-sm" v-model="centerName"
-           name="centerName"
+           name="centerName" 
           >
         </td>
        </tr>
@@ -89,6 +114,7 @@
             <option>010</option>
             <option>02</option>
           </select>
+          &nbsp;
           <input type=text ref=phone2 size=15 class="input-sm" v-model="phone2" name="phone2">
         </td>
        </tr>
@@ -99,9 +125,10 @@
         </td>
        </tr>
        <tr>
-         <td colspan="2" class="text-center inline">
-           <input type="submit" value="회원가입" class="btn-sm btn">
-           <input type=button value="취소" class="btn-sm btn"
+         <td colspan="2" class="text-center inline" id="last_tr">
+           <input type="submit" value="회원가입" class="btn-sm btn inputbutton">
+           &nbsp;&nbsp;&nbsp;&nbsp;
+           <input type=button value="취소" class="btn-sm btn inputbutton"
              onclick="javascript:history.back()">
          </td>
        </tr>

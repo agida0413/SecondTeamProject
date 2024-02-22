@@ -51,7 +51,7 @@ public class MemberController {
 		service.memberInsert(vo);
 		
 		//메일보내기
-		mm.mailMemberSender(vo);
+		mm.mailUserMemberSender(vo);
 		
 		return "main";
 	}
@@ -71,7 +71,7 @@ public class MemberController {
 		service.memberInsertCenter(vo);
 		
 		//메일보내기
-		mm.mailMemberSender(vo);
+		mm.mailCenterMemberSender(vo);
 		
 		return "main";
 	}

@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://kit.fontawesome.com/3f828a1af5.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="../css/donation.css">
 <style type="text/css">
 .do_category_theme_list{
     display: -webkit-box;
@@ -289,6 +290,44 @@ input[type=radio] {
   </div>
   </div>
   <div class="col-sm-4"  style="margin-top: 143px;">
+  <div class="collect_side">
+                <!-- 후원상태 -->
+                <!-- [D]진행기간 마감일 경우 end 추가 -->
+                <div class="section_status">
+                            <div class="graph_status" style="padding-bottom: 75px;">
+                                <span class="per"><strong class="num">10</strong>%</span>
+                            </div>
+                            <div class="card_bar">
+		                      <span class="card_bar_collection" style="width: 50%;"></span>
+		                    </div>
+                    
+
+                    <div class="term_area">
+                        <p>
+                            <strong>
+                                2024.02.15 ~
+                                2024.03.31
+                            </strong><span>까지</span>
+                        </p>
+                         <div>
+                            <span class="d_day">D<em class="bar">-</em>40</span>
+                         </div>
+                          
+                    </div>
+                    <div class="num_area">
+                        <p class="status_num"><span>현재 모금:&nbsp;</span><strong>264,700</strong><span>원</span></p>
+                        <p class="status_num"><span>목표 :&nbsp;</span><strong>264,700</strong><span>원</span></p>
+                        
+                    </div>
+                    
+                </div>
+                <!-- //후원상태 -->
+
+                <!-- 버튼 -->
+                <div class="section_btn">
+                    <a href="#" class="btn donate jq_donate" data-google="모금함_View" data-stat="기부하기_상단_BTN_CLK">모금함 기부하기</a>
+                </div>
+  </div>
   </div>
   
 <!-- vue -->

@@ -4,6 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.*;
 import com.sist.service.DonationService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -124,8 +128,18 @@ public class DonationRestController {
 	
 	
 	@GetMapping(value="donation_detail_vue.do",produces = "text/plain;charset=UTF-8")
-	public String donation_detail_vue(int dno) throws JsonProcessingException{
+	public String donation_detail_vue(int dno) throws JsonProcessingException, ParseException{
 		DonationVO vo=service.donationDetailData(dno);
+		
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy.MM.dd");
+		String todayFm=sdf.format(new Date(System.currentTimeMillis()));
+		Date enddate=sdf.parse(vo.getD_enddate());
+		Date today=sdf.parse(todayFm);
+		
+		
+		long diffSec=(enddate.getTime() - today.getTime())/1000;
+		long diffDays=diffSec / (24*60*60);
+		vo.setDday(diffDays);
 		
 		ObjectMapper mapper=new ObjectMapper();
 		String json=mapper.writeValueAsString(vo);

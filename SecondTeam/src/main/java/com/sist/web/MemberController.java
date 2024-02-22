@@ -1,5 +1,8 @@
 package com.sist.web;
 
+import java.io.PrintWriter;
+import java.util.Random;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sist.manager.MailManager;
 import com.sist.service.*;
@@ -117,4 +121,38 @@ public class MemberController {
 	    	}
 			return "redirect:../main/main.do";
 		}
+		
+		
+	//비밀번호 찾기로 이동
+	@GetMapping("member/login_pwdfind.do")
+	public String member_login_pwdfind()
+	{
+		return "member/login_pwdfind";
+	}
+	
+	 @RequestMapping("member/pwdfind_ok.do")
+	  public void member_pwdfindok(HttpServletRequest request,
+			  HttpServletResponse response) {
+
+		  String id=request.getParameter("id");
+		  String email=request.getParameter("email");
+		  // 임시비번 생성
+		  Random rand=new Random();
+		  // 4자리수 1000~9999 +++ 암호화
+		  String x = String.valueOf(rand.nextInt(9000) + 1000);
+		  String t = encoder.encode(x);
+		  //System.out.println(t);
+		  //System.out.println(x);
+		  String res = service.pwdFind(id,email,t);
+		  // id, email 맞으면 임시비번 전송후 변경
+		  if(res.equals("SEND")) {
+			  mm.TempPwdMailSend(email, x);
+		  }
+		  try {
+			  PrintWriter out=response.getWriter();
+			  out.write(res);
+		  }catch(Exception ex) {
+			  ex.printStackTrace();
+		  }
+	  }
 }

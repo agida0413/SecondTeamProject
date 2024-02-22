@@ -35,6 +35,50 @@ public class MemberServiceImpl implements MemberService{
 		// TODO Auto-generated method stub
 		return dao.memberLogin(userId, userPwd);
 	}
+
+	@Override
+	public int FindID(String userId) {
+		// TODO Auto-generated method stub
+		return dao.FindID(userId);
+	}
+
+	@Override
+	public int FindEmail(String userId, String email) {
+		// TODO Auto-generated method stub
+		return dao.FindEmail(userId, email);
+	}
+
+	@Override
+	public void updateMemberPwdById(String temp, String userId) {
+		// TODO Auto-generated method stub
+		dao.updateMemberPwdById(temp, userId);
+	}
+
+	@Override
+	public String pwdFind(String userId, String email, String temp) {
+		// TODO Auto-generated method stub
+		
+		int countById = dao.FindID(userId);
+		
+		if(countById == 0)
+		{
+			return "IDNO";
+		}
+		else
+		{
+			int countByIdAndEmail = dao.FindEmail(userId, email);
+			
+			if(countByIdAndEmail == 1)
+			{
+				dao.updateMemberPwdById(temp, userId);
+				return "SEND";
+			}
+			else
+			{
+				return "EMAILNO";
+			}
+		}
+	}
 	
 	
 }

@@ -30,6 +30,17 @@ public interface MemberMapper {
 			+ "FROM member "
 			+ "WHERE userId=#{userId} ")
 	public MemberVO memberLogin(String userId);
+	
+	//3. 비밀번호 찾기
+	//3-1. 아이디 여부 확인
+	@Select("SELECT COUNT(*) FROM member WHERE userId=#{userId}")
+	public int FindID(String userId);
+	//3-2. 이메일 여부 확인
+	@Select("SELECT COUNT(*) FROM member WHERE userId=#{userId} AND email=#{email}")
+	public int FindEmail(@Param("userId") String userId, @Param("email") String email);
+	//3-3. 임시비밀번호 발급
+	@Update("UPDATE member SET userPwd=#{temp} WHERE userId=#{userId}")
+	public void updateMemberPwdById(@Param("temp") String temp, @Param("userId") String userId);
 }
 
 

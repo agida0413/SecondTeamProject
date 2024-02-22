@@ -99,7 +99,15 @@ input:focus {
                </td>
             </tr>
             <tr>
-               <td colspan="2"></td>
+               <td colspan="2" class="text-center">
+                  <span><a href="#" style="color: #fff !important;">
+                    <i class="xi-city"></i>
+                     아이디 찾기</a></span>
+                  &nbsp;&nbsp;&nbsp;
+                  <span><a href="../member/login_pwdfind.do" style="color: #fff !important;">
+                    <i class="xi-user-o"></i>
+                     비밀번호 찾기</a></span>
+               </td>
             </tr>
             <tr>
                <td colspan="2" class="text-center inline" id="last_tr">

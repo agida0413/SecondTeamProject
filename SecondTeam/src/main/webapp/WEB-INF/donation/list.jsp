@@ -139,6 +139,7 @@ input[type=radio] {
 </style>
 </head>
 <body>
+  <div class="col-sm-8">
   <div class="wrap" id="donationList">
   	
   	<!-- 카테고리 출력 -->
@@ -285,6 +286,9 @@ input[type=radio] {
 			</ul>
 		</div>
 		
+  </div>
+  </div>
+  <div class="col-sm-4"  style="margin-top: 143px;">
   </div>
   
 <!-- vue -->

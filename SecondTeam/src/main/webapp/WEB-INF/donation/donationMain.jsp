@@ -40,11 +40,8 @@
   <tiles:insertAttribute name="dheader"/>
   <div class="container bg-white" style="margin-top:50px;">
 	<div class="row">
-  <div class="col-sm-8">
   <tiles:insertAttribute name="dcontent"/>
-  </div>
   <div class="col-sm-4"  style="margin-top: 143px;">
-  <tiles:insertAttribute name="daside"/>
   </div>
   </div>
   </div>

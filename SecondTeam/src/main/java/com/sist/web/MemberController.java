@@ -11,11 +11,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.sist.manager.MailManager;
 import com.sist.service.*;
 import com.sist.vo.MemberVO;
 
 @Controller
 public class MemberController {
+	//메일보내기
+	@Autowired
+	private MailManager mm;
+	
 	@Autowired
 	private MemberService service;
 	
@@ -44,9 +49,13 @@ public class MemberController {
 		String enPwd=encoder.encode(vo.getUserPwd());
 		vo.setUserPwd(enPwd);
 		service.memberInsert(vo);
+		
+		//메일보내기
+		mm.mailMemberSender(vo);
+		
 		return "main";
 	}
-	//일반 회원가입+비밀번호암호화 ++1234암호화부분
+	//센터 회원가입+비밀번호암호화 ++1234암호화부분
 	@PostMapping("member/join_ok_c.do")
 	public String member_join_ok_c(MemberVO vo)
 	{
@@ -60,6 +69,10 @@ public class MemberController {
 		
 		vo.setUserPwd(enPwd);
 		service.memberInsertCenter(vo);
+		
+		//메일보내기
+		mm.mailMemberSender(vo);
+		
 		return "main";
 	}
 	

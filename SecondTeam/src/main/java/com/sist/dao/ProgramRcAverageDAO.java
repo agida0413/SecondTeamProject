@@ -139,13 +139,19 @@ public class ProgramRcAverageDAO {
 	
 	public List<String> recommandWordList(Map map){
 	List<String> titleList=mapper.recTitleData(map);
-	String titles="";
-	for (String title : titleList) {
-		titles+=title;
+	List<String> returnList=new ArrayList<String>();
+	if(titleList.size()>0) {
+		String titles="";
+		for (String title : titleList) {
+			titles+=title;
+		}
+		
+		returnList = mgr.wordListData(titles);
+
 	}
 	
-	List<String> returnList = mgr.wordListData(titles);
-	
+
+
 	return returnList; 
 	}
 	

@@ -222,8 +222,17 @@
     			</tr>
     		</table>
     		<div style="margin-bottom:20px;">
+    	
     		<span style="font-weight:bold;">맞춤형 추천 검색어</span>
+    			
     		<hr>
+    		<c:if test="${sessionScope.id==null }">
+    		<div><h6>로그인후 이용 가능합니다.</h6>
+    		</div> 
+    		</c:if>
+    		<c:if test="${sessionScope.id!=null }">
+    		<div v-if="recommandWordList.length===0"><h6>아직 추천데이터가 부족합니다.</h6></div>
+    		</c:if>
     			<ul class="tags">
 							<li v-for="revo in recommandWordList" :style="Option.ss===revo?'color:blue; font-weight:bold;':''"><a style="cursor:pointer; "   @click="recList(revo)" >{{revo}}</a></li>
 						

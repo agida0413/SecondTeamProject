@@ -101,11 +101,11 @@ input:focus {
             <tr>
                <td colspan="2" class="text-center">
                   <span><a href="#" style="color: #fff !important;">
-                    <i class="xi-city"></i>
+                    <i class="xi-search"></i>
                      아이디 찾기</a></span>
                   &nbsp;&nbsp;&nbsp;
                   <span><a href="../member/login_pwdfind.do" style="color: #fff !important;">
-                    <i class="xi-user-o"></i>
+                    <i class="xi-lock"></i>
                      비밀번호 찾기</a></span>
                </td>
             </tr>

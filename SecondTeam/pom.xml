@@ -49,6 +49,12 @@
    <version>5.1.5.RELEASE</version>
 </dependency>
 
+<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+<dependency>
+    <groupId>javax.mail</groupId>
+    <artifactId>mail</artifactId>
+    <version>1.4.7</version>
+</dependency>
 
    <!--잭슨데이타바인드 -->
 <dependency>

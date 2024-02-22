@@ -34,6 +34,9 @@ public class ProgramServiceImpl implements ProgramService {
 
 	@Autowired
 	private ProgramReplyDAO rDao;
+	
+	@Autowired
+	private ProgramRcAverageDAO rcDao;
 
 	@Override
 	public List<OptionVO> stateOption() {
@@ -318,6 +321,14 @@ public class ProgramServiceImpl implements ProgramService {
 	public int myReplyTotalPage(Map map) {
 		// TODO Auto-generated method stub
 		return rDao.myReplyTotalPage(map);
+	}
+
+	
+
+	@Override
+	public List<ProgramVO> recommandList(Map map) {
+		// TODO Auto-generated method stub
+		return rcDao.recommandList(map);
 	}
 	
 

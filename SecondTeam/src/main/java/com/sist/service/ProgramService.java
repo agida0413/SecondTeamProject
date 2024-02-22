@@ -90,4 +90,8 @@ public interface ProgramService {
 		public void updateReplyLikeState(Map map);
 		public int replyTotalAmount(ProgramReplyVO vo);
 		public int myReplyTotalPage(Map map);
+		
+		
+		
+		public List<ProgramVO> recommandList(Map map);
 }

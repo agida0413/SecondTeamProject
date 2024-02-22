@@ -169,7 +169,6 @@ public String goods_detail_vue(int gno,HttpSession session) throws Exception
 	WishListVO wvo=new WishListVO();
 	wvo.setId(userid);
 	wvo.setObjno(gno);
-	WishListVO wish=gService.wishCk(wvo);
 	
 	Map map=new HashMap();
 	map.put("rList", rList);
@@ -177,7 +176,11 @@ public String goods_detail_vue(int gno,HttpSession session) throws Exception
 	map.put("goodsdetail", vo);
 	map.put("userid", userid);
 	map.put("username", username);
-	map.put("wish", wish);
+	if (userid!=null) 
+	{
+		WishListVO wish = gService.wishCk(wvo);
+		map.put("wish", wish);
+	}
 	ObjectMapper mapper=new ObjectMapper();
 	String json=mapper.writeValueAsString(map);
 	return json;

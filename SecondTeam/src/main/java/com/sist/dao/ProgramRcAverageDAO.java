@@ -137,4 +137,16 @@ public class ProgramRcAverageDAO {
 		return  returnlist;
 	}
 	
+	public List<String> recommandWordList(Map map){
+	List<String> titleList=mapper.recTitleData(map);
+	String titles="";
+	for (String title : titleList) {
+		titles+=title;
+	}
+	
+	List<String> returnList = mgr.wordListData(titles);
+	
+	return returnList; 
+	}
+	
 }

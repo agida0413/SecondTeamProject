@@ -221,9 +221,21 @@
     			</td>
     			</tr>
     		</table>
+    		<div style="margin-bottom:20px;">
+    		<span style="font-weight:bold;">맞춤형 추천 검색어</span>
+    		<hr>
+    			<ul class="tags">
+							<li v-for="revo in recommandWordList" :style="Option.ss===revo?'color:blue; font-weight:bold;':''"><a style="cursor:pointer; "   @click="recList(revo)" >{{revo}}</a></li>
+						
+							
+						</ul>
+						</div>
     		</div>
     		
-    		
+    	
+					
+						
+					
     	
     	<!-- 검색결과갯수정보 -->	
     	<div class="row findNum" style="margin-left:5px;">	
@@ -331,7 +343,7 @@
           
     </div>
  
-  
+ 
   
   
     

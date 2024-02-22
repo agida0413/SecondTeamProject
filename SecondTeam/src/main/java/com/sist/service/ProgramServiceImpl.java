@@ -330,6 +330,12 @@ public class ProgramServiceImpl implements ProgramService {
 		// TODO Auto-generated method stub
 		return rcDao.recommandList(map);
 	}
+
+	@Override
+	public List<String> recommandWordList(Map map) {
+		// TODO Auto-generated method stub
+		return rcDao.recommandWordList(map);
+	}
 	
 
 

@@ -94,4 +94,5 @@ public interface ProgramService {
 		
 		
 		public List<ProgramVO> recommandList(Map map);
+		public List<String> recommandWordList(Map map);
 }

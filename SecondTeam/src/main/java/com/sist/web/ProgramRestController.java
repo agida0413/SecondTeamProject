@@ -80,6 +80,27 @@ private CommonsFunction cf;
 		return json;
 	}
 	
+	@GetMapping(value="program/recommandWord_vue.do",produces = "text/plain;charset=UTF-8")
+	public String recommandWord(HttpSession session) throws JsonProcessingException {
+		System.out.println("실행");
+		String json="";
+		String id=(String)session.getAttribute("id");
+		if(id!=null) {
+			Map map =new HashMap();
+			map.put("id", id);
+			List<String> list = service.recommandWordList(map);
+			for (String string : list) {
+				System.out.println("츄촌"+string);
+			}
+			ObjectMapper mapper=new ObjectMapper();
+					
+			json=mapper.writeValueAsString(list);
+		}
+	
+		
+		return json;
+	}
+	
 	//검색
 	@RequestMapping(value="program/find_vue.do",produces = "text/plain;charset=UTF-8")
 	public String find_vue(@RequestParam("ssConditionString") String ssConditionString,

@@ -34,7 +34,7 @@ public class WordManager {
 	   		list.add(kwrd.getString());
 	   		k++;
 	   	}
-	   	if(k>10) {
+	   	if(k>20) {
 	   		break;
 	   	}
 	   }

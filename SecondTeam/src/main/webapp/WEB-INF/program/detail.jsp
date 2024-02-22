@@ -177,7 +177,7 @@ color:blue;
 			
 				     <div class="pt-5 comment-wrap">
 				     <!-- 댓글 갯수 -->
-            <h2 class="mb-5 heading" style="font-size:25px;">{{rsize}} Comments</h2>
+            <h2 class="mb-5 heading" style="font-size:25px;">{{rsize}} Comments<span style="font-size:15px; color:gray; margin-left:5px;" v-if="sessionId===''">(로그인 후 댓글 작성가능합니다.)</span></h2>
                	
               
               <!-- 새댓글 작성 -->

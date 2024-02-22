@@ -455,9 +455,9 @@ let goodsDetail=Vue.createApp({
            	
            }
        },
-       goWish(gno){
+goWish(gno){
     	   
-    	   if(this.state==='NO')
+    	   if(this.state==='NO' && this.userid!=null)
     		{
     		  	let form=new FormData()
     		   form.append("objno",this.gno)
@@ -472,7 +472,7 @@ let goodsDetail=Vue.createApp({
     			   this.state='YES'
     		   })
     		}
-    	   else if(this.state==="YES")
+    	   else if(this.state==="YES" && this.userid!=null)
    		{
     		   console.log(this.gno)
     		   axios.get("../goods/canclewishgoods_vue.do",{
@@ -485,6 +485,10 @@ let goodsDetail=Vue.createApp({
     		   })
    		   
    		}
+    	   else if(this.userid==null)
+    		{
+    		   alert("로그인이 필요한 서비스입니다")
+    		}
        },
        goCart(gno){
     	   let form=new FormData()

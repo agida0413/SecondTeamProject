@@ -70,7 +70,7 @@
                     </div>
                     </div>
                     <div class="text-center" v-else>
-                    <div style="margin:50px 0 150px ">
+                    <div style="margin:70px 0 150px ">
                     <span>장바구니에 담긴 상품이 없습니다</span>
                     </div>
                     </div>
@@ -81,7 +81,7 @@
                 <div class="col-lg-12">
                     <div class="shoping__cart__btns" style="display: flex">
                         <a href="../goods/goods_main.do" class="class"><input type="button" class="form-control" style="width: 150px;" value="상품보러가기"></a>
-                       <a href="#" class="class"><input type="button" class="form-control" style="width: 150px;" value="장바구니 비우기" @click="allDel()"></a>
+                       <a href="#" class="class" v-if="cart_list.length>0"><input type="button" class="form-control" style="width: 150px;" value="장바구니 비우기" @click="allDel()"></a>
                     </div>
                      
                 </div>
@@ -91,12 +91,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-6" v-if="cart_list.length>0">
                     <div class="shoping__checkout">
                         <h5>Cart Total</h5>
                         <ul>
                             
-                            <li>총액<span class="allTotalPrice" data-allTotalPrice=""></span></li>
+                            <li>총액<span class="allTotalPrice" data-allTotalPrice="" ></span></li>
                         </ul>
                         <form action="#" method="post" id="sendBuy"> 
                         <button class="form-control"  id="moveToBuy" style="width:500px;">결제이동하기</button>
@@ -112,7 +112,10 @@
         	data(){
         		return{
         			cart_list:[],
-        			userid:''
+        			userid:'',
+        			cart_count:0,
+        			total:0
+        			
         		}
         	},
         	mounted(){
@@ -128,6 +131,7 @@
         				console.log(this.userid)
         				console.log(res.data)
         				this.cart_list=res.data
+        				this.cartcount=res.data.cart_count
         			})
         		},
         		cartDel(gcno){
@@ -153,6 +157,7 @@
         			})
         			this.cartdata()
         		}
+        		
         	}
         }).mount("#cartApp")
         </script>

@@ -11,6 +11,7 @@ import com.sist.mapper.GoodsMapper;
 import com.sist.vo.CartVO;
 import com.sist.vo.GoodsReviewVO;
 import com.sist.vo.GoodsVO;
+import com.sist.vo.WishListVO;
 
 @Repository
 public class GoodsDAO {
@@ -52,4 +53,18 @@ public void gReviewUpdate(GoodsReviewVO vo) {
 public void cartInsert(CartVO vo) {
 	mapper.cartInsert(vo);
 }
+public void wishInsert(WishListVO vo) {
+	mapper.gLikeIncrese();
+	mapper.wishInsert(vo);
+}
+public WishListVO wishCk(WishListVO vo) {
+	return mapper.wishCk(vo);
+}
+public void wishDelete(Map map) {
+	mapper.wishDelete(map);
+}
+public List<GoodsVO> goodsWishList(String id){
+	return mapper.goodsWishList(id);
+}
+
 }

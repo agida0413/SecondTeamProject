@@ -10,6 +10,7 @@ import com.sist.dao.GoodsDAO;
 import com.sist.vo.CartVO;
 import com.sist.vo.GoodsReviewVO;
 import com.sist.vo.GoodsVO;
+import com.sist.vo.WishListVO;
 
 @Service
 public class GoodsServiceImpl implements GoodsService{
@@ -87,6 +88,30 @@ public void gReviewInsert(GoodsReviewVO vo) {
 public void cartInsert(CartVO vo) {
 	// TODO Auto-generated method stub
 	gDao.cartInsert(vo);
+}
+
+@Override
+public List<GoodsVO> goodsWishList(String id) {
+	// TODO Auto-generated method stub
+	return gDao.goodsWishList(id);
+}
+
+@Override
+public void wishDelete(Map map) {
+	// TODO Auto-generated method stub
+	gDao.wishDelete(map);
+}
+
+@Override
+public void wishInsert(WishListVO vo) {
+	// TODO Auto-generated method stub
+	gDao.wishInsert(vo);
+}
+
+@Override
+public WishListVO wishCk(WishListVO vo) {
+	// TODO Auto-generated method stub
+	return gDao.wishCk(vo);
 }
 
 

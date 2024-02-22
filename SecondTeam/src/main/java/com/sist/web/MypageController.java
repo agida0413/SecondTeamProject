@@ -327,5 +327,9 @@ private ProgramService pService;
 		return "myAndAdpage/donClassWishList";
 	}
 	
-
+	// 상품 위시 페이지
+	@GetMapping("myAndAdpage/wishgoods.do")
+	public String wishgoods() {
+		return "myAndAdpage/wishgoods";
+	}
 }

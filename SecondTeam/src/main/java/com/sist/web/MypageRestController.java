@@ -5,13 +5,18 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sist.service.GoodsService;
 import com.sist.service.MypageService;
+import com.sist.vo.GoodsVO;
 import com.sist.vo.VdataboardVO;
 import com.sist.vo.VprogramApplyVO;
 
@@ -21,7 +26,8 @@ public class MypageRestController {
 	@Autowired
 	private MypageService service;
 	
-	
+	@Autowired
+	private GoodsService gService;
 	
 	@PostMapping(value="myAndAdpage/certifyUpdate_vue.do",produces = "text/plain;charset=UTF-8")
 	   public String certifyUpdate_vue(VprogramApplyVO vo,HttpServletRequest request)
@@ -85,4 +91,16 @@ public class MypageRestController {
 		   }
 		   return result;
 	   }
+	
+	@GetMapping(value="myAndAdpage/wishgoodslist_vue.do",produces = "text/plain;charset=UTF-8")
+	public String wishgoodslist_vue(HttpSession session,String id) throws Exception
+	{
+		id=(String)session.getAttribute("id");
+		List<GoodsVO> list=gService.goodsWishList(id);
+		
+		ObjectMapper mapper=new ObjectMapper();
+		String json=mapper.writeValueAsString(list);
+		
+		return json;
+	}
 }

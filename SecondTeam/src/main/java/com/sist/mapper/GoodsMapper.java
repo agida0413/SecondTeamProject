@@ -4,11 +4,15 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.sist.vo.CartVO;
 import com.sist.vo.GoodsReviewVO;
 import com.sist.vo.GoodsVO;
+import com.sist.vo.WishListVO;
 
 import java.util.*;
 
@@ -106,6 +110,36 @@ public void gReviewUpdate(GoodsReviewVO vo);
 @Insert("INSERT INTO goods_cart(gcno,gno,userid,cart_price,cart_count) "
 		+ " VALUES(gct_gcno_seq.nextval,#{gno},#{userid},#{cart_price},#{cart_count})")
 public void cartInsert(CartVO vo);
+
+@Results({
+	@Result(property = "gvo.gno" ,column="gno"),
+})
+
+// 찜추가, 출력
+@Update("UPDATE goodslist SET g_like=g_like+1")
+public void gLikeIncrese();
+@Insert("INSERT INTO wishlist(wno,typeno,objno,state,id) VALUES(wishlist_seq.nextval,3,#{objno},#{state},#{id})")
+public void wishInsert(WishListVO vo);
+@Select("SELECT typeno,objno,state,id FROM wishlist WHERE objno=#{objno} AND id=#{id} AND typeno=3")
+public WishListVO wishCk(WishListVO vo);
+// 찜삭제
+@Delete("DELETE FROM wishlist WHERE id=#{id} AND objno=#{objno}")
+public void wishDelete(Map map);
+
+
+//찜리스트 
+@Results({
+	@Result(property = "wvo.wno" ,column="wno"),
+	@Result(property = "wvo.typeno" ,column="typeno"),
+	@Result(property = "wvo.objno" ,column="objno"),
+	@Result(property = "wvo.state" ,column="state"),
+	@Result(property = "wvo.id" ,column="id")
+})
+
+@Select("SELECT wno,gno,id,g_price,g_img,g_name FROM wishlist wl JOIN goodslist gl ON "
+		+ "wl.objno=gl.gno WHERE id=#{id} AND typeno=3")
+public List<GoodsVO> goodsWishList(String id);
+
 
 }
 

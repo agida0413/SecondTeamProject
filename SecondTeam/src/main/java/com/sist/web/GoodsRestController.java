@@ -28,6 +28,7 @@ import com.sist.vo.CartVO;
 import com.sist.vo.DonStoreVO;
 import com.sist.vo.GoodsReviewVO;
 import com.sist.vo.GoodsVO;
+import com.sist.vo.WishListVO;
 
 @RestController
 public class GoodsRestController {
@@ -165,12 +166,18 @@ public String goods_detail_vue(int gno,HttpSession session) throws Exception
 	vo =gService.goodsDetailData(gno);
 	vo.setIntprice(Integer.parseInt(vo.getG_price().replaceAll(",", "")));
 	List<GoodsReviewVO> rList=gService.gReviewListData(gno);
+	WishListVO wvo=new WishListVO();
+	wvo.setId(userid);
+	wvo.setObjno(gno);
+	WishListVO wish=gService.wishCk(wvo);
+	
 	Map map=new HashMap();
 	map.put("rList", rList);
 	map.put("goodsdetail_img", list);
 	map.put("goodsdetail", vo);
 	map.put("userid", userid);
 	map.put("username", username);
+	map.put("wish", wish);
 	ObjectMapper mapper=new ObjectMapper();
 	String json=mapper.writeValueAsString(map);
 	return json;
@@ -267,5 +274,25 @@ public String goods_cartInsert_vue(CartVO vo) throws Exception
 	String json=mapper.writeValueAsString(vo);
 	return json;
 }
+
+// 찜 insert
+@PostMapping(value="goods/wishgoods_vue.do",produces = "text/plain;charset=UTF-8")
+public void wishgoods_vue(WishListVO vo,HttpSession session)
+{
+	String id=(String)session.getAttribute("id");
+	gService.wishInsert(vo);	
+}
+// 찜 delete
+@GetMapping(value="goods/canclewishgoods_vue.do",produces = "text/plain;charset=UTF-8")
+public void canclewishgoods_vue(HttpSession session,int objno)
+{
+	String id=(String)session.getAttribute("id");
+	Map map=new HashMap();
+	map.put("id", id);
+	map.put("objno", objno);
+	gService.wishDelete(map);
+}
+
+
 }
 

@@ -74,9 +74,9 @@ margin-top: 50px;
                 <input type="button" class="form-control" value="장바구니" style="width: 180px; height: 50px; font-weight: bold; margin-right: 5px;" @click="goCart(goodsdetail.gno)">
                 <input type="button" class="form-control" value="바로구매" style="width: 180px; height: 50px; font-weight: bold; margin-right: 5px;">
                 <button class="form-control" style="width: 50px; height: 50px; margin-left: 1px; font-weight: bold; padding: 5px; display: flex; align-items: center; 
-                justify-content: center;" @click="goWish(goodsdetail.gno)">
-                    <span style="font-size: 27px;" v-if="!like"><i class="xi-heart-o"></i></span>
-                    <span style="font-size: 27px;" v-if="like"><i class="xi-heart"></i></span>
+                justify-content: center;" @click="goWish(goodsdetail.gno)" @submit="goWish()">
+                    <span style="font-size: 27px;" v-if="state==='YES'"><i class="xi-heart"></i></span>
+                    <span style="font-size: 27px;" v-if="state==='NO'"><i class="xi-heart-o"></i></span>
                 </button>
             </div>
         </td>
@@ -236,9 +236,10 @@ let goodsDetail=Vue.createApp({
 			username:'',
 			editMode:false,
 			upfiles:'',
-			like:false,
+			state:'NO',
 			cartlist:{},
-			intprice:0
+			intprice:0,
+			wish:{}
 		}
 	},
 	mounted(){
@@ -248,7 +249,9 @@ let goodsDetail=Vue.createApp({
 		detaildata(){
 			axios.get("../goods/goods_detail_vue.do",{
 				params:{
-					gno:this.gno
+					gno:this.gno,
+					objno:this.gno,
+					id:this.userid
 				}
 			}).then(res=>{
 				console.log(res.data)
@@ -259,6 +262,9 @@ let goodsDetail=Vue.createApp({
 				this.userid=res.data.userid,
 				this.username=res.data.username,
 				this.intprice=res.data.goodsdetail.intprice
+				this.wish=res.data.wish
+				this.state=res.data.wish.state
+				console.log("state:"+this.state)
 				let leng = res.data.rList.filecount;
 				if (leng > 0) {
 				    for (let i = 0; i < leng; i++) {
@@ -415,10 +421,7 @@ let goodsDetail=Vue.createApp({
        		form2.append("subject",this.subject)
        		form2.append("content",this.content)
        		form2.append("score",this.score)
-      
        		
-   
-
            if(this.editMode===false)
            { 
            axios.post("../goods/reviewInsert_vue.do",form,{
@@ -427,16 +430,9 @@ let goodsDetail=Vue.createApp({
 	            }
            }).then(res => {
         	   console.log(res.data)
-        	   if(res.data=="yes")
-        		{
         		   alert("리뷰작성이 완료되었습니다");
                    $("#dialog").dialog("close");
                    this.detaildata()
-        		}
-        	   else
-        		 {
-        		   alert(res.data);
-        		 }
            }).catch(error => {
                console.error("Error occurred while sending review:", error);
            });
@@ -460,11 +456,39 @@ let goodsDetail=Vue.createApp({
            }
        },
        goWish(gno){
-    	   this.like=true
+    	   
+    	   if(this.state==='NO')
+    		{
+    		  	let form=new FormData()
+    		   form.append("objno",this.gno)
+    		   form.append("id",this.userid)
+    		   form.append("state","YES")
+    		   axios.post("../goods/wishgoods_vue.do",form,{
+    			  headers:{
+    				  'Content-Type': 'multipart/form-data' 
+    			  }
+    		   }).then(res=>{
+    			   alert("상품이 위시리스트에 담겼습니다")
+    			   this.state='YES'
+    		   })
+    		}
+    	   else if(this.state==="YES")
+   		{
+    		   console.log(this.gno)
+    		   axios.get("../goods/canclewishgoods_vue.do",{
+    			   params:{
+    				   objno:this.gno
+    			   }
+    		   }).then(res=>{
+    			   alert("상품이 위시리스트에서 삭제되었습니다")
+    			   this.state='NO'
+    		   })
+   		   
+   		}
        },
        goCart(gno){
     	   let form=new FormData()
-    	   form.append("gno",this.gno)
+    	   form.append("gno",gno)
     	   form.append("userid",this.userid)
     	   form.append("cart_price",this.intprice*this.quantity)
     	   form.append("cart_count",this.quantity)

@@ -6,6 +6,7 @@ import java.util.Map;
 import com.sist.vo.CartVO;
 import com.sist.vo.GoodsReviewVO;
 import com.sist.vo.GoodsVO;
+import com.sist.vo.WishListVO;
 
 public interface GoodsService {
 	public List<GoodsVO> goodsListData(Map map);
@@ -22,4 +23,9 @@ public interface GoodsService {
 	public void gReviewInsert(GoodsReviewVO vo);
 	// 장바구니
 	public void cartInsert(CartVO vo);
+	// 찜목록
+	public void wishInsert(WishListVO vo);
+	public WishListVO wishCk(WishListVO vo);
+	public void wishDelete(Map map);
+	public List<GoodsVO> goodsWishList(String id);
 }

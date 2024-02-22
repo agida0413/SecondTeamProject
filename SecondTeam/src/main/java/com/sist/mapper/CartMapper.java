@@ -28,12 +28,12 @@ import com.sist.vo.CartVO;
 import com.sist.vo.GoodsVO;
 public interface CartMapper {
 
-@Results({//변경완료
+@Results({
 		@Result(property = "gvo.gno" ,column="gno"),
 		@Result(property = "gvo.g_name" , column = "g_name"),
 		@Result(property = "gvo.g_img",column = "g_img"),
 		@Result(property = "gvo.g_price",column = "g_price")
-})//변경완료	
+})
 	
 // 장바구니 목록
 @Select("SELECT gc.gno,g_name,g_img,g_price,cart_price,cart_count,gcno FROM goodslist gl JOIN goods_cart gc "

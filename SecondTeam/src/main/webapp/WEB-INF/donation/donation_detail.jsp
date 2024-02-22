@@ -222,7 +222,7 @@ h3.plan strong{
 			  <!-- 댓글목록 -->
 			  <div id="donationDetailReply">
 	            <div class="pt-5 comment-wrap">
-	              <h3 class="mb-5 heading" style="margin-bottom: 5px;">6 Comments</h3>
+	              <h3 class="mb-5 heading" style="margin-bottom: 5px;">6 Comments</h3><span style="float: right"><a class="btn reply_replybtn">댓글쓰기</a></span>
 	                <div class="reply_block">
 		            	<div class="reply_header" style="padding-bottom: 5px;">
 		            	  <b>유저아이디</b>
@@ -277,9 +277,6 @@ h3.plan strong{
             
             
 		</div>
-		
-		 
-			
 		  
         </div>
       </div>

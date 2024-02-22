@@ -54,7 +54,7 @@ public void cartInsert(CartVO vo) {
 	mapper.cartInsert(vo);
 }
 public void wishInsert(WishListVO vo) {
-	mapper.gLikeIncrese();
+	mapper.gLikeIncrese(vo.getObjno());
 	mapper.wishInsert(vo);
 }
 public WishListVO wishCk(WishListVO vo) {

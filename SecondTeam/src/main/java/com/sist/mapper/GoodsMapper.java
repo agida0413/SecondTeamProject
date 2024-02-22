@@ -116,8 +116,8 @@ public void cartInsert(CartVO vo);
 })
 
 // 찜추가, 출력
-@Update("UPDATE goodslist SET g_like=g_like+1")
-public void gLikeIncrese();
+@Update("UPDATE goodslist SET g_like=g_like+1 WHERE gno=#{gno}")
+public void gLikeIncrese(int gno);
 @Insert("INSERT INTO wishlist(wno,typeno,objno,state,id) VALUES(wishlist_seq.nextval,3,#{objno},#{state},#{id})")
 public void wishInsert(WishListVO vo);
 @Select("SELECT typeno,objno,state,id FROM wishlist WHERE objno=#{objno} AND id=#{id} AND typeno=3")

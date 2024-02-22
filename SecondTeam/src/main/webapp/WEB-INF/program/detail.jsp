@@ -191,7 +191,7 @@ color:blue;
                    
                 <textarea rows="3" cols="98" class="textareaStyle" placeholder="새로운 댓글을  작성해 주세요." v-model="content"></textarea>
                    <p style="float:right; margin-top:10px;">
-                 <a class="insert rounded" @click="replyNormalInsert(1,0)">등록하기</a>
+                 <a class="insert rounded" style="font-weight:bold;" @click="replyNormalInsert(1,0)">등록하기</a>
                   </p>
                
                 
@@ -233,10 +233,10 @@ color:blue;
                 <div class="comment-body" >
                   <h3>{{vo.username}}
                  
-                 <span style="float:right; margin-right:10px;">
-                   <span style="margin-right:10px;" @click="replyDelete(vo.rno,vo.root)" v-if="vo.content!=='삭제된 댓글입니다.'"><a style= "color:#ff9999;"class="reply rounded rpoint" v-if="vo.userid===sessionId">삭제</a></span>
-                        <span style="margin-right:10px;" @click="updateForm(vo.rno)" v-if="vo.content!=='삭제된 댓글입니다.'"> <a style="color:#8470FF;" class="reply rounded rpoint" v-if="vo.userid===sessionId" >수정</a> </span>
-                 <a class="reply rounded rpoint" v-if="vo.userid!==sessionId">신고하기</a>
+                 <span style="float:right; ">
+                   <span  @click="replyDelete(vo.rno,vo.root)" v-if="vo.content!=='삭제된 댓글입니다.'"><a style= "color:#ff9999; margin-right:10px;"class="reply rounded rpoint" v-if="vo.userid===sessionId">삭제</a></span>
+                        <span  @click="updateForm(vo.rno)" v-if="vo.content!=='삭제된 댓글입니다.'"> <a style="color:#8470FF; margin-right:10px;" class="reply rounded rpoint" v-if="vo.userid===sessionId" >수정</a> </span>
+                   <span ><a  style="margin-right:10px;" class="reply rounded rpoint" v-if="vo.userid!==sessionId">신고하기</a></span>
                  
                  </span> 
                   </h3>
@@ -261,7 +261,7 @@ color:blue;
                    
                      <img src="../Projectimages/notdislike.png" width="20px;" v-if="vo.rvo.hate_state!=='YES'" @click="replyLike(vo.rno,vo.rvo.like_state,vo.rvo.hate_state,2,vo.root,vo.userid)" class="rpoint">
                   <img src="../Projectimages/dislike.png" width="20px;" v-if="vo.rvo.hate_state==='YES'" @click="replyLike(vo.rno,vo.rvo.like_state,vo.rvo.hate_state,2,vo.root,vo.userid)" class="rpoint">
-                    	  <span style="margin-left:2px;">
+                    	  <span style="margin-left:4px;">
 			               {{vo.hate_count}}
 			               </span>
                      </span>
@@ -292,10 +292,10 @@ color:blue;
                     <div class="comment-body">
                  
                       <h3>{{avo.username}}
-                        <span style="float:right; margin-right:10px;">
-                   <span style="margin-right:10px;" @click="replyDelete(avo.rno,avo.root)"><a style= "color:#ff9999;"class="reply rounded rpoint" v-if="avo.userid===sessionId">삭제</a></span>
-                        <span style="margin-right:10px;" @click="updateForm(avo.rno)"> <a style="color:#8470FF;" class="reply rounded rpoint" v-if="avo.userid===sessionId" >수정</a> </span>
-                 <a class="reply rounded rpoint" >신고하기</a>
+                        <span style="float:right;">
+                   <span  @click="replyDelete(avo.rno,avo.root)"><a style= "margin-right:10px; color:#ff9999;"class="reply rounded rpoint" v-if="avo.userid===sessionId">삭제</a></span>
+                        <span @click="updateForm(avo.rno)"> <a style="margin-right:10px; color:#8470FF;" class="reply rounded rpoint" v-if="avo.userid===sessionId" >수정</a> </span>
+                 <span ><a style="margin-right:10px;" class="reply rounded rpoint" v-if="avo.userid!==sessionId">신고하기</a></span>
                  
                  </span> 
                       </h3>
@@ -319,7 +319,7 @@ color:blue;
                    
                      <img src="../Projectimages/notdislike.png" width="20px;" v-if="avo.rvo.hate_state!=='YES'" @click="replyLike(avo.rno,avo.rvo.like_state,avo.rvo.hate_state,2,avo.root,avo.userid)" class="rpoint">
                   <img src="../Projectimages/dislike.png" width="20px;" v-if="avo.rvo.hate_state==='YES'" @click="replyLike(avo.rno,avo.rvo.like_state,avo.rvo.hate_state,2,avo.root,avo.userid)" class="rpoint">
-                    	  <span style="margin-left:2px;">
+                    	  <span style="margin-left:4px;">
 			               {{avo.hate_count}}
 			               </span>
                      </span>
@@ -349,7 +349,7 @@ color:blue;
 		               		   
 		                   <p style="float:right; margin-top:10px; margin-right:42px;">
 		                <span style="margin-right:5px;"><a class="insert rounded" @click="hideAnswer(vo.rno)"><img src="../Projectimages/upSide.png" width=15px >&nbsp;답글접기</a></span>
-		                  <span @click="replyNormalInsert(2,vo.rno)"><a  class="insert rounded" style="color:#8470FF; font-weight:bold;">등록하기</a></span>
+		                  <span @click="replyNormalInsert(2,vo.rno)"><a  class="insert rounded" style="color:#8470FF; font-weight:bold; margin-right:5px;">등록하기</a></span>
 		                  </p>
 		                  
 		                   

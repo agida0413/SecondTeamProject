@@ -195,6 +195,14 @@
          <version>5.1.5.RELEASE</version>
       </dependency> -->
       
+       <dependency>
+	      <groupId>org.snu</groupId>
+	      <artifactId>kokoma</artifactId>
+	      <version>1.0</version>
+	      <scope>system</scope>
+	      <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/org.snu.ids.ha.jar</systemPath>
+	    </dependency>
+      
       <dependency>
          <groupId>taglibs</groupId>
          <artifactId>standard</artifactId>

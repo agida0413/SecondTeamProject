@@ -88,4 +88,6 @@ public interface ProgramService {
 	 public void replyHateInsert(Map map);
 		public void replyLikeInsert(Map map); 
 		public void updateReplyLikeState(Map map);
+		public int replyTotalAmount(ProgramReplyVO vo);
+		public int myReplyTotalPage(Map map);
 }

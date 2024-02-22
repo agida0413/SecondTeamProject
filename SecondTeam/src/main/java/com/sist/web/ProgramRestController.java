@@ -656,7 +656,7 @@ private CommonsFunction cf;
 			  id="NOID";
 		  }
 		   String index="ORDER BY ";
-		  
+		  String cd="";
 		  int rowsize=5;
 		  int start = cf.start(rowsize, page);
 		  int end=cf.end(rowsize, page);
@@ -671,6 +671,11 @@ private CommonsFunction cf;
 		 if(condition==3) {
 			 index=index+"likepercent DESC";
 		 }
+		 
+		 if(condition==4) {
+			  index=index+"rno DESC";
+			  cd="AND a.userid='"+id+"'";
+		  }
 		   Map map = new HashMap();
 		   if(vo.getRtype()==2) {
 			   start=1;
@@ -684,6 +689,7 @@ private CommonsFunction cf;
 		   map.put("root", vo.getRoot());
 		   map.put("objno", vo.getObjno());
 		   map.put("id", id);
+		   map.put("condition", cd);
 		
 			String json ="";
 		   try {
@@ -707,18 +713,33 @@ private CommonsFunction cf;
 		   
 		   
 		   @GetMapping(value="program/replyListPage_vue.do.do",produces = "text/plain;charset=UTF-8")
-	   public String replyListPage(ProgramReplyVO vo,int page) throws JsonProcessingException {
-	
-			   int totalpage=service.replyTotalPage(vo);
+	   public String replyListPage(ProgramReplyVO vo,int page,int condition,HttpSession session) throws JsonProcessingException {
+			   String id=(String)session.getAttribute("id");
+			   			   
+			   Map map = new HashMap(); 
+			   map.put("id", id);
+			   
+			   int totalpage=0;
+			   if(condition==4) {
+				   map.put("objno", vo.getObjno());
+				totalpage=service.myReplyTotalPage(map);  
+			  }
+			  else {
+				  totalpage=service.replyTotalPage(vo);
+			  }
+			  
 			   final int BLOCK=10;
 			   int startpage=cf.startPage(BLOCK, page);
 			   int endpage=cf.endPage(BLOCK, page, totalpage);
 			   
-			   Map map = new HashMap(); 
+			   
+			   
 			   map.put("totalpage", totalpage);
 			   map.put("startpage", startpage);
 			   map.put("endpage", endpage);
 			   map.put("curpage", page);
+			  
+			  
 			   
 		ObjectMapper mapper=  new ObjectMapper();
 		String json = mapper.writeValueAsString(map);
@@ -726,6 +747,18 @@ private CommonsFunction cf;
 		
 		return json;
 	   }
+		   
+		   
+		   @GetMapping(value="program/getAmount_vue.do.do",produces = "text/plain;charset=UTF-8")
+		   public String getAmount_vue(ProgramReplyVO vo) throws JsonProcessingException {
+		
+			   int replyAmount=service.replyTotalAmount(vo);
+				   
+			
+			   String result=String.valueOf(replyAmount);
+			
+			return result;
+		   }  
 
 		   @GetMapping(value="program/getUpdateInfo_vue.do",produces = "text/plain;charset=UTF-8")
 		   public String getUpdateInfo(int rno) throws JsonProcessingException {

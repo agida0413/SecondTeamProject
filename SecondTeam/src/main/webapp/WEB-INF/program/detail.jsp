@@ -177,7 +177,7 @@ color:blue;
 			
 				     <div class="pt-5 comment-wrap">
 				     <!-- 댓글 갯수 -->
-            <h3 class="mb-5 heading">6 Comments</h3>
+            <h2 class="mb-5 heading" style="font-size:25px;">{{rsize}} Comments</h2>
                	
               
               <!-- 새댓글 작성 -->
@@ -186,6 +186,7 @@ color:blue;
                 <div style="margin-bottom:10px;">
                <img src="../Projectimages/userIcon.jpg" alt="Image placeholder" width="40px">
               <span style="font-weight:bold;color:black; font-size:20px; margin-left:5px;">{{sessionName}}</span>
+               
                    </div>
                    
                 <textarea rows="3" cols="98" class="textareaStyle" placeholder="새로운 댓글을  작성해 주세요." v-model="content"></textarea>
@@ -202,7 +203,8 @@ color:blue;
 		            	 <p >
 		            	 <span style="margin-right:5px;" @click="replyNewlyList()"><a class="insert rounded" :class="condition==1?'act':''" >최신순</a></span>
 		                 <span style="margin-right:5px;" @click="replyLikeList()"><a  class="insert rounded" :class="condition==2?'act':''">순공감순</a></span>
-		                <span @click="replyLikePercentList()"><a class="insert rounded" :class="condition==3?'act':''">공감비율순</a></span>   
+		                <span style="margin-right:5px;" @click="replyLikePercentList()"><a class="insert rounded" :class="condition==3?'act':''">공감비율순</a></span>
+		                 <span v-if="sessionId!==''" @click="replyMyReList()"><a class="insert rounded" :class="condition==4?'act':''">My댓글</a></span>      
 		                  </p>
                   </div>
                    <!-- 조건별 끝 -->
@@ -214,14 +216,16 @@ color:blue;
             
         
           </div>
-            
+               <div v-if="rsize===0">
+               	<h2>아직 등록된 댓글이 없습니다.</h2>
+               </div>
             <!-- 댓글리스트 -->
               <ul class="comment-list" v-for="vo in replyListData">
-             
+             	
 			
               <li class="comment" style="border-bottom:2px #999 solid;">
-               
-               
+             
+              
                <!-- 일반댓글 -->
                 <div class="vcard">
                   <img src="../Projectimages/userIcon.jpg" alt="Image placeholder">
@@ -247,16 +251,16 @@ color:blue;
                 
                   <span style="margin-right:10px;">
                   
-                  <img src="../Projectimages/notup.png" width="20px;" v-if="vo.rvo.like_state!=='YES'" @click="replyLike(vo.rno,vo.rvo.like_state,vo.rvo.hate_state,1,vo.root)">
-                  <img src="../Projectimages/up.png" width="20px;" v-if="vo.rvo.like_state==='YES'" @click="replyLike(vo.rno,vo.rvo.like_state,vo.rvo.hate_state,1,vo.root)">
+                  <img src="../Projectimages/notup.png" width="20px;" v-if="vo.rvo.like_state!=='YES'" @click="replyLike(vo.rno,vo.rvo.like_state,vo.rvo.hate_state,1,vo.root,vo.userid)" class="rpoint">
+                  <img src="../Projectimages/up.png" width="20px;" v-if="vo.rvo.like_state==='YES'" @click="replyLike(vo.rno,vo.rvo.like_state,vo.rvo.hate_state,1,vo.root,vo.userid)" class="rpoint">
 	                  <span style="margin-left:4px;">
 	                {{vo.like_count}}
 	                  </span>
                   </span>
                     <span>
                    
-                     <img src="../Projectimages/notdislike.png" width="20px;" v-if="vo.rvo.hate_state!=='YES'" @click="replyLike(vo.rno,vo.rvo.like_state,vo.rvo.hate_state,2,vo.root)">
-                  <img src="../Projectimages/dislike.png" width="20px;" v-if="vo.rvo.hate_state==='YES'" @click="replyLike(vo.rno,vo.rvo.like_state,vo.rvo.hate_state,2,vo.root)">
+                     <img src="../Projectimages/notdislike.png" width="20px;" v-if="vo.rvo.hate_state!=='YES'" @click="replyLike(vo.rno,vo.rvo.like_state,vo.rvo.hate_state,2,vo.root,vo.userid)" class="rpoint">
+                  <img src="../Projectimages/dislike.png" width="20px;" v-if="vo.rvo.hate_state==='YES'" @click="replyLike(vo.rno,vo.rvo.like_state,vo.rvo.hate_state,2,vo.root,vo.userid)" class="rpoint">
                     	  <span style="margin-left:2px;">
 			               {{vo.hate_count}}
 			               </span>
@@ -305,16 +309,16 @@ color:blue;
                 
                   <span style="margin-right:10px;">
                   
-                  <img src="../Projectimages/notup.png" width="20px;" v-if="avo.rvo.like_state!=='YES'" @click="replyLike(avo.rno,avo.rvo.like_state,avo.rvo.hate_state,1,avo.root)">
-                  <img src="../Projectimages/up.png" width="20px;" v-if="avo.rvo.like_state==='YES'" @click="replyLike(avo.rno,avo.rvo.like_state,avo.rvo.hate_state,1,avo.root)">
+                  <img src="../Projectimages/notup.png" width="20px;" v-if="avo.rvo.like_state!=='YES'" @click="replyLike(avo.rno,avo.rvo.like_state,avo.rvo.hate_state,1,avo.root,avo.userid)" class="rpoint">
+                  <img src="../Projectimages/up.png" width="20px;" v-if="avo.rvo.like_state==='YES'" @click="replyLike(avo.rno,avo.rvo.like_state,avo.rvo.hate_state,1,avo.root,avo.userid)" class="rpoint">
 	                  <span style="margin-left:4px;">
 	                {{avo.like_count}}
 	                  </span>
                   </span>
                     <span>
                    
-                     <img src="../Projectimages/notdislike.png" width="20px;" v-if="avo.rvo.hate_state!=='YES'" @click="replyLike(avo.rno,avo.rvo.like_state,avo.rvo.hate_state,2,avo.root)">
-                  <img src="../Projectimages/dislike.png" width="20px;" v-if="avo.rvo.hate_state==='YES'" @click="replyLike(avo.rno,avo.rvo.like_state,avo.rvo.hate_state,2,avo.root)">
+                     <img src="../Projectimages/notdislike.png" width="20px;" v-if="avo.rvo.hate_state!=='YES'" @click="replyLike(avo.rno,avo.rvo.like_state,avo.rvo.hate_state,2,avo.root,avo.userid)" class="rpoint">
+                  <img src="../Projectimages/dislike.png" width="20px;" v-if="avo.rvo.hate_state==='YES'" @click="replyLike(avo.rno,avo.rvo.like_state,avo.rvo.hate_state,2,avo.root,avo.userid)" class="rpoint">
                     	  <span style="margin-left:2px;">
 			               {{avo.hate_count}}
 			               </span>
@@ -533,6 +537,7 @@ color:blue;
 				rtype:1,
 				root:0,
 				replyListData:[],
+				rsize:0,
 				condition:1,
 				 curpage:1,
 	   			 totalpage:0,
@@ -558,7 +563,7 @@ color:blue;
 			this.replyNormalList(1,0);
 		},
 		methods:{
-			replyLike(rno,ls,hs,rtype,updateRoot){
+			replyLike(rno,ls,hs,rtype,updateRoot,us){
 					
 				let type=0;
 				
@@ -573,6 +578,14 @@ color:blue;
 					alert('로그인 후 이용가능합니다.')
 					return;
 				}
+				
+				
+				if(this.sessionId===us){
+					alert('본인댓글엔 공감을 누를 수 없습니다.')
+					return;
+				}
+				
+			
 				axios.get('../program/replyLikeUpdate_vue.do',{
 					params:{
 						rno:rno,
@@ -870,7 +883,14 @@ color:blue;
 						
 					}
 					
-					
+					//여기 
+					axios.get('../program/getAmount_vue.do.do',{
+						params:{
+						objno:this.vno	
+						}
+					}).then(res=>{
+						this.rsize=res.data
+					})
 					
 				})
 			},
@@ -879,14 +899,15 @@ color:blue;
 				axios.get("../program/replyListPage_vue.do.do", {
 				    params: {
 				     objno:this.vno,
-				     page:this.curpage
+				     page:this.curpage,
+				     condition:this.condition
 				    }
 				}).then(response => {
 				 this.totalpage=response.data.totalpage
 				 this.startpage=response.data.startpage
 				 this.endpage=response.data.endpage
 				 this.curpage=response.data.curpage
-				 
+				
 				 
 				
 				
@@ -932,7 +953,12 @@ color:blue;
 				this.condition=3
 				this.curpage=1
 				this.replyNormalList(1,0);
-			}	
+			},
+			replyMyReList(){
+				this.condition=4
+				this.curpage=1
+				this.replyNormalList(1,0);
+			}
 		}
 	}).mount('#programReplyApp')
 	</script>

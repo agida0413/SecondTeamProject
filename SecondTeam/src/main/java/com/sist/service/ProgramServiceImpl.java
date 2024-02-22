@@ -307,6 +307,18 @@ public class ProgramServiceImpl implements ProgramService {
 		// TODO Auto-generated method stub
 		rDao.updateReplyLikeState(map);
 	}
+
+	@Override
+	public int replyTotalAmount(ProgramReplyVO vo) {
+		// TODO Auto-generated method stub
+		return rDao.replyTotalAmount(vo);
+	}
+
+	@Override
+	public int myReplyTotalPage(Map map) {
+		// TODO Auto-generated method stub
+		return rDao.myReplyTotalPage(map);
+	}
 	
 
 

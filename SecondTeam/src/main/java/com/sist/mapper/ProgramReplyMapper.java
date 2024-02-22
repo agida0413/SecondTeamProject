@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
@@ -30,14 +31,25 @@ public interface ProgramReplyMapper {
 			+"FROM (SELECT a.rno,content,like_count,hate_count,rtype,root,depth,a.userid,objno,report_state,report_type,typeno,username,regdate,rlno,like_state,hate_state FROM REPLY a "
 			+"LEFT JOIN REPLY_LIKE_STATE b ON b.userid=#{id} and a.rno=b.rno "
 			+"WHERE rtype=#{rtype} AND typeno=1 AND "
-			+"root=#{root} AND objno=#{objno} ${index} )) "
+			+"root=#{root} AND objno=#{objno} ${condition} ${index} )) "
 			+"WHERE num BETWEEN #{start} AND #{end}")
 	
 	public List<ProgramReplyVO> replyList(Map map);
 	
+	
+	
+	
 	@Select("SELECT CEIL(COUNT(*)/5.0) FROM REPLY "
 			+"WHERE rtype=1 AND typeno=1 AND objno=#{objno} ")
 	public int replyTotalPage(ProgramReplyVO vo);
+	
+	
+	@Select("SELECT CEIL(COUNT(*)/5.0) FROM REPLY "
+			+"WHERE rtype=1 AND typeno=1 AND objno=#{objno} AND userid=#{id}")
+	public int myReplyTotalPage(Map map);
+	
+	@Select("SELECT COUNT(*) FROM REPLY WHERE  objno=#{objno}")
+	public int replyTotalAmount(ProgramReplyVO vo);
 	
 	@Update("UPDATE REPLY SET "
 			+"depth=depth+1 "

@@ -34,6 +34,9 @@ public class ProgramReplyDAO {
 		return mapper.replyTotalPage(vo);
 	}
 	
+	public int replyTotalAmount(ProgramReplyVO vo) {
+		return mapper.replyTotalAmount(vo);
+	}
 	public ProgramReplyVO updateInfoData(int rno) {
 		return mapper.updateInfoData(rno);
 	}
@@ -114,5 +117,10 @@ public class ProgramReplyDAO {
 		 percent=(int) Math.round(percent);
 		 map.put("likepercent", percent);
 		 mapper.updateReplyPercent(map);
+	 }
+	 
+	 
+	 public int myReplyTotalPage(Map map) {
+		 return mapper.myReplyTotalPage(map);
 	 }
 }

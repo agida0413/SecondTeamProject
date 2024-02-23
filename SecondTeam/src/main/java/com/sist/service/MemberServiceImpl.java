@@ -79,6 +79,33 @@ public class MemberServiceImpl implements MemberService{
 			}
 		}
 	}
+
+	@Override
+	public int selectMemberCountByEmail(String email) {
+		// TODO Auto-generated method stub
+		return dao.selectMemberCountByEmail(email);
+	}
+
+	@Override
+	public String selectMaskedIdByEmail(String email) {
+		// TODO Auto-generated method stub
+		return dao.selectMaskedIdByEmail(email);
+	}
+
+
+	@Override
+	public String idemailFind(String email) {
+		// TODO Auto-generated method stub
+		String maskedId="";
+		int count =selectMemberCountByEmail(email);
+		if(count==0)
+			return "NO";
+		else
+			maskedId=selectMaskedIdByEmail(email);
+		    System.out.println("이메일로찾은아이디(service):"+maskedId);
+			return maskedId;
+	}
+
 	
 	
 }

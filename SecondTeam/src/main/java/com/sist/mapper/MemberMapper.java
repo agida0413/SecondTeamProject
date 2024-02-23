@@ -41,6 +41,17 @@ public interface MemberMapper {
 	//3-3. 임시비밀번호 발급
 	@Update("UPDATE member SET userPwd=#{temp} WHERE userId=#{userId}")
 	public void updateMemberPwdById(@Param("temp") String temp, @Param("userId") String userId);
+	
+	//4. 아이디 찾기
+	//4-1-1. 이메일로 아이디 찾기
+	@Select("SELECT COUNT(*) FROM member WHERE email=#{email} ")
+    public int selectMemberCountByEmail(String email);
+	//4-1-2. 이메일로 찾은 아이디 일부 출력하기
+	@Select("SELECT userId " +
+            "FROM MEMBER " +
+            "WHERE email=#{email}")
+    public String selectMaskedIdByEmail(String email);
+	
 }
 
 

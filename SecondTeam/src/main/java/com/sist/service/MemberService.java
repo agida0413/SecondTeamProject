@@ -1,5 +1,7 @@
 package com.sist.service;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.sist.vo.MemberVO;
 
 public interface MemberService {
@@ -11,6 +13,7 @@ public interface MemberService {
 	public void memberInsertCenter(MemberVO vo);
 	//2-2. 로그인-비밀번호확인
 	public MemberVO memberLogin(String userId, String userPwd);
+	
 	//3. 비밀번호 찾기
 	//3-1. 아이디 여부 확인
 	public int FindID(String userId);
@@ -20,4 +23,13 @@ public interface MemberService {
 	public void updateMemberPwdById(String temp,String userId);
 	//3-4. 3-1~3-3합치기
 	public String pwdFind(String id, String email, String temp);
+	
+	//4. 아이디 찾기
+	//4-1-1. 이메일로 아이디 찾기
+	public int selectMemberCountByEmail(String email);
+	//4-1-2. 이메일로 찾은 아이디 일부 출력하기
+	public String selectMaskedIdByEmail(String email);
+	//4-1-3. 이메일 합치기
+	 public String idemailFind(String email);
+
 }

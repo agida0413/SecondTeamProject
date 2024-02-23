@@ -81,5 +81,17 @@ public class MemberDAO {
 	{
 		mapper.updateMemberPwdById(temp, userId);
 	}
+	
+	//4. 아이디 찾기
+	//4-1-1. 이메일로 아이디 찾기
+	public int selectMemberCountByEmail(String email)
+	{
+		return mapper.selectMemberCountByEmail(email);
+	}
+	//4-1-2. 이메일로 찾은 아이디 일부 출력하기
+	public String selectMaskedIdByEmail(String email)
+	{
+		return mapper.selectMaskedIdByEmail(email);
+	}
 
 }

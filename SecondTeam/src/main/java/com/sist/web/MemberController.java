@@ -130,6 +130,7 @@ public class MemberController {
 		return "member/login_pwdfind";
 	}
 	
+	//임시 비밀번호 메일 전송
 	 @RequestMapping("member/pwdfind_ok.do")
 	  public void member_pwdfindok(HttpServletRequest request,
 			  HttpServletResponse response) {
@@ -155,4 +156,11 @@ public class MemberController {
 			  ex.printStackTrace();
 		  }
 	  }
+	 
+	//아이디 찾기로 이동
+	@GetMapping("member/login_idfind.do")
+	public String member_login_idfind()
+	{
+		return "member/login_idfind";
+	}
 }

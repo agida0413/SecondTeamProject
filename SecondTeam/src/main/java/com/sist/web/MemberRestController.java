@@ -1,11 +1,15 @@
 package com.sist.web;
 
+import java.io.PrintWriter;
+
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sist.service.*;
@@ -57,4 +61,19 @@ public class MemberRestController {
     	}
     	return vo.getMsg();
     }
+    
+    //아이디찾기
+    @RequestMapping("member/idfindemail_ok.do")
+	  public String member_idfindemailok(String email) {
+    	String res="";
+    	try {
+		  //System.out.println(email);
+		  res=service.idemailFind(email);
+		  //System.out.println("이메일로찾은아이디(controller):"+res);
+		  }catch(Exception ex) {
+			  ex.printStackTrace();
+		  }
+    	return res;
+	  }
+	  
 }

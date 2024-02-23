@@ -114,6 +114,19 @@ input:focus {
         	
         	
 		</div>
+		<div class="text-center">
+         <span><a href="../member/join_c.do" style="color: #fff !important;">
+                    <i class="xi-city"></i>
+                     센터회원가입</a></span>
+                  &nbsp;&nbsp;&nbsp;
+                  <span><a href="../member/join_u.do" style="color: #fff !important;">
+                    <i class="xi-user-o"></i>
+                     일반회원가입</a></span>
+         &nbsp;&nbsp;&nbsp;
+         <span><a href="../member/login.do" style="color: #fff !important;">
+                    <i class="xi-lock"></i>
+                     로그인하기</a></span>
+        </div>
       </div>
     </main>
 </div>

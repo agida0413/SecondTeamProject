@@ -100,7 +100,7 @@ input:focus {
             </tr>
             <tr>
                <td colspan="2" class="text-center">
-                  <span><a href="#" style="color: #fff !important;">
+                  <span><a href="../member/login_idfind.do" style="color: #fff !important;">
                     <i class="xi-search"></i>
                      아이디 찾기</a></span>
                   &nbsp;&nbsp;&nbsp;

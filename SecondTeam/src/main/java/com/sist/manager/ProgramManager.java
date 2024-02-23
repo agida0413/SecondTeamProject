@@ -19,16 +19,32 @@ public class ProgramManager {
 	private ProgramRcAverageDAO dao;
 	//지역별 분포
 	public List<ProgramStatisticsVO> siList(){
+		List<ProgramStatisticsVO> list=dao.siList();
+		List<ProgramStatisticsVO> returnList=new ArrayList<ProgramStatisticsVO>();
 		
-		List<ProgramStatisticsVO> list =dao.siList();
+		for (ProgramStatisticsVO vo : list) {
+			ProgramStatisticsVO returnVo=new ProgramStatisticsVO();
+			
+			int count=dao.siCount(vo);
+			
+			
+			
+			returnVo.setSi(vo.getSi());
+			returnVo.setCount(count);
+			
+			
+			returnList.add(returnVo);
+			
+		}
+		
 		List<ProgramStatisticsVO> newlist =new ArrayList<ProgramStatisticsVO>();
 	
-		for (ProgramStatisticsVO vo : list) {
+		for (ProgramStatisticsVO vo : returnList) {
 				vo.setSi(vo.getSi().substring(0,2));
 				
 				newlist.add(vo);
 		}
-		
+	
 		return newlist;
 	}
 	
@@ -42,7 +58,7 @@ public class ProgramManager {
 			map.put("state", "봉사완료");
 			
 			int count = dao.monthCount(map);
-			System.out.println("zkdns"+count);
+			
 			ProgramStatisticsVO vo = new ProgramStatisticsVO();
 			vo.setMonth(i+"월");
 			vo.setCount(count);

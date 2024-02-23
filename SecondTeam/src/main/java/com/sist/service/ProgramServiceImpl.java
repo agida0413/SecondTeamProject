@@ -1,10 +1,17 @@
 package com.sist.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sist.dao.OptionDAO;
 import com.sist.dao.ProgramDataboardDAO;
@@ -144,16 +151,53 @@ public class ProgramServiceImpl implements ProgramService {
 		pDao.updateEndSt(map);
 	}
 
+	
+	 @Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
 	@Override
 	public String updateAccess(int vano) {
-		return  pDao.updateAccess(vano);
+		String up="봉사활동 대기중";
+		String result="";
+		int vno=pDao.getVno(vano);
+		ProgramVO vo=pDao.getCollectnumApplynum(vno);
+		
+		
+		
+		if (vo.getCollect_num()==vo.getApply_num()) {
+			
+			result="NO";
+		}
+		else {
+				//신청인원===정원-1
+			
+			
+			Map map=new HashMap();
+			map.put("up", up);
+			map.put("vano", vano);
+			pDao.updateAcess(map);
+			
+				if(vo.getCollect_num()-1==vo.getApply_num()) {
+					map.put("st", "모집완료");
+					map.put("vno", vno);
+					pDao.updateCollectState(map);
+				}
+			
+			pDao.updateApplyNum(vno);
+			result="YES";
+		}
+		
+		return result;
+		
 		
 	}
 
 	@Override
 	public void updateRefuse(int vano) {
 		// TODO Auto-generated method stub
-		pDao.updateRefuse(vano);
+		String up="거절";
+		Map map=new HashMap();
+		map.put("up", up);
+		map.put("vano", vano);
+		pDao.updateRefuse(map);
 	}
 	
 	
@@ -164,9 +208,25 @@ public class ProgramServiceImpl implements ProgramService {
 	}
 	
 	
+	@Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
 	@Override
 	public void updateInformAfCertify(int vano) {
-		pDao.updateInformAfCertify(vano);
+		VprogramApplyVO vo=pDao.getCertifyIdVno(vano);
+		
+		String id=vo.getId();
+		int vno=vo.getVno();
+		
+		int wing=pDao.getCertifyWing(vno);
+		
+		Map map=new HashMap();
+		map.put("wing", wing);
+		map.put("id", id);
+		map.put("state", "보상지급완료");
+		map.put("vano", vano);
+		
+		pDao.updateProgramAfterState(map);
+		
+		pDao.updateProgramAfterWing(map);
 		
 	}
 
@@ -324,13 +384,58 @@ public class ProgramServiceImpl implements ProgramService {
 	}
 
 	
-
+//추천 프로그램
+	@Cacheable("recommandListCache")
 	@Override
 	public List<ProgramVO> recommandList(Map map) {
 		// TODO Auto-generated method stub
-		return rcDao.recommandList(map);
+		List<String>recList=rcDao.recTitleData(map);
+		  Set<String> titleSet = new HashSet<>(); // 중복을 제거할 Set
+		  for (String str : recList) {
+			titleSet.add(str);
+			
+			
+		}
+		List<ProgramVO> list = rcDao.recCateData(map);
+		List<ProgramVO> returnlist =new ArrayList<ProgramVO>();
+		int i=0;
+		
+		for (ProgramVO vo : list) {
+			
+			if(i==8) {
+				break;
+			}
+			
+			map.put("mjf", vo.getMajor_field());
+			
+			
+			List<ProgramVO> vo2=rcDao.recommandList(map);
+			int index=0;
+				for (ProgramVO programVO : vo2) {
+						
+				
+					
+					
+					if(!titleSet.contains(vo2.get(index).getTitle())) {
+						returnlist.add(vo2.get(index));
+						
+						i++;
+						
+						break;
+					}
+					
+					index++;
+				}
+			
+				
+				
+			
+			
+			
+		}
+		return  returnlist;
 	}
-
+//추천 검색키워드
 	@Override
 	public List<String> recommandWordList(Map map) {
 		// TODO Auto-generated method stub

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
@@ -53,86 +54,80 @@ public class ProgramListDAO {
 	
 	
 	
-	//인증센터 승인
+			//인증센터 승인
+			
+			public VprogramApplyVO centerCertifyAccess(int vano) {
+				return mapper.centerCertifyAccess(vano);
+			}
 	
-	public VprogramApplyVO centerCertifyAccess(int vano) {
-		return mapper.centerCertifyAccess(vano);
-	}
+			//신청 승인
 	
-	//신청 승인
+			//VNO값 가져오기
+		
+			public int getVno(int vano) {
+				return mapper.getVno(vano);
+			}
+			
+			//신청인원이 정원보다 많을시 처리
+		
+			public ProgramVO getCollectnumApplynum(int vno) {
+				return mapper.getCollectnumApplynum(vno);
+			}
+			
+			//신청 승인
+			
+			public void updateAcess(Map map) {
+				mapper.updateAcess(map);
+			}
+			
+			public void updateCollectState(Map map) {
+				mapper.updateCollectState(map);
+			}
+			
+			
+			//신청승인 후 해당프로그램 신청인원증가 
+		
+			public void updateApplyNum(int vno) {
+				mapper.updateApplyNum(vno);
+			}
 	
 	
-	 @Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
-	public String  updateAccess(int vano) {
-		String up="봉사활동 대기중";
-		String result="";
-		int vno=mapper.getVno(vano);
-		ProgramVO vo=mapper.getCollectnumApplynum(vno);
-		
-		
-		
-		if (vo.getCollect_num()==vo.getApply_num()) {
-			
-			result="NO";
-		}
-		else {
-				//신청인원===정원-1
-			
-			
-			Map map=new HashMap();
-			map.put("up", up);
-			map.put("vano", vano);
-			mapper.updateAcess(map);
-			
-				if(vo.getCollect_num()-1==vo.getApply_num()) {
-					map.put("st", "모집완료");
-					map.put("vno", vno);
-					mapper.updateCollectState(map);
-				}
-			
-			mapper.updateApplyNum(vno);
-			result="YES";
-		}
-		
-		return result;
-		
-		
-	}
-	//신청거절
-	public void updateRefuse(int vano) {
-		String up="거절";
-		Map map=new HashMap();
-		map.put("up", up);
-		map.put("vano", vano);
-		mapper.updateRefuse(map);
-	}
+			//신청거절
+			public void updateRefuse(Map map) {
+				
+				mapper.updateRefuse(map);
+			}
 	
 	
 	
 	//프로그램 승인완료 후 업데이트
 	
+			//아이디,vno얻기
+			public VprogramApplyVO getCertifyIdVno(int vano) {
+				return mapper.getCertifyIdVno(vano);
+			}
+			
+			//해당프로그램 wing 개수 얻기
+			
+			
+			public int getCertifyWing(int vno) {
+				return mapper.getCertifyWing(vno);
+			}
+			
+			//유저 wing 갯수 업데이트
+			
+			public void updateProgramAfterWing(Map map) {
+				mapper.updateProgramAfterWing(map);
+			}
+			
+			//신청내역 보상지급완료로 업데이트
+			
+			public void updateProgramAfterState(Map map) {
+				mapper.updateProgramAfterState(map);
+			}
+
 	
-	 @Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
-	public void updateInformAfCertify(int vano) {
-		VprogramApplyVO vo=mapper.getCertifyIdVno(vano);
-		
-		String id=vo.getId();
-		int vno=vo.getVno();
-		
-		int wing=mapper.getCertifyWing(vno);
-		
-		Map map=new HashMap();
-		map.put("wing", wing);
-		map.put("id", id);
-		map.put("state", "보상지급완료");
-		map.put("vano", vano);
-		
-		mapper.updateProgramAfterState(map);
-		
-		mapper.updateProgramAfterWing(map);
-		
-		
-	}
+
 	
 	//신청 리스트 파일
 	public VprogramApplyVO getApplyFiles(int vano) {

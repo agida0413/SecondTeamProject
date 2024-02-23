@@ -90,7 +90,7 @@ private CommonsFunction cf;
 			map.put("id", id);
 			List<String> list = service.recommandWordList(map);
 			for (String string : list) {
-				System.out.println("츄촌"+string);
+				
 			}
 			ObjectMapper mapper=new ObjectMapper();
 					

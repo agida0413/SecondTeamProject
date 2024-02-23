@@ -25,29 +25,15 @@ public class ProgramRcAverageDAO {
 	@Autowired 
 	private WordManager mgr;
 	
-	//시정보
+	//시정보 
 	public List<ProgramStatisticsVO> siList(){
-		List<ProgramStatisticsVO> list=mapper.siList();
-		List<ProgramStatisticsVO> returnList=new ArrayList<ProgramStatisticsVO>();
 		
-		for (ProgramStatisticsVO vo : list) {
-			ProgramStatisticsVO returnVo=new ProgramStatisticsVO();
-			
-			int count=mapper.siCount(vo);
-			
-			
-			
-			returnVo.setSi(vo.getSi());
-			returnVo.setCount(count);
-			
-			
-			returnList.add(returnVo);
-			
-		}
+		return mapper.siList();
 		
-		
-		return returnList;
-		
+	}
+	
+	public int siCount(ProgramStatisticsVO vo) {
+		return mapper.siCount(vo);
 	}
 	
 	
@@ -73,35 +59,16 @@ public class ProgramRcAverageDAO {
 	
 
 
-	
-	//추천프로그램
-	public List<ProgramVO> recommandList(Map map){
-		List<String>recList=mapper.recTitleData(map);
-		  Set<String> titleSet = new HashSet<>(); // 중복을 제거할 Set
-		  for (String str : titleSet) {
-			titleSet.add(str);
-		}
-		List<ProgramVO> list = mapper.recCateData(map);
-		List<ProgramVO> returnlist =new ArrayList<ProgramVO>();
-		int i=0;
-		for (ProgramVO vo : list) {
-			if(i==8) {
-				break;
-			}
-			
-			map.put("mjf", vo.getMajor_field());
-			
-		
-			ProgramVO vo2=mapper.recommandList(map);
-			
-			if(!titleSet.contains(vo2.getTitle())) {
-				returnlist.add(vo2);
-				i++;
-			}
-			
-		}
-		return  returnlist;
+	public List<String> recTitleData(Map map){
+		return mapper.recTitleData(map);
 	}
+	public List<ProgramVO> recCateData(Map map){
+		return mapper.recCateData(map);
+	}
+	public List<ProgramVO>  recommandList(Map map){
+		return mapper.recommandList(map);
+	}
+	//추천프로그램
 	
 	public List<String> recommandWordList(Map map){
 	List<String> titleList=mapper.recTitleData(map);

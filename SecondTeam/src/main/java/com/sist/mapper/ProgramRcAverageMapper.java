@@ -69,24 +69,21 @@ public List<ProgramStatisticsVO> siList();
 		@Result(property = "pvo.title",column = "title")
 		
 })
-@Select("SELECT title FROM v_program_apply a JOIN V_PROGRAM b "
-		+"ON a.vno=b.vno "
-		+"WHERE id=#{id}" )
+@Select("SELECT title FROM v_program_apply a JOIN V_PROGRAM b ON a.vno = b.vno WHERE a.id=#{id}")
 public List<String> recTitleData(Map map);
 
 
 
-
-@Select("SELECT /*+ INDEX_DESC(b vano_pk) */ DISTINCT major_field "
+@Select("SELECT  DISTINCT major_field "
 		+ "    FROM v_program a "
 		+ "    JOIN V_PROGRAM_apply b ON a.vno = b.vno "
-		+ "    WHERE id = #{id} and collect_state='모집중'")
+		+ "    WHERE b.id = #{id} ")
 public List<ProgramVO> recCateData(Map map);
 
 @Select("SELECT vno,title,si,gu,major_field FROM v_program "
-		+"WHERE major_field LIKE '%'||#{mjf}||'%' "
-		+"and ROWNUM=1 ")
-public ProgramVO recommandList(Map map);
+		+"WHERE major_field LIKE '%'||#{mjf}||'%' and rownum<=50"
+		+" ")
+public List<ProgramVO> recommandList(Map map);
 
 
 

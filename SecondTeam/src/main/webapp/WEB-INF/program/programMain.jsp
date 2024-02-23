@@ -72,7 +72,7 @@
     <script src="../js/navbar.js"></script>
     <script src="../js/counter.js"></script>
     <script src="../js/custom.js"></script>
-    <script src="../js/programList_vue.js"></script>
+    <script src="../js/programList_vue.js?no=2"></script>
       <script src="../js/programDataboard_vue.js"></script>
       
 </body>

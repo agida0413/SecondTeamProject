@@ -234,7 +234,7 @@
     		<div v-if="recommandWordList.length===0"><h6>아직 추천데이터가 부족합니다.</h6></div>
     		</c:if>
     			<ul class="tags">
-							<li v-for="revo in recommandWordList" :style="Option.ss===revo?'color:blue; font-weight:bold;':''"><a style="cursor:pointer; "   @click="recList(revo)" >{{revo}}</a></li>
+							<li v-for="revo in recommandWordList" :style="Option.ss===revo?'color:#fff; font-weight:bold;':''"><a :style="Option.ss===revo?'background-color: #214252;cursor:pointer;':'cursor:pointer;' "   @click="recList(revo)" >{{revo}}</a></li>
 						
 							
 						</ul>

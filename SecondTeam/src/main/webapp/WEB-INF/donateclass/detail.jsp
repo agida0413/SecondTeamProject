@@ -6,7 +6,7 @@
 <html>
 <head>
 <script src="//code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-
+<link rel="stylesheet" href="../css/shopping.css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -27,13 +27,17 @@ cursor:pointer;
       -moz-border-radius:20px 20px 20px 20px; 
       border-radius:20px 20px 20px 20px;
       border:solid 1px #ffffff;
-      background-color:#2b6bd1;
+      background-color:#214252;
       padding:10px;
       color:#ffffff;
     }
   td.link:hover{
     cursor: pointer;
   }
+  .noStyle td{
+  	border-top:1px black solid;
+  }
+
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -274,12 +278,14 @@ cursor:pointer;
   <script src="../js/reviewComponent.js"></script>
      <script>
      const reserveComponent={
-    		 template:`<table class="table">
+    		 template:`<div class="row" style="padding:30px;">
+     					<div class="col-6">
+     					<table class="table">
     		     <tr>
     		     
     		       <td class="text-center" width="60%">
     		         <table class="table">
-    		           <caption><h3 class="text-center">예약일 정보</h3></caption>
+    		          
     		           <tr>
     		             <td>
     		                <div class="calendar">
@@ -319,13 +325,92 @@ cursor:pointer;
     		              </div>
     		             </td>
     		           </tr>
+    		         <table class="table" style="border:1px #f2f2f2 solid;">
+    		         <tr >
+    		         	<td colspan="3" style="background-color:#f2f2f2; "><span style="font-weight:bold;">예약가능시간</span></td>
+    		         </tr>
+    		         <tr style="border:1px #f2f2f2 solid;">
+    		         	<td style="padding:20px; border:1px #f2f2f2  solid; background-color:#214252; color:white;"><span>13:00 ~ 15:00</span></td>
+    		        	<td style="padding:20px; border:1px #f2f2f2  solid;"><span style="font-weight:bold;">13:00 ~ 15:00</span></td>
+    		        	<td style="padding:20px; border:1px #f2f2f2  solid;"><span>13:00 ~ 15:00</span></td>
+    		         </tr>
     		         </table>
+    		       
+    		        		 
+    		         </table>
+    		        
+    		      
+        		   
+        		 
+		         </div>
+		       
     		       </td>
     		     </tr>
     		  
     		    
     		   
-    		   </table>`,
+    		   </table>
+    		  
+    		   <div class="col-6">
+    		   <div style="margin-bottom:7px;"> <span  style="color:gray;">수업인원( {{full_num}}명)</span></div>
+    		   <div style="margin-bottom:15px;"><span style="font-weight:bold; color:gray; font-size:25px;">${vo.name}</span></div>
+    		
+    		<div style="width:500px; height:375px; "> 
+    		<img src="${vo.image}" width=100% height="100%"style="border-radius:20px;">
+    		
+    		<div style="margin-top:20px;">
+    		<ul style="color:gray; font-size:10px;">
+    			<li style="font-weight:bold; font-size:15px; margin-top:10px;">* 주의사항</li>
+    			<li style="margin-top:10px;">재능기부 수업은 현금결제 프로그램이 아니기 때문에 노쇼행위에 대해 불이익이 있을 수 있습니다.</li>
+    			<li style="margin-top:10px;">예약 확정시 예약정보에 대한 내역을 회원가입시 기입한 이메일로 발송해 드립니다.</li>
+    			<li style="margin-top:10px;">마이페이지에서 예약 취소가 가능하며 당일 취소는 wing환불이 불가합니다.</li>
+    			<li style="margin-top:10px;">수업 간 마찰이나 폭언,욕설 등 으로 인해 회원탈퇴 처리 및 wing 회수가 될 수 있습니다.</li>
+    			<li style="margin-top:10px;">후기로 인한 허위 사실 유포나 폭언 등은 호스트에 의해 제재 처리 될 수 있습니다.</li>
+    			
+    		</ul>
+    		
+    		</div>
+    		</div>
+    		  
+    		   
+    		 
+    		   </div>
+    		   
+    		   <div class="col-6">
+    		 
+    		 		
+    		 	<table class="table text-center" style="border:1px #f2f2f2 solid;">
+    		 	<tr>
+    		 	<td style="background-color:#f2f2f2; "><span style="font-weight:bold;">남은 자리</span></td>
+    		 	<td style="background-color:#f2f2f2; "><span style="font-weight:bold;">예약인원 선택</span></td>
+    			<td style="background-color:#f2f2f2; "><span style="font-weight:bold;">차감될 윙</span></td>
+    		 	</tr>
+    		 	<tr style="border:1px #f2f2f2 solid;">
+    		 	<td style="padding:20px;"><span style="font-size:25px; font-weight:bold;">1 명</span></td>
+    		 	<td style="padding:20px; padding-left:25px;">
+    		 	 <button class="kyj_shoppingDecreseBtn" style="background-color:#214252; color:white; height:47px; width:30px; border-radius:5px;" @click="minusInwon()" >-</button>
+                 <input class="kyj_shoppingCal" type="text" id="inwon" name="inwon" v-model="inwon" min="1" readonly>
+                <button class="kyj_shoppingIncreseBtn" style="background-color:#214252; color:white; height:47px; width:30px; border-radius:5px;" @click="plusInwon()">+</button>
+    		 	</td>
+    		 	<td style="padding:20px;">
+    		 <span><span style="font-size:25px; font-weight:bold;">600<span>&nbsp;<img src="../Projectimages/wing3.png" width="25px"></span>
+    		 	</td>
+    		 	</tr>
+    		 	</table>
+    		 		
+    		 		
+    		 	
+    	               
+    	               
+    		 		
+    		 	
+    		   </div>
+    		   
+ 				 <div class="col-6 text-center" style="margin-top:45px;">
+		 				<div><button class="btn btn-xlarge btn-primary" style="width:500px; font-size:25px;">예약하기</button></div>
+				 	</div>
+    		   </div>
+    		   </div>`,
     		   data(){
     		      return {
     		         weekNames: ["월요일", "화요일", "수요일","목요일", "금요일", "토요일", "일요일"],
@@ -341,7 +426,9 @@ cursor:pointer;
     		            endOfDay: null,
     		            memoDatas: [],
     		            realDay:new Date().getDate(),
-    		            dcno:${vo.dcno}
+    		            dcno:${vo.dcno},
+    		            inwon:1,
+    		            full_num:${vo.full_num}
     		        
     		      }
     		   },
@@ -350,7 +437,15 @@ cursor:pointer;
     		 	
     		   },
     		   methods:{
-    			 
+    			 minusInwon(){
+    				 if(this.inwon>1){
+    					 this.inwon--;
+    				 }
+    				 
+    			 },
+    			 plusInwon(){
+    				 this.inwon++;
+    			 },
     		        init(){
     		           this.currentMonthStartWeekIndex = this.getStartWeek(this.currentYear, this.currentMonth);
     		           this.endOfDay = this.getEndOfDay(this.currentYear, this.currentMonth);

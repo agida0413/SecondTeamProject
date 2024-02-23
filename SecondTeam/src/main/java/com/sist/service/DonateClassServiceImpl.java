@@ -21,6 +21,9 @@ private ClassInformDAO cIdao;
 @Autowired
 private DonClassReviewDAO rDao;
 
+
+
+
 //재능기부 클래스 리스트 관련
 
 @Override

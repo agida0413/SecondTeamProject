@@ -22,8 +22,7 @@ public class ProgramRcAverageDAO {
 	private ProgramRcAverageMapper mapper;
 	//회원별 추천
 	
-	@Autowired 
-	private WordManager mgr;
+	
 	
 	//시정보 
 	public List<ProgramStatisticsVO> siList(){
@@ -70,22 +69,10 @@ public class ProgramRcAverageDAO {
 	}
 	//추천프로그램
 	
-	public List<String> recommandWordList(Map map){
-	List<String> titleList=mapper.recTitleData(map);
-	List<String> returnList=new ArrayList<String>();
-	if(titleList.size()>0) {
-		String titles="";
-		for (String title : titleList) {
-			titles+=title;
-		}
-		
-		returnList = mgr.wordListData(titles);
-
-	}
+	public List<ProgramVO> recommandWordList(Map map){
 	
 
-
-	return returnList; 
+	return mapper.recommandList(map); 
 	}
 	
 }

@@ -19,6 +19,7 @@ import com.sist.dao.ProgramListDAO;
 import com.sist.dao.ProgramRcAverageDAO;
 import com.sist.dao.ProgramReplyDAO;
 import com.sist.dao.ProgramWishDAO;
+import com.sist.manager.WordManager;
 import com.sist.vo.OptionVO;
 import com.sist.vo.ProgramReplyVO;
 import com.sist.vo.ProgramStatisticsVO;
@@ -44,6 +45,9 @@ public class ProgramServiceImpl implements ProgramService {
 	
 	@Autowired
 	private ProgramRcAverageDAO rcDao;
+	
+	@Autowired 
+	private WordManager mgr;
 
 	@Override
 	public List<OptionVO> stateOption() {
@@ -293,11 +297,14 @@ public class ProgramServiceImpl implements ProgramService {
 		// TODO Auto-generated method stub
 		zDao.insertWishList(map);
 	}
-
+	
+	@Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
 	@Override
 	public String updateWishList(Map map) {
 		// TODO Auto-generated method stub
-		return zDao.updateWishList(map);
+		zDao.updateWishList(map);
+		
+		return zDao.getWishState(map);
 	}
 
 	
@@ -317,9 +324,13 @@ public class ProgramServiceImpl implements ProgramService {
 	
 	
 //댓글
+	 @Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
 	@Override
 	public void insertReply(ProgramReplyVO vo) {
 		// TODO Auto-generated method stub
+		if(vo.getRtype()==2) {
+		rDao.updateDepth(vo);
+		}
 		rDao.insertReply(vo);
 	}
 
@@ -347,28 +358,83 @@ public class ProgramServiceImpl implements ProgramService {
 		rDao.updateReply(vo);
 	}
 
+	 @Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
 	@Override
 	public void deleteReply(ProgramReplyVO vo) {
 		// TODO Auto-generated method stub
-		rDao.deleteReply(vo);
+		int depth = rDao.getDepth(vo);
+		
+		if(depth==0) {
+			rDao.deleteReply(vo);
+			rDao.updateMinusDepth(vo);
+		}
+		else {
+			rDao.updateContent(vo);
+			
+			
+		}
 	}
-
+	 
+	 @Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
 	@Override
 	public void replyHateInsert(Map map) {
-		// TODO Auto-generated method stub
-		rDao.replyHateInsert(map);
+			rDao.replyHateInsert(map);
+		 
+		 rDao.updateReplyLikeCountPlus(map);
+		 int likeCount=rDao.getLikeCount(map);
+		 int hateCount=rDao.getHateCount(map);
+		 
+		 int percent =0;
+		 if (likeCount + hateCount != 0) {
+			  percent=  likeCount / (likeCount + hateCount) * 100;
+			    System.out.println("백분율: " + percent);
+			} 
+		 percent=(int) Math.round(percent);
+		 map.put("likepercent", percent);
+		rDao.updateReplyPercent(map);
 	}
-
+	 @Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
 	@Override
 	public void replyLikeInsert(Map map) {
-		// TODO Auto-generated method stub
 		rDao.replyLikeInsert(map);
+		
+		 rDao.updateReplyLikeCountPlus(map);
+		 int likeCount=rDao.getLikeCount(map);
+		 int hateCount=rDao.getHateCount(map);
+		 
+		 int percent =0;
+		 if (likeCount + hateCount != 0) {
+			  percent=  likeCount / (likeCount + hateCount) * 100;
+			   
+			} 
+		 
+		
+		 map.put("likepercent", percent);
+		 rDao.updateReplyPercent(map);
 	}
-
+	 
+	 @Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
 	@Override
 	public void updateReplyLikeState(Map map) {
 		// TODO Auto-generated method stub
-		rDao.updateReplyLikeState(map);
+			rDao.updateReplyLikeState(map);
+			 
+			 if(map.get("state").equals("YES")) {
+				 rDao.updateReplyLikeCountPlus(map);
+			 }else {
+				 rDao.updateReplyMinusCountPlus(map);
+			 }
+			 int likeCount=rDao.getLikeCount(map);
+			 int hateCount=rDao.getHateCount(map);
+			 
+			 int percent =0;
+			 if (likeCount + hateCount != 0) {
+				  percent=  likeCount / (likeCount + hateCount) * 100;
+				 
+				} 
+			 percent=(int) Math.round(percent);
+			 map.put("likepercent", percent);
+			 rDao.updateReplyPercent(map);
 	}
 
 	@Override
@@ -438,8 +504,20 @@ public class ProgramServiceImpl implements ProgramService {
 //추천 검색키워드
 	@Override
 	public List<String> recommandWordList(Map map) {
-		// TODO Auto-generated method stub
-		return rcDao.recommandWordList(map);
+		List<String> titleList=rcDao.recTitleData(map);
+		List<String> returnList=new ArrayList<String>();
+		
+		if(titleList.size()>0) {
+			String titles="";
+			for (String title : titleList) {
+				titles+=title;
+			}
+			
+			returnList = mgr.wordListData(titles);
+
+		}
+		return returnList;
+		
 	}
 	
 

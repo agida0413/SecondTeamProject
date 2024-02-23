@@ -15,7 +15,25 @@
 .dCzzimBtnClick{
 cursor:pointer;
 }
-
+#reserveApp {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+ .rounded2 {
+      -moz-border-radius:20px 20px 20px 20px; 
+      border-radius:20px 20px 20px 20px;
+      border:solid 1px #ffffff;
+      background-color:#2b6bd1;
+      padding:10px;
+      color:#ffffff;
+    }
+  td.link:hover{
+    cursor: pointer;
+  }
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -126,7 +144,7 @@ cursor:pointer;
 					</div>
 					
 				
-  			<span style="margin-left:400px;"><button class="btn btn-xlarge btn-primary" style="width:210px;">예약하기</button></span>
+  			<span style="margin-left:400px;"><button class="btn btn-xlarge btn-primary" style="width:210px;" @click="reserveFormOpen()">예약하기</button></span>
   		
   			</div>
        
@@ -136,7 +154,9 @@ cursor:pointer;
          
             <span style="font-size:20px; font-weight:bold; margin-left:10px;">Created Day:&nbsp;</span>${vo.dbCreate_date }
           </div>
-        
+        <div id="reserveDialog" v-show="reserveFormShow">
+        <dc-reserve-form></dc-reserve-form>
+        </div>
            
           </div>
 
@@ -245,134 +265,215 @@ cursor:pointer;
           <div id="rdialog" v-show="isShow">
 		<dc-review-form></dc-review-form>
 	</div>
+	
           </div>
 
 	
 
         </div>
-
+  <script src="../js/reviewComponent.js"></script>
      <script>
-     
-     const dcReview={
-    		
-    			template:`<div class="comment-form-wrap pt-5">
-    	              <h3 class="mb-5">Leave a Review</h3>
-    	          
-    	                <div class="form-group">
-    	              
-
-    	                <div class="form-group">
-    	                  <label for="message">Message</label>
-    	                  <textarea name="" id="message" cols="30" rows="10" class="form-control" v-model="content" ref="content"></textarea>
-    	                </div>
-    	                <div id="product_half-stars-example">
-    	        	    
-    	    	           <div class="product_rating-group">
-    	    	              
-    	    	               <label aria-label="0.5 stars" class="product_rating__label product_rating__label--half" for="product_rating2-05"><i class="product_rating__icon product_rating__icon--star fa fa-star-half"></i></label>
-    	    	               <input @click="changeRating()" class="product_rating__input" name="product_rating2" id="product_rating2-05" value="0.5" type="radio">
-    	    	               <label aria-label="1 star" class="product_rating__label" for="product_rating2-10"><i class="product_rating__icon product_rating__icon--star fa fa-star"></i></label>
-    	    	               <input @click="changeRating()" class="product_rating__input" name="product_rating2" id="product_rating2-10" value="1" type="radio">
-    	    	               <label aria-label="1.5 stars" class="product_rating__label product_rating__label--half" for="product_rating2-15"><i class="product_rating__icon product_rating__icon--star fa fa-star-half"></i></label>
-    	    	               <input @click="changeRating()" class="product_rating__input" name="product_rating2" id="product_rating2-15" value="1.5" type="radio">
-    	    	               <label aria-label="2 stars" class="product_rating__label" for="product_rating2-20"><i class="product_rating__icon product_rating__icon--star fa fa-star"></i></label>
-    	    	               <input @click="changeRating()" class="product_rating__input" name="product_rating2" id="product_rating2-20" value="2" type="radio">
-    	    	               <label aria-label="2.5 stars" class="product_rating__label product_rating__label--half" for="product_rating2-25"><i class="product_rating__icon product_rating__icon--star fa fa-star-half"></i></label>
-    	    	               <input @click="changeRating()" class="product_rating__input" name="product_rating2" id="product_rating2-25" value="2.5" type="radio" checked>
-    	    	               <label aria-label="3 stars" class="product_rating__label" for="product_rating2-30"><i class="product_rating__icon product_rating__icon--star fa fa-star"></i></label>
-    	    	               <input @click="changeRating()" class="product_rating__input" name="product_rating2" id="product_rating2-30" value="3" type="radio">
-    	    	               <label aria-label="3.5 stars" class="product_rating__label product_rating__label--half" for="product_rating2-35"><i class="product_rating__icon product_rating__icon--star fa fa-star-half"></i></label>
-    	    	               <input @click="changeRating()" class="product_rating__input" name="product_rating2" id="product_rating2-35" value="3.5" type="radio">
-    	    	               <label aria-label="4 stars" class="product_rating__label" for="product_rating2-40"><i class="product_rating__icon product_rating__icon--star fa fa-star"></i></label>
-    	    	               <input @click="changeRating()" class="product_rating__input" name="product_rating2" id="product_rating2-40" value="4" type="radio">
-    	    	               <label aria-label="4.5 stars" class="product_rating__label product_rating__label--half" for="product_rating2-45"><i class="product_rating__icon product_rating__icon--star fa fa-star-half"></i></label>
-    	    	               <input @click="changeRating()" class="product_rating__input" name="product_rating2" id="product_rating2-45" value="4.5" type="radio">
-    	    	               <label aria-label="5 stars" class="product_rating__label" for="product_rating2-50"><i class="product_rating__icon product_rating__icon--star fa fa-star"></i></label>
-    	    	               <input @click="changeRating()" class="product_rating__input" name="product_rating2" id="product_rating2-50" value="5" type="radio">
-    	    	         
-    	    	               <span style="font-weight:bold;color:orange; font-size:30px; margin-left:10px; margin-top:5px;font-style: italic;">{{ rating }}&nbsp;/&nbsp;5</span>
-    	    	               </div>
-    	    	         
-    	    	            
-    	    	       </div>
-    	    	       
-    	    	       <input type="file" id="review_insert_img_file" name="review_upload" @change="previewImage($event)" style="margin-right:260px; margin-bottom:20px;" accept="image/*" ref="upfiles">   
-    	    	       <div class="review_insert_img" v-if="imageUrl" style="width:250px; height:150px;">
-    	    	         <img :src="imageUrl" style="width:100%; height:100%;">
-    	    	       </div>
-    	                
-    	                <div class="form-group" style="float:right;">
-    	                  <input type="submit" @click="sendContent()" value="Post Comment" class="btn btn-primary">
-    	                </div>
-    	                <div class="insert_star" style="margin-top:20px;">
-    	             
-    	             
-    	     
-    	             
-    	      
-    	     
-    	       </div>
-    	             
-    	            </div>`,
-    	            data() {
-    	            return {
-    	              rating: 2.5 ,
-    	              imageUrl: null,
-    	              filename:'',
-    	              content:'',
-    	              rmf:[]
-    	              
-    	            };
-    	          },
-    	          methods: {
-    	            // 별을 클릭할 때 호출되는 메서드
-    	            changeRating() {
-    	              // 현재 클릭된 별의 값 가져오기
-    	              
-    	              const selectedRating = $('.product_rating__input:checked').val();
-    	              // 데이터에 선택된 별점 값 저장
-    	             
-    	            	  this.rating = selectedRating;
-    	              
-    	              
-    	            },
-    	            previewImage(event) {
-    	                const input = event.target;
-    	                if (input.files && input.files[0]) {
-    	                    const reader = new FileReader();
-
-    	                    reader.onload = (e) => {
-    	                        // Vue 데이터를 업데이트하여 이미지 URL을 저장합니다.
-    	                        this.imageUrl = e.target.result;
-    	                       
-    	                        this.filename = input.files[0].name;
-    	                       this.rmf=input.files[0]
-    	                    }
-
-    	                    reader.readAsDataURL(input.files[0]);
-    	                } else {
-    	                    // 파일이 없는 경우 이미지 URL을 초기화합니다.
-    	                    this.imageUrl = '';
-    	                }
-    	                
-    	            },
-    	            sendContent(){
-    	            	if(this.content===''){
-    	            		alert('내용을 작성해주세요')
-    	            		this.$refs.content.focus()
-    	            		return;
-    	            	}
-    	            	this.$parent.reviewSend(this.rating,this.content,this.filename,this.rmf)
-    	            }
-    	          }
-    	            
-    		 }
+     const reserveComponent={
+    		 template:`<table class="table">
+    		     <tr>
+    		     
+    		       <td class="text-center" width="60%">
+    		         <table class="table">
+    		           <caption><h3 class="text-center">예약일 정보</h3></caption>
+    		           <tr>
+    		             <td>
+    		                <div class="calendar">
+    		                  <h2>
+    		                    <a style="cursor:pointer;" v-on:click="onClickPrev(currentMonth)">◀</a>
+    		                    {{currentYear}}년 {{currentMonth}}월
+    		                    <a style="cursor:pointer;" v-on:click="onClickNext(currentMonth)">▶</a>
+    		                  </h2>
+    		                  <table class="table table-hover">
+    		                      <thead>
+    		                        <tr>
+    		                          <td v-for="(weekName, index) in weekNames" v-bind:key="index">
+    		                            {{weekName}}
+    		                          </td>
+    		                        </tr>
+    		                      </thead>
+    		                      <tbody>
+    		                        <tr v-for="(row, index) in currentCalendarMatrix" :key="index">
+    		                          <td v-for="(day, index2) in row" :key="index2" style="padding:20px;" :class="(day>=realDay &&  sysMonth===currentMonth && sysYear===currentYear) || (sysMonth<currentMonth && sysYear===currentYear)?'link':''">
+    		                            <span v-if="(day>=realDay &&  sysMonth===currentMonth && sysYear===currentYear) || (sysMonth<currentMonth && sysYear===currentYear)" @click="change(day) " style="color:black; font-weight:bold; ">
+    		                               <span v-if="day===currentDay &&  sysMonth<= currentMonth" class="rounded2" >
+    		                                 {{day}}
+    		                               </span>
+    		                               
+    		                              
+    		                               <span v-else >
+    		                                 {{day}}
+    		                               </span>
+    		                            </span>
+    		                            <span v-else style="color:gray; ">
+    		                               {{day}}
+    		                            </span>
+    		                          </td>
+    		                        </tr>
+    		                      </tbody>
+    		                  </table>    
+    		              </div>
+    		             </td>
+    		           </tr>
+    		         </table>
+    		       </td>
+    		     </tr>
+    		  
+    		    
+    		   
+    		   </table>`,
+    		   data(){
+    		      return {
+    		         weekNames: ["월요일", "화요일", "수요일","목요일", "금요일", "토요일", "일요일"],
+    		            rootYear: 1904,
+    		            rootDayOfWeekIndex: 4, // 2000년 1월 1일은 토요일
+    		            currentYear: new Date().getFullYear(),
+    		            currentMonth: new Date().getMonth()+1,
+    		            sysMonth:new Date().getMonth()+1,
+    		            sysYear:new Date().getFullYear(),
+    		            currentDay: new Date().getDate(),
+    		            currentMonthStartWeekIndex: null,
+    		            currentCalendarMatrix: [],
+    		            endOfDay: null,
+    		            memoDatas: [],
+    		            realDay:new Date().getDate(),
+    		            dcno:${vo.dcno}
+    		        
+    		      }
+    		   },
+    		   mounted(){
+    		      this.init()
+    		 	
+    		   },
+    		   methods:{
+    			 
+    		        init(){
+    		           this.currentMonthStartWeekIndex = this.getStartWeek(this.currentYear, this.currentMonth);
+    		           this.endOfDay = this.getEndOfDay(this.currentYear, this.currentMonth);
+    		           this.initCalendar();
+    		         },
+    		         initCalendar(){
+    		           this.currentCalendarMatrix = [];
+    		           let day=1;
+    		           for(let i=0; i<6; i++){
+    		             let calendarRow = [];
+    		             for(let j=0; j<7; j++){
+    		               if(i==0 && j<this.currentMonthStartWeekIndex){
+    		                 calendarRow.push("");
+    		               }
+    		               else if(day<=this.endOfDay){
+    		                 calendarRow.push(day);
+    		                 day++;
+    		               }
+    		               else{
+    		                 calendarRow.push("");
+    		               }
+    		             }
+    		             this.currentCalendarMatrix.push(calendarRow);
+    		           }
+    		         },
+    		         getEndOfDay(year, month){
+    		             switch(month){
+    		                 case 1:
+    		                 case 3:
+    		                 case 5:
+    		                 case 7:
+    		                 case 8:
+    		                 case 10:
+    		                 case 12:
+    		                   return 31;
+    		                   break;
+    		                 case 4:
+    		                 case 6:
+    		                 case 9:
+    		                 case 11:
+    		                   return 30;
+    		                   break;
+    		                 case 2:
+    		                   if( (year%4 == 0) && (year%100 != 0) || (year%400 == 0) ){
+    		                   return 29;   
+    		                   }
+    		                   else{
+    		                       return 28;
+    		                   }
+    		                   break;
+    		                 default:
+    		                   console.log("unknown month " + month);
+    		                   return 0;
+    		                   break;
+    		             }
+    		         },
+    		         getStartWeek(targetYear, targetMonth){
+    		           let year = this.rootYear;
+    		           let month = 1;
+    		           let sumOfDay = this.rootDayOfWeekIndex;
+    		           while(true){
+    		             if(targetYear > year){
+    		               for(let i=0; i<12; i++){
+    		                 sumOfDay += this.getEndOfDay(year, month+i);
+    		               }
+    		               year++;
+    		             }
+    		             else if(targetYear == year){
+    		               if(targetMonth > month){
+    		                 sumOfDay += this.getEndOfDay(year, month);
+    		                 month++;
+    		               }
+    		               else if(targetMonth == month){
+    		                 return (sumOfDay)%7;
+    		               }
+    		             }
+    		           }
+    		         },
+    		         onClickPrev(month){
+    		           month--;
+    		           if(month<=0){
+    		             this.currentMonth = 12;
+    		             this.currentYear -= 1;
+    		           }
+    		           else{
+    		             this.currentMonth -= 1;
+    		           }
+    		           this.init();
+    		         },
+    		         onClickNext(month){
+    		        	 this.currentDay=1;
+    		           month++;
+    		           if(month>12){
+    		             this.currentMonth = 1;
+    		             this.currentYear += 1;
+    		           }
+    		           else{
+    		             this.currentMonth += 1;
+    		           }
+    		           this.init();
+    		         },
+    		         isToday: function(year, month, day){
+    		           let date = new Date();
+    		           return year == date.getFullYear() && month == date.getMonth()+1 && day == day; 
+    		         },
+    		         change(day){
+    		           this.currentDay=day;
+    		           
+    		           //this.isToday(this.currentYear,.this.currentMonth,this.currentDay)
+    		         }
+    		         // 시간
+    		         // 인원
+    		         // 데이터 전송 (예약처리) => 화면변경 (Mypage)
+    		     }
+     }
+    
      let dcDetailControll=Vue.createApp({
     	 data(){
     		 return{
     			 sessionId:'${sessionScope.id}',
     			 dcno:${vo.dcno},	
- 				 zzimstate:'${state}'
+ 				 zzimstate:'${state}',
+ 				 reserveFormShow:false
     		 }
     	 },
     	 methods:{
@@ -390,9 +491,27 @@ cursor:pointer;
  				}).then(res=>{
  					this.zzimstate=res.data
  				})
+ 			},
+ 			reserveFormOpen(){
+ 				this.reserveFormShow=true
+ 				 $('#reserveDialog').dialog({
+    				 autoOpen:false,
+    				 modal:true,
+    				 width:1200,
+    				 height:900
+    			 }).dialog('open')
  			}
+    	 },
+    	 components:{
+    		 'dc-reserve-form':reserveComponent
     	 }
      }).mount('#dcDetailControll')
+     
+     
+     
+     
+     
+     
      
      let reviewApp=Vue.createApp({
     	 data(){
@@ -551,8 +670,11 @@ cursor:pointer;
     	
     	 components:{
     		 'dc-review-form': dcReview
+    		
          }
      }).mount('#reviewApp')
+     
      </script>
+    
 </body>
 </html>

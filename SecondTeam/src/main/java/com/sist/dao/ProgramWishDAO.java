@@ -31,15 +31,10 @@ public class ProgramWishDAO {
 		 mapper.insertWishList(map);
 	}
 	
-	
-	@Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
-	public String updateWishList(Map map) {
-		mapper.updateWishList(map);
-		
-		return mapper.getWishState(map);
-		
+	public void updateWishList(Map map) {
+		 mapper.updateWishList(map);
 	}
-	
+
 	
 	//마이페이지 찜목록
 	public List<ProgramVO> wishList(Map map){

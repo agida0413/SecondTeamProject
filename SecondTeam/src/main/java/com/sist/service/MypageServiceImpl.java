@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sist.dao.ClassInformDAO;
-import com.sist.dao.MypageDAO;
+
 import com.sist.dao.ProgramListDAO;
 import com.sist.dao.ProgramWishDAO;
 import com.sist.mapper.ProgramWishMapper;

@@ -71,41 +71,7 @@ public class ProgramRcAverageDAO {
 	}
 	
 	
-//	public List<VprogramApplyVO> recTitleData(Map map) {
-//	    List<VprogramApplyVO> returnList = new ArrayList<VprogramApplyVO>();
-//	    String tempId = (String) map.get("id");
-//	    
-//	    if (tempId != null) {
-//	       String titles="";
-//	       	System.out.println(map.get("id"));
-//	    	List<String> list = mapper.recTitleData(map);
-//	   
-//	       
-//	        
-//	       
-//	        if (list.size() > 0) {
-//	        	
-//	            for (String title : list) {
-//	    			titles+=title;
-//	    		}
-//	        	 List<String>wordList=mgr.wordListData(titles);
-//	       
-//	            Set<String> titleSet = new HashSet<>(); // 중복을 제거할 Set
-//	            for (String title : list) {
-//	    			titleSet.add(title);
-//	    		}
-//	            int i = 0;
-//	            for (String title : wordList) {
-//	            	
-//	            System.out.println("추천어"+title);
-//	                
-//	                    
-//	                
-//	            }
-//	        }
-//	    }
-//	    return returnList;
-//	}
+
 
 	
 	//추천프로그램

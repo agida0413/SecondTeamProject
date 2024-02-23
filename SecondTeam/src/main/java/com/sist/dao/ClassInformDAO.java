@@ -60,13 +60,13 @@ private ClassInformMapper mapper;
 	}
 	
 	
-	@Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
-	public String updateWishList(Map map) {
+	
+	public void updateWishList(Map map) {
 		mapper.updateWishList(map);
 		
-		return mapper.getWishState(map);
-		
 	}
+	
+
 	
 	
 	//위시리스트

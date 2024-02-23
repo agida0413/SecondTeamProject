@@ -72,9 +72,9 @@ public class ProgramController {
 	public String programDetail(int vno,Model model,HttpSession session) {
 		
 		ProgramVO vo=service.programDetailData(vno);
-		String state="";
-		String id=(String)session.getAttribute("id");
 		
+		String id=(String)session.getAttribute("id");
+		String state="";
 		if(id!=null) {
 			Map map =new HashMap();
 			map.put("id", id);

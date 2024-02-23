@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sist.dao.ClassInformDAO;
 import com.sist.dao.DonClassReviewDAO;
@@ -79,18 +81,61 @@ public void insertWishList(Map map) {
 	cIdao.insertWishList(map);
 }
 
+@Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
 @Override
 public String updateWishList(Map map) {
 	// TODO Auto-generated method stub
-	return cIdao.updateWishList(map);
+	 cIdao.updateWishList(map);
+	 
+	 return cIdao.getWishState(map);
 }
 
 //리뷰
-
+@Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
 @Override
 public void insertReview(DonClassReviewVO vo) {
 	// TODO Auto-generated method stub
 	rDao.insertReview(vo);
+	int reviewNum=rDao.reviewNum(vo);
+	
+	double sum=rDao.reviewTotal(vo);
+	//리뷰 인서트
+		
+	double newGrade = (sum) / (reviewNum);
+	newGrade = Math.round(newGrade * 10.0) / 10.0;
+	
+	//클래스 평균 - > 업데이트
+	DonClassVO dvo = new DonClassVO();
+	dvo.setScore(newGrade);
+	dvo.setDcno(vo.getObjno());
+	
+	
+	rDao.updateClassScore(dvo);
+}
+
+@Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
+@Override
+public void deleteReview(DonClassReviewVO vo) {
+	// TODO Auto-generated method stub
+	rDao.deleteReview(vo);
+	int reviewNum=rDao.reviewNum(vo);
+	
+	double sum=rDao.reviewTotal(vo);
+	
+	double newGrade = (sum) / (reviewNum);
+	newGrade = Math.round(newGrade * 10.0) / 10.0;
+	
+	if(reviewNum==0) {
+		newGrade=2.5;
+	}
+	DonClassVO dvo = new DonClassVO();
+	dvo.setScore(newGrade);
+	dvo.setDcno(vo.getObjno());
+	
+	
+	rDao.updateClassScore(dvo);
+	rDao.deleteReview(vo);
+	
 }
 
 @Override
@@ -111,12 +156,7 @@ public int reviewNum(DonClassReviewVO vo) {
 	return rDao.reviewNum(vo);
 }
 
-@Override
-public void deleteReview(DonClassReviewVO vo) {
-	// TODO Auto-generated method stub
-	rDao.deleteReview(vo);
-	
-}
+
 
 @Override
 public String getFilename(DonClassReviewVO vo) {

@@ -19,58 +19,6 @@ public class DonClassReviewDAO {
 	private DonClassReviewMapper mapper;
 	
 	
-	@Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
-	public void insertReview(DonClassReviewVO vo) {
-		
-		mapper.insertReview(vo);
-		int reviewNum=mapper.reviewNum(vo);
-		
-		double sum=mapper.reviewTotal(vo);
-		//리뷰 인서트
-			
-		double newGrade = (sum) / (reviewNum);
-		newGrade = Math.round(newGrade * 10.0) / 10.0;
-		
-		//클래스 평균 - > 업데이트
-		DonClassVO dvo = new DonClassVO();
-		dvo.setScore(newGrade);
-		dvo.setDcno(vo.getObjno());
-		
-		
-		mapper.updateClassScore(dvo);
-		
-		
-		
-		
-	}
-	
-	//리뷰삭제
-	@Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
-	public void deleteReview(DonClassReviewVO vo) {
-		mapper.deleteReview(vo);
-		int reviewNum=mapper.reviewNum(vo);
-		
-		double sum=mapper.reviewTotal(vo);
-		
-		double newGrade = (sum) / (reviewNum);
-		newGrade = Math.round(newGrade * 10.0) / 10.0;
-		
-		if(reviewNum==0) {
-			newGrade=2.5;
-		}
-		DonClassVO dvo = new DonClassVO();
-		dvo.setScore(newGrade);
-		dvo.setDcno(vo.getObjno());
-		
-		
-		mapper.updateClassScore(dvo);
-	}
-	
-	
-	public String getFilename(DonClassReviewVO vo) {
-		return mapper.getFilename(vo);
-	}
-	
 	
 	//리뷰리스트
 	public List<DonClassReviewVO> reviewList(Map map){
@@ -79,11 +27,33 @@ public class DonClassReviewDAO {
 	
 	//리뷰 토탈페이지
 	
+	
 	public int reviewTotalpage(Map map) {
 		return mapper.reviewTotalpage(map);
 	}
 	
+	
+	//리뷰 업데이트정보
 	public int reviewNum(DonClassReviewVO vo) {
 		return mapper.reviewNum(vo);
+	}
+	
+	public void insertReview(DonClassReviewVO vo) {
+		mapper.insertReview(vo);
+	}
+	
+	public void updateClassScore(DonClassVO vo) {
+		mapper.updateClassScore(vo);
+	}
+	public double reviewTotal(DonClassReviewVO vo) {
+		return mapper.reviewTotal(vo);
+	}
+	public String getFilename(DonClassReviewVO vo) {
+		return mapper.getFilename(vo);
+	}
+	
+	//삭제
+	public void deleteReview(DonClassReviewVO vo) {
+		 mapper.deleteReview(vo);
 	}
 }

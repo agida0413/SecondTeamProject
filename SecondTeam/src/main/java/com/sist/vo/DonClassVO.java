@@ -11,4 +11,5 @@ private String name,id,cls_level,time,image,address,category,create_state;
 private Date create_date;
 private String dbCreate_date; 
 private WishListVO wvo=new WishListVO();
+private DonClassResHistoryVO hvo=new DonClassResHistoryVO();
 }

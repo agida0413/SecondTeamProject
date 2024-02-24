@@ -220,6 +220,7 @@ public String insertReserveInform(DonClassResHistoryVO vo, int rno,String hostNa
 		result="NO";
 	}
 	else {
+		vo.setRno(rno);
 		resDao.insertReserveInform(vo);
 		
 		resDao.resCanNumMinus(vo.getRnum(), rno);
@@ -230,7 +231,8 @@ public String insertReserveInform(DonClassResHistoryVO vo, int rno,String hostNa
 	
 	return result;
 }
-	
+
+
 
 
 

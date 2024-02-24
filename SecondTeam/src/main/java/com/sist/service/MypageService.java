@@ -3,6 +3,7 @@ package com.sist.service;
 import java.util.List;
 import java.util.Map;
 
+import com.sist.vo.DonClassResHistoryVO;
 import com.sist.vo.DonClassVO;
 import com.sist.vo.ProgramVO;
 import com.sist.vo.VprogramApplyVO;
@@ -24,4 +25,11 @@ public interface MypageService {
 	//클래스 위시리스트
 	public List<DonClassVO> donClassWishList(Map map);
 	public int donClassWishTotalpage(Map map);
+	
+	//클래스 예약내역
+	public Map donClassReserveHistoryList(String page,String userid);
+	
+	
+	//마이페이지 클래스 예약취소
+		public void reserveCancel(DonClassResHistoryVO vo,String hostname);
 }

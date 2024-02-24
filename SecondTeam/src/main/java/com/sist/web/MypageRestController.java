@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sist.service.GoodsService;
 import com.sist.service.MypageService;
+import com.sist.vo.DonClassResHistoryVO;
 import com.sist.vo.GoodsVO;
 import com.sist.vo.VdataboardVO;
 import com.sist.vo.VprogramApplyVO;
@@ -92,6 +93,16 @@ public class MypageRestController {
 		   return result;
 	   }
 	
+	//예약취소
+	@GetMapping(value="myAndAdpage/cancleReserve.do",produces = "text/plain;charset=UTF-8")
+	public void cancleReserve(DonClassResHistoryVO vo,String hostname) throws Exception
+	{		
+		service.reserveCancel(vo, hostname);
+		
+		
+	}
+	
+	
 	@GetMapping(value="myAndAdpage/wishgoodslist_vue.do",produces = "text/plain;charset=UTF-8")
 	public String wishgoodslist_vue(HttpSession session,String id) throws Exception
 	{
@@ -103,4 +114,7 @@ public class MypageRestController {
 		
 		return json;
 	}
+	
+	
+	
 }

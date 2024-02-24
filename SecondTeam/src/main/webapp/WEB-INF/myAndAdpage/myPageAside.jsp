@@ -26,6 +26,7 @@ cursor:pointer;
    <a class="aLink" @click="centerCheck()"><li class="list-group-item ${cate == 'centerProgram' ? 'active' : ''}" style="padding:18px;">센터's 프로그램</li></a>
  
   <a href="../myAndAdpage/donClassWishList.do"> <li class="list-group-item ${cate == 'classWishList' ? 'active' : ''}" style="padding:18px;">클래스 관심목록</li></a>
+  <a href="../myAndAdpage/classResHistory.do"> <li class="list-group-item ${cate == 'classHistory' ? 'active' : ''}" style="padding:18px;">클래스 예약내역</li></a>
 	 <a href="../myAndAdpage/wishgoods.do"> <li class="list-group-item" style="padding:18px;">상품 위시리스트</li></a>
 </ul>
 

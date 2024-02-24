@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.sist.mapper.DonClassReserveMapper;
 import com.sist.vo.DonClassResHistoryVO;
 import com.sist.vo.DonClassReserveVO;
+import com.sist.vo.DonClassVO;
 
 import lombok.Data;
 
@@ -33,6 +34,9 @@ public void insertReserveInform(DonClassResHistoryVO vo) {
 public void resCanNumMinus(int rnum,int rno) {
 	mapper.resCanNumMinus(rnum, rno);
 }
+public void resCanNumPlus(int rnum,int rno) {
+	mapper.resCanNumPlus(rnum, rno);
+}
 
 public void UpdateUserMinusWing(int wing,String userid) {
 	mapper.UpdateUserMinusWing(wing, userid);
@@ -43,5 +47,20 @@ public void UpdateUserPlusWing(int wing,String userid) {
 }
 public int userWing(String userid) {
 	return mapper.userWing(userid);
+}
+
+
+//마이페이지
+
+public List<DonClassVO> donClassReserveHistoryList(Map map){
+	return mapper.donClassReserveHistoryList(map);
+}
+
+public int donClassReserveHistoryTotalPage(String userid) {
+	return mapper.donClassReserveHistoryTotalPage(userid);
+}
+
+public void updateResState(DonClassResHistoryVO vo) {
+	 mapper.updateResState(vo);
 }
 }

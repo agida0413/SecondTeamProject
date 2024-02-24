@@ -512,9 +512,11 @@ cursor:pointer;
     				 }).then(res=>{
     					 if(res.data==='YES'){
     						 alert('예약이 완료 되었습니다.')
+    						 location.href="../myAndAdpage/classResHistory.do"
     					 }else{
     						 alert('보유 wing이 부족합니다.')
     					 }
+    					
     				 })
     			   },
     			   

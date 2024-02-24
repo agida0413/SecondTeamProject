@@ -327,6 +327,24 @@ private ProgramService pService;
 		return "myAndAdpage/donClassWishList";
 	}
 	
+	//원데이 클래스 예약내역
+	@GetMapping("myAndAdpage/classResHistory.do")
+	public String classHistoryLits(String page,Model model,HttpSession session) {
+		String userid= (String)session.getAttribute("id");
+		Map map =service.donClassReserveHistoryList(page, userid);
+		
+		
+		
+		model.addAttribute("list",map.get("list"));
+		model.addAttribute("totalpage",map.get("totalpage"));
+		model.addAttribute("startpage",map.get("startpage"));
+		model.addAttribute("endpage",map.get("endpage"));
+		model.addAttribute("page",map.get("page"));
+		model.addAttribute("cate","classHistory");
+		model.addAttribute("size",map.get("size"));
+		return "myAndAdpage/classResHistory";
+	}
+	
 	// 상품 위시 페이지
 	@GetMapping("myAndAdpage/wishgoods.do")
 	public String wishgoods() {

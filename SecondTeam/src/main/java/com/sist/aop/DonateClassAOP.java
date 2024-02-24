@@ -69,7 +69,7 @@ public class DonateClassAOP {
 	                     
 	                     
 	                    
-	                     if(count==3) {
+	                     if(count==6) {
 	                        break;
 	                     }
 	                     

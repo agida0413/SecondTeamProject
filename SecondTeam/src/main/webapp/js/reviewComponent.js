@@ -41,13 +41,13 @@
     	    	            
     	    	       </div>
     	    	       
-    	    	       <input type="file" id="review_insert_img_file" name="review_upload" @change="previewImage($event)" style="margin-right:260px; margin-bottom:20px;" accept="image/*" ref="upfiles">   
+    	    	       <input type="file" id="review_insert_img_file" name="review_upload" @change="previewImage($event)" style="margin-right:260px; margin-bottom:20px; border:none;" accept="image/*" ref="upfiles">   
     	    	       <div class="review_insert_img" v-if="imageUrl" style="width:250px; height:150px;">
     	    	         <img :src="imageUrl" style="width:100%; height:100%;">
     	    	       </div>
     	                
     	                <div class="form-group" style="float:right;">
-    	                  <input type="submit" @click="sendContent()" value="Post Comment" class="btn btn-primary">
+    	                  <input type="submit" @click="sendContent()" value="등록하기" class="btn btn-primary">
     	                </div>
     	                <div class="insert_star" style="margin-top:20px;">
     	             

@@ -156,6 +156,11 @@ private CommonsFunction cf;
 		
 	}
 	
+	@GetMapping("newclass.do")
+	public String newprogram() {
+		return "donateclass/newclass";
+	}
+	
 	
 	
 }

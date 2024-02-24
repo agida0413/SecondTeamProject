@@ -55,12 +55,12 @@
 								
 								
 									<li class="has-children">
-									<a href="../donateclass/list.do?type=A">재능기부</a>
+									<a href="../donateclass/list.do?type=A">재능기부 클래스</a>
 									<ul class="dropdown">
 										
   
-											<li><a href="#">???</a></li>
-											<li><a href="#">???</a></li>
+											<li><a href="../donateclass/list.do?type=A">재능기부 클래스</a></li>
+											<li><a href="../donateclass/newclass.do">나의 재능등록</a></li>
   											<li><a href="#">???</a></li>
   											<li><a href="#">???</a></li>
   											<li><a href="#">???</a></li>

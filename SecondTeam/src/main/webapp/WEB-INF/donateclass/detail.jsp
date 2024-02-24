@@ -90,10 +90,10 @@ cursor:pointer;
             <div class="col-6">
         		 
 					<table  class="table" >
-					<tr style="border-right:1px #f2f2f2 solid ;"><td style="font-size:60px;color:gray;">예상차감</td></tr>
+					<tr style="border-right:1px #f2f2f2 solid ;" class="text-center"><td style="font-size:60px;  color:gray;">예상차감</td></tr>
 						<tr style="border-right:1px #f2f2f2 solid ;">
-							<td>
-								<span style="font-size:100px; color:black; font-weight:bold; margin-left:10px;">${vo.wing }<img src="../Projectimages/wing3.png" width=80px;></span>	
+							<td style="padding-left:90px;"> 
+								<span style="font-size:65px; color:black; font-weight:bold; margin-left:10px;">${vo.wing }<img src="../Projectimages/wing3.png" width=80px;></span>	
 							</td>
 						</tr>
 					
@@ -135,10 +135,7 @@ cursor:pointer;
 	  			<td style="font-size:25px; color:black; font-weight:bold;">${vo.full_num }&nbsp;명</td>
   			</tr>
   			
-  				<tr>
-	  			<td style="font-size:25px; color:black; font-weight:bold;">창설금액</td>
-	  			<td style="font-size:25px; color:black; font-weight:bold;">${formattedPrice }</td>
-  			</tr>
+  					
   			
   			</table>
   			</div>
@@ -284,7 +281,7 @@ cursor:pointer;
 	
 
         </div>
-  <script src="../js/reviewComponent.js"></script>
+  <script src="../js/reviewComponent.js?no=1"></script>
      <script>
      const reserveComponent={
     		 template:`<div class="row" style="padding:30px;">

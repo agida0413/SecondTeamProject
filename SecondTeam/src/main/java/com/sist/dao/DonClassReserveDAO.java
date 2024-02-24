@@ -48,7 +48,9 @@ public void UpdateUserPlusWing(int wing,String userid) {
 public int userWing(String userid) {
 	return mapper.userWing(userid);
 }
-
+public int curvalSeQ() {
+	return mapper.curvalSeQ();
+}
 
 //마이페이지
 
@@ -62,5 +64,12 @@ public int donClassReserveHistoryTotalPage(String userid) {
 
 public void updateResState(DonClassResHistoryVO vo) {
 	 mapper.updateResState(vo);
+}
+public  String getEmail(String userid) {
+	return mapper.getEmail(userid);
+}
+
+public DonClassVO mailInfo(int rhno) {
+	return mapper.mailInfo(rhno);
 }
 }

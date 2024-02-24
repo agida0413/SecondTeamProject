@@ -85,5 +85,29 @@ public interface DonClassReserveMapper {
 			+"WHERE userid=#{userid}")
 	public int donClassReserveHistoryTotalPage(String userid);
 	
+	@Select("SELECT email FROM member WHERE userid=#{userid}")
+	public  String getEmail(String userid);
+	@Select("SELECT DC_RESERVE_HISTORY_SEQ.currval FROM dual")
+	public int curvalSeQ();
 	
+	
+	@Results({
+		@Result(property = "hvo.rdate" ,column="rdate"),
+		@Result(property = "hvo.dbRdate" ,column="dbRdate"),
+		@Result(property = "hvo.cdate" ,column="cdate"),
+		@Result(property = "hvo.state" ,column="state"),
+		@Result(property = "hvo.rnum" ,column="rnum"),
+		@Result(property = "hvo.wing" ,column="getwing"),
+		@Result(property = "hvo.rno" ,column="rno"),
+		@Result(property = "hvo.rhno" ,column="rhno")
+	
+		
+})
+	@Select("SELECT b.dcno,name,a.id,cls_level,time,full_num,image,address,category,a.wing,score,TO_CHAR(rdate,'YYYY- MM-DD HH24:MI:SS') as dbRdate,cdate,state,rnum,b.wing as getwing,rno,rhno "
+			+ "	FROM donate_class a "
+			+ "	JOIN dc_reserve_history b ON "
+			+ " a.dcno=b.dcno "
+			+ " WHERE "
+			+ " rhno=#{rhno}")
+	public DonClassVO mailInfo(int rhno);
 }

@@ -14,10 +14,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sist.dao.ClassInformDAO;
 import com.sist.dao.DonClassReserveDAO;
 import com.sist.dao.DonClassReviewDAO;
+import com.sist.dao.MemberDAO;
+import com.sist.manager.DonClassMailManager;
 import com.sist.vo.DonClassResHistoryVO;
 import com.sist.vo.DonClassReserveVO;
 import com.sist.vo.DonClassReviewVO;
 import com.sist.vo.DonClassVO;
+import com.sist.vo.MemberVO;
 
 @Service
 public class DonateClassServiceImpl implements DonateClassService{
@@ -30,6 +33,8 @@ private DonClassReviewDAO rDao;
 @Autowired 
 private DonClassReserveDAO resDao;
 
+@Autowired
+private DonClassMailManager mgr;
 
 //재능기부 클래스 리스트 관련
 
@@ -222,11 +227,16 @@ public String insertReserveInform(DonClassResHistoryVO vo, int rno,String hostNa
 	else {
 		vo.setRno(rno);
 		resDao.insertReserveInform(vo);
-		
+		int curval=resDao.curvalSeQ();
 		resDao.resCanNumMinus(vo.getRnum(), rno);
 		resDao.UpdateUserMinusWing(vo.getWing(), vo.getUserid());
 		resDao.UpdateUserPlusWing(vo.getWing(), hostName);
 		result="YES";
+		String email=resDao.getEmail(vo.getUserid());
+		
+		DonClassVO mVo = resDao.mailInfo(curval);
+		
+		mgr.sendMail(email,mVo);
 	}
 	
 	return result;

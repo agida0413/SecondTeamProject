@@ -77,4 +77,22 @@ private ClassInformMapper mapper;
 	public int donClassWishTotalpage(Map map) {
 		return mapper.donClassWishTotalpage(map);
 	}
+	
+	
+	//새 클래스 등록
+	public void newClassInsert(DonClassVO vo) {
+		 mapper.newClassInsert(vo);
+	}
+	
+	public int getDcSeq() {
+		return mapper.getDcSeq();
+	}
+	
+	public void newClassSubImgInsert(Map map) {
+		mapper.newClassSubImgInsert(map);
+	}
+	
+	public void newClassReserveInformInsert(Map map) {
+		 mapper.newClassReserveInformInsert(map);
+	}
 }

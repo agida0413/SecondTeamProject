@@ -243,6 +243,49 @@ public String insertReserveInform(DonClassResHistoryVO vo, int rno,String hostNa
 }
 
 
+//새클래스 등록
+@Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
+@Override
+public void newClassInsert(DonClassVO vo, List<String> list,String[] partTime1,String[] partTime2,String[] partTime3) {
+	// TODO Auto-generated method stub
+	cIdao.newClassInsert(vo);
+	
+	int dcno=cIdao.getDcSeq();
+		Map map =new HashMap();
+		map.put("dcno", dcno);
+		
+	for (String subimg : list) {
+		map.put("subimage", subimg);
+		cIdao.newClassSubImgInsert(map);
+	}
+	
+	map.put("can_num", vo.getFull_num());
+	
+	for(int month=2;month<=3;month++) {
+		map.put("month", month);
+		for(int day=1;day<=31;day++) {
+			map.put("day", day);
+			
+				map.put("st", partTime1[0]);
+				map.put("et", partTime1[1]);
+				cIdao.newClassReserveInformInsert(map);
+				map.put("st", partTime2[0]);
+				map.put("et", partTime2[1]);
+				cIdao.newClassReserveInformInsert(map);
+				map.put("st", partTime3[0]);
+				map.put("et", partTime3[1]);
+				cIdao.newClassReserveInformInsert(map);
+				
+				
+			
+		}
+	}
+	
+	
+	
+}
+
+
 
 
 

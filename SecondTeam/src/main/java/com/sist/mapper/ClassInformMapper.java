@@ -105,4 +105,18 @@ public interface ClassInformMapper {
 			+"AND state=#{state}")
 	public int donClassWishTotalpage(Map map);
 	
+	
+	@Insert("INSERT INTO DONATE_CLASS VALUES("
+			+"DONATE_CLASS_SEQ.nextval,#{name},#{id},#{cls_level},#{time},#{full_num},#{image},#{address},#{category},#{wing},2.5,0,0,sysdate,0,'창설완료')")
+	public void newClassInsert(DonClassVO vo);
+	@Select("select donate_class_seq.currval FROM DUAL")
+	public int getDcSeq();
+	
+	@Insert("INSERT INTO donate_class_subimg VALUES("
+			+"donate_class_subimg_seq.nextval,#{dcno},#{subimage})")
+	public void newClassSubImgInsert(Map map);
+	
+	@Insert("INSERT INTO DC_RESERVE2 VALUES("
+			+"DC_RESERVE2_SEQ.nextval,#{dcno},#{month},#{day},#{st},#{et},#{can_num})")
+	public void newClassReserveInformInsert(Map map);
 }

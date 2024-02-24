@@ -1,13 +1,17 @@
 package com.sist.web;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +22,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sist.commons.CommonsFunction;
@@ -161,6 +167,59 @@ private CommonsFunction cf;
 		return "donateclass/newclass";
 	}
 	
-	
+	@PostMapping("insertNewProgram.do")
+	public String insertNewProgram(DonClassVO vo,HttpServletRequest request,HttpSession session,String partTime1[],String partTime2[],String partTime3[]) throws IllegalStateException, IOException {
+		System.out.println(vo.getAddress());
+		System.out.println(vo.getCls_level());
+		for (String string : partTime1) {
+			System.out.println(string);
+		}
+		System.out.println(vo.getCategory());
+		System.out.println(vo.getTime());
+		System.out.println(vo.getFull_num());
+		System.out.println(vo.getName());
+		System.out.println(vo.getMainimage().getOriginalFilename());
+		vo.setId((String)session.getAttribute("id"));
+		
+		String path = request.getSession().getServletContext().getRealPath("/classMainImg/");
+		 File dir=new File(path);
+		   if(!dir.exists())
+		   {
+			   dir.mkdir();
+		   }
+		   
+		   MultipartFile mf=vo.getMainimage();
+		   String originalFilename = mf.getOriginalFilename();
+		   String extension = originalFilename.substring(originalFilename.lastIndexOf("."));
+		   String newFilename = UUID.randomUUID().toString() + extension; // 새로운 파일 이름 생성
+		   
+		   File newFile = new File(path + newFilename);
+		   mf.transferTo(newFile); // 업로드된 파일을 새로운 이름으로 저장
+		   vo.setImage("../classMainImg/"+newFilename);
+		
+		   
+		 List<MultipartFile>sublist=vo.getSubimages();
+		 String path2 = request.getSession().getServletContext().getRealPath("/classSubImg/");
+		 File dir2=new File(path2);
+		   if(!dir2.exists())
+		   {
+			   dir2.mkdir();
+		   }
+		 
+		 List<String> subImgList=new ArrayList<String>();
+		for (MultipartFile m : sublist) {
+			String originalFilename2 = mf.getOriginalFilename();
+			   String extension2 = originalFilename.substring(originalFilename.lastIndexOf("."));
+			   String newFilename2 = UUID.randomUUID().toString() + extension; // 새로운 파일 이름 생성
+			   
+			   File newFile2 = new File(path2 + newFilename2);
+			   m.transferTo(newFile2); // 업로드된 파일을 새로운 이름으로 저장
+			   String subImg=("../classSubImg/"+newFilename2);
+			   subImgList.add(subImg);
+		}
+		
+		service.newClassInsert(vo, subImgList,partTime1,partTime2,partTime3);
+		return "redirect:../main/main.do";
+	}
 	
 }

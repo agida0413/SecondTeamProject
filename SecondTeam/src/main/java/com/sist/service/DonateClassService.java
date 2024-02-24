@@ -43,4 +43,7 @@ public interface DonateClassService {
 	public String insertReserveInform(DonClassResHistoryVO vo,int rno,String hostName);
 	
 	
+	//새클래스 등록
+	public void newClassInsert(DonClassVO vo,List<String> list,String[] partTime1,String[] partTime2,String[] partTime3);
+	
 }

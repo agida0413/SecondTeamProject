@@ -1,5 +1,6 @@
 package com.sist.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,8 +9,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sist.dao.ClassInformDAO;
+import com.sist.dao.DonClassReserveDAO;
 import com.sist.dao.DonClassReviewDAO;
+import com.sist.vo.DonClassResHistoryVO;
+import com.sist.vo.DonClassReserveVO;
 import com.sist.vo.DonClassReviewVO;
 import com.sist.vo.DonClassVO;
 
@@ -21,7 +27,8 @@ private ClassInformDAO cIdao;
 @Autowired
 private DonClassReviewDAO rDao;
 
-
+@Autowired 
+private DonClassReserveDAO resDao;
 
 
 //재능기부 클래스 리스트 관련
@@ -165,6 +172,63 @@ public int reviewNum(DonClassReviewVO vo) {
 public String getFilename(DonClassReviewVO vo) {
 	// TODO Auto-generated method stub
 	return rDao.getFilename(vo);
+}
+
+
+//월별 예약인원 정보
+@Override
+public String monthInwonList(int dcno, int month) throws JsonProcessingException {
+	// TODO Auto-generated method stub
+	Map map=new HashMap();
+	map.put("dcno",dcno);
+	map.put("month", month);
+	
+	List<Integer> list = resDao.monthInwonList(map);
+	
+	
+			ObjectMapper mapper= new ObjectMapper();
+	String json=mapper.writeValueAsString(list);
+	return json;
+}
+
+
+//일별 예약가능정보
+@Override
+public String reserveInform(int dcno, int month, int day) throws JsonProcessingException {
+	Map map =new HashMap();
+	map.put("dcno",dcno);
+	map.put("month", month);
+	map.put("day", day);
+	
+	List<DonClassReserveVO>list = resDao.reserveInform(map);
+	ObjectMapper mapper= new ObjectMapper();
+	String json=mapper.writeValueAsString(list);
+	
+	return json;
+}
+
+
+//예약하기(인서트)
+@Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
+@Override
+public String insertReserveInform(DonClassResHistoryVO vo, int rno,String hostName) {
+	// TODO Auto-generated method stub
+	String result="";
+	int userWing=resDao.userWing(vo.getUserid());
+	
+	if(vo.getWing()>userWing) {
+		result="NO";
+	}
+	else {
+		resDao.insertReserveInform(vo);
+		
+		resDao.resCanNumMinus(vo.getRnum(), rno);
+		resDao.UpdateUserMinusWing(vo.getWing(), vo.getUserid());
+		resDao.UpdateUserPlusWing(vo.getWing(), hostName);
+		result="YES";
+	}
+	
+	return result;
 }
 	
 

@@ -6,6 +6,7 @@ import lombok.Data;
 @Data
 public class DonClassResHistoryVO {
 private int rhno,dcno,rnum,wing;
-private String userid,state,dbRdate,dbCdate;
-private Date rdate,cdate;
+private String userid,state,dbRdate;
+private Date rdate;
+private String cdate;
 }

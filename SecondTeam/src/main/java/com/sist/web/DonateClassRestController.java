@@ -21,6 +21,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.DBPortPool.SemaphoresOut;
 import com.sist.commons.CommonsFunction;
 import com.sist.service.DonateClassService;
+import com.sist.vo.DonClassResHistoryVO;
+import com.sist.vo.DonClassReserveVO;
 import com.sist.vo.DonClassReviewVO;
 
 @RestController
@@ -181,5 +183,32 @@ public class DonateClassRestController {
 	}
 	
 	
+	
+	//월 별 예약가능인원 리스트
+	@GetMapping(value="donateclass/classInwonInform_vue.do",produces = "text/plain;charset=UTF-8")
+	public String classInwonInform(int dcno,int month) throws JsonProcessingException {
+		
+		String json=service.monthInwonList(dcno, month);
+				
+		return json;
+	}
+	
+	//일별 예약가능정보
+	@GetMapping(value="donateclass/classReserveInform_vue.do",produces = "text/plain;charset=UTF-8")
+	public String classReserveInform(int dcno,int month,int day) throws JsonProcessingException {
+		
+			String json = service.reserveInform(dcno, month, day);
+				
+		return json;
+	}
+	
+	//예약 정보 삽입
+	@PostMapping(value="donateclass/reserve_ok_vue.do",produces = "text/plain;charset=UTF-8")
+	public String reserve_ok_vue(DonClassResHistoryVO vo,int rno,String hostName) {
+		
+	String result=	service.insertReserveInform(vo, rno,hostName);
+				
+		return result;
+	}
 	
 }

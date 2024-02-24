@@ -3,6 +3,9 @@ package com.sist.service;
 import java.util.List;
 import java.util.Map;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.sist.vo.DonClassResHistoryVO;
+import com.sist.vo.DonClassReserveVO;
 import com.sist.vo.DonClassReviewVO;
 import com.sist.vo.DonClassVO;
 
@@ -34,6 +37,10 @@ public interface DonateClassService {
 	public void deleteReview(DonClassReviewVO vo);
 	public String getFilename(DonClassReviewVO vo);
 	
-	//댓글
+	//예약
+	public String monthInwonList(int dcno,int month) throws JsonProcessingException;
+	public String reserveInform(int dcno,int month,int day) throws JsonProcessingException;
+	public String insertReserveInform(DonClassResHistoryVO vo,int rno,String hostName);
+	
 	
 }

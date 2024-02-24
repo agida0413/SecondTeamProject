@@ -37,6 +37,15 @@ cursor:pointer;
   .noStyle td{
   	border-top:1px black solid;
   }
+  .selectedReserve{
+  padding:20px; border:1px #f2f2f2  solid; background-color:#214252; color:white;cursor:pinter;
+  }
+  .notSelectedReserve{
+  padding:20px; border:1px #f2f2f2  solid; color:white;cursor:pinter;
+  }
+  .fullReserve{
+  padding:20px;background-color:gray; border:1px #f2f2f2  solid; color:white;
+  }
 
 </style>
 <meta charset="UTF-8">
@@ -304,9 +313,9 @@ cursor:pointer;
     		                      </thead>
     		                      <tbody>
     		                        <tr v-for="(row, index) in currentCalendarMatrix" :key="index">
-    		                          <td v-for="(day, index2) in row" :key="index2" style="padding:20px;" :class="(day>=realDay &&  sysMonth===currentMonth && sysYear===currentYear) || (sysMonth<currentMonth && sysYear===currentYear)?'link':''">
-    		                            <span v-if="(day>=realDay &&  sysMonth===currentMonth && sysYear===currentYear) || (sysMonth<currentMonth && sysYear===currentYear)" @click="change(day) " style="color:black; font-weight:bold; ">
-    		                               <span v-if="day===currentDay &&  sysMonth<= currentMonth" class="rounded2" >
+    		                          <td v-for="(day, index2) in row" :key="index2" style="padding:20px;" :class="(day>=realDay &&  sysMonth===currentMonth && sysYear===currentYear &&  classInforms[day-1]!==0) || (sysMonth<currentMonth && sysYear===currentYear &&  classInforms[day-1]!==0)?'link':''">
+    		                            <span v-if="(day>=realDay &&  sysMonth===currentMonth && sysYear===currentYear &&  classInforms[day-1]!==0) || (sysMonth<currentMonth && sysYear===currentYear &&  classInforms[day-1]!==0)" @click="change(day) " style="color:black; font-weight:bold; ">
+    		                               <span v-if="day===currentDay &&  sysMonth<= currentMonth &&  classInforms[day-1]!==0 " class="rounded2" >
     		                                 {{day}}
     		                               </span>
     		                               
@@ -330,9 +339,22 @@ cursor:pointer;
     		         	<td colspan="3" style="background-color:#f2f2f2; "><span style="font-weight:bold;">예약가능시간</span></td>
     		         </tr>
     		         <tr style="border:1px #f2f2f2 solid;">
-    		         	<td style="padding:20px; border:1px #f2f2f2  solid; background-color:#214252; color:white;"><span>13:00 ~ 15:00</span></td>
-    		        	<td style="padding:20px; border:1px #f2f2f2  solid;"><span style="font-weight:bold;">13:00 ~ 15:00</span></td>
-    		        	<td style="padding:20px; border:1px #f2f2f2  solid;"><span>13:00 ~ 15:00</span></td>
+    		         	<td v-for="(ifrm,index) in dayReserveInform" 
+    		         	:style="ifrm.rno===ReserveInform.rno?' padding:20px; border:1px #f2f2f2  solid; background-color:#214252; color:white;':' padding:20px; border:1px #f2f2f2  solid;  '">
+    		         
+    		         	<span @click="changeReserveInform(index)" style="cursor:pointer;"
+    		         	v-if="ifrm.can_num!==0">
+    		         	{{ifrm.s_time}} ~ {{ifrm.e_time}}
+    		         	</span>
+    		         	
+    		         	<span style="color:gray"
+        		         	v-if="ifrm.can_num===0">
+        		         	{{ifrm.s_time}} ~ {{ifrm.e_time}}<br>
+        		         	(예약마감)
+        		         	</span>
+    		         	
+    		         	</td>
+    		        	
     		         </tr>
     		         </table>
     		       
@@ -379,21 +401,21 @@ cursor:pointer;
     		   <div class="col-6">
     		 
     		 		
-    		 	<table class="table text-center" style="border:1px #f2f2f2 solid;">
+    		 	<table class="table text-center" style="border:1px #f2f2f2 solid;" v-show="isShow">
     		 	<tr>
     		 	<td style="background-color:#f2f2f2; "><span style="font-weight:bold;">남은 자리</span></td>
     		 	<td style="background-color:#f2f2f2; "><span style="font-weight:bold;">예약인원 선택</span></td>
     			<td style="background-color:#f2f2f2; "><span style="font-weight:bold;">차감될 윙</span></td>
     		 	</tr>
     		 	<tr style="border:1px #f2f2f2 solid;">
-    		 	<td style="padding:20px;"><span style="font-size:25px; font-weight:bold;">1 명</span></td>
+    		 	<td style="padding:20px;"><span style="font-size:25px; font-weight:bold;">{{ReserveInform.can_num}} 명</span></td>
     		 	<td style="padding:20px; padding-left:25px;">
     		 	 <button class="kyj_shoppingDecreseBtn" style="background-color:#214252; color:white; height:47px; width:30px; border-radius:5px;" @click="minusInwon()" >-</button>
                  <input class="kyj_shoppingCal" type="text" id="inwon" name="inwon" v-model="inwon" min="1" readonly>
                 <button class="kyj_shoppingIncreseBtn" style="background-color:#214252; color:white; height:47px; width:30px; border-radius:5px;" @click="plusInwon()">+</button>
     		 	</td>
     		 	<td style="padding:20px;">
-    		 <span><span style="font-size:25px; font-weight:bold;">600<span>&nbsp;<img src="../Projectimages/wing3.png" width="25px"></span>
+    		 <span><span style="font-size:25px; font-weight:bold;">{{totalWing}}<span>&nbsp;<img src="../Projectimages/wing3.png" width="25px"></span>
     		 	</td>
     		 	</tr>
     		 	</table>
@@ -407,7 +429,7 @@ cursor:pointer;
     		   </div>
     		   
  				 <div class="col-6 text-center" style="margin-top:45px;">
-		 				<div><button class="btn btn-xlarge btn-primary" style="width:500px; font-size:25px;">예약하기</button></div>
+		 				<div><button class="btn btn-xlarge btn-primary" style="width:500px; font-size:25px;" @click="reserveOk()">예약하기</button></div>
 				 	</div>
     		   </div>
     		   </div>`,
@@ -428,23 +450,112 @@ cursor:pointer;
     		            realDay:new Date().getDate(),
     		            dcno:${vo.dcno},
     		            inwon:1,
-    		            full_num:${vo.full_num}
+    		            full_num:${vo.full_num},
+    		            wing:${vo.wing},
+    		            totalWing:${vo.wing},
+    		            sendWing:0,
+    		            classInforms:[],
+    		            dayReserveInform:[],
+    		            ReserveInform:{},
+    		            isShow:false,
+    		            sessionId:'${sessionScope.id}',
+    		            hostName:'${vo.id}'
+    		           
+    		            
+    		          
     		        
     		      }
     		   },
     		   mounted(){
     		      this.init()
-    		 	
+    		 	  this.callMonthInwonInform()
+    		 	   this.callDayInform()
     		   },
     		   methods:{
+    			   
+    			   reserveOk(){
+    				
+    				 if(this.sessionId===''){
+    					 alert('로그인 후 이용가능합니다.')
+    					 return;
+    				 }
+    				 
+    				 if(typeof this.sendwing==='undefined' || this.sendwing===0){
+    					 alert('예약날짜와 정보를 선택해주세요.')
+    					 return;
+    				 }
+    				 
+    				 if(this.inwon>this.ReserveInform.can_num){
+    					 alert('예약하고자 하는 인원이 가능인원보다 많습니다.')
+    					 return;
+    				 }
+    				 
+    				 if(this.hostName===this.sessionId){
+    					 alert('본인클래스는 예약할 수 없습니다.')
+    					 return;
+    				 }
+    				 let cdate=new Date().getFullYear()+"년 "+this.currentMonth+"월 "+this.currentDay+"일 "+this. ReserveInform.s_time+" ~ "+this. ReserveInform.e_time
+    				
+    				
+    				 axios.post('../donateclass/reserve_ok_vue.do',null,{
+    					 params:{
+    						dcno:this.dcno,
+    						userid:this.sessionId,
+    						cdate:cdate,
+    						state:'예약확정',
+    						rnum:this.inwon,
+    						wing:this.sendwing,
+    						rno:this.ReserveInform.rno,
+    						hostName:this.hostName
+    						
+    					 }
+    				 }).then(res=>{
+    					 if(res.data==='YES'){
+    						 alert('예약이 완료 되었습니다.')
+    					 }else{
+    						 alert('보유 wing이 부족합니다.')
+    					 }
+    				 })
+    			   },
+    			   
+    			   changeReserveInform(index){
+    				 this.ReserveInform=this.dayReserveInform[index]
+    				this.isShow=true;
+    				 this.totalWing=this.wing*this.inwon
+    				 this.sendwing=this.totalWing
+    			   },
+    			   callDayInform(){
+    				axios.get('../donateclass/classReserveInform_vue.do',{
+    					params:{
+    						 dcno:this.dcno,
+    						month:this.currentMonth,
+    						day:this.currentDay
+    					}
+    				}).then(res=>{
+    					this.dayReserveInform=res.data
+    					 
+    				})
+    			   },
+    			   callMonthInwonInform(){
+    				
+    				 axios.get('../donateclass/classInwonInform_vue.do',{params:{
+    					 month:this.currentMonth,
+    					 dcno:this.dcno
+    				 }}).then(res=>{
+    					 this.classInforms=res.data
+    				 })  
+    			   },
     			 minusInwon(){
     				 if(this.inwon>1){
     					 this.inwon--;
     				 }
-    				 
+    				this.totalWing=this.wing*this.inwon
+    				this.sendwing=this.totalWing
     			 },
     			 plusInwon(){
     				 this.inwon++;
+    				 this.totalWing=this.wing*this.inwon
+    				 this.sendwing=this.totalWing
     			 },
     		        init(){
     		           this.currentMonthStartWeekIndex = this.getStartWeek(this.currentYear, this.currentMonth);
@@ -533,7 +644,15 @@ cursor:pointer;
     		           else{
     		             this.currentMonth -= 1;
     		           }
+    		           this.callMonthInwonInform()
+    		           this.ReserveInform={};
+    		           this.inwon=1
+    		           this.isShow=false;
+    		           this.callDayInform()
+    		            this.sendwing=0;
     		           this.init();
+    		         
+    		           
     		         },
     		         onClickNext(month){
     		        	 this.currentDay=1;
@@ -545,7 +664,14 @@ cursor:pointer;
     		           else{
     		             this.currentMonth += 1;
     		           }
+    		           this.callMonthInwonInform()
+    		           this.ReserveInform={};
+    		           this.inwon=1
+    		           this.isShow=false;
+    		           this.callDayInform()
+    		            this.sendwing=0;
     		           this.init();
+    		          
     		         },
     		         isToday: function(year, month, day){
     		           let date = new Date();
@@ -553,7 +679,12 @@ cursor:pointer;
     		         },
     		         change(day){
     		           this.currentDay=day;
-    		           
+    		           this.callDayInform()
+    		           this.ReserveInform={};
+    		           this.inwon=1
+    		           this.isShow=false;
+    		           this.sendwing=0;
+    		         
     		           //this.isToday(this.currentYear,.this.currentMonth,this.currentDay)
     		         }
     		         // 시간

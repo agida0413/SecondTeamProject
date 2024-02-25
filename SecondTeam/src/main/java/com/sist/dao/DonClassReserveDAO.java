@@ -72,4 +72,11 @@ public  String getEmail(String userid) {
 public DonClassVO mailInfo(int rhno) {
 	return mapper.mailInfo(rhno);
 }
+
+public List<DonClassVO> myDonclassResHistoryList(Map map){
+	return mapper.myDonclassResHistoryList(map);
+}
+public int myDonclassResHistoryTotalPage(String userid) {
+	return mapper.myDonclassResHistoryTotalPage(userid);
+}
 }

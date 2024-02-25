@@ -32,4 +32,11 @@ public interface MypageService {
 	
 	//마이페이지 클래스 예약취소
 		public void reserveCancel(DonClassResHistoryVO vo,String hostname);
+
+		
+		//나의 클래스
+		public Map  myDonClassList(String id,String page);
+			
+		//나의 클래스 예약관리
+		public Map myDonclassResHistoryList(String userid,String page);
 }

@@ -143,5 +143,77 @@ public class MypageServiceImpl implements MypageService {
 		vo.setState("예약취소");
 		resDao.updateResState(vo);
 	}
+	@Override
+	public Map myDonClassList(String id,String page) {
+		// TODO Auto-generated method stub
+		
+		Map returnMap=new HashMap();
+		if(page==null) {
+			page="1";
+		}
+		
+		int curpage=Integer.parseInt(page);
+		int rowsize=5;
+		
+		int start=cf.start(rowsize, curpage);
+		int end=cf.end(rowsize, curpage);
+		
+		
+		Map map =new HashMap();
+		map.put("start",start);
+		map.put("end", end);
+		map.put("id", id);
+		
+		List<DonClassVO>list= cDao.myDonClassList(map);
+		int totalpage=cDao.myDonClassTotalPage(id);
+		
+		final int BLCOK=10;
+		int startpage=cf.startPage(BLCOK, curpage);
+		int endpage=cf.endPage(BLCOK, curpage, totalpage);
+		
+		returnMap.put("list", list);
+		returnMap.put("totalpage", totalpage);
+		returnMap.put("startpage", startpage);
+		returnMap.put("endpage", endpage);
+		returnMap.put("page", curpage);
+		returnMap.put("size", list.size());
+		
+		return returnMap;
+	}
+	@Override
+	public Map myDonclassResHistoryList(String userid, String page) {
+		// TODO Auto-generated method stub
+		Map returnMap=new HashMap();
+		if(page==null) {
+			page="1";
+		}
+		
+		int curpage=Integer.parseInt(page);
+		int rowsize=5;
+		
+		int start=cf.start(rowsize, curpage);
+		int end=cf.end(rowsize, curpage);
+		
+		Map map =new HashMap();
+		map.put("start",start);
+		map.put("end", end);
+		map.put("userid", userid);
+		
+		List<DonClassVO>list=resDao.myDonclassResHistoryList(map);
+		
+		int totalpage=resDao.myDonclassResHistoryTotalPage(userid);
+		final int BLCOK=10;
+		int startpage=cf.startPage(BLCOK, curpage);
+		int endpage=cf.endPage(BLCOK, curpage, totalpage);
+		
+		returnMap.put("list", list);
+		returnMap.put("totalpage", totalpage);
+		returnMap.put("startpage", startpage);
+		returnMap.put("endpage", endpage);
+		returnMap.put("page", curpage);
+		returnMap.put("size", list.size());
+		
+		return returnMap;
+	}
 
 }

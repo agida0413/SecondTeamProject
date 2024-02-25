@@ -4,6 +4,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://unpkg.com/vue@3"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <style type="text/css">
  
   
@@ -28,12 +31,12 @@
 <body>
 
 
-				<div class="col-lg-12" id="donateClassList">
-				 <div class=""><span style="font-weight:bold; font-size:30px; color:black;">원데이 클래스 관심목록</span></div>
+				<div class="col-lg-12"  id="classHistoryApp">
+				 <div class=""><span style="font-weight:bold; font-size:30px; color:black;">나의 원데이 클래스 예약관리</span></div>
 				 <hr>
 				<c:if test="${size==0 }">
  				
-  			<div><h3>관심 클래스가 존재하지 않습니다.</h3></div>
+  			<div><h3>예약내역이 존재하지 않습니다.</h3></div>
   			</c:if>
   			
 					<c:forEach var="vo" items="${list }">
@@ -59,27 +62,32 @@
 									</div>
 							
 							
-							
-									<table class="table" style="width:500px;">
+								
+									<table class="table" >
 										<tr style=" font-weight:bold;">
-											<td style="border:none;" width="12%">소요시간</td>
-											<td style="border:none;" width="12%">${vo.time }</td>
-											<td style="border:none; vertical-align:middle; " rowspan="3" width="50%">
-											<span  style="font-weight:bold; font-size:40px; color:black;">${vo.wing }&nbsp;<img src="../Projectimages/wing3.png" width="40px"></span>
-											</td>
+											<td style="border:none;" >예약인원</td>
+											<td style="border:none; color:gray;" >${vo.hvo.rnum } 명</td>
+											<td style="border:none;">차감 wing</td>
+											<td style="color:gray; border:none;"><img src="../Projectimages/wing3.png" width=20px>${vo.hvo.wing }</td>
 										</tr>
 										<tr style=" font-weight:bold;">
-											<td style="border:none;">수업인원</td>
-											<td style="border:none;">${vo.full_num }&nbsp;명</td>
+											<td style="border:none;">예약일</td>
+											<td style="border:none;color:gray;">${vo.hvo.dbRdate}</td>
+											<td style="border:none;">예약 상태</td>
+											<td style="color:gray; border:none;">${vo.hvo.state }</td>
 										</tr>
 										<tr style=" font-weight:bold;">
-											<td style="border:none;">난이도</td>
-											<td style="border:none;">${vo.cls_level }</td>
+											<td style="border:none;">수업일</td>
+											<td style="border:none;color:gray;">${vo.hvo.cdate}</td>
+											<td style="border:none;">예약자 성함</td>
+											<td style="color:gray; border:none;">${vo.hvo.userid}</td>
 										</tr>
 										<tr></tr>
 									</table>
 							
 								
+							
+							
 									
 									<div style="margin-top:5px;"></div>
 									
@@ -92,16 +100,16 @@
 				  <div class="row">
   		   	 <ul class="pagination" >
   			 		<c:if test="${startpage>1 }">
-				  <li class="page-item"><a href="../myAndAdpage/donClassWishList.do?page=${startpage-1 }" class="link page-link">&lt;</a></li>
+				  <li class="page-item"><a href="../myAndAdpage/classResHistory.do?page=${startpage-1 }" class="link page-link">&lt;</a></li>
 				  </c:if>
 				   <c:forEach var="i" begin="${startpage }" end="${endpage }">
 				  <li class="page-item ${page == i ? 'active' : ''}" aria-current="${page == i ? 'page' : 'null'}">
 				 
-				  <a class="link page-link" href="../myAndAdpage/donClassWishList.do?page=${i }">${i }</a> 
+				  <a class="link page-link" href="../myAndAdpage/classResHistory.do?page=${i }">${i }</a> 
 				  </li>
 				   </c:forEach>
 				 <c:if test="${endpage<totalpage }">
-				  <li  class="page-item"><a href="../myAndAdpage/donClassWishList.do?page=${endpage+1 }" class="link page-link">&gt;</a></li>
+				  <li  class="page-item"><a href="../myAndAdpage/classResHistory.do?page=${endpage+1 }" class="link page-link">&gt;</a></li>
 				   </c:if>
 				   
 				   
@@ -111,6 +119,36 @@
 				</div>
 
 		
-	
+	<script>
+	let classHistoryApp=Vue.createApp({
+		data(){
+			return{
+			sessionid:'${sessionScope.id}'	
+			}
+		},
+		mounted(){
+			
+		},
+		methods:{
+		cancleRes(rhno,rno,wing,id,rnum){
+			
+		axios.get('../myAndAdpage/cancleReserve.do',{
+			params:{
+				userid:this.sessionid,
+				rhno:rhno,
+				rno:rno,
+				wing:wing,
+				hostname:id,
+				rnum:rnum
+				
+			}
+		}).then(res=>{
+			alert('취소가 완료되었습니다('+wing+'wing 환불)')
+			location.href="../myAndAdpage/classResHistory.do"
+		})
+		}	
+		}
+	}).mount('#classHistoryApp')
+	</script>
 </body>
 </html>

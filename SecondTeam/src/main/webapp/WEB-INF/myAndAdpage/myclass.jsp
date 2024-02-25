@@ -29,11 +29,11 @@
 
 
 				<div class="col-lg-12" id="donateClassList">
-				 <div class=""><span style="font-weight:bold; font-size:30px; color:black;">원데이 클래스 관심목록</span></div>
+				 <div class=""><span style="font-weight:bold; font-size:30px; color:black;">나의 원데이 클래스</span></div>
 				 <hr>
 				<c:if test="${size==0 }">
  				
-  			<div><h3>관심 클래스가 존재하지 않습니다.</h3></div>
+  			<div><h3>나의 클래스가 존재하지 않습니다.</h3></div>
   			</c:if>
   			
 					<c:forEach var="vo" items="${list }">
@@ -92,16 +92,16 @@
 				  <div class="row">
   		   	 <ul class="pagination" >
   			 		<c:if test="${startpage>1 }">
-				  <li class="page-item"><a href="../myAndAdpage/donClassWishList.do?page=${startpage-1 }" class="link page-link">&lt;</a></li>
+				  <li class="page-item"><a href="../myAndAdpage/myclass.do?page=${startpage-1 }" class="link page-link">&lt;</a></li>
 				  </c:if>
 				   <c:forEach var="i" begin="${startpage }" end="${endpage }">
 				  <li class="page-item ${page == i ? 'active' : ''}" aria-current="${page == i ? 'page' : 'null'}">
 				 
-				  <a class="link page-link" href="../myAndAdpage/donClassWishList.do?page=${i }">${i }</a> 
+				  <a class="link page-link" href="../myAndAdpage/myclass.do?page=${i }">${i }</a> 
 				  </li>
 				   </c:forEach>
 				 <c:if test="${endpage<totalpage }">
-				  <li  class="page-item"><a href="../myAndAdpage/donClassWishList.do?page=${endpage+1 }" class="link page-link">&gt;</a></li>
+				  <li  class="page-item"><a href="../myAndAdpage/myclass.do?page=${endpage+1 }" class="link page-link">&gt;</a></li>
 				   </c:if>
 				   
 				   

@@ -345,9 +345,43 @@ private ProgramService pService;
 		return "myAndAdpage/classResHistory";
 	}
 	
+	//나의 클래스
+		@GetMapping("myAndAdpage/myclass.do")
+		public String myclass(String page ,HttpSession session, Model model) {
+			String id= (String)session.getAttribute("id");
+			Map map = service.myDonClassList(id, page);
+			
+			model.addAttribute("cate","myclass");
+			model.addAttribute("list",map.get("list"));
+			model.addAttribute("totalpage",map.get("totalpage"));
+			model.addAttribute("startpage",map.get("startpage"));
+			model.addAttribute("endpage",map.get("endpage"));
+			model.addAttribute("page",map.get("page"));
+			model.addAttribute("size",map.get("size"));
+			return "myAndAdpage/myclass";
+		}
+	
+		
+		@GetMapping("myAndAdpage/myclassResHistory.do")
+		public String myclassResHistory(String page ,HttpSession session, Model model) {
+			String userid= (String)session.getAttribute("id");
+			Map map = service.myDonclassResHistoryList(userid, page);
+			
+			model.addAttribute("cate","myclassResHistory");
+			model.addAttribute("list",map.get("list"));
+			model.addAttribute("totalpage",map.get("totalpage"));
+			model.addAttribute("startpage",map.get("startpage"));
+			model.addAttribute("endpage",map.get("endpage"));
+			model.addAttribute("page",map.get("page"));
+			model.addAttribute("size",map.get("size"));
+			return "myAndAdpage/myclassResHistory";
+		}
 	// 상품 위시 페이지
 	@GetMapping("myAndAdpage/wishgoods.do")
 	public String wishgoods() {
 		return "myAndAdpage/wishgoods";
 	}
+	
+	
+	
 }

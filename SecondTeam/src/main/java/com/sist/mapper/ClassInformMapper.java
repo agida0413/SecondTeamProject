@@ -119,4 +119,18 @@ public interface ClassInformMapper {
 	@Insert("INSERT INTO DC_RESERVE2 VALUES("
 			+"DC_RESERVE2_SEQ.nextval,#{dcno},#{month},#{day},#{st},#{et},#{can_num})")
 	public void newClassReserveInformInsert(Map map);
+	
+	
+	
+	//마이페이지 나의원데이클래스 내역
+	@Select("SELECT dcno,name,id,cls_level,time,full_num,image,address,category,wing,score,num "
+			+"FROM (SELECT dcno,name,id,cls_level,time,full_num,image,address,category,wing,score,ROWNUM as num "
+			+"FROM (SELECT /*+INDEX_DESC(DONATE_CLASS DCNO_PK)*/dcno,name,id,cls_level,time,full_num,image,address,category,wing,score "
+			+"FROM donate_class "
+			+"WHERE id=#{id}))"
+			+"WHERE num BETWEEN #{start} and #{end}")
+	public List<DonClassVO> myDonClassList(Map map);
+	
+	@Select("SELECT CEIL(COUNT(*)/5.0) FROM donate_class where id=#{id}")
+	public int myDonClassTotalPage(String id);
 }

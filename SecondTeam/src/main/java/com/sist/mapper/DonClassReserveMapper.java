@@ -76,7 +76,7 @@ public interface DonClassReserveMapper {
 			+"JOIN dc_reserve_history b ON "
 			+"a.dcno=b.dcno "
 			+"WHERE "
-			+"b.userid=#{userid} ORDER BY b.rdate DESC)) "
+			+"userid=#{userid} ORDER BY b.rdate DESC)) "
 			+"WHERE num between #{start} AND #{end}"
 			)
 	public List<DonClassVO> donClassReserveHistoryList(Map map);
@@ -110,4 +110,41 @@ public interface DonClassReserveMapper {
 			+ " WHERE "
 			+ " rhno=#{rhno}")
 	public DonClassVO mailInfo(int rhno);
+	
+	
+	
+	@Results({
+		@Result(property = "hvo.rdate" ,column="rdate"),
+		@Result(property = "hvo.dbRdate" ,column="dbRdate"),
+		@Result(property = "hvo.cdate" ,column="cdate"),
+		@Result(property = "hvo.state" ,column="state"),
+		@Result(property = "hvo.rnum" ,column="rnum"),
+		@Result(property = "hvo.wing" ,column="getwing"),
+		@Result(property = "hvo.rno" ,column="rno"),
+		@Result(property = "hvo.rhno" ,column="rhno"),
+		@Result(property = "hvo.userid" ,column="userid")
+	
+		
+})
+	@Select("SELECT dcno,name,id,cls_level,time,full_num,image,address,category,wing,score,TO_CHAR(rdate,'YYYY- MM-DD HH24:MI:SS') as dbRdate, "
+			+"cdate,state,rnum,getwing,rno,rhno,userid,num "
+			+ "	FROM (SELECT dcno,name,id,cls_level,time,full_num,image,address,category,wing,score,rdate,cdate,state,rnum,getwing,rno,rhno,userid,ROWNUM as num "
+			+ "	FROM (SELECT b.dcno,name,a.id,cls_level,time,full_num,image,address,category,a.wing,score,rdate,cdate,state,rnum,b.wing as getwing,rno,rhno,userid "
+			+ "	FROM donate_class a "
+			+"JOIN dc_reserve_history b ON "
+			+"a.dcno=b.dcno "
+			+"WHERE "
+			+"a.id=#{userid} ORDER BY b.rdate DESC)) "
+			+"WHERE num between #{start} AND #{end}"
+			)
+	public List<DonClassVO> myDonclassResHistoryList(Map map);
+	
+	@Select("SELECT CEIL(COUNT(*)/5.0) FROM (SELECT b.dcno  "
+			+ "	FROM donate_class a "
+			+ "	JOIN dc_reserve_history b ON "
+			+ "	a.dcno=b.dcno "
+			+ " WHERE "
+			+ "	a.id=#{userid})"
+			)
+	public int myDonclassResHistoryTotalPage(String userid);
 }

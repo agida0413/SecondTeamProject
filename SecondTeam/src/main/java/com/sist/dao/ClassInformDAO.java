@@ -95,4 +95,13 @@ private ClassInformMapper mapper;
 	public void newClassReserveInformInsert(Map map) {
 		 mapper.newClassReserveInformInsert(map);
 	}
+
+	//나의 클래스
+	public List<DonClassVO> myDonClassList(Map map){
+		return mapper.myDonClassList(map);
+	}
+	
+	public int myDonClassTotalPage(String id) {
+		return mapper.myDonClassTotalPage(id);
+	}
 }

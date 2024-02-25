@@ -12,9 +12,9 @@ public class DonationReplyServiceImpl implements DonationReplyService{
 	private DonationReplyDAO dao;
 
 	@Override
-	public List<DonationReplyVO> donationMainReplyListData(int start, int end) {
+	public List<DonationReplyVO> donationMainReplyListData(Map map) {
 		// TODO Auto-generated method stub
-		return dao.donationMainReplyListData(start, end);
+		return dao.donationMainReplyListData(map);
 	}
 
 	@Override
@@ -27,6 +27,12 @@ public class DonationReplyServiceImpl implements DonationReplyService{
 	public void donationReplyInsert(DonationReplyVO vo) {
 		// TODO Auto-generated method stub
 		dao.donationReplyInsert(vo);
+	}
+
+	@Override
+	public int donationReplyTotalPage(int dno) {
+		// TODO Auto-generated method stub
+		return dao.donationReplyTotalPage(dno);
 	}
 	
 	

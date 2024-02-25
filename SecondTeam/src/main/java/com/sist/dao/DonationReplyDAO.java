@@ -12,13 +12,16 @@ public class DonationReplyDAO {
 	@Autowired
 	private DonationReplyMapper mapper;
 	
-	public List<DonationReplyVO> donationMainReplyListData(int start, int end){
-		return mapper.donationMainReplyListData(start, end);
+	public List<DonationReplyVO> donationMainReplyListData(Map map){
+		return mapper.donationMainReplyListData(map);
 	}
 	public List<DonationReplyVO> donationSubReplyListData(int root){
 		return mapper.donationSubReplyListData(root);
 	}
 	public void donationReplyInsert(DonationReplyVO vo) {
 		mapper.donationReplyInsert(vo);
+	}
+	public int donationReplyTotalPage(int dno) {
+		return mapper.donationReplyTotalPage(dno);
 	}
 }

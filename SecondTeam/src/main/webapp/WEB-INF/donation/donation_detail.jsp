@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="../css/donation.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <style type="text/css">
 .detail_cate{
@@ -86,6 +87,10 @@ h3.plan strong{
     font-size: 13px;
     color: #202020;
 }
+.reply_replybtn:hover{
+	background-color: #ccc;
+	color: #000000;
+}
 .reply_likebtn{
 	min-width: auto;
     height: 23px;
@@ -100,6 +105,41 @@ h3.plan strong{
 	border-bottom: 1px solid #ccc;
 	height: 150px;
 }
+.reply_box{
+	padding: 0 30px;
+    background-color: #00000005;
+    border-top: 1px solid #dcdcdc;
+}
+.reply_inner{
+	border-color: #ccc;
+    border-radius: 3px;
+}
+.reply_write_area{
+	max-width: 100%;
+    padding: 17px 0 8px;
+}
+.reply_write_box{
+	position: relative;
+    padding: 0 15px;
+    background-color: #fff;
+    border: 1px solid #dcdcdc;
+}
+.reply_text_area{
+	height: 120px;
+    font-size: 13px;
+    letter-spacing: 0;
+    display: block;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
+    width: 100%;
+    border: none;
+    color: #333;
+    background-color: rgba(255,255,255,.001);
+    line-height: 18px;
+    padding: 0;
+}
+
 </style>
 </head>
 <body>
@@ -222,52 +262,62 @@ h3.plan strong{
 			  <!-- 댓글목록 -->
 			  <div id="donationDetailReply">
 	            <div class="pt-5 comment-wrap">
-	              <h3 class="mb-5 heading" style="margin-bottom: 5px;">6 Comments</h3><span style="float: right"><a class="btn reply_replybtn">댓글쓰기</a></span>
-	                <div class="reply_block">
+	              <h3 class="mb-5 heading" style="margin-bottom: 5px;">6 Comments<span style="float: right"><a class="btn reply_replybtn" @click="replyWrite()">댓글쓰기</a></span></h3>
+	                <div class="reply_box" v-show="replyShow">
+	                  <div class="reply_inner">
+	                    <div class="reply_write_area">
+	                      <div class="reply_write_box">
+	                        <textarea v-model="replymsg" ref="replymsg" rows="5" cols="50" class="reply_text_area" placeholder="응원의 댓글 부탁드립니다."></textarea>
+	                      </div>
+	                       <span>
+	                          <a class="btn reply_replybtn" style="float: right;" @click="replyCancel()">취소</a>
+	                          <a class="btn reply_replybtn" style="float: right;" @click="replyMainWrite()">작성</a>
+	                       </span>
+	                    </div>
+	                  </div>
+	                </div>
+	                
+	                <div class="reply_block" v-for="vo in reply_list">
+	                  <div>
 		            	<div class="reply_header" style="padding-bottom: 5px;">
-		            	  <b>유저아이디</b>
+		            	  <b>{{vo.writer}}</b>
 		            	</div> 
 		            	<div class="reply_content">
-		            	  이 모금함을 보며 중학교 입학하는 딸과 가방 쇼핑하던 생각났습니다. 직접 골라주지는 못하시만 작은 도움이 되었으면 합니다.
+		            	  {{vo.msg}}
 		            	</div>
-		            	<div class="reply_time">등록시간</div>
+		            	<div class="reply_time">{{vo.dbday}}</div>
 		            	<div>
-		            	  <span><a class="btn reply_replybtn" style="float: left">답글</a><a class="btn reply_replybtn" style="float: right">좋아요</a></span>
+		            	  <span>
+		            	    <a class="btn reply_replybtn" style="float: left" @click="subReplyShow(vo.rno)">답글</a>
+		            	    <a class="btn reply_replybtn" style="float: right">좋아요</a>
+		            	  </span>
 		            	</div>
-	            	</div>
-	                <div class="reply_block">
-		            	<div class="reply_header">
-		            	  <b>유저아이디</b>
-		            	</div> 
-		            	<div class="reply_content">
-		            	  이 모금함을 보며 중학교 입학하는 딸과 가방 쇼핑하던 생각났습니다. 직접 골라주지는 못하시만 작은 도움이 되었으면 합니다.
-		            	</div>
-		            	<div class="reply_time">등록시간</div>
-		            	<div>
-		            	  <span><a class="btn reply_replybtn" style="float: left">답글</a><a class="btn reply_replybtn" style="float: right">좋아요</a></span>
-		            	</div>
-	            	</div>
-	                <div class="reply_block">
-		            	<div class="reply_header">
-		            	  유저아이디
-		            	</div> 
-		            	<div class="reply_content">
-		            	  이 모금함을 보며 중학교 입학하는 딸과 가방 쇼핑하던 생각났습니다. 직접 골라주지는 못하시만 작은 도움이 되었으면 합니다.
-		            	</div>
-		            	<div class="reply_time">등록시간</div>
-		            	<div>
-		            	  <span><a class="btn reply_replybtn" style="float: left">답글</a><a class="btn reply_replybtn" style="float: right">좋아요</a></span>
-		            	</div>
+		              </div>
+		              <!-- 대댓글목록 (답글버튼누를시 show) -->
+		              
+		              <!-- //대댓글목록 -->
+		              
+		              
+		            	<!-- 대댓글 작성창 -->
+		            	<!-- <div class="reply_box" :id="'subReply'+vo.rno">
+		                  <div class="reply_inner">
+		                    <div class="reply_write_area">
+		                      <div class="reply_write_box">
+		                        <textarea v-model="replySubmsg" ref="replySubmsg" rows="5" cols="50" class="reply_text_area" placeholder="응원의 댓글 부탁드립니다."></textarea>
+		                      </div>
+		                       <span>
+		                          <a class="btn reply_replybtn" style="float: right;" @click="replySubCancel(vo.rno)">취소</a>
+		                          <a class="btn reply_replybtn" style="float: right;" @click="replySubWrite(vo.rno)">작성</a>
+		                       </span>
+		                    </div>
+		                  </div>
+		                </div> -->
+		            	<!-- //대댓글 작성창 -->
+		            	
 	            	</div>
 	            
 	            <!-- END comment-list -->
 				
-				<!-- 댓글 작성창 -->
-	            <div class="comment-form-wrap pt-5">
-	              <h3 class="mb-5">Leave a comment</h3>
-	            </div>
-	            <!-- END 댓글 작성창 -->
-            
           	    </div>
           	  </div>
           <!-- END 댓글목록 -->
@@ -322,7 +372,7 @@ h3.plan strong{
 
                 <!-- 버튼 -->
                 <div class="section_btn">
-                    <a href="#" class="btn donate jq_donate" data-google="모금함_View" data-stat="기부하기_상단_BTN_CLK">모금함 기부하기</a>
+                    <a href="../donation/donation_pay.do?dno=${dno }" class="btn donate jq_donate" data-google="모금함_View" data-stat="기부하기_상단_BTN_CLK">모금함 기부하기</a>
                 </div>
   </div>
   </div>
@@ -336,10 +386,17 @@ h3.plan strong{
     			content_title:{},
     			content_content:{},
     			content_purpose:{},
-    			content_cost:{}
+    			content_cost:{},
+    			replyShow:false,
+    			replymsg:'',
+    			replyCurpage:1,
+    			replyTotalpage:0,
+    			reply_list:[],
+    			replySubmsg:''
     		} 
     	 },
     	 mounted(){
+    		 
     		 axios.get('../donation/donation_detail_vue.do',{
     			 params:{
     				 dno:this.dno
@@ -354,9 +411,57 @@ h3.plan strong{
     			console.log(res.data.dday)
     			
     		 })
+    		 
+    		 this.replyDataSend()
     	 },
     	 methods:{
-    		 
+    		 subReplyShow(rno){
+    			 $('#subReply'+rno).show();
+    		 },
+    		 replySubCancel(rno){
+    			 $('#subReply'+rno).hide("slow"); 
+    		 },
+    		 replyCancel(){
+    			 this.replyShow=false;
+    		 },
+    		 replyWrite(){
+    			 this.replyShow=true;
+    		 },
+    		 replyMainWrite(){
+    			 if(this.replymsg===''){
+    				 this.$refs.replymsg.focus()
+    				 return
+    			 }
+    			 axios.post('../donation/donation_reply_write_vue.do',null,{
+    				 params:{
+    					 dno:this.dno,
+    					 msg:this.replymsg,
+    				     root:0,
+    				     depth:0
+    				 }
+    			 }).then(res=>{
+    				 if(res.data==='yes'){
+    					 alert('소중한 응원 댓글 감사합니다.')
+    					 this.replymsg='';
+    					 this.replyShow=false;
+    					 this.replyDataSend()
+    				 } else {
+    					 alert(res.data);
+    				 }
+    			 })
+    		 },
+    		 replyDataSend(){
+    			 axios.get('../donation/donation_reply_list_vue.do',{
+    				 params:{
+    				     page:this.replyCurpage,
+    				     dno:this.dno
+    				 }
+    			 }).then(res=>{
+    				console.log(res.data); 
+    				this.reply_list=res.data.reply_list;
+    				this.replyTotalpage=res.data.totalpage;
+    			 })
+    		 }
     	 }
      }).mount('#donationDetailApp')
      

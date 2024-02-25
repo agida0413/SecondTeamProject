@@ -2,6 +2,7 @@ package com.sist.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -9,6 +10,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.*;
+
+import javax.servlet.http.HttpSession;
+
 import com.sist.service.DonationService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -20,6 +24,9 @@ import com.sist.vo.*;
 public class DonationRestController {
 	@Autowired
 	private DonationService service;
+	
+	@Autowired
+	private DonationReplyService rService;
 	
 	String[] cateList= {
 			"","전체","아동","어르신","장애인","다문화","지구촌","가족","시민사회","동물","환경","기타"
@@ -145,5 +152,73 @@ public class DonationRestController {
 		String json=mapper.writeValueAsString(vo);
 		
 		return json;
+	}
+	
+	
+	@GetMapping(value="donation_reply_list_vue.do",produces = "text/plain;charset=UTF-8")
+	public String donation_reply_list_vue(int dno,int page) throws Exception{
+		int rowSize=5;
+		int start=(rowSize*page)-(rowSize-1);
+		int end=(rowSize*page);
+		int totalpage=rService.donationReplyTotalPage(dno);
+		Map map=new HashMap();
+		map.put("dno", dno);
+		map.put("start", start);
+		map.put("end", end);
+		
+		List<DonationReplyVO> list=rService.donationMainReplyListData(map);
+		
+		map=new HashMap();
+		map.put("reply_list", list);
+		map.put("totalpage", totalpage);
+		
+		ObjectMapper mapper=new ObjectMapper();
+		String json=mapper.writeValueAsString(map);
+		
+		return json;
+		
+		
+	}
+	
+	@PostMapping(value = "donation_reply_write_vue.do",produces = "text/plain;charset=UTF-8")
+	public String donation_reply_write_vue(DonationReplyVO vo,HttpSession session) {
+		String userid= (String)session.getAttribute("id");
+		
+		vo.setWriter(userid);
+		
+		/*
+		 * System.out.println("dno:"+vo.getDno());
+		 * System.out.println("writer:"+vo.getWriter());
+		 * System.out.println("msg:"+vo.getMsg());
+		 * System.out.println("root:"+vo.getRoot());
+		 * System.out.println("depth:"+vo.getDepth());
+		 */
+		
+		String result="";
+		try {
+			result="yes";
+			rService.donationReplyInsert(vo);
+			
+		}catch(Exception ex) {
+			result=ex.getMessage();
+		}
+		
+		return result;
+		
+	}
+	
+	@PostMapping(value = "buy_ok.do",produces = "text/plain;charset=UTF-8")
+	public String donation_buy_ok(DonationPayVO vo,HttpSession session) {
+		String userid=(String)session.getAttribute("id");
+		vo.setUserid(userid);
+		
+		String result=""; 
+		try {
+			result="yes";
+			service.donationPayInsert(vo);
+		}catch(Exception ex) {
+			result="no";
+		}
+		return result;
 	}
 }

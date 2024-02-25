@@ -1,6 +1,7 @@
 package com.sist.mapper;
 import java.util.*;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -64,5 +65,22 @@ public interface DonationMapper {
 			+ "WHERE dno=#{dno}")
 	public void donationHitIncrement(int dno);
 	
+	// 구매관련
+	// 트랜잭션 예정 (결제내역테이블에 저장, 후원금만큼 캠페인테이블에 현재후원금 증가, 현재후원금에 따른 퍼센트 증가)
+	// 결제내역 테이블에 추가
+	@Insert("INSERT INTO donation_pay VALUES(dp_payno_seq.nextval,#{price},#{dno},#{userid})")
+	public void donationPayInsert(DonationPayVO vo);
 	
+	// 현재후원금 증가
+	@Update("UPDATE donation_list SET "
+			+ "d_now=d_now+#{price} "
+			+ "WHERE dno=#{dno}")
+	public void donationPayNowUpdate(DonationPayVO vo);
+	
+	// 퍼센트 증가
+	@Update("UPDATE donation_list SET "
+			+ "d_nowpercent=(SELECT TRUNC(d_now*100/REGEXP_REPLACE(d_goal,'[^0-9]','')) "
+			+ "FROM (SELECT d_now,d_goal FROM donation_list "
+			+ "WHERE dno=#{dno}))")
+	public void donationPayPercentUpdate(int dno);
 }

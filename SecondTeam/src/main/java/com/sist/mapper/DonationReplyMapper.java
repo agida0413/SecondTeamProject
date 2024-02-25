@@ -8,15 +8,20 @@ import org.apache.ibatis.annotations.Select;
 import com.sist.vo.*;
 public interface DonationReplyMapper {
 	// 메인 댓글
-	@Select("SELECT rno,dno,writer,msg,TO_CHAR(regdate,'YYYY-MM-DD'),group_id,group_tab,group_step,root,depth,num "
+	@Select("SELECT rno,dno,writer,msg,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,group_id,group_tab,group_step,root,depth,num "
 			+ "FROM (SELECT rno,dno,writer,msg,regdate,group_id,group_tab,group_step,root,depth,rownum as num "
 			+ "FROM (SELECT rno,dno,writer,msg,regdate,group_id,group_tab,group_step,root,depth "
-			+ "FROM donation_reply WHERE root=rno ORDER BY DESC)) "
+			+ "FROM donation_reply WHERE dno=#{dno} ORDER BY rno DESC)) "
 			+ "WHERE num BETWEEN #{start} AND #{end}")
-	public List<DonationReplyVO> donationMainReplyListData(@Param("start") int start,@Param("end") int end);
+	public List<DonationReplyVO> donationMainReplyListData(Map map);
+	
+	// 메인댓글 토탈
+	@Select("SELECT CEIL(COUNT(*)/5.0) FROM donation_reply "
+			+ "WHERE dno=#{dno}")
+	public int donationReplyTotalPage(int dno);
 	
 	// root댓글의 대댓글 리스트
-	@Select("SELECT rno,dno,writer,msg,TO_CHAR(regdate,'YYYY-MM-DD'),group_id,group_tab,group_step,root,depth "
+	@Select("SELECT rno,dno,writer,msg,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,group_id,group_tab,group_step,root,depth "
 			+ "FROM donation_reply "
 			+ "WHERE root=#{root} "
 			+ "ORDER BY DESC")

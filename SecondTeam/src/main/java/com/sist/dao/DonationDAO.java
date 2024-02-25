@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.sist.mapper.DonationMapper;
+import com.sist.vo.DonationPayVO;
 import com.sist.vo.DonationVO;
 
 @Repository
@@ -46,5 +47,17 @@ public class DonationDAO {
 	
 	public int donationOnlyCateListTotalPage(Map map) {
 		return mapper.donationOnlyCateListTotalPage(map);
+	}
+	
+	public void donationPayInsert(DonationPayVO vo) {
+		mapper.donationPayInsert(vo);
+	}
+	
+	public void donationPayNowUpdate(DonationPayVO vo) {
+		mapper.donationPayNowUpdate(vo);
+	}
+	
+	public void donationPayPercentUpdate(int dno) {
+		mapper.donationPayPercentUpdate(dno);
 	}
 }

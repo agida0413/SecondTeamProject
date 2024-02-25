@@ -5,8 +5,11 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sist.dao.DonationDAO;
+import com.sist.vo.DonationPayVO;
 import com.sist.vo.DonationVO;
 
 @Service
@@ -60,6 +63,27 @@ public class DonationServiceImpl implements DonationService{
 	public int donationOnlyCateListTotalPage(Map map) {
 		// TODO Auto-generated method stub
 		return dao.donationOnlyCateListTotalPage(map);
+	}
+
+	@Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
+	@Override
+	public void donationPayInsert(DonationPayVO vo) {
+		// TODO Auto-generated method stub
+		dao.donationPayInsert(vo);
+		dao.donationPayNowUpdate(vo);
+		dao.donationPayPercentUpdate(vo.getDno());
+	}
+
+	@Override
+	public void donationPayNowUpdate(DonationPayVO vo) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void donationPayPercentUpdate(int dno) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

@@ -23,5 +23,11 @@ public class DonationController {
 		return "donation/donation_reply";
 	}
 	
+	@GetMapping("donation/donation_pay.do")
+	public String donation_pay(int dno,Model model) {
+		model.addAttribute("dno",dno);
+		return "donation/donation_pay";
+	}
+	
 	
 }

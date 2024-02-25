@@ -3,6 +3,7 @@ package com.sist.service;
 import java.util.List;
 import java.util.Map;
 
+import com.sist.vo.DonationPayVO;
 import com.sist.vo.DonationVO;
 
 public interface DonationService {
@@ -14,4 +15,7 @@ public interface DonationService {
 	public int donationCateListTotalPage(Map map);
 	public List<DonationVO> donationOnlyCateListData(Map map);
 	public int donationOnlyCateListTotalPage(Map map);
+	public void donationPayInsert(DonationPayVO vo);
+	public void donationPayNowUpdate(DonationPayVO vo);
+	public void donationPayPercentUpdate(int dno);
 }

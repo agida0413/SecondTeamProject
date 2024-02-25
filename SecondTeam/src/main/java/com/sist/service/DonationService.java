@@ -3,6 +3,7 @@ package com.sist.service;
 import java.util.List;
 import java.util.Map;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.sist.vo.DonationPayVO;
 import com.sist.vo.DonationVO;
 
@@ -18,4 +19,5 @@ public interface DonationService {
 	public void donationPayInsert(DonationPayVO vo);
 	public void donationPayNowUpdate(DonationPayVO vo);
 	public void donationPayPercentUpdate(int dno);
+	public String donationPayListData(int dno, int page) throws JsonProcessingException;
 }

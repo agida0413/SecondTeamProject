@@ -221,4 +221,9 @@ public class DonationRestController {
 		}
 		return result;
 	}
+	
+	@GetMapping(value = "donation_pay_list_vue.do",produces = "text/plain;charset=UTF-8")
+	public String donation_pay_list_vue(int page,int dno) throws JsonProcessingException {
+		return service.donationPayListData(dno, page);
+	}
 }

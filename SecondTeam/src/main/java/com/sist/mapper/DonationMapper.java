@@ -68,7 +68,7 @@ public interface DonationMapper {
 	// 구매관련
 	// 트랜잭션 예정 (결제내역테이블에 저장, 후원금만큼 캠페인테이블에 현재후원금 증가, 현재후원금에 따른 퍼센트 증가)
 	// 결제내역 테이블에 추가
-	@Insert("INSERT INTO donation_pay VALUES(dp_payno_seq.nextval,#{price},#{dno},#{userid})")
+	@Insert("INSERT INTO donation_pay VALUES(dp_payno_seq.nextval,#{price},#{dno},#{userid},SYSDATE)")
 	public void donationPayInsert(DonationPayVO vo);
 	
 	// 현재후원금 증가
@@ -83,4 +83,18 @@ public interface DonationMapper {
 			+ "FROM (SELECT d_now,d_goal FROM donation_list "
 			+ "WHERE dno=#{dno}))")
 	public void donationPayPercentUpdate(int dno);
+	
+	// 참여내역 리스트 출력
+	@Select("SELECT payno,price,dno,userid,TO_CHAR(regdate,'YYYY-MM-DD HH24:MI:SS') as dbday,num "
+			+ "FROM (SELECT payno,price,dno,userid,regdate,rownum as num "
+			+ "FROM (SELECT payno,price,dno,userid,regdate "
+			+ "FROM donation_pay "
+			+ "WHERE dno=#{dno} ORDER BY payno DESC)) "
+			+ "WHERE num BETWEEN #{start} AND #{end}")
+	public List<DonationPayVO> donationPayListData(Map map);
+	
+	// 참여내역 리스트 총페이지
+	@Select("SELECT CEIL(COUNT(*)/10.0) FROM donation_pay "
+			+ "WHERE dno=#{dno}")
+	public int donationPayTotalPage(int dno);
 }

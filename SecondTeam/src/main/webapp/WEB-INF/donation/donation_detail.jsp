@@ -139,7 +139,63 @@ h3.plan strong{
     line-height: 18px;
     padding: 0;
 }
-
+.history_title {
+    display: table;
+    width: 100%;
+    min-height: 65px;
+    background-color: #fcfcfc;
+    border-top: 1px solid rgba(0,0,0,.05);
+    border-bottom: 1px solid rgba(0,0,0,.05);
+}
+.history_title_inner {
+    display: table-cell;
+    padding: 20px 70px;
+    font-family: NanumSquareWebFont,Sans-serif;
+    font-size: 17px;
+    line-height: 1.5;
+    letter-spacing: -.5px;
+    color: #333;
+    text-align: center;
+    word-break: keep-all;
+    word-wrap: break-word;
+    vertical-align: middle;
+}
+.history_list{
+	border-bottom: 1px solid rgba(0,0,0,.05);
+	list-style: none;
+}
+.history_item{
+	border-top: 1px solid rgba(0,0,0,.05);
+}
+.history_card{
+	position: relative;
+    padding: 13px 20px 10px;
+    letter-spacing: 0;
+}
+.history_card_date{
+    display: block;
+    position: relative;
+    z-index: 10;
+    margin-bottom: 4px;
+    font-size: 13px;
+    color: #828282;
+}
+.history_card_name {
+    position: relative;
+    font-size: 15px;
+    font-weight: 400;
+    color: #202020;
+}
+.history_card_amount {
+    position: relative;
+    margin-left: 12px;
+    font-size: 15px;
+    color: #666;
+}
+.number {
+    position: relative;
+    color: #00ab33;
+}
 </style>
 </head>
 <body>
@@ -240,7 +296,6 @@ h3.plan strong{
 					
 					</tbody>
 				</table>
-				<!-- //[D] 수정 후 개설된 모금함 버전 -->
             </div>
         
     	  </div>
@@ -252,7 +307,25 @@ h3.plan strong{
 			  
 				  <!-- 참여내역 -->	
 			  <div id="donationDetailPar">
-			    <h3>참여내역</h3>
+			    <div class="history_title">
+			      <p class="history_title_inner">
+			      	총
+			        <strong>{{paysize}}</strong>
+			        건이 기부되었습니다.
+			      </p>
+			    </div>
+			    <ul class="history_list">
+			      <li class="history_item" v-for="pvo in pay_list">
+			        <div class="history_card">
+			          <span class="history_card_date">{{pvo.dbday}}</span>
+			          <strong class="history_card_name">{{pvo.userid}}</strong>
+			          <span class="history_card_amount">
+			            <span class="number">{{pvo.price}}</span>
+			            원 참여
+			          </span>
+			        </div>
+			      </li>
+			    </ul>
 			  </div>
 			  <!-- END 참여내역 -->	
 			  
@@ -392,7 +465,11 @@ h3.plan strong{
     			replyCurpage:1,
     			replyTotalpage:0,
     			reply_list:[],
-    			replySubmsg:''
+    			replySubmsg:'',
+    			historyCurpage:1,
+    			pay_list:[],
+    			payTotalpage:0,
+    			paysize:0
     		} 
     	 },
     	 mounted(){
@@ -411,7 +488,7 @@ h3.plan strong{
     			console.log(res.data.dday)
     			
     		 })
-    		 
+    		 this.historyDataSend()
     		 this.replyDataSend()
     	 },
     	 methods:{
@@ -460,6 +537,19 @@ h3.plan strong{
     				console.log(res.data); 
     				this.reply_list=res.data.reply_list;
     				this.replyTotalpage=res.data.totalpage;
+    			 })
+    		 },
+    		 historyDataSend(){
+    			 axios.get('../donation/donation_pay_list_vue.do',{
+    				 params:{
+    					 page:this.historyCurpage,
+    					 dno:this.dno
+    				 }
+    			 }).then(res=>{
+    				 console.log(res.data)
+    				 this.pay_list=res.data.list
+    				 this.payTotalpage=res.data.totalpage
+    				 this.paysize=res.data.size
     			 })
     		 }
     	 }

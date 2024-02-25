@@ -60,4 +60,12 @@ public class DonationDAO {
 	public void donationPayPercentUpdate(int dno) {
 		mapper.donationPayPercentUpdate(dno);
 	}
+	
+	public List<DonationPayVO> donationPayListData(Map map){
+		return mapper.donationPayListData(map);
+	}
+	
+	public int donationPayTotalPage(int dno) {
+		return mapper.donationPayTotalPage(dno);
+	}
 }

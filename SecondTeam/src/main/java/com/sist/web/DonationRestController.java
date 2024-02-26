@@ -252,4 +252,10 @@ public class DonationRestController {
 		
 		return json;
 	}
+	
+	@GetMapping(value = "donation_related_vue.do",produces = "text/plain;charset=UTF-8")
+	public String donation_related_vue(int dno) throws Exception{
+		
+		return service.donation_related_vue(dno);
+	}
 }

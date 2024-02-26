@@ -318,6 +318,26 @@ input[type=radio] {
 						</div>
 					</div>
 					<!-- END sidebar-box -->
+					<!-- END sidebar-box -->
+					<div class="sidebar-box">
+						<h3 class="heading">추천 캠페인</h3>
+						<div class="post-entry-sidebar">
+							<ul>
+								<li v-for="cvo in cookie_list">
+									<a :href="'../donation/donation_detail.do?dno='+cvo.dno">
+										<img :src="cvo.d_image" class="rounded" style="width: 110px;height: 80px;">
+										<div class="text" style="margin-left: 5px;">
+											<h6>{{cvo.d_title}}</h6>
+											<div class="post-meta">
+												<span class="mr-2">목표:{{cvo.d_goal}}원</span>
+											</div>
+										</div>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<!-- END sidebar-box -->
 
   </div>
   

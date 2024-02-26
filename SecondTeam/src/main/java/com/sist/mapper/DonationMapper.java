@@ -97,4 +97,11 @@ public interface DonationMapper {
 	@Select("SELECT CEIL(COUNT(*)/10.0) FROM donation_pay "
 			+ "WHERE dno=#{dno}")
 	public int donationPayTotalPage(int dno);
+	
+	// 관련캠페인 리스트
+	@Select("SELECT dno,d_image,d_title,d_company,d_goal,d_now,d_nowpercent,rownum "
+			+ "FROM donation_list "
+			+ "WHERE d_cate LIKE '%'||#{d_cate}||'%' "
+			+ "AND rownum<4")
+	public List<DonationVO> donationCateRelatedListData(String d_cate);
 }

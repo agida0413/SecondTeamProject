@@ -68,4 +68,8 @@ public class DonationDAO {
 	public int donationPayTotalPage(int dno) {
 		return mapper.donationPayTotalPage(dno);
 	}
+	
+	public List<DonationVO> donationCateRelatedListData(String d_cate){
+		return mapper.donationCateRelatedListData(d_cate);
+	}
 }

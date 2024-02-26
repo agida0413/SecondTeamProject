@@ -114,6 +114,21 @@ public class DonationServiceImpl implements DonationService{
 		return json;
 	}
 
+	@Override
+	public String donation_related_vue(int dno) throws Exception {
+		// TODO Auto-generated method stub
+		DonationVO vo=dao.donationDetailData(dno);
+		List<DonationVO> list=dao.donationCateRelatedListData(vo.getD_cate());
+		Map map=new HashMap();
+		map.put("detail_data", vo);
+		map.put("related_data", list);
+		
+		ObjectMapper mapper=new ObjectMapper();
+		String json=mapper.writeValueAsString(map);
+		
+		return json;
+	}
+
 	
 	
 	

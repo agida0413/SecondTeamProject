@@ -408,8 +408,8 @@ h3.plan strong{
    </div>
    
    <!-- 사이드바 -->
-   <div class="col-sm-4">
-  <div class="collect_side" id="donationSideDetailBar">
+   <div class="col-sm-4" id="donationSideDetailBar">
+  <div class="collect_side">
                 <!-- 후원상태 -->
                 <!-- [D]진행기간 마감일 경우 end 추가 -->
                 <div class="section_status">
@@ -447,7 +447,29 @@ h3.plan strong{
                 <div class="section_btn">
                     <a href="../donation/donation_pay.do?dno=${dno }" class="btn donate jq_donate" data-google="모금함_View" data-stat="기부하기_상단_BTN_CLK">모금함 기부하기</a>
                 </div>
+                
+                
   </div>
+  					<!-- END sidebar-box -->
+					<div class="sidebar-box" style="margin-top: 20px;width: 278px;">
+						<h3 class="heading">관련 캠페인</h3>
+						<div class="post-entry-sidebar">
+							<ul>
+								<li v-for="revo in related_data">
+									<a :href="'../donation/donation_before_detail.do?dno='+revo.dno" style="text-decoration: none;">
+										<img :src="revo.d_image" class="rounded" style="width: 110px;height: 80px;">
+										<div class="text" style="margin-left: 5px;">
+											<h6>{{revo.d_title}}</h6>
+											<div class="post-meta">
+												<span class="mr-2">목표:{{revo.d_goal}}원</span>
+											</div>
+										</div>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<!-- END sidebar-box -->
   </div>
    
    <script>
@@ -473,7 +495,6 @@ h3.plan strong{
     		} 
     	 },
     	 mounted(){
-    		 
     		 axios.get('../donation/donation_detail_vue.do',{
     			 params:{
     				 dno:this.dno
@@ -559,18 +580,19 @@ h3.plan strong{
     	 data(){
     		return{
     			detail_data:{},
-    			dno:${dno}
+    			dno:${dno},
+    			related_data:{}
     		} 
     	 },
     	 mounted(){
-    		 axios.get('../donation/donation_detail_vue.do',{
+    		 axios.get('../donation/donation_related_vue.do',{
     			 params:{
     				 dno:this.dno
     			 }
     		 }).then(res=>{
-    			console.log(res.data) 
-    			this.detail_data=res.data
-    			console.log(res.data.dday)
+    			 console.log(res.data)
+    			 this.detail_data=res.data.detail_data
+    			 this.related_data=res.data.related_data
     		 })
     	 },
     	 methods:{

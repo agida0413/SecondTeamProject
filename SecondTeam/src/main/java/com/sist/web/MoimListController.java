@@ -44,8 +44,20 @@ public class MoimListController {
 	}
 	
 	@GetMapping("moim/schedule.do")
-	public String sns_insert() {
+	public String moim_schedule() {
 		
 		return "moim/schedule";
+	}
+	
+	@GetMapping("moim/reserve.do")
+	public String moim_reserve() {
+		
+		return "moim/reserve";
+	}
+	
+	@GetMapping("myAndAdpage/moim_res_my.do")
+	public String moim_reserve_mypage() {
+		
+		return "myAndAdpage/moim_res_my";
 	}
 }

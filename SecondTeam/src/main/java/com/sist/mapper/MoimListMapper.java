@@ -3,12 +3,15 @@ package com.sist.mapper;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import java.util.*;
 import com.sist.vo.MoimListVO;
 import com.sist.vo.MoimReplyVO;
+import com.sist.vo.MoimReserveVO;
 
 public interface MoimListMapper {
 	@Select("SELECT rno,img,loc,type,time,content "
@@ -51,4 +54,33 @@ public interface MoimListMapper {
 	//삭제
 	@Delete("DELETE FROM MOIM_REPLY WHERE mrno=#{mrno}")
 	public void MoimReplyDelete(int mrno);
+	
+	//공간예약
+	//예약가능 공간 리스트 출력
+	@Select("SELECT rno,img,loc "
+			+ "FROM moim_list "
+			+ "WHERE type LIKE '%'||#{type}||'%'")
+	public List<MoimListVO> moimReserveData(String type);
+	
+	//예약한값 테이블에 추가히기
+	@Insert("INSERT INTO moim_reserve (mno, rno, userId, rDate, rTime, rInwon, regdate, reserve_ok) " +
+            "VALUES (mr_mno_seq.nextval, #{rno}, #{userId}, #{rDate}, #{rTime}, #{rInwon}, SYSDATE, 0)")
+    public void moimReserveInsert(MoimReserveVO vo);
+	
+	//예약한값 마이페이지에서 출력
+	@Results({
+	    @Result(column = "loc", property = "mvo.loc"),
+	    @Result(column = "img", property = "mvo.img")
+	})
+	@Select("SELECT mno, r.rno,loc,img,rDate,rTime,rInwon, "
+			+ "reserve_ok,TO_CHAR(regdate,'YYYY-MM-DD HH24:MI:SS')as dbday "
+			+ "FROM moim_reserve r, moim_list m "
+			+ "WHERE r.rno=m.rno AND userId=#{userId} "
+			+ "ORDER BY mno DESC ")
+	public List<MoimReserveVO> reserveMyPageData(String userId);
+	
+	//예약취소
+	@Delete("DELETE FROM moim_reserve WHERE mno=#{mno} ")
+	public void reserveMypageCancel(int mno);
+	
 }

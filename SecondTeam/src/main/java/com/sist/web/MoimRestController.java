@@ -11,17 +11,23 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sist.manager.MailManager;
 import com.sist.service.MoimListService;
 import com.sist.vo.MoimListVO;
 import com.sist.vo.MoimReplyVO;
+import com.sist.vo.MoimReserveVO;
 
 @RestController
 @RequestMapping("moim/")
 public class MoimRestController {
+	
+	@Autowired
+	private MailManager mm;
 	
 	@Autowired
 	private MoimListService service;
@@ -147,4 +153,66 @@ public class MoimRestController {
 		   return json;
 	   }
 
+	   //공간예약하기 type나눠서 출력
+	   @GetMapping(value = "reserve_list_vue.do", produces = "text/plain;charset=UTF-8")
+	   public String moim_list(String type) throws Exception
+	   {
+		   List<MoimListVO> list=service.moimReserveData(type);
+		   ObjectMapper mapper=new ObjectMapper();
+		   String json=mapper.writeValueAsString(list);
+		   return json;
+	   }
+	   
+	   //공간대여 추가하기
+	   @PostMapping(value = "reserve_ok.do", produces = "text/plain;charset=UTF-8")
+	   public String reserve_ok(int rno, String rDate, String rTime, String rInwon, HttpSession session)
+	   {
+		   String result="no";
+		   try {
+			   String userId=(String)session.getAttribute("id");
+			   MoimReserveVO vo=new MoimReserveVO();
+			   vo.setRno(rno);
+			   vo.setUserId(userId);
+			   vo.setRDate(rDate);
+			   vo.setRTime(rTime);
+			   vo.setRInwon(rInwon);
+			   //System.out.println("userId:"+vo.getUserId());
+			   service.moimReserveInsert(vo);
+
+			   return "yes";
+			   
+		   }catch(Exception ex)
+			{
+				ex.printStackTrace();
+				result="no";
+			}
+			return result;
+	   }
+	   
+	   //마이페이지 예약내역
+	   @GetMapping(value = "mypage_list_vue.do", produces = "text/plain;charset=UTF-8")
+	   public String mypage_list(HttpSession session) throws Exception
+		{
+		   String userId=(String)session.getAttribute("id");
+			List<MoimReserveVO> list=service.reserveMyPageData(userId);
+			ObjectMapper mapper=new ObjectMapper();
+			String json=mapper.writeValueAsString(list);
+			return json;
+		}
+	   
+	   //마이페이지 예약내역 취소
+	   @GetMapping(value = "reserve_cancel_vue.do", produces = "text/plain;charset=UTF-8")
+		public String reserve_cancel(int mno) throws Exception
+		{
+		   String result="";
+			try {
+				result="yes";
+				service.reserveMypageCancel(mno);
+			}catch(Exception ex)
+			{
+				result="no";
+				ex.printStackTrace();
+			}
+			return result;
+		}
 }

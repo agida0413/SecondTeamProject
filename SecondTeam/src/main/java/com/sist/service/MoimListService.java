@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.sist.vo.MoimListVO;
 import com.sist.vo.MoimReplyVO;
+import com.sist.vo.MoimReserveVO;
 
 public interface MoimListService {
 	
@@ -21,4 +22,12 @@ public interface MoimListService {
 	public void MoimReplyUpdate(MoimReplyVO vo);
 	//삭제
 	public void MoimReplyDelete(int mrno);
+	//모임예약하기 타입따라 출력
+	public List<MoimListVO> moimReserveData(String type);
+	//예약한값 테이블에 추가하기
+	public void moimReserveInsert(MoimReserveVO vo);
+	//예약한값 마이페이지 출력
+	public List<MoimReserveVO> reserveMyPageData(String userId);
+	//마이페이지 예약취소
+	public void reserveMypageCancel(int mno);
 }

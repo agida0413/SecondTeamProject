@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 import com.sist.mapper.MoimListMapper;
 import com.sist.vo.MoimListVO;
 import com.sist.vo.MoimReplyVO;
+import com.sist.vo.MoimReserveVO;
 
 @Repository
 public class MoimListDAO {
@@ -57,6 +58,28 @@ public class MoimListDAO {
 		//삭제
 		public void MoimReplyDelete(int mrno) {
 			mapper.MoimReplyDelete(mrno);
+		}
+		
+		//모임예약하기 타입따라 출력
+		public List<MoimListVO> moimReserveData(String type)
+		{
+			return mapper.moimReserveData(type);
+		}
+		
+		//예약한값 테이블에 추가하기
+		public void moimReserveInsert(MoimReserveVO vo)
+		{
+			mapper.moimReserveInsert(vo);
+		}
+		//예약한값 마이페이지 출력
+		public List<MoimReserveVO> reserveMyPageData(String userId)
+		{
+			return mapper.reserveMyPageData(userId);
+		}
+		//예약취소
+		public void reserveMypageCancel(int mno)
+		{
+			mapper.reserveMypageCancel(mno);
 		}
 
 }

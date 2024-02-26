@@ -24,12 +24,9 @@ cursor:pointer;
   <a href="../myAndAdpage/programCertify.do?state=COMPLETE"><li class="list-group-item ${cate == 'programCertify' ? 'active' : ''}" style="padding:18px;">봉사완료프로그램 인증신청</li></a>
    <a href="../myAndAdpage/programwishList.do"><li class="list-group-item ${cate == 'wishlist' ? 'active' : ''}" style="padding:18px;">봉사프로그램 관심목록</li></a>
    <a class="aLink" @click="centerCheck()"><li class="list-group-item ${cate == 'centerProgram' ? 'active' : ''}" style="padding:18px;">센터's 프로그램</li></a>
- 
-  <a href="../myAndAdpage/donClassWishList.do"> <li class="list-group-item ${cate == 'classWishList' ? 'active' : ''}" style="padding:18px;">원데이 클래스 관심목록</li></a>
-  <a href="../myAndAdpage/classResHistory.do"> <li class="list-group-item ${cate == 'classHistory' ? 'active' : ''}" style="padding:18px;">원데이 클래스 예약내역</li></a>
-	 <a href="../myAndAdpage/myclass.do"> <li class="list-group-item ${cate == 'myclass' ? 'active' : ''}" style="padding:18px;">나의 원데이클래스</li></a>
-	  <a href="../myAndAdpage/myclassResHistory.do"> <li class="list-group-item ${cate == 'myclassResHistory' ? 'active' : ''}" style="padding:18px;">나의 원데이클래스 예약관리</li></a>
-	 <a href="../myAndAdpage/wishgoods.do"> <li class="list-group-item" style="padding:18px;">상품 위시리스트</li></a>
+  <a href="../myAndAdpage/donClassWishList.do"> <li class="list-group-item ${cate == 'classWishList' ? 'active' : ''}" style="padding:18px;">클래스 관심목록</li></a>
+  <a href="../myAndAdpage/moim_res_my.do"> <li class="list-group-item ${cate == '' ? 'active' : ''}" style="padding:18px;">소모임 예약목록</li></a>
+
 </ul>
 
 

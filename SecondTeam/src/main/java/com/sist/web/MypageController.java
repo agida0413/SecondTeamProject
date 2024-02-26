@@ -277,6 +277,7 @@ private ProgramService pService;
 		
 		
 		model.addAttribute("list",list);
+		model.addAttribute("size",list.size());
 		model.addAttribute("startpage",startpage);
 		model.addAttribute("endpage",endpage);
 		model.addAttribute("page",curpage);

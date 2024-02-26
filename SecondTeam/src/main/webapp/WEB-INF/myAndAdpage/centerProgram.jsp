@@ -27,10 +27,14 @@
 </head>
 <body>
  <div class=""><span style="font-weight:bold; font-size:30px; color:black;">센터's 프로그램</span></div>
-  
-<div class="container">
-
+ <hr>
+  	<c:if test="${size==0 }">
+ 				
+  			<div><h3>센터프로그램이 존재하지 않습니다.</h3></div>
+  			</c:if>
 		<div class="row">
+<div class="container">
+		
 	
   			
   			

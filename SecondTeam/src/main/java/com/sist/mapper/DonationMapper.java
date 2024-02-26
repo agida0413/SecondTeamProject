@@ -81,7 +81,7 @@ public interface DonationMapper {
 	@Update("UPDATE donation_list SET "
 			+ "d_nowpercent=(SELECT TRUNC(d_now*100/REGEXP_REPLACE(d_goal,'[^0-9]','')) "
 			+ "FROM (SELECT d_now,d_goal FROM donation_list "
-			+ "WHERE dno=#{dno}))")
+			+ "WHERE dno=#{dno})) WHERE dno=#{dno}")
 	public void donationPayPercentUpdate(int dno);
 	
 	// 참여내역 리스트 출력

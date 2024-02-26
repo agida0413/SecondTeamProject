@@ -1,9 +1,13 @@
 package com.sist.web;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class DonationController {
@@ -27,6 +31,17 @@ public class DonationController {
 	public String donation_pay(int dno,Model model) {
 		model.addAttribute("dno",dno);
 		return "donation/donation_pay";
+	}
+	
+	@GetMapping("donation/donation_before_detail.do")
+	public String donation_before_detail(int dno,RedirectAttributes ra, HttpServletResponse response) {
+		Cookie cookie=new Cookie("donation_"+dno,String.valueOf(dno));
+		cookie.setPath("/");
+		cookie.setMaxAge(60*60*24);
+		response.addCookie(cookie);
+		
+		ra.addAttribute("dno",dno);
+		return "redirect:../donation/donation_detail.do";
 	}
 	
 	

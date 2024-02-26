@@ -11,6 +11,8 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.*;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.sist.service.DonationService;
@@ -225,5 +227,29 @@ public class DonationRestController {
 	@GetMapping(value = "donation_pay_list_vue.do",produces = "text/plain;charset=UTF-8")
 	public String donation_pay_list_vue(int page,int dno) throws JsonProcessingException {
 		return service.donationPayListData(dno, page);
+	}
+	
+	@GetMapping(value = "donation_cookie_vue.do",produces = "text/plain;charset=UTF-8")
+	public String donation_cookie(HttpServletRequest request) throws Exception{
+		Cookie[] cookies=request.getCookies();
+		List<DonationVO> list=new ArrayList<DonationVO>();
+		int k=0;
+		if(cookies!=null) {
+			for(int i=0;i<cookies.length;i++) {
+				if(cookies[i].getName().startsWith("donation_")) {
+						String dno=cookies[i].getValue();
+						DonationVO vo=service.donationDetailData(Integer.parseInt(dno));
+						list.add(vo);
+						k++;
+						if(k>=3) break;
+				}
+				
+			}
+		}
+		
+		ObjectMapper mapper=new ObjectMapper();
+		String json=mapper.writeValueAsString(list);
+		
+		return json;
 	}
 }

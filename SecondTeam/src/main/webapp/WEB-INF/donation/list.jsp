@@ -259,15 +259,15 @@ input[type=radio] {
  	<div class="row">
         <div class="col-lg-4 mb-4" v-for="vo in do_list">
             <div class="card_form">
-                <a :href="'../donation/donation_detail.do?dno='+vo.dno" class="img-link">
+                <a :href="'../donation/donation_before_detail.do?dno='+vo.dno" class="img-link">
                     <img :src="vo.d_image" style=" width:266px; height: 150px; border-top-left-radius: 5px;border-top-right-radius: 5px">
                 </a>
                 <div class="card_content">
-                    <h2 class="donaTitle"><a :href="'../donation/donation_detail.do?dno='+vo.dno">{{vo.d_title}}</a></h2>
+                    <h2 class="donaTitle"><a :href="'../donation/donation_before_detail.do?dno='+vo.dno">{{vo.d_title}}</a></h2>
                     <div class="card_bar">
-                      <span class="card_bar_collection" style="width: 10%"></span>
+                      <span class="card_bar_collection" :style="'width:'+vo.d_nowpercent+'%'"></span>
                     </div>
-                    <strong class="card_percent">10%</strong>
+                    <strong class="card_percent">{{vo.d_nowpercent}}%</strong>
                     <span class="card_money">{{vo.d_goal}}원</span>
                 </div>
             </div>
@@ -289,45 +289,36 @@ input[type=radio] {
 		
   </div>
   </div>
-  <div class="col-sm-4"  style="margin-top: 143px;">
-  <div class="collect_side">
-                <!-- 후원상태 -->
-                <!-- [D]진행기간 마감일 경우 end 추가 -->
-                <div class="section_status">
-                            <div class="graph_status" style="padding-bottom: 75px;">
-                                <span class="per"><strong class="num">10</strong>%</span>
-                            </div>
-                            <div class="card_bar">
-		                      <span class="card_bar_collection" style="width: 50%;"></span>
-		                    </div>
-                    
+  
+  <!-- 리스트페이지 사이드바 -->
+  <div class="col-sm-4" style="width: 25%;margin-left: 10px;margin-top: 88px;" id="donationListSideApp">
+  				<div class="sidebar-box search-form-wrap mb-4">
+						<form action="#" class="sidebar-search-form">
+							<input type="text" size=25 id="s" class="input-sm" placeholder="검색어를 입력하세요">
+							<span style="margin-left: 15px;"><a><i class="fa-solid fa-magnifying-glass"></i></a></span>
+						</form>
+					</div>
+					<!-- END sidebar-box -->
+					<div class="sidebar-box">
+						<h3 class="heading">최근 방문한 캠페인</h3>
+						<div class="post-entry-sidebar">
+							<ul>
+								<li v-for="cvo in cookie_list">
+									<a :href="'../donation/donation_detail.do?dno='+cvo.dno">
+										<img :src="cvo.d_image" class="rounded" style="width: 110px;height: 80px;">
+										<div class="text" style="margin-left: 5px;">
+											<h6>{{cvo.d_title}}</h6>
+											<div class="post-meta">
+												<span class="mr-2">목표:{{cvo.d_goal}}원</span>
+											</div>
+										</div>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<!-- END sidebar-box -->
 
-                    <div class="term_area">
-                        <p>
-                            <strong>
-                                2024.02.15 ~
-                                2024.03.31
-                            </strong><span>까지</span>
-                        </p>
-                         <div>
-                            <span class="d_day">D<em class="bar">-</em>40</span>
-                         </div>
-                          
-                    </div>
-                    <div class="num_area">
-                        <p class="status_num"><span>현재 모금:&nbsp;</span><strong>264,700</strong><span>원</span></p>
-                        <p class="status_num"><span>목표 :&nbsp;</span><strong>264,700</strong><span>원</span></p>
-                        
-                    </div>
-                    
-                </div>
-                <!-- //후원상태 -->
-
-                <!-- 버튼 -->
-                <div class="section_btn">
-                    <a href="#" class="btn donate jq_donate" data-google="모금함_View" data-stat="기부하기_상단_BTN_CLK">모금함 기부하기</a>
-                </div>
-  </div>
   </div>
   
 <!-- vue -->
@@ -365,6 +356,8 @@ input[type=radio] {
 				  this.startPage=res.data.startPage
 				  this.endPage=res.data.endPage
 			  })
+			  
+			 
 		  },
 		  range(start,end){
 				let arr=[]
@@ -405,6 +398,20 @@ input[type=radio] {
 			
 	  }
   }).mount('#donationList')
+  
+  let donationListSideApp=Vue.createApp({
+	  data(){
+		return{
+			cookie_list:[]
+		}  
+	  },
+	  mounted(){
+		  axios.get('../donation/donation_cookie_vue.do').then(res=>{
+			  console.log(res.data)
+			  this.cookie_list=res.data
+		  })
+	  }
+  }).mount('#donationListSideApp')
 </script>
 </body>
 </html>

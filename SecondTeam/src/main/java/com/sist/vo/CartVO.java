@@ -19,8 +19,8 @@ import java.util.*;
  */
 @Data
 public class CartVO {
-	private int gcno,gno,cart_count;
-	private String cart_price,dbday,buy_state,recipient,phone,buy_post,buy_address,buy_request,userid;
+	private int gcno,gno,cart_count,price;
+	private String cart_price,dbday,buy_state,recipient,phone,buy_post,buy_addr1,buy_addr2,buy_request,userid;
 	private Date buy_date;
 	private GoodsVO gvo;
 }

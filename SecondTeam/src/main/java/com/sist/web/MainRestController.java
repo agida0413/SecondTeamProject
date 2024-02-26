@@ -9,12 +9,15 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sist.commons.CommonsFunction;
+import com.sist.service.DonResService;
 import com.sist.service.DonStoreService;
 import com.sist.service.DonationService;
+import com.sist.vo.DonResVO;
 import com.sist.vo.DonStoreVO;
 import com.sist.vo.DonationVO;
 
@@ -26,6 +29,8 @@ private DonStoreService service;
 private CommonsFunction comm;
 @Autowired
 private DonationService dService;
+@Autowired
+private DonResService donService;
 
 @GetMapping(value="donstore/search_vue.do",produces="text/plain;charset=UTF-8")
 public String donstore_search_vue(String ss,int page) throws Exception
@@ -81,4 +86,20 @@ public String donstore_detail_vue(int dno) throws Exception
 		
 		return json;
 	}
+@PostMapping(value="main/donres_ok_vue.do",produces="text/plain;charset=UTF-8")
+public void donres_ok(HttpSession session,DonResVO vo,int dno)
+{
+	String userid=(String)session.getAttribute("id");
+	vo.setUserid(userid);
+	donService.donresInsert(vo);
+}
+
+@GetMapping(value="main/getuserid.do",produces="text/plain;charset=UTF-8")
+public String getuserid(HttpSession session) throws Exception
+{
+	String userid=(String)session.getAttribute("id");
+	ObjectMapper mapper=new ObjectMapper();
+	String json=mapper.writeValueAsString(userid);
+	return json;
+}
 }

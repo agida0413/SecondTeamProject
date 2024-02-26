@@ -168,7 +168,7 @@ public String goods_detail_vue(int gno,HttpSession session) throws Exception
 	List<GoodsReviewVO> rList=gService.gReviewListData(gno);
 	WishListVO wvo=new WishListVO();
 	wvo.setId(userid);
-	wvo.setObjno(gno);
+	wvo.setObjno(gno);	
 	
 	Map map=new HashMap();
 	map.put("rList", rList);

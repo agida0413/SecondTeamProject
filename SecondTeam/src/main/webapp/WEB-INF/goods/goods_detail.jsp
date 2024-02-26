@@ -19,8 +19,42 @@
 #goodsDetail{
 margin-top: 50px;
 }
-
 </style>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+<script type="text/javascript">
+var IMP = window.IMP; // 생략 가능
+IMP.init("imp34378262"); // 예: imp00000000
+function requestPay() {
+    console.log('clicked');
+    // IMP.request_pay(param, callback) 결제창 호출
+    IMP.request_pay({
+        pg: 'html5_inicis',
+        pay_method: 'card',
+        merchant_uid: 'merchant_' + new Date().getTime(),
+        name: '구매 상품명',
+        amount: 1000, // 실제 결제할 금액
+        buyer_email: 'iamport@siot.do',
+        buyer_name: '구매자이름',
+        buyer_tel: '010-1234-5678',
+        buyer_addr: '서울특별시 강남구 삼성동',
+        buyer_postcode: '123-456',
+        app_scheme: 'iamporttest'
+    }, function (rsp) {
+        if (rsp.success) {
+            // 결제 성공 시 처리
+        } else {
+            // 결제 실패 시 처리
+            console.error('결제 실패:', rsp.error_msg);
+        }
+    });
+}
+$(function() {
+
+	$('#buy').click(function(){
+		requestPay()
+	})
+})
+</script>
 </head>
 <body>
 	<div class="container" id="goodsDetail">
@@ -42,38 +76,42 @@ margin-top: 50px;
             <div style="margin-bottom: 20px;">
                 <span style="font-size: 24px; font-weight: bold;">{{goodsdetail.g_name}}</span>
             </div>
-            <div style="margin-top: 20px;">
-                <div v-for="(vo,index) in goodsdetail_img" :key="index" style="display: inline-block; margin-right: 10px;">
-                    <img v-if="index < 2" :src="vo.type_img" style="max-width: 100%; max-height: 100%;">
-                </div>
-            </div>
-            <div style="margin-top: 30px; font-size: 18px;">
-                <span>{{goodsdetail.g_price}}</span>
+            <div style="margin-top: 20px; font-size: 0;">
+    <div v-for="(vo, index) in goodsdetail_img" :key="index" style="display: inline-block; margin-right: 10px;" :style="{'display':index===0 || index===goodsdetail_img.length - 1?'inline-block':'none'}">
+        <img :src="vo.type_img" style="max-width: 100%; max-height: 100%;">
+    </div>
+</div>
+            <div style="margin-top: 30px; font-size: 23px;">
+                <span>{{goodsdetail.g_price}}원</span>
             </div>
         </td>
     </tr>
     <tr>
-        <td colspan="2" style="padding-left: 20px; vertical-align: top;">
+        <td colspan="3" style="padding-left: 20px; vertical-align: top;">
+        <div style="margin-top: 20px;">
+                 <span><i class="fa-solid fa-check"></i>&nbsp;배송비 3000원 (27,900원 이상 구매시 무료배송)</span>
+            </div>
             <div style="margin-top: 20px; display: flex; align-items: center;">
-                <span style="margin-right: 20px; font-size: 16px;">수량</span>
+                <span style="margin-right: 20px; font-size: 16px;"><i class="fa-solid fa-check"></i>&nbsp;수량</span>
                 <div class="v" style="margin-right: 20px;" >
                 <button class="kyj_shoppingDecreseBtn" @click="decreaseQuantity" >-</button>
                     <input class="kyj_shoppingCal" type="text" id="quantity" name="quantity" v-model="quantity" min="1" readonly>
                    <button class="kyj_shoppingIncreseBtn" @click="increaseQuantity">+</button>
                 </div>
             </div>
-            <div style="margin-top: 10px;">
-                <span style="font-size: 16px;">총금액</span>&nbsp;
-                <span>{{goodsdetail.intprice ? (goodsdetail.intprice * quantity).toLocaleString() : '0'}}</span>
+            <div style="margin-top: 20px;">
+                <span style="font-size: 16px;"><i class="fa-solid fa-check"></i>&nbsp;총금액</span>&nbsp;
+                <span style="font-size: 24px; font-weight: bold">{{goodsdetail.intprice ? (goodsdetail.intprice * quantity).toLocaleString() : '0'}}원</span>	
             </div>
         </td>
     </tr>
     <tr>
-        <td colspan="2" style="padding-left: 20px;">
+        <td colspan="2" style="padding-left: 20px; margin-top: 10px;">
+        <span style="border-bottom: 1px solid grey">상품 판매금액의 1%는 취약계층아동에게 기부됩니다</span>
             <div style="margin-top: 20px; display: flex;">
                 <input type="button" class="form-control" value="장바구니" style="width: 180px; height: 50px; font-weight: bold; margin-right: 5px;" @click="goCart(goodsdetail.gno)">
-                <input type="button" class="form-control" value="바로구매" style="width: 180px; height: 50px; font-weight: bold; margin-right: 5px;">
-                <button class="form-control" style="width: 50px; height: 50px; margin-left: 1px; font-weight: bold; padding: 5px; display: flex; align-items: center; 
+                <input type="button" class="form-control" value="바로구매" style="width: 180px; height: 50px; font-weight: bold; margin-right: 5px;" id="buy" >
+							<button class="form-control" style="width: 50px; height: 50px; margin-left: 1px; font-weight: bold; padding: 5px; display: flex; align-items: center; 
                 justify-content: center;" @click="goWish(goodsdetail.gno)" @submit="goWish()">
                     <span style="font-size: 27px;" v-if="state==='YES'"><i class="xi-heart"></i></span>
                     <span style="font-size: 27px;" v-if="state==='NO'"><i class="xi-heart-o"></i></span>
@@ -217,6 +255,7 @@ margin-top: 50px;
 		</div>
 		</div>
 	</div>
+	
 	<script>
 let goodsDetail=Vue.createApp({
 	data(){
@@ -264,6 +303,7 @@ let goodsDetail=Vue.createApp({
 				this.intprice=res.data.goodsdetail.intprice
 				this.wish=res.data.wish
 				this.state=res.data.wish.state
+				
 				console.log("state:"+this.state)
 				let leng = res.data.rList.filecount;
 				if (leng > 0) {
@@ -328,11 +368,11 @@ let goodsDetail=Vue.createApp({
 			}
 		},
 		increaseQuantity() {
-                this.quantity++;
+                this.quantity++
         },
         decreaseQuantity() {
                 if (this.quantity > 1) {
-                    this.quantity--;
+                    this.quantity--
                 }
         },
         updateScore() {
@@ -455,7 +495,7 @@ let goodsDetail=Vue.createApp({
            	
            }
        },
-goWish(gno){
+       goWish(gno){
     	   
     	   if(this.state==='NO' && this.userid!=null)
     		{
@@ -491,20 +531,29 @@ goWish(gno){
     		}
        },
        goCart(gno){
-    	   let form=new FormData()
-    	   form.append("gno",gno)
-    	   form.append("userid",this.userid)
-    	   form.append("cart_price",this.intprice*this.quantity)
-    	   form.append("cart_count",this.quantity)
-    	   axios.post("../goods/cartInsert_vue.do",form,{
-    		   headers:{
-    			   'Content-Type': 'multipart/form-data' 
-    		   }
-    	   }).then(res=>{
-    		   console.log(res.data)
-    		   alert("상품이 장바구니에 담겼습니다")
-    		   location.href="../cart/cart_list.do"
-    	   })
+    	   if(this.userid!==null)
+    	{
+    		   let form=new FormData()
+        	   form.append("gno",gno)
+        	   form.append("userid",this.userid)
+        	   form.append("cart_price",this.intprice*this.quantity)
+        	   form.append("cart_count",this.quantity),
+        	   form.append("price",this.intprice)
+        	   axios.post("../goods/cartInsert_vue.do",form,{
+        		   headers:{
+        			   'Content-Type': 'multipart/form-data' 
+        		   }
+        	   }).then(res=>{
+        		   console.log(res.data)
+        		   alert("상품이 장바구니에 담겼습니다")
+        		   location.href="../cart/cart_list.do"
+        	   })
+    	}
+    	   else
+    		{
+    		   alert("로그인 후 이용 가능합니다")
+    		}
+    	   
        }
 	}
 }).mount("#goodsDetail")

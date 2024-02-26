@@ -9,10 +9,18 @@
 <link rel="stylesheet" href="../css/cart.css">
 <script src="https://unpkg.com/vue@3"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
 <style type="text/css">
 #cartApp{
-	margin-top: 50px;
+	margin: 50px 0 50px 0;
 }
+#shoppadding{
+	border: 1px solid black;
+	 margin: auto;
+     margin-top: 550px; 
+}
+
 </style>
 </head>
 <body>
@@ -22,7 +30,7 @@
                     
                     <div style="text-align:center;"><img src="../Projectimages/shoppingcart.png" style="width:200px;"></div>
                        <div class="cartShow" v-if="cart_list.length>0">
-                        <div class="shoping__cart__table" v-for="vo in cart_list">
+                        <div class="shoping__cart__table" v-for="(vo, index) in cart_list" :key="index">
                         <table >
                             <thead>
                             
@@ -50,16 +58,17 @@
                                     <td class="shoping__cart__quantity">
                                       <div class="kyj_shoppingQuantity" >
                                         <div class="kyj__ShopInput-container">
-								            <button class="kyj_shoppingDecreseBtn" >-</button>
+								            <button class="kyj_shoppingDecreseBtn"  @click="decreaseQuantity(index)" >-</button>
 								
 								
-								            <input type="text" :value="vo.cart_count" class="kyj_shoppingCal" readonly>
-								            <button class="kyj_shoppingIncreseBtn">+</button>
+								            <input type="text" :value="vo.cart_count" class="kyj_shoppingCal" id="quantity" refs="quantity" v-model="vo.cart_count" min="1" readonly>
+								            <button class="kyj_shoppingIncreseBtn" @click="increaseQuantity(index)">+</button>
 								        </div>
             						 </div>
                                     </td>
                                     <td class="shoping__cart__total" >
-                                    {{vo.cart_price}}
+                                     <span v-if="!modify">{{(vo.cart_price*1).toLocaleString()}}</span>
+  									 <span v-if="modify">{{(vo.price*vo.cart_count).toLocaleString()}}</span>
                                     </td>
                                     <td class="shoping__cart__item__close" @click="cartDel(vo.gcno)">
                                         <span class="icon_close">x</span>
@@ -78,35 +87,44 @@
             </div>
             <div class="row">
             
-                <div class="col-lg-12">
+                <div class="col-lg-6">
                     <div class="shoping__cart__btns" style="display: flex">
                         <a href="../goods/goods_main.do" class="class"><input type="button" class="form-control" style="width: 150px;" value="상품보러가기"></a>
                        <a href="#" class="class" v-if="cart_list.length>0"><input type="button" class="form-control" style="width: 150px;" value="장바구니 비우기" @click="allDel()"></a>
                     </div>
                      
                 </div>
-                <div class="col-lg-6">
-                    <div class="shoping__continue">
-                        <div class="shoping__discount">
-                        </div>
-                    </div>
-                </div>
                 <div class="col-lg-6" v-if="cart_list.length>0">
-                    <div class="shoping__checkout">
-                        <h5>Cart Total</h5>
-                        <ul>
-                            
-                            <li>총액<span class="allTotalPrice" data-allTotalPrice="" ></span></li>
-                        </ul>
-                        <form action="#" method="post" id="sendBuy"> 
-                        <button class="form-control"  id="moveToBuy" style="width:500px;">결제이동하기</button>
+                <table class="table">
+		<colgroup>
+			<col style="width:50%;">
+			<col style="width:50%;">
+		</colgroup>
+		<tbody>
+			<tr>
+				<th scope="row">주문금액</th>
+				<td>W<span class="prd_prc_cart_87 ">{{totalPrice.toLocaleString()}}</span></td>
+			</tr>
+			<tr>
+				<th scope="row">배송비 <a class="i_info p_cursor" ></a></th>
+				<td>
+					W<span id="dlv_prc_cart" class="dlv_prc_cart_87">3,000</span>
+				</td>
+			</tr>
+			<tr>
+				<th scope="row">결제금액</th>
+				<td><strong>W<span id="total_order_price_cartlist" class="price total_order_price_cartlist_87">{{(totalPrice + 3000).toLocaleString()}}</span></strong></td>
+			</tr>
+		</tbody>
+	</table>
+                        <a href="../cart/buy_page.do"><button class="form-control"  id="moveToBuy" style="width:100%; margin-top: 10px;">결제이동하기
+                        </button>
+                        </a>
                         <input type="hidden" name="getTotal" id="inputTotal" value="">
                           <input type="hidden" name="getStringTotal" id="inputStringTotal" value="">
-                        </form>
                     </div>
                 </div>
             </div>
-        </div>
         <script>
         let cartApp=Vue.createApp({
         	data(){
@@ -114,12 +132,16 @@
         			cart_list:[],
         			userid:'',
         			cart_count:0,
-        			total:0
+        			totalPrice:0,
+        			intprice:0,
+        			mPrice:0,
+        			modify:false
         			
         		}
         	},
         	mounted(){
         		this.cartData()
+        		
         	},
         	methods:{
         		cartData(){
@@ -132,6 +154,7 @@
         				console.log(res.data)
         				this.cart_list=res.data
         				this.cartcount=res.data.cart_count
+        				this.TotalPrice()
         			})
         		},
         		cartDel(gcno){
@@ -148,7 +171,6 @@
         		allDel(){
         			axios.get("../cart/cart_alldelete_vue.do",{
         				params:{
-        					
         					userid:this.userid
         				}
         			}).then(res=>{
@@ -156,8 +178,30 @@
         				alert("전체 삭제")
         			})
         			this.cartdata()
-        		}
-        		
+        		},
+        		 increaseQuantity(index) {
+        			this.modify=true
+        	        this.cart_list[index].cart_count++
+        	    },
+        	    decreaseQuantity(index) {
+        	    	this.modify=true
+        	        if (this.cart_list[index].cart_count > 1) {
+        	            this.cart_list[index].cart_count--
+        	        }
+        	    },
+        	    TotalPrice() {
+        	    	if(this.modify===false){
+        	    		let totalPrice = 0;
+            	        for (let i = 0; i < this.cart_list.length; i++) {
+            	            totalPrice += parseFloat(this.cart_list[i].cart_price);
+            	        }
+            	        this.totalPrice = totalPrice;
+            	        console.log("tp:" + this.totalPrice);
+            	        return this.totalPrice;
+        	    	}
+        	    	
+        	        
+        	    }
         	}
         }).mount("#cartApp")
         </script>

@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.sist.vo.CartVO;
 /*
@@ -26,6 +27,7 @@ import com.sist.vo.CartVO;
 	CONSTRAINT gct_gcno_pk PRIMARY KEY(gcno)
  */
 import com.sist.vo.GoodsVO;
+import com.sist.vo.MemberVO;
 public interface CartMapper {
 
 @Results({
@@ -36,8 +38,8 @@ public interface CartMapper {
 })
 	
 // 장바구니 목록
-@Select("SELECT gc.gno,g_name,g_img,g_price,cart_price,cart_count,gcno FROM goodslist gl JOIN goods_cart gc "
-		+ "ON gl.gno=gc.gno WHERE userid=#{userid}")
+@Select("SELECT gc.gno,g_name,g_img,g_price,cart_price,cart_count,gcno,price FROM goodslist gl JOIN goods_cart gc "
+		+ "ON gl.gno=gc.gno WHERE userid=#{userId}")
 public List<CartVO> cartListData(String userid);
 // 장바구니 비우기 (부분삭제)
 @Delete("DELETE FROM goods_cart WHERE gcno=#{gcno}")
@@ -45,4 +47,16 @@ public void cartDelete(int gcno);
 //장바구니 비우기 (전체삭제)
 @Delete("DELETE FROM goods_cart WHERE userid=#{userid}")
 public void cartAllDelete(String userid);
+
+@Select("SELECT userid,username,phone,email,addr1,addr2 FROM member "
+		+ "WHERE userid=#{userId}")
+public MemberVO buyInfo(String userid);
+
+@Select("SELECT price,cart_count FROM goods_cart WHERE userid=#{userid}")
+public List<CartVO> buyPriceInfo(String userid);
+
+@Update("UPDATE goods_cart SET buy_state='order',recipient=#{recipient},phone=#{phone}"
+		+ ",buy_post=#{buy_post},buy_addr1=#{buy_addr1},buy_addr2=#{buy_addr2},buy_request=#{buy_request} "
+		+ "WHERE userid=#{userid}")
+public void orderInfo(CartVO vo);
 }

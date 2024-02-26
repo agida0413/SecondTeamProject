@@ -16,4 +16,9 @@ public String cart_list()
 {
 	return "cart/cart_list";
 }
+@GetMapping("cart/buy_page.do")
+public String buy_page()
+{
+	return "cart/buy_page";
+}
 }

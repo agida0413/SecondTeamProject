@@ -15,6 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sist.service.CartService;
 import com.sist.vo.CartVO;
 import com.sist.vo.GoodsVO;
+import com.sist.vo.MemberVO;
 
 @RestController
 public class CartRestController {
@@ -47,5 +48,23 @@ public String cart_alldelete_vue(String userid,HttpSession session) throws Excep
 	System.out.println((String)session.getAttribute("id"));
 	cService.cartAllDelete((String)session.getAttribute("id"));
 	return cart_commonsList(session);
+}
+@GetMapping(value="cart/buy_info_vue.do",produces =  "application/json;charset=UTF-8")
+public String buy_info(HttpSession session) throws Exception
+{
+	String userid=(String)session.getAttribute("id");
+	MemberVO vo=cService.buyInfo(userid);
+	List<CartVO> list=cService.buyPriceInfo(userid);
+	Map map=new HashMap();
+	map.put("mvo", vo);
+	map.put("buyinfo", list);
+	ObjectMapper mapper=new ObjectMapper();
+	String json=mapper.writeValueAsString(map);
+	return json;
+}
+@PostMapping(value="cart/order_info_vue.do",produces =  "application/json;charset=UTF-8")
+public void order_info(CartVO vo) throws Exception
+{
+	cService.orderInfo(vo);
 }
 }

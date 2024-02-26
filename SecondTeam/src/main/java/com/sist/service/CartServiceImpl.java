@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.sist.dao.CartDAO;
 import com.sist.vo.CartVO;
+import com.sist.vo.MemberVO;
 @Service 
 public class CartServiceImpl implements CartService{
 
@@ -31,6 +32,25 @@ public class CartServiceImpl implements CartService{
 		// TODO Auto-generated method stub
 		cDao.cartAllDelete(userid);
 	}
+
+	@Override
+	public MemberVO buyInfo(String userid) {
+		// TODO Auto-generated method stub
+		return cDao.buyInfo(userid);
+	}
+
+	@Override
+	public List<CartVO> buyPriceInfo(String userid) {
+		// TODO Auto-generated method stub
+		return cDao.buyPriceInfo(userid);
+	}
+
+	@Override
+	public void orderInfo(CartVO vo) {
+		// TODO Auto-generated method stub
+		cDao.orderInfo(vo);
+	}
+
 
 
 }

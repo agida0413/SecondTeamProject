@@ -107,8 +107,8 @@ public void gReviewDelete(int rno);
 		+ "WHERE rno=#{rno}")
 public void gReviewUpdate(GoodsReviewVO vo);
 // 장바구니 이동
-@Insert("INSERT INTO goods_cart(gcno,gno,userid,cart_price,cart_count) "
-		+ " VALUES(gct_gcno_seq.nextval,#{gno},#{userid},#{cart_price},#{cart_count})")
+@Insert("INSERT INTO goods_cart(gcno,gno,userid,cart_price,cart_count,price) "
+		+ " VALUES(gct_gcno_seq.nextval,#{gno},#{userid},#{cart_price},#{cart_count},#{price})")
 public void cartInsert(CartVO vo);
 
 @Results({
@@ -116,10 +116,11 @@ public void cartInsert(CartVO vo);
 })
 
 // 찜추가, 출력
-@Update("UPDATE goodslist SET g_like=g_like+1 WHERE gno=#{gno}")
-public void gLikeIncrese(int gno);
+@Update("UPDATE goodslist SET g_like=g_like+1")
+public void gLikeIncrese();
 @Insert("INSERT INTO wishlist(wno,typeno,objno,state,id) VALUES(wishlist_seq.nextval,3,#{objno},#{state},#{id})")
 public void wishInsert(WishListVO vo);
+
 @Select("SELECT typeno,objno,state,id FROM wishlist WHERE objno=#{objno} AND id=#{id} AND typeno=3")
 public WishListVO wishCk(WishListVO vo);
 // 찜삭제

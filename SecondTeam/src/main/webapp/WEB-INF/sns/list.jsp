@@ -70,45 +70,10 @@ li{
   border-bottom: 1px solid #e6e6e6;"
 }
 
-/*사이드 메뉴*/
-.res_submenu{
-	background-color: #214252;
-	text-align: center;
-	border-radius: 50%;
-	position: fixed;
-	right: 150px;
-	top: 500px;
-	width: 100px;
-	height: 100px;
-	z-index: 9999 !important;
-}
-.res_submenu a{
-	display: block;
-}
-.res_submenu i{
-	margin-top: 20px;
-	font-size: 25px;
-	color: #fff !important;
-}
-.res_submenu p{
-	color: #fff;
-}
-.res_submenu:hover{
-	 box-shadow: 0 10px 10px 10px rgba(147,160,168, 0.2);
-	 transition: all 0.4s ease-in-out;
-	 transform: translateY(-25px);
-}
 </style>
 </head>
 <body>
 	<div class="container" style="margin-top: 50px;">
-	<!-- 일정 사이드 매뉴 시작 -->
-   <div class="res_submenu" style="z-index: 9999 !important;">
-      <a href="schedule.do"> <i class="xi-calendar-list"></i>
-         <p>나의 일정표</p>
-      </a>
-   </div>
-   <!-- 일정 사이드 매뉴 종료 -->
 	   <div class="row">
 <%-- 	   <p>${sessionScope.id }출력됨</p>
 	   <p>${sessionScope.userid }출력안됨</p> --%>

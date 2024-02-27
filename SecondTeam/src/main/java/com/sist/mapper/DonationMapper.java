@@ -121,4 +121,25 @@ public interface DonationMapper {
 			+ "AND userid=#{userid} "
 			+ "ORDER BY payno DESC")
 	public List<DonationHistoryVO> donatedHistoryListData(String userid);
+	
+	// 사용자의 후원내역에서 가장많은 카테고리 가져오기
+	@Select("SELECT d_cate,count(d_cate) "
+			+ "FROM donation_list dl,donation_pay dp "
+			+ "WHERE userid=#{userid} AND dl.dno=dp.dno "
+			+ "GROUP BY d_cate "
+			+ "HAVING count(d_cate)=(SELECT MAX(mycount) "
+			+ "FROM (SELECT d_cate,count(d_cate) as mycount "
+			+ "FROM donation_list dl2,donation_pay dp2 "
+			+ "WHERE userid=#{userid} AND dl2.dno=dp2.dno "
+			+ "GROUP BY d_cate))")
+	public List<String> donatedMaxCategory(String userid);
+	
+	// 카테고리를 받아서 같은 카테고리의 캠페인 출력
+	@Select("SELECT dno,d_image,d_title,d_company,d_goal,d_now,d_nowpercent,rownum "
+			+ "FROM (SELECT dno,d_image,d_title,d_company,d_goal,d_now,d_nowpercent "
+			+ "FROM donation_list "
+			+ "WHERE d_cate LIKE '%'||#{d_cate}||'%' "
+			+ "ORDER BY dno DESC) "
+			+ "WHERE rownum<4")
+	public List<DonationVO> donatedCateRelatedListData(String d_cate);
 }

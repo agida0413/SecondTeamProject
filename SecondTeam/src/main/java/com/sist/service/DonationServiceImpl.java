@@ -181,6 +181,23 @@ public class DonationServiceImpl implements DonationService{
 		return json;
 	}
 
+	@Override
+	public String donated_max_category(String userid) throws Exception {
+		// TODO Auto-generated method stub
+		List<String> list=dao.donatedMaxCategory(userid);
+		String mcate="";
+		if(list.size()!=0) {
+			mcate=list.get(0);
+		}else {
+			mcate="어르신";
+		}
+		List<DonationVO> dList=dao.donatedCateRelatedListData(mcate);
+		
+		String json=CommonsObjectMapper(dList);
+		
+		return json;
+	}
+
 	
 	
 	

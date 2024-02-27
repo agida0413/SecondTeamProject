@@ -264,4 +264,10 @@ public class DonationRestController {
 		String userid=(String)session.getAttribute("id");
 		return service.donated_history_vue(userid);
 	}
+	
+	@GetMapping(value = "donated_max_category_vue.do",produces = "text/plain;charset=UTF-8")
+	public String donated_max_category(HttpSession session) throws Exception{
+		String userid=(String)session.getAttribute("id");
+		return service.donated_max_category(userid);
+	}
 }

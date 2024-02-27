@@ -93,18 +93,18 @@ $(function(){
 					<div class="contact-info">
 						
 						<div>
-						  	<img :src="detail_data.d_image" class="img-fluid" style="border-radius: 10px;">
+						  	<img :src="detail_data.d_image" style="width:400px;height:260px;border-radius: 10px;">
 						</div>
 						
 						<div class="address mt-2" id="don_pay" data-no="${dno }">
 							<i class="icon-room"></i>
-							<h4 class="mb-2">Location:</h4>
+							<h4 class="mb-2">캠페인 소개:</h4>
 							<p id="payTitle">{{detail_data.d_title}}</p>
 						</div>
 
 						<div class="open-hours mt-4">
 							<i class="icon-clock-o"></i>
-							<h4 class="mb-2">Open Hours:</h4>
+							<h4 class="mb-2">캠페인 기간:</h4>
 							<p>
 								{{detail_data.d_startdate}}
 								~
@@ -113,15 +113,15 @@ $(function(){
 						</div>
 
 						<div class="email mt-4">
-							<i class="icon-envelope"></i>
-							<h4 class="mb-2">Email:</h4>
-							<p>{{detail_data.d_now}}</p>
+							<i class="icon-handshake-o"></i>
+							<h4 class="mb-2">모금상황:</h4>
+							<p>{{now_donate}}원</p>
 						</div>
 
 						<div class="phone mt-4">
-							<i class="icon-phone"></i>
-							<h4 class="mb-2">Call:</h4>
-							<p>{{detail_data.d_goal}}</p>
+							<i class="icon-flag"></i>
+							<h4 class="mb-2">목표금액:</h4>
+							<p>{{detail_data.d_goal}}원</p>
 						</div>
 						
 						
@@ -137,7 +137,7 @@ $(function(){
 								<input type="email" class="form-control" value="${sessionScope.email }" readonly>
 							</div>
 							<div class="col-12 mb-3">
-								<input type="text" class="form-control" id="howMuch" value="20000">
+								<input type="text" class="form-control" id="howMuch" value="후원하실 금액을 입력해주세요.">
 							</div>
 							<div class="col-12 mb-3">
 								<textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="후원금과 함께 전달되는 메세지를 입력해주세요."></textarea>
@@ -145,6 +145,7 @@ $(function(){
 
 							<div class="col-12">
 								<input type="button" value="후원하기" class="btn btn-primary" id="dobuy">
+								<input type="button" value="돌아가기" class="btn btn-primary" onclick="javascript:history.back()" style="margin-left: 10px;">
 							</div>
 						</div>
 					</form>
@@ -158,7 +159,8 @@ $(function(){
 	 data(){
 		return{
 			dno:${dno},
-			detail_data:{}
+			detail_data:{},
+			now_donate:''
 		} 
 	 },
 	 mounted(){
@@ -169,6 +171,7 @@ $(function(){
 		 }).then(res=>{
 			console.log(res.data) 
 			this.detail_data=res.data
+			this.now_donate=res.data.d_now.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 		 })
 	 },
 	 methods:{

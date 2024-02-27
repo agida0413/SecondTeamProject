@@ -77,4 +77,12 @@ public class DonationDAO {
 	public List<DonationHistoryVO> donatedHistoryListData(String userid){
 		return mapper.donatedHistoryListData(userid);
 	}
+	
+	public List<String> donatedMaxCategory(String userid){
+		return mapper.donatedMaxCategory(userid);
+	}
+	
+	public List<DonationVO> donatedCateRelatedListData(String d_cate){
+		return mapper.donatedCateRelatedListData(d_cate);
+	}
 }

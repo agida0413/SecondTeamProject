@@ -24,9 +24,9 @@
       <tr v-for="(vo,index) in history_list">
         <td>{{vo.dvo.d_title}}</td>
         <td>{{vo.dvo.d_startdate}}~{{vo.dvo.d_enddate}}</td>
-        <td>{{now_price[index]}}</td>
-        <td>{{now_data[index]}}</td>
-        <td>{{vo.dvo.d_goal}}</td>
+        <td>{{now_price[index]}}원</td>
+        <td>{{now_data[index]}}원</td>
+        <td>{{vo.dvo.d_goal}}원</td>
       </tr>
     </tbody>
   </table>

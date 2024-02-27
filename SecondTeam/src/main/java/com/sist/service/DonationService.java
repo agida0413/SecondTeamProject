@@ -3,6 +3,8 @@ package com.sist.service;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.sist.vo.DonationPayVO;
 import com.sist.vo.DonationVO;
@@ -22,4 +24,5 @@ public interface DonationService {
 	public String donationPayListData(int dno, int page) throws JsonProcessingException;
 	public String donation_related_vue(int dno) throws Exception;
 	public String donated_history_vue(String userid) throws Exception;
+	public String donated_max_category(String userid) throws Exception;
 }

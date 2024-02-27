@@ -323,13 +323,13 @@ input[type=radio] {
 						<h3 class="heading">추천 캠페인</h3>
 						<div class="post-entry-sidebar">
 							<ul>
-								<li v-for="cvo in cookie_list">
-									<a :href="'../donation/donation_detail.do?dno='+cvo.dno">
-										<img :src="cvo.d_image" class="rounded" style="width: 110px;height: 80px;">
+								<li v-for="recvo in recommend_list">
+									<a :href="'../donation/donation_detail.do?dno='+recvo.dno">
+										<img :src="recvo.d_image" class="rounded" style="width: 110px;height: 80px;">
 										<div class="text" style="margin-left: 5px;">
-											<h6>{{cvo.d_title}}</h6>
+											<h6>{{recvo.d_title}}</h6>
 											<div class="post-meta">
-												<span class="mr-2">목표:{{cvo.d_goal}}원</span>
+												<span class="mr-2">목표:{{recvo.d_goal}}원</span>
 											</div>
 										</div>
 									</a>
@@ -422,13 +422,19 @@ input[type=radio] {
   let donationListSideApp=Vue.createApp({
 	  data(){
 		return{
-			cookie_list:[]
+			cookie_list:[],
+			recommend_list:[]
 		}  
 	  },
 	  mounted(){
 		  axios.get('../donation/donation_cookie_vue.do').then(res=>{
 			  console.log(res.data)
 			  this.cookie_list=res.data
+		  })
+		  
+		  axios.get('../donation/donated_max_category_vue.do').then(resp=>{
+			  console.log(resp.data)
+			  this.recommend_list=resp.data
 		  })
 	  }
   }).mount('#donationListSideApp')

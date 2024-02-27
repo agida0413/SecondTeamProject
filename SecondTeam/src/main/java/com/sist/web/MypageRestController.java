@@ -120,16 +120,21 @@ public class MypageRestController {
 		return json;
 	}
 	@GetMapping(value="myAndAdpage/buylist_vue.do",produces = "text/plain;charset=UTF-8")
-	public String buylist_vue(HttpSession session,String id) throws Exception
+	public String buylist_vue(HttpSession session) throws Exception
 	{
-		id=(String)session.getAttribute("id");
-		System.out.println(id);
-		List<CartVO> cList=cService.buyList(id);
+		String userid=(String)session.getAttribute("id");
+		List<CartVO> cList=cService.buyList(userid);
 		ObjectMapper mapper=new ObjectMapper();
 		String json=mapper.writeValueAsString(cList);
 		
 		return json;
 		
+	}
+	@GetMapping(value="myAndAdpage/buyCancel_vue.do",produces = "text/plain;charset=UTF-8")
+	public void buycancel_vue(HttpSession session,CartVO vo) throws Exception
+	{
+		String userid=(String)session.getAttribute("id");
+		cService.buyCancle(vo);
 	}
 	
 	

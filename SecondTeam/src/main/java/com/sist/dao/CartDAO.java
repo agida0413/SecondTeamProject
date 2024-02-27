@@ -39,4 +39,7 @@ public void orderInfo(CartVO vo) {
 public List<CartVO> buyList(String userid){
 	return mapper.buyList(userid);
 }
+public void buyCancle(CartVO vo) {
+	mapper.buyCancle(vo);
+}
 }

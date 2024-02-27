@@ -61,7 +61,7 @@
 								<td>
 
 							<button class="form-control"
-								style="width: 100px; height: 40px;">결제취소</button>
+								style="width: 100px; height: 40px;" @click="buyCancel(vo.gcno)">결제취소</button>
 					</td>
 					</tr>
 					<tr>
@@ -97,7 +97,7 @@
 		data(){
 			return{
 					buy_list:[],
-					id:''
+					userid:''
 				}
 		},
 		mounted(){
@@ -105,14 +105,25 @@
 		},
 		methods:{
 			buyList(){
-				axios.get('../myAndAdpage/buylist_vue.do',{
-					params:{
-						id:this.id
-					}
-				}).then(res=>{
+				axios.get('../myAndAdpage/buylist_vue.do').then(res=>{
 					console.log(res.data)
 					this.buy_list=res.data
+					this.userid=this.buy_list[0].userid
+					console.log(this.userid)
 				})
+			},
+			buyCancel(gcno){
+				axios.get("../myAndAdpage/buyCancel_vue.do",{
+					params:{
+    					gcno:gcno,
+    					userid:this.userid
+    					
+    				}
+				}).then(res=>{
+    				console.log(res.data)
+    				this.buy_list=res.data
+    				
+    			})
 			}
 		}
 	}).mount("#buyListApp")

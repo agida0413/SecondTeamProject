@@ -14,5 +14,5 @@ public interface CartService {
 	public List<CartVO> buyPriceInfo(String userid);
 	public void orderInfo(CartVO vo);
 	public List<CartVO> buyList(String userid);
-	
+	public void buyCancle(CartVO vo);
 }

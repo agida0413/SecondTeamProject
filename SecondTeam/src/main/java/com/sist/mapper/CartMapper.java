@@ -80,8 +80,11 @@ public void orderInfo(CartVO vo);
 	@Result(property = "gvo.g_img",column = "g_img"),
 	@Result(property = "gvo.g_price",column = "g_price")
 })
-@Select("SELECT userid,cart_count,TO_CHAR(buy_date,'YYYY-MM-DD') as dbday,buy_state,recipient,phone,buy_post,buy_addr1,buy_addr2,buy_request,price,"
+@Select("SELECT gcno,userid,cart_count,TO_CHAR(buy_date,'YYYY-MM-DD') as dbday,buy_state,recipient,phone,buy_post,buy_addr1,buy_addr2,buy_request,price,"
 		+ "gl.gno,g_name,g_img,g_price "
-		+ "FROM goods_cart gc JOIN goodslist gl ON gc.gno=gl.gno WHERE userid=#{id}")
+		+ "FROM goods_cart gc JOIN goodslist gl ON gc.gno=gl.gno WHERE userid=#{userid}")
 public List<CartVO> buyList(String userid);
+
+@Delete("DELETE FROM goods_cart WHERE gcno=#{gcno} AND userid=#{userid}")
+public void buyCancle(CartVO vo);
 }

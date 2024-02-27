@@ -3,8 +3,12 @@ package com.sist.mapper;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
+import com.sist.vo.CartVO;
 import com.sist.vo.MemberVO;
 
 public interface AdminMapper {
@@ -21,4 +25,22 @@ public interface AdminMapper {
    
 @Select("SELECT CEIL(COUNT(*)/10.0) FROM member WHERE userid LIKE '%'||#{ss}||'%' ")
 public int totalpage(Map  map);
+
+@Results({
+	@Result(property = "gvo.gno" ,column="gno"),
+	@Result(property = "gvo.g_name" , column = "g_name"),
+	@Result(property = "gvo.g_price" , column = "g_price")
+})
+@Select("SELECT gc.gcno, gl.gno, gc.userid, gc.cart_price, gc.cart_count, TO_CHAR(gc.buy_date, 'YYYY-MM-DD') as dbday, gc.buy_state, gc.recipient, gc.price, gl.g_name, gl.g_price, gc.num "
+		+ "FROM (SELECT gcno, gno, userid, cart_price, cart_count, buy_date, buy_state, recipient, price, ROWNUM AS num "
+		+ "FROM goods_cart ORDER BY gcno DESC) gc "
+		+ "JOIN goodslist gl ON gc.gno = gl.gno "
+		+ "WHERE gc.num BETWEEN #{start} AND #{end} AND (buy_state='order' OR buy_state='buyOk') ")
+public List<CartVO> buyList(Map map);
+
+@Select("SELECT CEIL(COUNT(*)/10.0) FROM goods_cart")
+public int buyTotalpage();
+
+@Update("UPDATE goods_cart SET buy_state='buyOk' WHERE gcno=#{gcno}")
+public void buyOk(int gcno);
 }

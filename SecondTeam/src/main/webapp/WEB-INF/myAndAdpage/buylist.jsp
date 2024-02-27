@@ -57,11 +57,16 @@
 								<td class="text-center" width="80px;">{{vo.cart_count}}개</td>
 								<td class="text-center" width="80px;">{{(vo.cart_count*vo.price).toLocaleString()}}</td>
 								<td class="text-center" width="80px;">{{vo.dbday}}</td>
-								<td class="text-center" width="80px;"></td>
+								<td class="text-center" width="80px;">
+								<span v-if="vo.buy_state=='order'">결제승인대기</span>
+								<span v-if="vo.buy_state=='buyOk'">배송중</span>
+								</td>
 								<td>
 
-							<button class="form-control"
+							<button class="form-control" v-if="vo.buy_state=='order'"
 								style="width: 100px; height: 40px;" @click="buyCancel(vo.gcno)">결제취소</button>
+							<button class="form-control" v-if="vo.buy_state=='buyOk'"
+								style="width: 100px; height: 40px;" @click="noCancel()">결제완료</button>
 					</td>
 					</tr>
 					<tr>
@@ -124,6 +129,9 @@
     				alert("주문이 취소되었습니다")
     				
     			})
+			},
+			noCancel(){
+				alert("상품이 배송중이므로 결제 취소 불가합니다")
 			}
 		}
 	}).mount("#buyListApp")

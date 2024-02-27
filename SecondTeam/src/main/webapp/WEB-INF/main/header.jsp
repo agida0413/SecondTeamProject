@@ -102,8 +102,13 @@
 							
 							 <c:if test="${sessionScope.id!=null }">
 								<span style="color:#fff; font-size: 14px;">${sessionScope.name } 님 환영합니다.</span><br>
-								<span><a href="../myAndAdpage/mypage.do" style="color:#fff; font-size: 14px;"><i class="xi-home"></i> MYPAGE</a></span>
-							&nbsp;
+								   <c:if test="${sessionScope.admin!=1 }">
+                        <span><a href="../myAndAdpage/mypage.do" style="color:#fff; font-size: 14px;"><i class="xi-home"></i> MYPAGE</a></span>
+                        </c:if>
+                        
+                        <c:if test="${sessionScope.admin==1 }">
+                        <span><a href="../adminPage/adminMain.do" style="color:#fff; font-size: 14px;"><i class="xi-home"></i> ADMINPAGE</a></span>
+                        </c:if>
 							<span><a href="../member/logout.do" style="color:#fff; font-size: 14px;"><i class="xi-log-out"></i> LOGOUT</a></span>
 							
 							</c:if>

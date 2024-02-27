@@ -22,6 +22,12 @@
          <put-attribute name="myAdcontent" value="/WEB-INF/myAndAdpage/myPageInform.jsp"/>
          <put-attribute name="footer" value="/WEB-INF/main/footer.jsp"/>
       </definition>
+       <definition name="adminPage" template="/WEB-INF/adminPage/adminMain.jsp">
+         <put-attribute name="header" value="/WEB-INF/main/header.jsp"/>
+         <put-attribute name="adminaside" value="/WEB-INF/adminPage/adminAside.jsp"/>
+         <put-attribute name="admincontent" value="/WEB-INF/adminPage/revokeAdDel.jsp"/>
+         <put-attribute name="footer" value="/WEB-INF/main/footer.jsp"/>
+      </definition>
       
        <definition name="goods" template="/WEB-INF/goods/goods_main.jsp">
          <put-attribute name="header" value="/WEB-INF/main/header.jsp"/>
@@ -47,19 +53,19 @@
          <put-attribute name="content" value="/WEB-INF/cart/cart_list.jsp"/>
          <put-attribute name="footer" value="/WEB-INF/main/footer.jsp"/>
       </definition>
-     	
+        
        <definition name="program/*" extends="program">
           <put-attribute name="content" value="/WEB-INF/program/{1}.jsp"/>
            </definition>
-   		 <definition name="program/*/*" extends="program"><!-- {1}/{2}/{3} -->
-			<put-attribute name="content" value="/WEB-INF/program/{1}/{2}.jsp"></put-attribute>
-		</definition>
-		
-		<definition name="myAndAdpage/*" extends="mypage">
+          <definition name="program/*/*" extends="program"><!-- {1}/{2}/{3} -->
+         <put-attribute name="content" value="/WEB-INF/program/{1}/{2}.jsp"></put-attribute>
+      </definition>
+      
+      <definition name="myAndAdpage/*" extends="mypage">
           <put-attribute name="myAdcontent" value="/WEB-INF/myAndAdpage/{1}.jsp"/>
            </definition>
-		
-		 <definition name="goods/*" extends="goods">
+      
+       <definition name="goods/*" extends="goods">
           <put-attribute name="content" value="/WEB-INF/goods/{1}.jsp"/>
            </definition>
            
@@ -69,18 +75,22 @@
            
         <definition name="donation/*" extends="donation">
           <put-attribute name="dcontent" value="/WEB-INF/donation/{1}.jsp"/>
-       	</definition>
-       	
-       	<definition name="cart/*" extends="cart">
+          </definition>
+          
+          <definition name="cart/*" extends="cart">
           <put-attribute name="content" value="/WEB-INF/cart/{1}.jsp"/>
            </definition>
            
-   		 <definition name="program/*/*" extends="program"><!-- {1}/{2}/{3} -->
-			<put-attribute name="content" value="/WEB-INF/program/{1}/{2}.jsp"></put-attribute>
-		</definition>
-		
-		
-   		
+          <definition name="program/*/*" extends="program"><!-- {1}/{2}/{3} -->
+         <put-attribute name="content" value="/WEB-INF/program/{1}/{2}.jsp"></put-attribute>
+      </definition>
+      
+       <definition name="adminPage/*/*" extends="adminPage"><!-- {1}/{2}/{3} -->
+         <put-attribute name="admincontent" value="/WEB-INF/program/{1}/{2}.jsp"></put-attribute>
+      </definition>
+      
+      
+         
       <definition name="*/*" extends="main"><!-- {1}/{2} -->
          <put-attribute name="home" value="/WEB-INF/{1}/{2}.jsp"></put-attribute>
       </definition>

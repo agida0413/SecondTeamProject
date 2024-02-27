@@ -85,8 +85,12 @@
          <put-attribute name="content" value="/WEB-INF/program/{1}/{2}.jsp"></put-attribute>
       </definition>
       
+      <definition name="adminPage/*" extends="adminPage"><!-- {1}/{2}/{3} -->
+         <put-attribute name="admincontent" value="/WEB-INF/adminPage/{1}.jsp"></put-attribute>
+      </definition>
+      
        <definition name="adminPage/*/*" extends="adminPage"><!-- {1}/{2}/{3} -->
-         <put-attribute name="admincontent" value="/WEB-INF/program/{1}/{2}.jsp"></put-attribute>
+         <put-attribute name="admincontent" value="/WEB-INF/adminPage/{1}/{2}.jsp"></put-attribute>
       </definition>
       
       

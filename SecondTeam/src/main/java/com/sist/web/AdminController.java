@@ -14,4 +14,9 @@ public class AdminController {
    
    return"adminPage";
    }
+@GetMapping("adminPage/buyok.do")   
+public String buyok(Model model) {
+model.addAttribute("cate","buyok");
+return"adminPage/buyok";
+}
 }

@@ -10,6 +10,7 @@
 <script type="text/javascript" src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <link rel="shortcut icon" type="image/x-icon" href="https://img.f-ridge.com/_data/favicon/favicon_1692850256.ico">
 <link rel="apple-touch-icon" href="https://img.f-ridge.com/_data/favicon/favicon_1692850256.ico">
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 <style type="text/css">
 #buyApp {
 	margin: 50px 0 50px 0;
@@ -167,7 +168,7 @@ input[type="text"], textarea {
 							<label><input name="reconfirm" id="reconfirm" type="checkbox" v-model="checked" @change="upChecked"> 결제정보를 확인하였으며,구매진행에 동의합니다.</label>
 						</div>
 						<div id="order1">
-							<button class="form-control" @click="order()">주문하기</button>
+							<button class="form-control" @click="pay()">주문하기</button>
 					</div>
 					</div>
 				</div>
@@ -200,7 +201,7 @@ input[type="text"], textarea {
 						
 						this.buyinfo=res.data.buyinfo
 						this.mvo=res.data.mvo
-						this.userid=res.data.mvo.userId
+						this.userid=res.data.mvo.userid
 					})
 				},
 				postFind(){
@@ -216,7 +217,29 @@ input[type="text"], textarea {
 				upChecked(){
 					  this.checked=true
 				  },
-				order(){
+				  order(){
+					  let form=new FormData()
+					  form.append("buy_post",this.post)
+					  form.append("buy_addr1",this.addr1)
+					  form.append("buy_addr2",this.addr2)
+					  form.append("userid",this.userid)
+					  console.log("u"+this.userid)
+					  form.append("recipient",this.recipient)
+					  console.log("u"+this.recipient)
+					  form.append("phone",this.phone)
+					  form.append("buy_request",this.buy_request)
+					  axios.post("../cart/order_info_vue.do",form,{
+						  headers: {
+			        		   'Content-Type': 'multipart/form-data' 
+				            }
+					  }).then(res=>{
+						  alert("주문이 정상 완료되었습니다")
+						  location.href="../myAndAdpage/buylist.do";
+					  }).catch(error => {
+			               console.error("Error occurred while sending review:", error);
+			           })
+				  },
+				pay(){
 					  if(this.recipient === '') {
 						   alert("수령인을 입력하세요")
 			               this.$refs.recipient.focus();
@@ -237,25 +260,32 @@ input[type="text"], textarea {
 			               alert("결제정보를 확인하고 구매진행 동의에 체크해주세요");
 			               return;
 			             }
-					  let form=new FormData()
-					  form.append("buy_post",this.post)
-					  form.append("buy_addr1",this.addr1)
-					  form.append("buy_addr2",this.addr2)
-					  form.append("userid",this.userid)
-					  console.log("u"+this.userid)
-					  form.append("recipient",this.recipient)
-					  console.log("u"+this.recipient)
-					  form.append("phone",this.phone)
-					  form.append("buy_request",this.buy_request)
-					  axios.post("../cart/order_info_vue.do",form,{
-						  headers: {
-			        		   'Content-Type': 'multipart/form-data' 
-				            }
-					  }).then(res=>{
-						  alert("주문이 정상 완료되었습니다")
-					  }).catch(error => {
-			               console.error("Error occurred while sending review:", error);
-			           })
+							  let IMP = window.IMP; // 생략 가능
+							  IMP.init("imp34378262");
+							    console.log('clicked');
+							    // IMP.request_pay(param, callback) 결제창 호출
+							    IMP.request_pay({
+							        pg: 'html5_inicis',
+							        pay_method: 'card',
+							        merchant_uid: 'merchant_' + new Date().getTime(),
+							        name: '구매 상품명',
+							        amount: 1000, // 실제 결제할 금액
+							        buyer_email: 'iamport@siot.do',
+							        buyer_name: '구매자이름',
+							        buyer_tel: '010-1234-5678',
+							        buyer_addr: '서울특별시 강남구 삼성동',
+							        buyer_postcode: '123-456',
+							        app_scheme: 'iamporttest'
+							    }, (rsp) => {
+							        if (rsp.success) {
+							            // 결제 성공 시 처리
+							        } else {
+							            // 결제 실패 시 처리
+										this.order()
+							        }
+							        
+							    })
+					  
 				  }
 			}
 		}).mount('#buyApp')

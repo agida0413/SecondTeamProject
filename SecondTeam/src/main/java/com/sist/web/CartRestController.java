@@ -66,5 +66,6 @@ public String buy_info(HttpSession session) throws Exception
 public void order_info(CartVO vo) throws Exception
 {
 	cService.orderInfo(vo);
+	System.out.println(vo.getBuy_addr1());
 }
 }

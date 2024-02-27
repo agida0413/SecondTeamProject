@@ -106,6 +106,18 @@ public class MemberServiceImpl implements MemberService{
 			return maskedId;
 	}
 
+	@Override
+	public MemberVO memberUpdateDetail(String userId) {
+		// TODO Auto-generated method stub
+		return dao.memberUpdateDetail(userId);
+	}
+
+	@Override
+	public void memberUpdate(MemberVO vo) {
+		// TODO Auto-generated method stub
+		dao.memberUpdate(vo);
+	}
+
 	
 	
 }

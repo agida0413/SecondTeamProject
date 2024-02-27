@@ -52,7 +52,19 @@ public interface MemberMapper {
             "WHERE email=#{email}")
     public String selectMaskedIdByEmail(String email);
 	
+	//5. 회원정보 수정
+		//5-1. 회원정보 불러오기
+		@Select("SELECT userId,userPwd,userName,centerName,addr1,addr2,phone,email,content,birth "
+				+ "FROM member WHERE userId=#{userId} ")
+		public MemberVO memberUpdateDetail(String userId);
+		//5-2. 회원정보 수정하기
+		@Update("UPDATE member SET userPwd=#{userPwd}, userName=#{userName}, "
+				+ "addr1=#{addr1}, addr2=#{addr2}, "
+				+ "email=#{email}, content=#{content} "
+				+ "WHERE userId=#{userId} ")
+		public void memberUpdate(MemberVO vo);
 }
+
 
 
 

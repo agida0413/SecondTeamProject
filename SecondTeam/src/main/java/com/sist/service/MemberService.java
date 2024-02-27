@@ -31,5 +31,11 @@ public interface MemberService {
 	public String selectMaskedIdByEmail(String email);
 	//4-1-3. 이메일 합치기
 	 public String idemailFind(String email);
+	 
+	//5. 회원정보 수정
+		//5-1. 회원정보 불러오기
+		public MemberVO memberUpdateDetail(String userId);
+		//5-2. 회원정보 수정하기
+		public void memberUpdate(MemberVO vo);
 
 }

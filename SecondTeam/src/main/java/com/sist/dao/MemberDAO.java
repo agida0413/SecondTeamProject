@@ -93,5 +93,15 @@ public class MemberDAO {
 	{
 		return mapper.selectMaskedIdByEmail(email);
 	}
-
+	
+	//5. 회원정보 수정
+		//5-1. 회원정보 불러오기
+		public MemberVO memberUpdateDetail(String userId)
+		{
+			return mapper.memberUpdateDetail(userId);
+		}
+		public void memberUpdate(MemberVO vo)
+		{
+			mapper.memberUpdate(vo);
+		}
 }

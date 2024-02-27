@@ -13,28 +13,29 @@
 	<div class="row">
 	
 		<table class="table">
-			<tr>
+			<tr >
 				
-				<th>아이디</th>
-				<th>이름</th>
-				<th>생일</th>
-				<th>주소</th>
-				<th>전화번호</th>
-				<th>관리자 처리</th>
+				<th width="10%" >아이디</th>
+				<th width="15%">이름</th>
+				<th width="25%">생일</th>
+				<th width="10%">보유윙</th>
+				<th width="20%">전화번호</th>
+				<th width="20%">관리자 처리</th>
 			</tr>
 			
 			
-			<tr>
+			<tr v-for="vo in memberList" style="vertical-align:middle;">
 			
-				<td>아이디</td>
-				<td>이름</td>
-				<td>생일</td>
-				<td>주소</td>
-				<td>전화번호</td>
+				<td>{{vo.userId}}</td>
+				<td>{{vo.userName}}</td>
+				<td>{{vo.dbBirthday}}</td>
+				<td>{{vo.wing}}</td>
+				<td>{{vo.phone}}</td>
 				<td>
 				<button class="btn btn-small btn-danger">탈퇴처리</button>
 				<button class="btn btn-small btn-danger">권한부여</button>
 				<button class="btn btn-small btn-danger">윙 몰수</button>
+				<button class="btn btn-small btn-danger">권환 회수</button>
 				</td>
 			</tr>
 		

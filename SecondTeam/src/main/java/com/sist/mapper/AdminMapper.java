@@ -10,7 +10,7 @@ import com.sist.vo.MemberVO;
 public interface AdminMapper {
 
    
-   @Select("SELECT mno,userid,userpwd,typeno,centername,username,TO_CHAR(birth,'YYYY-MM-DD') as dbdbBirthday ,sex,addr1,addr2,phone,admin,wing,num "
+   @Select("SELECT mno,userid,userpwd,typeno,centername,username,TO_CHAR(birth,'YYYY-MM-DD') as dbBirthday ,sex,addr1,addr2,phone,admin,wing,num "
          +"FROM (SELECT mno,userid,userpwd,typeno,centername,username,birth ,sex,addr1,addr2,phone,admin,wing,rownum as num "
          + "FROM "
          + "(SELECT mno,userid,userpwd,typeno,centername,username,birth ,sex,addr1,addr2,phone,admin,wing FROM member WHERE userid Like '%'||#{ss}||'%' "

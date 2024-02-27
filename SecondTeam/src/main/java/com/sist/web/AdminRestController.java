@@ -22,7 +22,7 @@ private AdminService service;
 @Autowired
 private CommonsFunction cf;
 
-@GetMapping("adminPage/memberList_vue.do")
+@GetMapping(value="adminPage/memberList_vue.do",produces = "text/plain;charset=UTF-8")
 public String adminPage(String ss, String page ) throws JsonProcessingException{
    System.out.println("실행");
    if(page==null) {

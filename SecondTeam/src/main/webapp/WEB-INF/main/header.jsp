@@ -72,7 +72,6 @@
 									<ul class="dropdown">
 											<li><a href="../moim/list.do">소모임 리스트</a></li>
 											<li><a href="../moim/reserve.do">소모임 예약하기</a></li>
-  											<li><a href="../moim/schedule.do">소모임 캘린더</a></li>
 									</ul>
 								</li>
 								<li><a href="category.html">추가예정</a></li>

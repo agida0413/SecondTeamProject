@@ -38,12 +38,9 @@
 							
 						</ul>
 						<ul class="list-unstyled float-start links">
-							<li style="font-weight:bold; font-size:20px;"><a href="#">주메뉴</a></li>
-							<li><a href="#">Services</a></li>
-							<li><a href="#">Vision</a></li>
-							<li><a href="#">Mission</a></li>
-							<li><a href="#">Terms</a></li>
-							<li><a href="#">Privacy</a></li>
+							<li style="font-weight:bold; font-size:20px;"><a href="#">소모임</a></li>
+							<li><a href="../moim/list.do">소모임 리스트</a></li>
+							<li><a href="../moim/reserve.do">소모임 예약하기</a></li>
 						</ul>
 						<ul class="list-unstyled float-start links">
 							<li style="font-weight:bold; font-size:20px;"><a href="#">주메뉴</a></li>

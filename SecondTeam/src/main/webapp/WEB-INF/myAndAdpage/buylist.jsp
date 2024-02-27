@@ -122,6 +122,7 @@
 				}).then(res=>{
     				console.log(res.data)
     				this.buy_list=res.data
+    				alert("주문이 취소되었습니다")
     				
     			})
 			}

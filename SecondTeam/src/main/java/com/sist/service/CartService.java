@@ -13,4 +13,6 @@ public interface CartService {
 	public MemberVO buyInfo(String userid);
 	public List<CartVO> buyPriceInfo(String userid);
 	public void orderInfo(CartVO vo);
+	public List<CartVO> buyList(String userid);
+	
 }

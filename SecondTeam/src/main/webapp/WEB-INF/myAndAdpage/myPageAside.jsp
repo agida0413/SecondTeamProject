@@ -29,7 +29,7 @@ cursor:pointer;
 <a href="../myAndAdpage/myclass.do"> <li class="list-group-item ${cate == 'myclass' ? 'active' : ''}" style="padding:18px;">나의 원데이클래스</li></a>
 <a href="../myAndAdpage/myclassResHistory.do"> <li class="list-group-item ${cate == 'myclassResHistory' ? 'active' : ''}" style="padding:18px;">나의 원데이클래스 예약관리</li></a>
 <a href="../myAndAdpage/wishgoods.do"> <li class="list-group-item" style="padding:18px;">상품 위시리스트</li></a>
-  
+  <a href="../myAndAdpage/buylist.do"> <li class="list-group-item ${cate == 'buylist' ? 'active' : ''}" style="padding:18px;">주문내역</li></a>
   <a href="../myAndAdpage/moim_res_my.do"> <li class="list-group-item ${cate == '' ? 'active' : ''}" style="padding:18px;">소모임 예약목록</li></a>
 
 </ul>

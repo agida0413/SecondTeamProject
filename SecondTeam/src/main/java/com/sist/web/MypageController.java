@@ -382,6 +382,11 @@ private ProgramService pService;
 	public String wishgoods() {
 		return "myAndAdpage/wishgoods";
 	}
+	// 구매내역
+	@GetMapping("myAndAdpage/buylist.do")
+	public String buylist() {
+		return "myAndAdpage/buylist";
+	}
 	
 	
 	

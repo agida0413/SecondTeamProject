@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sist.service.CartService;
 import com.sist.service.GoodsService;
 import com.sist.service.MypageService;
+import com.sist.vo.CartVO;
 import com.sist.vo.DonClassResHistoryVO;
 import com.sist.vo.GoodsVO;
 import com.sist.vo.VdataboardVO;
@@ -29,6 +31,9 @@ public class MypageRestController {
 	
 	@Autowired
 	private GoodsService gService;
+	
+	@Autowired
+	private CartService cService;
 	
 	@PostMapping(value="myAndAdpage/certifyUpdate_vue.do",produces = "text/plain;charset=UTF-8")
 	   public String certifyUpdate_vue(VprogramApplyVO vo,HttpServletRequest request)
@@ -114,7 +119,18 @@ public class MypageRestController {
 		
 		return json;
 	}
-	
+	@GetMapping(value="myAndAdpage/buylist_vue.do",produces = "text/plain;charset=UTF-8")
+	public String buylist_vue(HttpSession session,String id) throws Exception
+	{
+		id=(String)session.getAttribute("id");
+		System.out.println(id);
+		List<CartVO> cList=cService.buyList(id);
+		ObjectMapper mapper=new ObjectMapper();
+		String json=mapper.writeValueAsString(cList);
+		
+		return json;
+		
+	}
 	
 	
 }

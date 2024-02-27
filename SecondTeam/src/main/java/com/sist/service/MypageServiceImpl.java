@@ -10,11 +10,13 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sist.commons.CommonsFunction;
+import com.sist.dao.CartDAO;
 import com.sist.dao.ClassInformDAO;
 import com.sist.dao.DonClassReserveDAO;
 import com.sist.dao.ProgramListDAO;
 import com.sist.dao.ProgramWishDAO;
 import com.sist.mapper.ProgramWishMapper;
+import com.sist.vo.CartVO;
 import com.sist.vo.DonClassResHistoryVO;
 import com.sist.vo.DonClassVO;
 import com.sist.vo.ProgramVO;
@@ -34,7 +36,7 @@ public class MypageServiceImpl implements MypageService {
 	
 	@Autowired
 	private DonClassReserveDAO resDao;
-	
+		
 	@Autowired
 	private CommonsFunction cf;
 	@Override

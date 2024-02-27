@@ -51,6 +51,12 @@ public class CartServiceImpl implements CartService{
 		cDao.orderInfo(vo);
 	}
 
+	@Override
+	public List<CartVO> buyList(String userid) {
+		// TODO Auto-generated method stub
+		return cDao.buyList(userid);
+	}
+
 
 
 }

@@ -36,4 +36,7 @@ public List<CartVO> buyPriceInfo(String userid) {
 public void orderInfo(CartVO vo) {
 	mapper.orderInfo(vo);
 }
+public List<CartVO> buyList(String userid){
+	return mapper.buyList(userid);
+}
 }

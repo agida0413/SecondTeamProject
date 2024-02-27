@@ -16,46 +16,11 @@ white-space: nowrap;
 overflow: hidden; 	
 text-overflow: ellipsis;   
 }
-/*사이드 메뉴*/
-.res_submenu{
-	background-color: #214252;
-	text-align: center;
-	border-radius: 50%;
-	position: fixed;
-	right: 150px;
-	top: 500px;
-	width: 100px;
-	height: 100px;
-	z-index: 9999 !important;
-}
-.res_submenu a{
-	display: block;
-}
-.res_submenu i{
-	margin-top: 20px;
-	font-size: 25px;
-	color: #fff !important;
-}
-.res_submenu p{
-	color: #fff;
-}
-.res_submenu:hover{
-	 box-shadow: 0 10px 10px 10px rgba(147,160,168, 0.2);
-	 transition: all 0.4s ease-in-out;
-	 transform: translateY(-25px);
-}
 </style>
 </head>
 <body>
 <div class="moimDetail">
 
-   <!-- 일정 사이드 매뉴 시작 -->
-   <div class="res_submenu" style="z-index: 9999 !important;">
-      <a href="schedule.do"> <i class="xi-calendar-list"></i>
-         <p>나의 일정표</p>
-      </a>
-   </div>
-   <!-- 일정 사이드 매뉴 종료 -->
 
 <!-- 상단 소제목 시작 -->
  <div class="site-cover site-cover-sm same-height overlay single-page" style="background-image: url('../images/hero_5.jpg');">
@@ -156,12 +121,9 @@ text-overflow: ellipsis;
                     </div>
                 </li>
                 <li class="text-center">
-				<a href="#"
+				<a href="reserve.do"
 				style="border: 3px solid #214252; border-radius: 2px; display:inline-block;
-				color: #214252; padding: 10px 30px; font-weight: 600;"><i class="xi-calendar-add"></i>&nbsp;예약하기</a>&nbsp;&nbsp;
-				<a href="#"
-				style="border: 3px solid #214252; border-radius: 2px; display:inline-block;
-				color: #214252; padding: 10px 30px; font-weight: 600;"><i class="xi-credit-card"></i>&nbsp;결제하기</a>
+				color: #214252; padding: 10px 30px; font-weight: 600;"><i class="xi-calendar-add"></i>&nbsp;예약하기</a>
 				</li>
               </ul>
             </div>

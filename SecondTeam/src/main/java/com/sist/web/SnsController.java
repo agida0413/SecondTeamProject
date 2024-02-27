@@ -11,10 +11,4 @@ public class SnsController {
 		
 		return "sns/list";
 	}
-	
-	@GetMapping("sns/schedule.do")
-	public String sns_schedule() {
-		
-		return "sns/schedule";
-	}
 }

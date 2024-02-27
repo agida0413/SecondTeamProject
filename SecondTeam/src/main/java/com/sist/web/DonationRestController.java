@@ -258,4 +258,10 @@ public class DonationRestController {
 		
 		return service.donation_related_vue(dno);
 	}
+	
+	@GetMapping(value = "donation_donated_history_vue.do",produces = "text/plain;charset=UTF-8")
+	public String donated_history_vue(HttpSession session) throws Exception{
+		String userid=(String)session.getAttribute("id");
+		return service.donated_history_vue(userid);
+	}
 }

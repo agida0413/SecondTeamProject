@@ -21,4 +21,5 @@ public interface DonationService {
 	public void donationPayPercentUpdate(int dno);
 	public String donationPayListData(int dno, int page) throws JsonProcessingException;
 	public String donation_related_vue(int dno) throws Exception;
+	public String donated_history_vue(String userid) throws Exception;
 }

@@ -1,5 +1,9 @@
 package com.sist.service;
 
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sist.dao.DonationDAO;
+import com.sist.vo.DonationHistoryVO;
 import com.sist.vo.DonationPayVO;
 import com.sist.vo.DonationVO;
 
@@ -119,12 +124,59 @@ public class DonationServiceImpl implements DonationService{
 		// TODO Auto-generated method stub
 		DonationVO vo=dao.donationDetailData(dno);
 		List<DonationVO> list=dao.donationCateRelatedListData(vo.getD_cate());
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy.MM.dd");
+		String todayFm=sdf.format(new Date(System.currentTimeMillis()));
+		Date enddate=sdf.parse(vo.getD_enddate());
+		Date today=sdf.parse(todayFm);
+		
+		
+		long diffSec=(enddate.getTime() - today.getTime())/1000;
+		long diffDays=diffSec / (24*60*60);
+		vo.setDday(diffDays);
+		
+		
 		Map map=new HashMap();
 		map.put("detail_data", vo);
 		map.put("related_data", list);
 		
 		ObjectMapper mapper=new ObjectMapper();
 		String json=mapper.writeValueAsString(map);
+		
+		return json;
+	}
+
+	// Commons ObjectMapper
+	public String CommonsObjectMapper(Object obj) throws Exception{
+		ObjectMapper mapper=new ObjectMapper();
+		String json=mapper.writeValueAsString(obj);
+		
+		return json;
+	}
+	
+	
+	@Override
+	public String donated_history_vue(String userid) throws Exception {
+		// TODO Auto-generated method stub
+		List<DonationHistoryVO> list=dao.donatedHistoryListData(userid);
+		List<String> priceList=new ArrayList<>();
+		List<String> nowList=new ArrayList<>();
+		DecimalFormat decFormat = new DecimalFormat("###,###");
+		String str = decFormat.format(12300000);
+		if(list.size()!=0) {
+			for(int i=0;i<list.size();i++) {
+				String s=decFormat.format(list.get(i).getPrice());
+				String n=decFormat.format(list.get(i).getDvo().getD_now());
+				priceList.add(s);
+				nowList.add(n);
+			}
+		}
+		Map map=new HashMap();
+		map.put("list", list);
+		map.put("priceList", priceList);
+		map.put("nowList", nowList);
+		
+		
+		String json=CommonsObjectMapper(map);
 		
 		return json;
 	}

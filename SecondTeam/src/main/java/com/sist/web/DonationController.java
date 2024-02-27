@@ -44,5 +44,10 @@ public class DonationController {
 		return "redirect:../donation/donation_detail.do";
 	}
 	
+
+	@GetMapping("myAndAdpage/donated_campaign.do")
+	public String donated_campaign() {
+		return "myAndAdpage/donatedHistory";
+	}
 	
 }

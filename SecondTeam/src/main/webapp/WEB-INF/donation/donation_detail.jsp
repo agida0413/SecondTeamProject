@@ -417,7 +417,7 @@ h3.plan strong{
                                 <span class="per"><strong class="num">{{detail_data.d_nowpercent}}</strong>%</span>
                             </div>
                             <div class="card_bar">
-		                      <span class="card_bar_collection" style="width: 50%;"></span>
+		                      <span class="card_bar_collection" :style="'width:'+detail_data.d_nowpercent+'%'"></span>
 		                    </div>
                     
 
@@ -435,7 +435,7 @@ h3.plan strong{
                           
                     </div>
                     <div class="num_area">
-                        <p class="status_num"><span>현재 모금:&nbsp;</span><strong>{{detail_data.d_now}}</strong><span>원</span></p>
+                        <p class="status_num"><span>현재 모금:&nbsp;</span><strong>{{now_data}}</strong><span>원</span></p>
                         <p class="status_num"><span>목표 :&nbsp;</span><strong>{{detail_data.d_goal}}</strong><span>원</span></p>
                         
                     </div>
@@ -581,7 +581,8 @@ h3.plan strong{
     		return{
     			detail_data:{},
     			dno:${dno},
-    			related_data:{}
+    			related_data:{},
+    			now_data:''
     		} 
     	 },
     	 mounted(){
@@ -593,6 +594,7 @@ h3.plan strong{
     			 console.log(res.data)
     			 this.detail_data=res.data.detail_data
     			 this.related_data=res.data.related_data
+    			 this.now_data=res.data.detail_data.d_now.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
     		 })
     	 },
     	 methods:{

@@ -56,11 +56,12 @@ function requestPay() {
 	    		// 마이페이지 이동 
 	    		if(result=='yes')
 	    		{
-	    			alert("구매 성공하셨습니다")
+	    			alert("소중한 후원 감사합니다.")
+	    			location.href="../myAndAdpage/donated_campaign.do"
 	    		}
 	    		else
 	    		{
-	    			alert("구매 실패하셨습니다")
+	    			alert("후원 실패하셨습니다")
 	    		}
 	    		
 	    	}

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.sist.mapper.DonationMapper;
+import com.sist.vo.DonationHistoryVO;
 import com.sist.vo.DonationPayVO;
 import com.sist.vo.DonationVO;
 
@@ -71,5 +72,9 @@ public class DonationDAO {
 	
 	public List<DonationVO> donationCateRelatedListData(String d_cate){
 		return mapper.donationCateRelatedListData(d_cate);
+	}
+	
+	public List<DonationHistoryVO> donatedHistoryListData(String userid){
+		return mapper.donatedHistoryListData(userid);
 	}
 }

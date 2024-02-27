@@ -5,6 +5,8 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Result;
 
 import com.sist.vo.*;
 public interface DonationMapper {
@@ -104,4 +106,19 @@ public interface DonationMapper {
 			+ "WHERE d_cate LIKE '%'||#{d_cate}||'%' "
 			+ "AND rownum<4")
 	public List<DonationVO> donationCateRelatedListData(String d_cate);
+	
+	// 마이페이지 내 후원내역 리스트
+	@Results({
+		@Result(column="d_title",property="dvo.d_title"),
+		@Result(column="d_goal",property = "dvo.d_goal"),
+		@Result(column="d_startdate",property = "dvo.d_startdate"),
+		@Result(column="d_enddate",property = "dvo.d_enddate"),
+		@Result(column="d_now",property = "dvo.d_now"),
+	})
+	@Select("SELECT payno,price,dl.dno,userid,d_title,d_goal,d_startdate,d_enddate,d_now "
+			+ "FROM donation_list dl,donation_pay dp "
+			+ "WHERE dl.dno=dp.dno "
+			+ "AND userid=#{userid} "
+			+ "ORDER BY payno DESC")
+	public List<DonationHistoryVO> donatedHistoryListData(String userid);
 }

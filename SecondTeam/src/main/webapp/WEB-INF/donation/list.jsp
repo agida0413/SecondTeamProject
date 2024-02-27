@@ -294,8 +294,8 @@ input[type=radio] {
   <div class="col-sm-4" style="width: 25%;margin-left: 10px;margin-top: 88px;" id="donationListSideApp">
   				<div class="sidebar-box search-form-wrap mb-4">
 						<form action="#" class="sidebar-search-form">
-							<input type="text" size=25 id="s" class="input-sm" placeholder="검색어를 입력하세요">
-							<span style="margin-left: 15px;"><a><i class="fa-solid fa-magnifying-glass"></i></a></span>
+							<input type="text" size=25 id="s" class="input-lg" placeholder="검색어를 입력하세요">
+							<span style="margin-left: 15px;"><a class="dlink"><i class="fa-solid fa-magnifying-glass"></i></a></span>
 						</form>
 					</div>
 					<!-- END sidebar-box -->

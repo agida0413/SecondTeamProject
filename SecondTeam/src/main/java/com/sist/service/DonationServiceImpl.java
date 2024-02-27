@@ -198,6 +198,12 @@ public class DonationServiceImpl implements DonationService{
 		return json;
 	}
 
+	@Override
+	public DonationVO donationFooterAOPData() {
+		// TODO Auto-generated method stub
+		return dao.donationFooterAOPData();
+	}
+
 	
 	
 	

@@ -43,12 +43,8 @@
 							<li><a href="../moim/reserve.do">소모임 예약하기</a></li>
 						</ul>
 						<ul class="list-unstyled float-start links">
-							<li style="font-weight:bold; font-size:20px;"><a href="#">주메뉴</a></li>
-							<li><a href="#">Services</a></li>
-							<li><a href="#">Vision</a></li>
-							<li><a href="#">Mission</a></li>
-							<li><a href="#">Terms</a></li>
-							<li><a href="#">Privacy</a></li>
+							<li style="font-weight:bold; font-size:20px;"><a href="../donation/donationMain.do">후원 캠페인</a></li>
+							<li><a href="../donation/donationMain.do">캠페인 후원하기</a></li>
 						</ul>
 						<ul class="list-unstyled float-start links">
 							<li style="font-weight:bold; font-size:20px;"><a href="#">주메뉴</a></li>
@@ -88,7 +84,7 @@
 						<div class="post-entry-footer">
 							<ul>
 								<li>
-									<a href="../donateclass/detail_cookie.do?dcno=${dcvo.dcno }"">
+									<a href="../donateclass/detail_cookie.do?dcno=${dcvo.dcno }">
 										<img src="${dcvo.image }" alt="Image placeholder" class="me-4">
 										<div class="text">
 											<h4>이달의 재능</h4>
@@ -112,13 +108,14 @@
 									</a>
 								</li>
 								<li>
-									<a href="">
-										<img src="../images/img_2_sq.jpg" alt="Image placeholder" class="me-4">
+									<a href="../donation/donation_before_detail.do?dno=${dovo.dno }">
+										<img src="${dovo.d_image }" class="me-4">
 										<div class="text">
-											<h4>이달의 xxx</h4>
+											<h4>이달의 캠페인</h4>
 											<div class="post-meta">
-												<span class="mr-2">부내용</span>
-											
+												<span class="mr-2">${dovo.d_title }</span>
+												<p class="mr-2">목표:${dovo.d_goal }원</p>
+												
 											</div>
 										</div>
 									</a>

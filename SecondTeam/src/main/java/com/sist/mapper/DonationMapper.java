@@ -142,4 +142,11 @@ public interface DonationMapper {
 			+ "ORDER BY dno DESC) "
 			+ "WHERE rownum<4")
 	public List<DonationVO> donatedCateRelatedListData(String d_cate);
+	
+	// 푸터에 들어갈 AOP용 조회수 가장높은 데이터
+	@Select("SELECT dno,d_image,d_title,d_goal,rownum "
+			+ "FROM (SELECT dno,d_image,d_title,d_goal "
+			+ "FROM donation_list ORDER BY d_hit DESC) "
+			+ "WHERE rownum=1")
+	public DonationVO donationFooterAOPData();
 }

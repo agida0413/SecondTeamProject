@@ -334,15 +334,17 @@ cursor: pointer;
 	<!-- 후원캠페인 홈배너 -->
 	<section class="section posts-entry posts-entry-sm bg-light">
 		<div class="container" id="donateCamApp">
+		  <div class="col-sm-6">
+		     <h2 class="posts-entry-title">후원 캠페인</h2>
+		  </div>
 			<div class="row">
 				<div class="col-md-6 col-lg-3" v-for="vo in donatecam_list">
 					<div class="blog-entry">
 						<a href="#" class="img-link">
-							<img :src="vo.d_image" alt="Image" class="img-fluid">
+							<img :src="vo.d_image" alt="Image" style="width: 260px;height: 140px;border-radius: 10px;">
 						</a>
-						<span class="date">Apr. 14th, 2022</span>
 						<h2><a href="#">{{vo.d_title}}</a></h2>
-						<p>{{vo.d_goal}}</p>
+						<p>목표:{{vo.d_goal}}원</p>
 					</div>
 				</div>
 			</div>

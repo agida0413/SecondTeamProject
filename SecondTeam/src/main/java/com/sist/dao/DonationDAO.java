@@ -85,4 +85,8 @@ public class DonationDAO {
 	public List<DonationVO> donatedCateRelatedListData(String d_cate){
 		return mapper.donatedCateRelatedListData(d_cate);
 	}
+	
+	public DonationVO donationFooterAOPData() {
+		return mapper.donationFooterAOPData();
+	}
 }

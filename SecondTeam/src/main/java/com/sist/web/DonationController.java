@@ -46,7 +46,8 @@ public class DonationController {
 	
 
 	@GetMapping("myAndAdpage/donated_campaign.do")
-	public String donated_campaign() {
+	public String donated_campaign(Model model) {
+		model.addAttribute("cate","donated_history");
 		return "myAndAdpage/donatedHistory";
 	}
 	

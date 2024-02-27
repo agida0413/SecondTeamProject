@@ -25,4 +25,5 @@ public interface DonationService {
 	public String donation_related_vue(int dno) throws Exception;
 	public String donated_history_vue(String userid) throws Exception;
 	public String donated_max_category(String userid) throws Exception;
+	public DonationVO donationFooterAOPData();
 }

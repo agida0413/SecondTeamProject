@@ -201,7 +201,7 @@ input[type="text"], textarea {
 						
 						this.buyinfo=res.data.buyinfo
 						this.mvo=res.data.mvo
-						this.userid=res.data.mvo.userid
+						this.userid=res.data.mvo.userId
 					})
 				},
 				postFind(){

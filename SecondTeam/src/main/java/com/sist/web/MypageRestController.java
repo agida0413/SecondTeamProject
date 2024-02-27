@@ -131,10 +131,15 @@ public class MypageRestController {
 		
 	}
 	@GetMapping(value="myAndAdpage/buyCancel_vue.do",produces = "text/plain;charset=UTF-8")
-	public void buycancel_vue(HttpSession session,CartVO vo) throws Exception
+	public String buycancel_vue(HttpSession session,CartVO vo) throws Exception
 	{
 		String userid=(String)session.getAttribute("id");
 		cService.buyCancle(vo);
+		List<CartVO> cList=cService.buyList(userid);
+		ObjectMapper mapper=new ObjectMapper();
+		String json=mapper.writeValueAsString(cList);
+		
+		return json;
 	}
 	
 	

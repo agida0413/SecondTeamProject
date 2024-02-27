@@ -117,7 +117,6 @@
 					params:{
     					gcno:gcno,
     					userid:this.userid
-    					
     				}
 				}).then(res=>{
     				console.log(res.data)

@@ -17,9 +17,11 @@ import com.sist.commons.CommonsFunction;
 import com.sist.service.DonResService;
 import com.sist.service.DonStoreService;
 import com.sist.service.DonationService;
+import com.sist.service.GoodsService;
 import com.sist.vo.DonResVO;
 import com.sist.vo.DonStoreVO;
 import com.sist.vo.DonationVO;
+import com.sist.vo.GoodsVO;
 
 @RestController
 public class MainRestController {
@@ -31,6 +33,8 @@ private CommonsFunction comm;
 private DonationService dService;
 @Autowired
 private DonResService donService;
+@Autowired
+private GoodsService gService;
 
 @GetMapping(value="donstore/search_vue.do",produces="text/plain;charset=UTF-8")
 public String donstore_search_vue(String ss,int page) throws Exception
@@ -100,6 +104,14 @@ public String getuserid(HttpSession session) throws Exception
 	String userid=(String)session.getAttribute("id");
 	ObjectMapper mapper=new ObjectMapper();
 	String json=mapper.writeValueAsString(userid);
+	return json;
+}
+@GetMapping(value = "goods/mainGoodsList.do",produces = "text/plain;charset=UTF-8")
+public String maingoods() throws Exception
+{
+	List<GoodsVO> list=gService.mainGoodsList();
+	ObjectMapper mapper=new ObjectMapper();
+	String json=mapper.writeValueAsString(list);
 	return json;
 }
 }

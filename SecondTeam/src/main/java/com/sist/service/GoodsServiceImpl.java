@@ -114,5 +114,11 @@ public WishListVO wishCk(WishListVO vo) {
 	return gDao.wishCk(vo);
 }
 
+@Override
+public List<GoodsVO> mainGoodsList() {
+	// TODO Auto-generated method stub
+	return gDao.mainGoodsList();
+}
+
 
 }

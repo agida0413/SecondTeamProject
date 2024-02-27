@@ -6,5 +6,4 @@ import lombok.Data;
 public class WishListVO {
 private int wno,typeno,objno;
 private String state,id;
-
 }

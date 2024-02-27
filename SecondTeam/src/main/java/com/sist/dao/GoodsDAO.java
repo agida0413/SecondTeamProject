@@ -66,5 +66,7 @@ public void wishDelete(Map map) {
 public List<GoodsVO> goodsWishList(String id){
 	return mapper.goodsWishList(id);
 }
-
+public List<GoodsVO> mainGoodsList(){
+	return mapper.mainGoodsList();
+}
 }

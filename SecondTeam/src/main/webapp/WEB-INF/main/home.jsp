@@ -230,7 +230,7 @@ cursor: pointer;
 		
 
 	<section class="section posts-entry posts-entry-sm bg-light">
-		<div class="container">
+		<div class="container" id="mgApp">
 			<div class="row mb-4">
 				<div class="col-sm-6">
 					<h2 class="posts-entry-title">인기상품</h2>
@@ -396,6 +396,7 @@ cursor: pointer;
 	<!-- Start posts-entry -->
 	<!-- Start posts-entry -->
 	<script>
+	
 let search=Vue.createApp({
 	data(){
 		return{
@@ -605,7 +606,7 @@ let search=Vue.createApp({
 }).mount("#donSearch")
 </script>
 	<script src="../js/donationHome.js"></script>
-	
+	<script src="../js/goodsmain.js"></script>
 
 </body>
 </html>

@@ -111,11 +111,10 @@ public void gReviewUpdate(GoodsReviewVO vo);
 		+ " VALUES(gct_gcno_seq.nextval,#{gno},#{userid},#{cart_price},#{cart_count},#{price})")
 public void cartInsert(CartVO vo);
 
-@Results({
-	@Result(property = "gvo.gno" ,column="gno"),
-})
-
 // 찜추가, 출력
+@Results({
+	@Result(property = "gvo.gno" ,column="gno")
+})
 @Update("UPDATE goodslist SET g_like=g_like+1")
 public void gLikeIncrese();
 @Insert("INSERT INTO wishlist(wno,typeno,objno,state,id) VALUES(wishlist_seq.nextval,3,#{objno},#{state},#{id})")
@@ -141,6 +140,8 @@ public void wishDelete(Map map);
 		+ "wl.objno=gl.gno WHERE id=#{id} AND typeno=3")
 public List<GoodsVO> goodsWishList(String id);
 
+@Select("SELECT g_name,g_img,g_price FROM (SELECT g_name,g_img,g_price FROM goodslist ORDER BY g_like DESC ) WHERE rownum<=4")
+public List<GoodsVO> mainGoodsList();
 
 }
 

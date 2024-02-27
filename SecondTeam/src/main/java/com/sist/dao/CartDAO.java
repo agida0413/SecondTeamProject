@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.sist.mapper.CartMapper;
 import com.sist.vo.CartVO;
+import com.sist.vo.GoodsVO;
 import com.sist.vo.MemberVO;
 
 @Repository

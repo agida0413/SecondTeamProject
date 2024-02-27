@@ -28,4 +28,6 @@ public interface GoodsService {
 	public WishListVO wishCk(WishListVO vo);
 	public void wishDelete(Map map);
 	public List<GoodsVO> goodsWishList(String id);
+	// 메인
+	public List<GoodsVO> mainGoodsList();
 }

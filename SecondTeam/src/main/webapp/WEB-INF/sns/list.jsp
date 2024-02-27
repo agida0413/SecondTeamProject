@@ -120,15 +120,28 @@ li{
    				 margin-bottom: 30px;
    				 padding-bottom: 20px;
    				 border-bottom: 1px solid #e6e6e6;">추천목록</h3>
-	       <div class="post-entry-sidebar follow_id_list" v-for="(vo,index) in id_list">
+<!-- 	       <div class="post-entry-sidebar follow_id_list" v-for="vo in follow_list">
 	          <i class="xi-profile"></i><br>
-	          <span class="date"><i class="xi-at"></i>{{vo.userid}}</span><br>
-	          <span class="date">{{vo.username}}</span>
+	          <span class="date"
+	          style="font-size: 9px;"
+	          ><i class="xi-at"></i>{{vo.userId}}</span><br>
+	          <span class="date"
+	          style="color: #666; font-size: 11px;"
+	          >{{vo.userName}}</span>
 	          <a style="border: 2px solid #93a0a8; border-radius: 2px; display:block;
 	                   width:80px; margin: 0 auto; cursor:pointer;
-				        color: #93a0a8; padding: 5px; font-size: 13px;" @click="snsDelete(vo.sno)">
+				        color: #93a0a8; padding: 5px; font-size: 13px;" @click="followInsert(vo.userId)">
 				        <i class="xi-user-plus"></i>&nbsp;follow</a>
-	       </div>
+	       </div> -->
+	       <div class="post-entry-sidebar follow_id_list" v-for="vo in follow_list">
+    <i class="xi-profile"></i><br>
+    <span class="date" style="font-size: 9px;"><i class="xi-at"></i>{{vo.userId}}</span><br>
+    <span class="date" style="color: #666; font-size: 11px;">{{vo.userName}}</span>
+    <a style="border: 2px solid #93a0a8; border-radius: 2px; display:block; width:80px; margin: 0 auto; cursor:pointer; color: #93a0a8; padding: 5px; font-size: 13px;"
+     @click="followInsert(vo.userId)">
+        <i class="xi-user-plus"></i>&nbsp;follow
+    </a>
+</div>
 	    </div>
 	    
 		<div class="col-md-7" style="display: flex; flex-flow: column;" id="mycontent_list">
@@ -338,10 +351,11 @@ li{
   }).mount('#sns_keep')
 </script>
 <script>
-  let id_list=Vue.createApp({
+  let follow_list=Vue.createApp({
 	  data(){
 		  return{
-			  id_list:[]
+			  follow_list:[],
+		      userId:'${id}'
 		  }
 	  },
 	  mounted(){
@@ -349,11 +363,30 @@ li{
 	  },
 	  methods:{
 		  dataRecv(){
-			  axios.get('../sns/list_id_vue.do').then(res=>{
+			  axios.get('../sns/list_id_vue.do',{
+				  params: {
+				        userId: this.userId
+				    }
+			  }).then(res=>{
 				  console.log(res.data)
-				  this.id_list=res.data
+				  this.follow_list=res.data
 			  })
-		  }
+		  },
+		// 추가
+		  followInsert(userId) {
+			    console.log("전송할 userId 값:", userId); // userId 값 콘솔 출력
+			    axios.post('../sns/follow_insert_vue.do',null, {
+			    	params:{
+			    		userId: userId
+			    	}
+			    }).then(res => {
+			        console.log(res.data);
+			        this.follow_list = res.data;
+			        alert(userId+"가 팔로우 되었습니다.")
+			    }).catch(error => {
+			        console.error('Error adding follow:', error);
+			    });
+			}
 	  }
   }).mount('#id_list')
 </script>

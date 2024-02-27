@@ -22,12 +22,6 @@ public class SnsServiceImpl implements SnsService{
 	}
 
 	@Override
-	public List<SnsIdVO> snsIdList() {
-		// TODO Auto-generated method stub
-		return dao.snsIdList();
-	}
-
-	@Override
 	public List<SnsMyContentVO> snsMyContentList(String userid) {
 		// TODO Auto-generated method stub
 		return dao.snsMyContentList(userid);
@@ -63,4 +57,15 @@ public class SnsServiceImpl implements SnsService{
 		return dao.snsMyContentList2(sno);
 	}
 
+	@Override
+	public List<SnsIdVO> snsIdList(String userId) {
+		// TODO Auto-generated method stub
+		return dao.snsIdList(userId);
+	}
+
+	@Override
+	public void insertFollowData(String f_ing_UserId, String userId) {
+		// TODO Auto-generated method stub
+		dao.insertFollowData(f_ing_UserId, userId);
+	}
 }

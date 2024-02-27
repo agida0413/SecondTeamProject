@@ -26,11 +26,16 @@ public class SnsDAO {
 		return mapper.snsKeepDetailData(kano);
 	}
 	
-	//sns id 목록중 4명 랜덤출력
-	public List<SnsIdVO> snsIdList()
-	{
-		return mapper.snsIdList();
-	}
+	//sns id 목록중 4명 랜덤출력 (본인아이디제외)
+		public List<SnsIdVO> snsIdList(String userId)
+		{
+			return mapper.snsIdList(userId);
+		}
+		//sns follow insert
+		public void insertFollowData(String f_ing_UserId, String userId)
+		{
+			mapper.insertFollowData(f_ing_UserId, userId);
+		}
 	
 	//sns crud
 	//sns페이지 본인+팔로우 게시글 출력

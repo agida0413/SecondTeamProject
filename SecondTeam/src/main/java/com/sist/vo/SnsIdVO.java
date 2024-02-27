@@ -5,5 +5,7 @@ import lombok.Data;
 @Data
 public class SnsIdVO {
 	private int mno;
-	private String userid,username;
+	private String userId,userName;
+	
+	private SnsFollowVO svo=new SnsFollowVO();
 }

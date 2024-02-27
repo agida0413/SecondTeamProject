@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sist.service.SnsService;
+import com.sist.vo.SnsFollowVO;
 import com.sist.vo.SnsIdVO;
 import com.sist.vo.SnsKeepVO;
 import com.sist.vo.SnsMyContentVO;
@@ -61,14 +62,30 @@ public class SnsRestController {
 		return json;
 	}
 	
-	//sns id 목록중 4명 랜덤출력
+	//sns id 목록중 4명 랜덤출력 (본인아이디제외)
 	@GetMapping(value = "list_id_vue.do", produces = "text/plain;charset=UTF-8")
-	public String list_id_vue() throws Exception
+	public String list_id_vue(String userId) throws Exception
 	{
-		List<SnsIdVO> list=service.snsIdList();
+		List<SnsIdVO> list=service.snsIdList(userId);
 		ObjectMapper mapper=new ObjectMapper();
 		String json=mapper.writeValueAsString(list);
 		return json;
+	}
+	//sns follow insert
+	@PostMapping(value = "follow_insert_vue.do", produces = "text/plain;charset=UTF-8")
+	public String insertFollowData(String userId, HttpSession session) throws Exception {
+	    String f_ing_UserId = (String) session.getAttribute("id");
+	    SnsIdVO vo = new SnsIdVO();
+	    SnsFollowVO svo = vo.getSvo(); // SnsIdVO에 포함된 SnsFollowVO 인스턴스 가져오기
+	    svo.setUserid(f_ing_UserId); // 사용자 ID 설정
+	    svo.setF_id(userId); // 팔로우할 대상의 ID 설정
+	    System.out.println("f_ing_UserId : " + svo.getUserid());
+	    System.out.println("userId : " + userId);
+	    service.insertFollowData(f_ing_UserId, userId); // 팔로우 데이터 삽입
+	    List<SnsIdVO> list = service.snsIdList(f_ing_UserId);
+	    ObjectMapper mapper = new ObjectMapper();
+	    String json = mapper.writeValueAsString(list);
+	    return json;
 	}
 	
 	//sns crud

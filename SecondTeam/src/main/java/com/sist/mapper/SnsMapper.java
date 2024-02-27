@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -27,13 +28,24 @@ public interface SnsMapper {
 			+ "FROM SNS_KEEP WHERE kano=#{kano} ")
 	public SnsKeepVO snsKeepDetailData(int kano);
 	
-	//sns id 목록중 4명 랜덤출력
-	@Select("SELECT mno, userid, username, num "
-			+ "FROM (SELECT mno, userid, username, rownum AS num "
-			+ "FROM (SELECT mno, userid, username "
-			+ "FROM MEMBER WHERE TYPENO =2 ORDER BY dbms_random.value )) "
-			+ "WHERE num BETWEEN 1 AND 4 ")
-	public List<SnsIdVO> snsIdList();
+	//sns id 목록중 4명 랜덤출력 (본인아이디제외)
+		@Select("SELECT mno, userId, userName, num "
+				+ "FROM (SELECT mno, userId, userName, rownum AS num "
+				+ "FROM (SELECT mno, userId, userName "
+				+ "FROM MEMBER "
+				+ "WHERE TYPENO = 2 "
+				+ "AND userId != #{userId} " //여기에 본인 아이디 제외하도록 추가하기 AND userid != 'user1'
+				+ "ORDER BY dbms_random.value )) "
+				+ "WHERE num BETWEEN 1 AND 4 ")
+		public List<SnsIdVO> snsIdList(String userId);
+		
+		//sns id follow
+		 @Insert("INSERT INTO SNS_FOLLOW (fno, userid, f_id) " +
+		            "SELECT sf_fno_seq.NEXTVAL, m1.userId, m2.userId " +
+		            "FROM member m1 " +
+		            "INNER JOIN member m2 ON m1.userId = #{f_ing_UserId} " +
+		            "WHERE m2.userId = #{userId}")
+		 public void insertFollowData(@Param("f_ing_UserId") String f_ing_UserId, @Param("userId") String userId);
 	
 	//sns crud
 	//sns페이지 본인+팔로우 게시글 출력

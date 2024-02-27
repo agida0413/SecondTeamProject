@@ -285,6 +285,18 @@ public void newClassInsert(DonClassVO vo, List<String> list,String[] partTime1,S
 	
 }
 
+@Override
+public DonClassVO footerDonclassAopData() {
+	// TODO Auto-generated method stub
+	return cIdao.footerDonclassAopData();
+}
+
+@Override
+public List<DonClassVO> mainDonclassData() {
+	// TODO Auto-generated method stub
+	return cIdao.mainDonclassData();
+}
+
 
 
 

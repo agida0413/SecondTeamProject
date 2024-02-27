@@ -351,52 +351,43 @@ cursor: pointer;
 	
 	<section class="section posts-entry posts-entry-sm bg-white">
 		<div class="container">
-		<h1>용준</h1><!-- 지워도됌 -->
+			<div class="col-sm-6" style="margin-bottom:50px;">
+					<h2 class="posts-entry-title">인기 재능기부 원데이클래스</h2>
+				</div>
 			<div class="row">
+				<c:forEach var="dcvo" items="${dcList }" >
+				
 				<div class="col-md-6 col-lg-3">
+				<a href="#">
 					<div class="blog-entry">
-						<a href="single.html" class="img-link">
-							<img src="../images/img_1_horizontal.jpg" alt="Image" class="img-fluid">
-						</a>
-						<span class="date">Apr. 14th, 2022</span>
-						<h2><a href="single.html">Thought you loved Python? Wait until you meet Rust</a></h2>
-						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-						<p><a href="#" class="read-more">Continue Reading</a></p>
+					<div style="width:300px; height:200px;">
+							
+						
+							<img src="${dcvo.image }" alt="Image" class="img-fluid" style="width:100%; height:100%;">
+							
+						
 					</div>
-				</div>
-				<div class="col-md-6 col-lg-3">
-					<div class="blog-entry">
-						<a href="single.html" class="img-link">
-							<img src="../images/img_2_horizontal.jpg" alt="Image" class="img-fluid">
-						</a>
-						<span class="date">Apr. 14th, 2022</span>
-						<h2><a href="single.html">Startup vs corporate: What job suits you best?</a></h2>
-						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-						<p><a href="#" class="read-more">Continue Reading</a></p>
+						<span class="date">${dcvo.dbCreate_date }</span>
+						<h2><a href="single.html">${dcvo.name }</a></h2>
+						<div class="rating" style="margin-left:5px;"> 
+									    <c:forEach begin="1" end="${dcvo.score}" var="i">
+								        <span class="star">⭐️</span>
+								    </c:forEach>
+								    <c:if test="${dcvo.score % 1 >= 0.5}">
+								        <span class="half-star">⭐️</span>
+								    </c:if>	
+									
+									
+										
+									<span style="font-weight:bold;color:orange;  margin-left:20px; font-style: italic;">${dcvo.score }</span>
+									
+									</div>
+						
 					</div>
+					</a>
 				</div>
-				<div class="col-md-6 col-lg-3">
-					<div class="blog-entry">
-						<a href="single.html" class="img-link">
-							<img src="../images/img_3_horizontal.jpg" alt="Image" class="img-fluid">
-						</a>
-						<span class="date">Apr. 14th, 2022</span>
-						<h2><a href="single.html">UK sees highest inflation in 30 years</a></h2>
-						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-						<p><a href="#" class="read-more">Continue Reading</a></p>
-					</div>
-				</div>
-				<div class="col-md-6 col-lg-3">
-					<div class="blog-entry">
-						<a href="single.html" class="img-link">
-							<img src="../images/img_4_horizontal.jpg" alt="Image" class="img-fluid">
-						</a>
-						<span class="date">Apr. 14th, 2022</span>
-						<h2><a href="single.html">Don’t assume your user data in the cloud is safe</a></h2>
-						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-						<p><a href="#" class="read-more">Continue Reading</a></p>
-					</div>
-				</div>
+				
+			</c:forEach>
 			</div>
 		</div>
 	</section>

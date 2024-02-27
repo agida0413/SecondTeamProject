@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <style type="text/css">
 
 </style>
+<link rel="stylesheet" href="../css/star.css">
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -21,17 +23,18 @@
 					<div class="widget">
 						<h3 class="mb-4">Quick menu</h3>
 						<ul class="list-unstyled float-start links">
-							<li style="font-weight:bold; font-size:20px;"><a href="#">주메뉴</a></li>
-							<li><a href="#">Services</a></li>
-							<li><a href="#">Vision</a></li>
-							<li><a href="#">Mission</a></li>
-							<li><a href="#">Terms</a></li>
+							<li style="font-weight:bold; font-size:20px;"><a href="#">봉사프로그램</a></li>
+						
+							<li ><a href="../program/list.do"> 봉사프로그램 조회</a></li>
+								<li ><a href="../program/databoardList.do"> 자료실(양식다운)</a></li>
+							<li ><a href="../program/statistics.do?type=A"> 통계정보</a></li>
+						
 						
 						</ul>
 						<ul class="list-unstyled float-start links">
-							<li style="font-weight:bold; font-size:20px;"><a href="#">주메뉴</a></li>
-							<li><a href="#">Business</a></li>
-							<li><a href="#">Careers</a></li>
+							<li style="font-weight:bold; font-size:20px;"><a href="#">재능기부</a></li>
+							<li><a href="../donateclass/list.do?type=A">재능기부 클래스</a></li>
+											<li><a href="../donateclass/newclass.do">나의 재능등록</a></li>
 							
 						</ul>
 						<ul class="list-unstyled float-start links">
@@ -88,30 +91,44 @@
 						<div class="post-entry-footer">
 							<ul>
 								<li>
-									<a href="">
-										<img src="../images/img_1_sq.jpg" alt="Image placeholder" class="me-4 rounded">
+									<a href="../donateclass/detail_cookie.do?dcno=${dcvo.dcno }"">
+										<img src="${dcvo.image }" alt="Image placeholder" class="me-4">
 										<div class="text">
-											<h4>이달의 xxx</h4>
+											<h4>이달의 재능</h4>
 											<div class="post-meta">
-												<span class="mr-2">부내용</span>
+												<span class="mr-2">${dcvo.name }</span>
+													<div class="rating" style="margin-left:5px;"> 
+									    <c:forEach begin="1" end="${dcvo.score}" var="i">
+								        <span class="star">⭐️</span>
+								    </c:forEach>
+								    <c:if test="${dcvo.score % 1 >= 0.5}">
+								        <span class="half-star">⭐️</span>
+								    </c:if>	
+									
+									
+										
+									<span style="font-weight:bold;color:orange;  margin-left:20px; font-style: italic;">${dcvo.score }</span>
+									
+									</div>
 											</div>
 										</div>
 									</a>
 								</li>
 								<li>
 									<a href="">
-										<img src="../images/img_2_sq.jpg" alt="Image placeholder" class="me-4 rounded">
+										<img src="../images/img_2_sq.jpg" alt="Image placeholder" class="me-4">
 										<div class="text">
 											<h4>이달의 xxx</h4>
 											<div class="post-meta">
 												<span class="mr-2">부내용</span>
+											
 											</div>
 										</div>
 									</a>
 								</li>
 								<li>
 									<a href="">
-										<img src="../images/img_3_sq.jpg" alt="Image placeholder" class="me-4 rounded">
+										<img src="../images/img_3_sq.jpg" alt="Image placeholder" class="me-4 ">
 										<div class="text">
 											<h4>이달의 xxx</h4>
 											<div class="post-meta">
@@ -122,7 +139,7 @@
 								</li>
 								<li>
 									<a href="">
-										<img src="../images/img_1_sq.jpg" alt="Image placeholder" class="me-4 rounded">
+										<img src="../images/img_1_sq.jpg" alt="Image placeholder" class="me-4 ">
 										<div class="text">
 											<h4>이달의 xxx</h4>
 											<div class="post-meta">
@@ -137,11 +154,17 @@
 
 					</div> <!-- /.widget -->
 				</div> <!-- /.col-lg-4 -->
-					<div class="widget">
-						<h3 class="mb-4">사이트이름</h3>
-						<p>(사이트이름)은 대한민국 국민들의 봉사의식,도움정신,희생정신을 촉진시키고자 창설된 사이트입니다.</p>
-						
-					</div> <!-- /.widget -->
+						<div class="widget">
+						<h3 class="mb-4"><span class="logo m-0 ">W<sub><span style="font-size:20px;">e all have potential to</span></sub></span><span class="text-primary"></span>
+						<span class="logo m-0 ">I<sub><span style="font-size:20px;">ncrease the</span></sub></span><span class="text-primary"></span>
+						<span class="logo m-0 ">N<sub><span style="font-size:20px;">ecessary </span></sub></span><span class="text-primary"></span>
+						<span class="logo m-0 ">G<sub><span style="font-size:20px;">ood influence  </span></sub></span><span class="text-primary"></span>
+					
+						</h3>
+					
+					</div>
+					
+					
 					
 			</div> <!-- /.row -->
 

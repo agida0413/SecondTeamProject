@@ -21,8 +21,8 @@
 			<div class="menu-bg-wrap">
 				<div class="site-navigation">
 					<div class="row g-0 align-items-center">
-						<div class="col-2">
-						<a href="../main/main.do" class="logo m-0 float-start">site<span class="text-primary">name</span></a>
+						<div class="col-2" >
+						<a href="../main/main.do" class="logo m-0 float-start">wi<span class="text-primary">ng&nbsp;<img src="../Projectimages/wing3.png" width="50px"></span></a>
 						</div>
 						<div class="col-8 text-center">
 							<div>
@@ -45,9 +45,7 @@
 											    <li ><a href="../program/applyList.do">봉사신청 승인</a></li>
 											  </c:if>
 											  
-											  <c:if test="${sessionScope.id!=null && sessionScope.centername==null }"><!--변경요망-->
-											  <li><a href="#">추천 봉사프로그램</a></li>
-											  </c:if>	
+											 
 										
 									</ul>
 								</li>
@@ -61,9 +59,7 @@
   
 											<li><a href="../donateclass/list.do?type=A">재능기부 클래스</a></li>
 											<li><a href="../donateclass/newclass.do">나의 재능등록</a></li>
-  											<li><a href="#">???</a></li>
-  											<li><a href="#">???</a></li>
-  											<li><a href="#">???</a></li>
+  										
  											
 										
 									</ul>

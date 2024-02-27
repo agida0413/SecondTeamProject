@@ -104,4 +104,14 @@ private ClassInformMapper mapper;
 	public int myDonClassTotalPage(String id) {
 		return mapper.myDonClassTotalPage(id);
 	}
+
+
+
+	public DonClassVO footerDonclassAopData() {
+		return mapper.footerDonclassAopData();
+	}
+	
+	public List<DonClassVO> mainDonclassData(){
+		return mapper.mainDonclassData();
+	}
 }

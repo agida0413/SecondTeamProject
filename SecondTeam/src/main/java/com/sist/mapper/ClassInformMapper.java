@@ -133,4 +133,14 @@ public interface ClassInformMapper {
 	
 	@Select("SELECT CEIL(COUNT(*)/5.0) FROM donate_class where id=#{id}")
 	public int myDonClassTotalPage(String id);
+	
+	//푸터aop
+	
+	@Select("SELECT name,image,score,dcno FROM (SELECT name,image,score,dcno FROM DONATE_CLASS ORDER BY SCORE DESC ) WHERE rownum=1" )
+	public DonClassVO footerDonclassAopData();
+	
+	
+	
+	@Select("SELECT name,image,score,dcno,TO_CHAR(create_date,'YYYY-MM-DD') as dbCreate_date FROM (SELECT name,image,score,dcno,create_date FROM DONATE_CLASS ORDER BY SCORE DESC ) WHERE rownum<=4" )
+	public List<DonClassVO> mainDonclassData();
 }

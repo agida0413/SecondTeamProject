@@ -46,4 +46,8 @@ public interface DonateClassService {
 	//새클래스 등록
 	public void newClassInsert(DonClassVO vo,List<String> list,String[] partTime1,String[] partTime2,String[] partTime3);
 	
+	
+	public DonClassVO footerDonclassAopData();
+	public List<DonClassVO> mainDonclassData();
+	
 }

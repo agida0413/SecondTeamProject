@@ -1,9 +1,11 @@
 package com.sist.mapper;
 import java.util.*;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.sist.vo.*;
 public interface DonationReplyMapper {
@@ -32,6 +34,13 @@ public interface DonationReplyMapper {
 			+ "VALUES(dr_rno_seq.nextval,#{dno},#{writer},#{msg},SYSDATE,#{root},#{depth})")
 	public void donationReplyInsert(DonationReplyVO vo);
 	// update
+	@Update("UPDATE donation_reply "
+			+ "SET msg=#{msg} "
+			+ "WHERE rno=#{rno}")
+	public void donationReplyUpdate(DonationReplyVO vo);
 	
 	// delete
+	@Delete("DELETE FROM donation_reply "
+			+ "WHERE rno=#{rno}")
+	public void donationReplyDelete(int rno);
 }

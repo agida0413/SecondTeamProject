@@ -6,4 +6,6 @@ public interface DonationReplyService {
 	public List<DonationReplyVO> donationSubReplyListData(int root);
 	public void donationReplyInsert(DonationReplyVO vo);
 	public int donationReplyTotalPage(int dno);
+	public void donationReplyDelete(int rno);
+	public void donationReplyUpdate(int rno,String msg);
 }

@@ -24,4 +24,12 @@ public class DonationReplyDAO {
 	public int donationReplyTotalPage(int dno) {
 		return mapper.donationReplyTotalPage(dno);
 	}
+	
+	public void donationReplyDelete(int rno) {
+		mapper.donationReplyDelete(rno);
+	}
+	
+	public void donationReplyUpdate(DonationReplyVO vo) {
+		mapper.donationReplyUpdate(vo);
+	}
 }

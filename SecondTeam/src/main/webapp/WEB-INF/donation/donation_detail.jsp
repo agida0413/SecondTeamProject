@@ -103,7 +103,6 @@ h3.plan strong{
 .reply_block{
 	padding: 16px 0 14px;
 	border-bottom: 1px solid #ccc;
-	height: 150px;
 }
 .reply_box{
 	padding: 0 30px;
@@ -133,7 +132,6 @@ h3.plan strong{
     overflow-y: auto;
     position: relative;
     width: 100%;
-    border: none;
     color: #333;
     background-color: rgba(255,255,255,.001);
     line-height: 18px;
@@ -351,7 +349,7 @@ h3.plan strong{
 	                </div>
 	                
 	                <div class="reply_block" v-for="vo in reply_list">
-	                  <div>
+	                  <div style="display: block;">
 		            	<div class="reply_header" style="padding-bottom: 5px;">
 		            	  <b>{{vo.writer}}</b>
 		            	</div> 
@@ -361,32 +359,24 @@ h3.plan strong{
 		            	<div class="reply_time">{{vo.dbday}}</div>
 		            	<div>
 		            	  <span>
-		            	    <a v-if="vo.writer==dSessionId" class="btn reply_replybtn" style="float: left">수정</a>
-		            	    <a v-if="vo.writer==dSessionId"  class="btn reply_replybtn" style="float: left">삭제</a>
-		            	    <a v-if="dSessionId"  class="btn reply_replybtn" style="float: right">좋아요</a>
+		            	    <a v-if="vo.writer==dSessionId" class="btn reply_replybtn" @click="replyUpdate(vo.rno)">수정</a>
+		            	    <a v-if="vo.writer==dSessionId"  class="btn reply_replybtn" @click="replyDelete(vo.rno)">삭제</a>
 		            	  </span>
 		            	</div>
 		              </div>
-		              <!-- 대댓글목록 (답글버튼누를시 show) -->
 		              
-		              <!-- //대댓글목록 -->
+		              <!-- 수정댓글작성창 (수정버튼누를시 show) -->
+		              <div style="display: none;" :id="'u'+vo.rno">
+	                        <textarea rows="5" cols="50" class="reply_text_area" :id="'u_msg'+vo.rno">{{vo.msg}}</textarea>
+		            	<div>
+		            	  <span>
+		            	    <a v-if="vo.writer==dSessionId" class="btn reply_replybtn" @click="updateOk(vo.rno)">작성</a>
+		            	    <a v-if="vo.writer==dSessionId"  class="btn reply_replybtn" @click="updateCancel(vo.rno)">취소</a>
+		            	  </span>
+		            	</div>
+		              </div>
+		              <!-- //수정댓글작성창 -->
 		              
-		              
-		            	<!-- 대댓글 작성창 -->
-		            	<!-- <div class="reply_box" :id="'subReply'+vo.rno">
-		                  <div class="reply_inner">
-		                    <div class="reply_write_area">
-		                      <div class="reply_write_box">
-		                        <textarea v-model="replySubmsg" ref="replySubmsg" rows="5" cols="50" class="reply_text_area" placeholder="응원의 댓글 부탁드립니다."></textarea>
-		                      </div>
-		                       <span>
-		                          <a class="btn reply_replybtn" style="float: right;" @click="replySubCancel(vo.rno)">취소</a>
-		                          <a class="btn reply_replybtn" style="float: right;" @click="replySubWrite(vo.rno)">작성</a>
-		                       </span>
-		                    </div>
-		                  </div>
-		                </div> -->
-		            	<!-- //대댓글 작성창 -->
 		            	
 	            	</div>
 	            
@@ -493,7 +483,8 @@ h3.plan strong{
     			pay_list:[],
     			payTotalpage:0,
     			paysize:0,
-    			dSessionId:''
+    			dSessionId:'',
+    			sss:''
     		} 
     	 },
     	 mounted(){
@@ -515,6 +506,43 @@ h3.plan strong{
     		 this.replyDataSend()
     	 },
     	 methods:{
+    		 updateOk(rno){
+    			 let msg=$('#u_msg'+rno).val()
+    			 axios.get('../donation/donation_reply_update_ok_vue.do',{
+    				 params:{
+    					 msg:msg,
+    					 rno:rno
+    				 }
+    			 }).then(res=>{
+    				 if(res.data==='yes'){
+    					 alert('댓글이 수정되었습니다.');
+    					 this.updateCancel(rno);
+    					 this.replyDataSend();
+    				 } else {
+    					alert('댓글 수정에 실패했습니다.'); 
+    				 }
+    			 })
+    		 },
+    		 replyUpdate(rno){
+    			 $('#u'+rno).show();
+    		 },
+    		 updateCancel(rno){
+    			 $('#u'+rno).hide();
+    		 },
+    		 replyDelete(rno){
+    			axios.get('../donation/donation_reply_delete_vue.do',{
+    				params:{
+    					rno:rno
+    				}
+    			}).then(res=>{
+    				if(res.data==='yes'){
+    					alert('댓글이 삭제되었습니다.')
+    					this.replyDataSend()
+    				} else{
+    					alert('삭제에 실패했습니다.')
+    				}
+    			}) 
+    		 },
     		 subReplyShow(rno){
     			 $('#subReply'+rno).show();
     		 },

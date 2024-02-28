@@ -34,6 +34,21 @@ public class DonationReplyServiceImpl implements DonationReplyService{
 		// TODO Auto-generated method stub
 		return dao.donationReplyTotalPage(dno);
 	}
+
+	@Override
+	public void donationReplyDelete(int rno) {
+		// TODO Auto-generated method stub
+		dao.donationReplyDelete(rno);
+	}
+
+	@Override
+	public void donationReplyUpdate(int rno, String msg) {
+		// TODO Auto-generated method stub
+		DonationReplyVO vo=new DonationReplyVO();
+		vo.setRno(rno);
+		vo.setMsg(msg);
+		dao.donationReplyUpdate(vo);
+	}
 	
 	
 }

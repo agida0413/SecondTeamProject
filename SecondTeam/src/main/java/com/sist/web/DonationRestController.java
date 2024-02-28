@@ -271,4 +271,29 @@ public class DonationRestController {
 		String userid=(String)session.getAttribute("id");
 		return service.donated_max_category(userid);
 	}
+	
+	@GetMapping(value = "donation_reply_delete_vue.do",produces = "text/plain;charset=UTF-8")
+	public String donation_reply_delete_vue(int rno) {
+		String result="";
+		try {
+			rService.donationReplyDelete(rno);
+			result="yes";
+		}catch(Exception ex) {
+			result="no";
+		}
+		
+		return result;
+	}
+	
+	@GetMapping(value = "donation_reply_update_ok_vue.do",produces = "text/plain;charset=UTF-8")
+	public String donation_reply_update_vue(int rno,String msg) {
+		String result="";
+		try {
+			rService.donationReplyUpdate(rno, msg);
+			result="yes";
+		}catch(Exception ex) {
+			result="no";
+		}
+		return result;
+	}
 }

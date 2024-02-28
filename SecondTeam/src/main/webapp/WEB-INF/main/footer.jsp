@@ -47,29 +47,19 @@
 							<li><a href="../donation/donationMain.do">캠페인 후원하기</a></li>
 						</ul>
 						<ul class="list-unstyled float-start links">
-							<li style="font-weight:bold; font-size:20px;"><a href="#">주메뉴</a></li>
-							<li><a href="#">Services</a></li>
-							<li><a href="#">Vision</a></li>
-							<li><a href="#">Mission</a></li>
-							<li><a href="#">Terms</a></li>
-							<li><a href="#">Privacy</a></li>
+							<li style="font-weight:bold; font-size:20px;"><a href="../goods/goods_main.do">상품</a></li>
+							<li><a href="../goods/goods_main.do">상품리스트</a></li>
+							<li><a href="../cart/cart_main.do">장바구니</a></li>
+							<li><a href="../myAndAdpage/wishgoods.do">위시리스트</a></li>
+							<li><a href="../myAndAdpage/buylist.do">주문내역</a></li>
 						</ul>
 						<ul class="list-unstyled float-start links">
-							<li style="font-weight:bold; font-size:20px;"><a href="#">주메뉴</a></li>
-							<li><a href="#">Services</a></li>
-							<li><a href="#">Vision</a></li>
-							<li><a href="#">Mission</a></li>
-							<li><a href="#">Terms</a></li>
-							<li><a href="#">Privacy</a></li>
+							<li style="font-weight:bold; font-size:20px;"><a href="#">기부스토어</a></li>
+							<li><a href="#">스토어찾기</a></li>
+							<li><a href="#">방문예약하기</a></li>
+							<li><a href="../myAndAdpage/donres.do">예약내역</a></li>
 						</ul>
-						<ul class="list-unstyled float-start links">
-							<li style="font-weight:bold; font-size:20px;"><a href="#">주메뉴</a></li>
-							<li><a href="#">Services</a></li>
-							<li><a href="#">Vision</a></li>
-							<li><a href="#">Mission</a></li>
-							<li><a href="#">Terms</a></li>
-							<li><a href="#">Privacy</a></li>
-						</ul>
+						
 					</div> <!-- /.widget -->
 				
 				

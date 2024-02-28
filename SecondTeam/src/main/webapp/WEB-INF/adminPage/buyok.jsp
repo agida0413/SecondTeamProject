@@ -122,7 +122,7 @@
 				form.append("cartprice",this.cartprice)
 				form.append("dbday",this.dbday)
 				form.append("gcno",gcno)
-			    axios.get("../adminPage/buyok_vue.do",form,{
+			    axios.get("../adminPage/buyok_vue.do",form, {
 			    	headers: {
 		         		   'Content-Type': 'multipart/form-data' 
 		 	            }

@@ -100,8 +100,13 @@ public class MemberDAO {
 		{
 			return mapper.memberUpdateDetail(userId);
 		}
-		public void memberUpdate(MemberVO vo)
+		public String memberUpdate(MemberVO vo)
 		{
-			mapper.memberUpdate(vo);
+			  String result="yes";
+		      mapper.memberUpdate(vo);
+		      System.out.println("yes/no result°ª(DAO)"+result);
+		      
+		       return result;
+
 		}
 }

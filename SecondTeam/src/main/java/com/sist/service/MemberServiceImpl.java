@@ -113,9 +113,9 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public void memberUpdate(MemberVO vo) {
+	public String memberUpdate(MemberVO vo) {
 		// TODO Auto-generated method stub
-		dao.memberUpdate(vo);
+		return dao.memberUpdate(vo);
 	}
 
 	

@@ -9,9 +9,11 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sist.service.*;
 import com.sist.vo.MemberVO;
 
@@ -75,5 +77,24 @@ public class MemberRestController {
 		  }
     	return res;
 	  }
+    
+  //마이페이지 회원정보 불러오기
+    @GetMapping(value = "member/update_vue.do", produces = "text/plain;charset=UTF-8")
+    public String member_update(String userId) throws Exception
+    {
+    	MemberVO vo=service.memberUpdateDetail(userId);
+    	ObjectMapper mapper=new ObjectMapper();
+		String json=mapper.writeValueAsString(vo);
+		return json;
+    }
+    
+    //마이페이지 회원정보 수정하기
+    @PostMapping(value="member/update_ok_vue.do",produces = "text/plain;charset=UTF-8")
+    public String member_update_ok(MemberVO vo)
+    {
+    	   String result=service.memberUpdate(vo);
+    	   System.out.println("yes/no result값(CONTROLLER)"+result);
+    	   return result;
+    }
 	  
 }

@@ -36,6 +36,6 @@ public interface MemberService {
 		//5-1. 회원정보 불러오기
 		public MemberVO memberUpdateDetail(String userId);
 		//5-2. 회원정보 수정하기
-		public void memberUpdate(MemberVO vo);
+		public String memberUpdate(MemberVO vo);
 
 }

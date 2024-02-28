@@ -36,28 +36,17 @@ table{
 </style>
 </head>
 <body>
-<div class="wrapper row3" id="memberApp">
+<div class="wrapper row3" id="updateApp">
     <main class="container mainmain"> 
       <h2 class="sectiontitle text-center">회원정보 수정</h2>
+
       <table class="table">
        <tr>
         <th width=15% class="text-center">ID</th>
         <td width=85% class="inline">
-          <input type=text ref=userId size=15 class="input-sm" v-model="userId"  name="userId" readonly="readonly"
+          <input type=text ref=userId size=15 class="input-sm" v-model="userId"
+            readonly="isReadOnly" name="userId"
           >
-          <p>{{idOk}}</p>
-        </td>
-       </tr>
-       <th width=15% class="text-center">비밀번호</th>
-        <td width=85% class="inline">
-          <input type=password ref=userPwd size=15 class="input-sm" v-model="userPwd"
-            name="userPwd"
-          >
-          &nbsp;
-          <input type=password ref=userPwd1 size=15 class="input-sm" placeholder="비밀번호재입력" v-model="userPwd1"
-           
-          >
-          <p>{{pwdOk}}</p>
         </td>
        </tr>
        <tr>
@@ -66,6 +55,20 @@ table{
           <input type=text ref=userName size=15 class="input-sm" v-model="userName"
            name="userName"
           >
+        </td>
+       </tr>
+       <tr>
+        <th width=15% class="text-center">성별</th>
+        <td width=85% class="inline">
+          <%-- radio => group name --%>
+          <input type="radio" ref="sex" value="남자" checked v-model="sex" name="sex">남자
+          <input type="radio" ref="sex" value="여자" v-model="sex" name="sex">여자
+        </td>
+       </tr>
+       <tr>
+        <th width=15% class="text-center">생년월일</th>
+        <td width=85% class="inline">
+          <input type=date ref="birth" size=25 v-model="birth" name="birth">
         </td>
        </tr>
        <tr>
@@ -94,86 +97,94 @@ table{
         </td>
        </tr>
        <tr>
-         <td colspan="2" class="text-center inline" id="last_tr">
-           <input type="submit" value="수정" class="btn-sm btn inputbutton" @click="update()">
-           &nbsp;&nbsp;&nbsp;&nbsp;
-           <a href="../main/main.do" class="btn-sm btn inputbutton">취소</a>
+         <td colspan="2" class="text-center inline">
+           <input type=button value="수정" class="btn-sm btn-primary" @click="update()">
+           <input type=button value="취소" class="btn-sm btn-primary" @click="goback()">
          </td>
        </tr>
       </table>
     </main>
 </div>
-<script>
-  let memberApp = Vue.createApp({
-    data() {
-      return {
-        update_data: {},
-        addr2: '',
-        addr1: '',
-        userName: '',
-        phone1: '',
-        phone2: '',
-        email: '',
-        content: '',
-        birth: '',
-        idOk: '', // 수정: pwdOk로 변경
-        userId: '${id}'
+  <script>
+   let memberApp=Vue.createApp({
+      data(){
+         return{
+            user_info:{},
+               userId:'${id}',
+               userName:'',
+               sex:'',
+               birth:'',
+               email:'',
+               addr1:'',
+               addr2:'',
+               content:'' 
+         }
+      },
+      mounted(){
+         axios.get('../member/update_vue.do',{
+            params:{
+               userId:this.userId
+            }
+         })
+         .then(response=>{
+        	console.log(response)
+            console.log(response.data)
+            this.user_info=response.data
+            this.userName=response.data.userName
+            this.sex=response.data.sex
+            this.birth=response.data.birth
+            this.email=response.data.email
+            this.addr1=response.data.addr1
+            this.addr2=response.data.addr2
+            this.content=response.data.content
+         })
+      },
+      methods:{
+         goback(){
+            window.history.back()
+         },
+         update(){
+            axios.post('../member/update_ok_vue.do',null,{
+               params:{
+                  userId:this.userId,
+                  userName:this.userName,
+                     sex:this.sex,
+                     birth:this.birth,
+                     email:this.email,
+                     addr1:this.addr1,
+                     addr2:this.addr2,
+                     content:this.content 
+               }
+            }).then(response=>{
+               if(response.data==="yes")
+               {
+                  
+                  location.href="../myAndAdpage/mypage.do";
+               }
+               else
+               {
+                  alert("비밀번호가 틀립니다!!")
+               }
+            }).catch(error => {
+               alert("에러가 발생했습니다: " + error.message);
+               });
+         }
       }
-    },
-    mounted() {
-      axios.get('../member/update_vue.do', {
-        params: {
-          userId: this.userId
-        }
-      }).then(res => {
-        this.update_data = res.data;
-        this.userPwd = res.data.userPwd;
-        this.userName = res.data.userName;
-        this.addr1 = res.data.addr1;
-        this.addr2 = res.data.addr2;
-        this.email = res.data.email;
-        this.content = res.data.content;
-      })
-    },
-    methods: {
-    	update() {
-    	    axios.post('../member/update_ok_vue.do', {
-    	    	params:{
-    	    		userPwd: this.userPwd,
-       	         userName: this.userName,
-       	         addr1: this.addr1,
-       	         addr2: this.addr2,
-       	         email: this.email,
-       	         content: this.content
-    	    	}
-    	    	 
-    	    }, {
-    	        headers: {
-    	            'Content-Type': 'application/json'
-    	        }
-    	    }).then(res => {
-    	    	console.log(res)
-    	        console.log(res.data);
-    	        this.update_data = res.data;
-    	        this.userPwd = res.data.userPwd;
-    	        this.userName = res.data.userName;
-    	        this.addr1 = res.data.addr1;
-    	        this.addr2 = res.data.addr2;
-    	        this.email = res.data.email;
-    	        this.content = res.data.content;
-    	        alert("개인정보 수정 성공");
-    	        // 페이지를 새로고침합니다.
-    	        //window.location.reload();
-    	    }).catch(error => {
-    	        alert("개인정보 수정 실패");
-    	        console.error(error);
-    	    });
-    	}
-    }
-  }).mount("#memberApp");
-</script>
+   }).mount("#updateApp")
+  </script>
+</body>
+</html>
 
-</body>
-</html>
-</body>
-</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

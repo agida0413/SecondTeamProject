@@ -408,7 +408,7 @@ public class ProgramServiceImpl implements ProgramService {
 			   
 			} 
 		 
-		
+		System.out.println(percent);
 		 map.put("likepercent", percent);
 		 rDao.updateReplyPercent(map);
 	}
@@ -424,15 +424,18 @@ public class ProgramServiceImpl implements ProgramService {
 			 }else {
 				 rDao.updateReplyMinusCountPlus(map);
 			 }
-			 int likeCount=rDao.getLikeCount(map);
+			int likeCount=rDao.getLikeCount(map);
 			 int hateCount=rDao.getHateCount(map);
-			 
-			 int percent =0;
+			
+			 double percent =0;
 			 if (likeCount + hateCount != 0) {
-				  percent=  likeCount / (likeCount + hateCount) * 100;
+				
+				  percent=  likeCount / ((double)likeCount + (double)hateCount) * 100;
+				  System.out.println(percent);
 				 
 				} 
 			 percent=(int) Math.round(percent);
+			
 			 map.put("likepercent", percent);
 			 rDao.updateReplyPercent(map);
 	}

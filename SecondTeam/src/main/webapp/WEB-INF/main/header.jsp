@@ -28,7 +28,7 @@
 							<div>
 
 							<ul class="js-clone-nav d-none d-lg-inline-block text-start site-menu mx-auto">
-								<li class="active"><a href="index.html">Home</a></li>
+								<li class="active"><a href="../main/main.do">Home</a></li>
 								<li class="has-children">
 									<a href="../program/list.do">봉사 프로그램</a>
 									<ul class="dropdown">
@@ -74,8 +74,7 @@
 											<li><a href="../moim/reserve.do">소모임 예약하기</a></li>
 									</ul>
 								</li>
-								<li><a href="category.html">추가예정</a></li>
-								<li><a href="category.html">추가예정</a></li>
+							
 							
 							</ul>
 							

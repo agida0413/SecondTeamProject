@@ -122,7 +122,7 @@ cursor: pointer;
 							<h2>가치있는 시간,보람있는 순간</h2>
 						</div>
 					</a>
-					<a href="single.html" class="h-entry v-height gradient">
+					<a href="../donateclass/list.do?type=A" class="h-entry v-height gradient">
 
 						<div class="featured-img" style="background-image: url('../Projectimages/talenetmain3.jpg');"></div>
 

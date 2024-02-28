@@ -40,7 +40,22 @@
 			</tr>
 		
 		</table>
-	
+		<div class="row text-center">
+  			 <ul class="pagination" v-if="totalpage!=0">
+  			 		
+				  <li @click="prev()" class="page-item"><a v-if="startpage>1" class="link page-link">&lt;</a></li>
+				  <li v-for="i in range(startpage,endpage)" @click="move(i)"  class="page-item" 
+				  :class="{ 'active': curpage === i }" 
+   				 :aria-current="curpage === i ? 'page' : null">
+				  <a class="link page-link">{{i}}</a>
+				  </li>
+				 
+				  <li @click="next()" class="page-item"><a v-if="endpage<totalpage" class="link page-link">&gt;</a></li>
+				 
+				   
+				   
+				</ul> 
+  			</div>
 	</div>
 
 </div>
@@ -69,9 +84,25 @@ let adminApp = Vue.createApp({
 					}
 				}).then(res=>{
 					this.memberList=res.data
-				      console.log(this.memberList)
+					this.paging()
+				    
 				})
 				
+			},
+			
+			paging(){
+				axios.get("../adminPage/memberList_page_vue.do",{
+					params:{
+						page:this.curpage,
+						ss:''
+					}
+				}).then(res=>{
+					 this.totalpage=response.data.totalpage
+					 this.startpage=response.data.startpage
+					 this.endpage=response.data.endpage
+					 this.curpage=response.data.curpage
+					
+				})
 			},
 			
 			range(start,end){

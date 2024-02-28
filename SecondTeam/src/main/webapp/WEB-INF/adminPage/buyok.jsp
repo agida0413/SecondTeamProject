@@ -118,6 +118,7 @@
 					}
 				}).then(res=>{
 					this.buy_list=res.data
+					this.buyList()
 				})
 			   
 			}

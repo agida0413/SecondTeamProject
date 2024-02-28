@@ -57,7 +57,7 @@ public String goods_list_vue(int page,String ss) throws Exception{
 }
 // 전체 리스트 페이징
 @GetMapping(value="goods/page_vue.do",produces="text/plain;charset=UTF-8")
-public String don_page_vue(int page,String ss) throws Exception
+public String goods_page_vue(int page,String ss) throws Exception
 {	
 	Map map=new HashMap();
 	map.put("ss", ss);

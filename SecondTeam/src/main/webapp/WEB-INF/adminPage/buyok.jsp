@@ -30,7 +30,7 @@
 				<td>{{vo.dbday}}</td>
 				<td>
    					<button class="form-control" v-if="vo.buy_state=='order'" style="width: 90px;"  @click="ok(vo.gcno)">승인대기</button>
-   					<button class="form-control" v-else>승인완료</button>
+   					<button class="form-control" v-if="vo.buy_state=='buyOk'">승인완료</button>
 				</td>
 			</tr>
 			</table>

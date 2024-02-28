@@ -121,7 +121,7 @@
 									</a>
 								</li>
 								<li>
-									<a href="../goods/goods_before_detail.do?gno==${gvo.gno }">
+									<a href="../goods/goods_before_detail.do?gno=${gvo.gno }">
 										<img src="${gvo.g_img }" class="me-4">
 										<div class="text">
 											<h4>이달의 상품</h4>

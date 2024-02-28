@@ -5,6 +5,18 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+    .myres_table {
+        border-collapse: collapse;
+        width: 100%;
+        font-size: 16px; 
+    }
+    .myres_table th, .myres_table td {
+        border-bottom: 1px solid #ddd;
+        padding: 10px;
+        text-align: center; 
+    }
+</style>
 </head>
 <body>
 <div class="conatiner" id="donresApp">
@@ -15,12 +27,13 @@
  <table class="myres_table" style="margin-top: 20px; text-align: center" v-for="vo in donres_list">
   
    <tr>
-    <th class="text-center">예약방문스토어</th>
-    <th class="text-center">전화번호</th>
-    <th class="text-center">방문일자</th>
-    <th class="text-center">방문시간</th>
-    <th class="text-center">방문주소</th>
-    <th class="text-center">방문인원</th>
+    <th class="text-center">예약스토어</th>
+    <th class="text-center">스토어번호</th>
+    <th class="text-center">일자</th>
+    <th class="text-center">시간</th>
+    <th class="text-center">주소</th>
+    <th class="text-center">인원</th>
+    <th></th>
    </tr>
 	<tr>
 	<td>{{vo.dvo.name}}</td>

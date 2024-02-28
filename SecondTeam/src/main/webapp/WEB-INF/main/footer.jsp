@@ -123,17 +123,7 @@
 										</div>
 									</a>
 								</li>
-								<li>
-									<a href="">
-										<img src="../images/img_1_sq.jpg" alt="Image placeholder" class="me-4 ">
-										<div class="text">
-											<h4>이달의 xxx</h4>
-											<div class="post-meta">
-												<span class="mr-2">부내용</span>
-											</div>
-										</div>
-									</a>
-								</li>
+								
 							</ul>
 						</div>
 

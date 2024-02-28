@@ -11,17 +11,17 @@
         width: 100%;
     }
     .myres_table th, .myres_table td {
-        border-bottom: 1px solid #ddd; /* 가로선 */
+        border-bottom: 1px solid #ddd;
         padding: 8px;
         text-align: center;
     }
     .myres_table th:first-child,
     .myres_table td:first-child {
-        border-left: none; /* 첫번째 열의 왼쪽 세로선 제거 */
+        border-left: none; 
     }
     .myres_table th:last-child,
     .myres_table td:last-child {
-        border-right: none; /* 마지막 열의 오른쪽 세로선 제거 */
+        border-right: none; 
     }
 </style>
 </head>

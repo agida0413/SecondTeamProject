@@ -95,7 +95,7 @@ public String buylist(String page) throws Exception
 	
 	int curpage=Integer.parseInt(page);
 	Map map=new HashMap();
-	int rowsize=10;
+	int rowsize=5;
     int start= cf.start(rowsize, curpage);
 	int end=cf.end(rowsize, curpage);
 	map.put("start", start);

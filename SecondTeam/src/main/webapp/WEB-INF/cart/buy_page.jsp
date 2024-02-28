@@ -115,7 +115,7 @@ input[type="text"], textarea {
 						
 						<tr>
 							<th scope="row"><label for="order_dlv_memo">배송시요청사항</label></th>
-							<td><textarea type="text" name="buy_request" id="buy_request" class="form_input block"></textarea></td>
+							<td><textarea type="text" name="buy_request" id="buy_request" v-model="buy_request" class="form_input block"></textarea></td>
 						</tr>
 
 					</tbody>
@@ -137,7 +137,7 @@ input[type="text"], textarea {
 							<tbody>
 								<tr>
 									<th scope="row">상품합계 금액</th>
-									<td>W14,700</td>
+									<td>W{{totalPrice.toLocaleString()}}</td>
 								</tr>
 								<tr class="total">
 									<th scope="row">배송비 <a class="i_info p_cursor" onclick="$('#delivery_info').toggle()"></a></th>
@@ -158,7 +158,7 @@ input[type="text"], textarea {
 								<tr>
 									<th scope="row">총 결제 금액</th>
 									<td>
-										<strong class="total_price">W<span class="order_info_sale_prc"></span></strong>
+										<strong class="total_price">W<span class="order_info_sale_prc">{{(totalPrice+3000).toLocaleString()}}</span></strong>
 										
 									</td>
 								</tr>
@@ -176,119 +176,128 @@ input[type="text"], textarea {
 		</div>
 		</div>
 		<script>
-		let buyApp=Vue.createApp({
-			data(){
-				return{
-					buyinfo:[],
-					mvo:{},
-					userid:'',
-					post:'',
-					addr1:'',
-					addr2:'',
-					recipient:'',
-					phone:'',
-					buy_request:'',
-					checked:false
-				}
-			},
-			mounted(){
-				this.buyInfo()
-			},
-			methods:{
-				buyInfo(){
-					axios.get("../cart/buy_info_vue.do").then(res=>{
-						console.log(res.data)
-						
-						this.buyinfo=res.data.buyinfo
-						this.mvo=res.data.mvo
-						this.userid=res.data.mvo.userId
-					})
-				},
-				postFind(){
-					  let _this=this
-					  new daum.Postcode({
-						 oncomplete:function(data)
-						 {
-							 _this.post=data.zonecode;
-							 _this.addr1=data.address;
-						 }
-					  }).open()
-				  },
-				upChecked(){
-					  this.checked=true
-				  },
-				  order(){
-					  let form=new FormData()
-					  form.append("buy_post",this.post)
-					  form.append("buy_addr1",this.addr1)
-					  form.append("buy_addr2",this.addr2)
-					  form.append("userid",this.userid)
-					  console.log("u"+this.userid)
-					  form.append("recipient",this.recipient)
-					  console.log("u"+this.recipient)
-					  form.append("phone",this.phone)
-					  form.append("buy_request",this.buy_request)
-					  axios.post("../cart/order_info_vue.do",form,{
-						  headers: {
-			        		   'Content-Type': 'multipart/form-data' 
-				            }
-					  }).then(res=>{
-						  alert("주문이 정상 완료되었습니다")
-						  location.href="../myAndAdpage/buylist.do";
-					  }).catch(error => {
-			               console.error("Error occurred while sending review:", error);
-			           })
-				  },
-				pay(){
-					  if(this.recipient === '') {
-						   alert("수령인을 입력하세요")
-			               this.$refs.recipient.focus();
-			               return;
-			           }
-			           if(this.phone === '') {
-			        	   alert("전화번호를 입력하세요")
-			               this.$refs.phone.focus();
-			               return;
-			           }
-					  if(this.post === '') {
-						  alert("주소를 검색하세요")
-			               this.$refs.post.focus();
-			               return;
-			           }
+		let buyApp = Vue.createApp({
+		    data() {
+		        return {
+		            buyinfo: [],
+		            mvo: {},
+		            userid: '',
+		            post: '',
+		            addr1: '',
+		            addr2: '',
+		            recipient: '',
+		            phone: '',
+		            buy_request: '',
+		            checked: false,
+		            totalPrice: 0
+		        }
+		    },
+		    mounted() {
+		        this.buyInfo();
+		    },
+		    methods: {
+		        buyInfo() {
+		            axios.get("../cart/buy_info_vue.do").then(res => {
+		                console.log(res.data);
 
-			           if (this.checked===false) {
-			               alert("결제정보를 확인하고 구매진행 동의에 체크해주세요");
-			               return;
-			             }
-							  let IMP = window.IMP; // 생략 가능
-							  IMP.init("imp34378262");
-							    console.log('clicked');
-							    // IMP.request_pay(param, callback) 결제창 호출
-							    IMP.request_pay({
-							        pg: 'html5_inicis',
-							        pay_method: 'card',
-							        merchant_uid: 'merchant_' + new Date().getTime(),
-							        name: '구매 상품명',
-							        amount: 1000, // 실제 결제할 금액
-							        buyer_email: 'iamport@siot.do',
-							        buyer_name: '구매자이름',
-							        buyer_tel: '010-1234-5678',
-							        buyer_addr: '서울특별시 강남구 삼성동',
-							        buyer_postcode: '123-456',
-							        app_scheme: 'iamporttest'
-							    }, (rsp) => {
-							        if (rsp.success) {
-							            // 결제 성공 시 처리
-							        } else {
-							            // 결제 실패 시 처리
-										this.order()
-							        }
-							        
-							    })
-					  
-				  }
-			}
-		}).mount('#buyApp')
+		                this.buyinfo = res.data.buyinfo;
+		                this.mvo = res.data.mvo;
+		                this.userid = res.data.mvo.userId;
+		                this.sum(); // sum 메서드 호출
+		            });
+		        },
+		        postFind() {
+		            let _this = this;
+		            new daum.Postcode({
+		                oncomplete: function(data) {
+		                    _this.post = data.zonecode;
+		                    _this.addr1 = data.address;
+		                }
+		            }).open();
+		        },
+		        upChecked() {
+		            this.checked = true;
+		        },
+		        order() {
+		            let form = new FormData();
+		            form.append("buy_post", this.post);
+		            form.append("buy_addr1", this.addr1);
+		            form.append("buy_addr2", this.addr2);
+		            form.append("userid", this.userid);
+		            console.log("u" + this.userid);
+		            form.append("recipient", this.recipient);
+		            console.log("u" + this.recipient);
+		            form.append("phone", this.phone);
+		            form.append("buy_request", this.buy_request);
+		            axios.post("../cart/order_info_vue.do", form, {
+		                headers: {
+		                    'Content-Type': 'multipart/form-data'
+		                }
+		            }).then(res => {
+		                alert("주문이 정상 완료되었습니다");
+		                location.href = "../myAndAdpage/buylist.do";
+		            }).catch(error => {
+		                console.error("Error occurred while sending review:", error);
+		            });
+		        },
+		        pay() {
+		            if (this.recipient === '') {
+		                alert("수령인을 입력하세요");
+		                this.$refs.recipient.focus();
+		                return;
+		            }
+		            if (this.phone === '') {
+		                alert("전화번호를 입력하세요");
+		                this.$refs.phone.focus();
+		                return;
+		            }
+		            if (this.post === '') {
+		                alert("주소를 검색하세요");
+		                this.$refs.post.focus();
+		                return;
+		            }
+
+		            if (this.checked === false) {
+		                alert("결제정보를 확인하고 구매진행 동의에 체크해주세요");
+		                return;
+		            }
+		            let IMP = window.IMP; // 생략 가능
+		            IMP.init("imp34378262");
+		            console.log('clicked');
+		            // IMP.request_pay(param, callback) 결제창 호출
+		            IMP.request_pay({
+		                pg: 'html5_inicis',
+		                pay_method: 'card',
+		                merchant_uid: 'merchant_' + new Date().getTime(),
+		                name: '상품주문',
+		                amount: this.totalPrice+3000, // totalPrice를 실제 결제할 금액으로 지정
+		                buyer_email: 'iamport@siot.do',
+		                buyer_name: '구매자이름',
+		                buyer_tel: '010-1234-5678',
+		                buyer_addr: '서울특별시 강남구 삼성동',
+		                buyer_postcode: '123-456',
+		                app_scheme: 'iamporttest'
+		            }, (rsp) => {
+		                if (rsp.success) {
+		                    // 결제 성공 시 처리
+		                } else {
+		                    // 결제 실패 시 처리
+		                    this.order();
+		                }
+
+		            });
+
+		        },
+		        sum() {
+		            let totalPrice = 0;
+
+		            for (let i = 0; i < this.buyinfo.length; i++) {
+		                totalPrice += this.buyinfo[i].price * this.buyinfo[i].cart_count;
+		            }
+		            this.totalPrice = totalPrice;
+		        }
+		    }
+		}).mount('#buyApp');
 		</script>
 </body>
 </html>

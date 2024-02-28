@@ -148,9 +148,6 @@ $(function() {
 				<a href="#" class="read-more"  @click="rWrite()">Write Review</a>
 			</div>
 			<div class="row"  style="border-top: 1px solid grey; margin-top: 20px;">
-				<div class="text-center" style="background-color: #f5f5f5; width: 100%; height: 210px; margin-top: 30px; text-align: center;">
-				
-				</div>	
 			</div>
 			<div class="col-sm-3 text-sm-end"
 				style="margin-top: 50px; display: none; height: 400px;" id="dialog" @submit="write">
@@ -172,7 +169,7 @@ $(function() {
 		                <th width="10%">내용</th>
 		                <td width="90%"><textarea rows="15" cols="70" ref="content" v-model="content"></textarea></td>
 		            </tr>
-					<tr >
+					<tr>
 						<th width="15%" class="text-center">첨부파일</th>
 						<td width="85%">
 						<input type="file" ref="upfiles" class="input-sm" :readonly="upfiles">
@@ -354,7 +351,7 @@ let goodsDetail=Vue.createApp({
 		        autoOpen:false,
 		        modal:true,
 		        width:900,
-		        height:900,
+		        height:1000,
 		        open: function(event, ui) {
 		            $("body").css("top", -scrollTop); 
 		            $("body").addClass("dialog-open"); 

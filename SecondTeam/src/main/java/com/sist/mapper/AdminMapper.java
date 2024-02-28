@@ -59,7 +59,7 @@ public void deleteMemWing(int mno);
 		+ "WHERE gc.num BETWEEN #{start} AND #{end} AND (buy_state='order' OR buy_state='buyOk') ")
 public List<CartVO> buyList(Map map);
 
-@Select("SELECT CEIL(COUNT(*)/10.0) FROM goods_cart")
+@Select("SELECT CEIL(COUNT(*)/5.0) FROM goods_cart")
 public int buyTotalpage();
 
 @Update("UPDATE goods_cart SET buy_state='buyOk' WHERE gcno=#{gcno}")

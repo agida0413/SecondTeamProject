@@ -30,14 +30,14 @@
 <div class="row my_res">
 <div class="row">
 <h4 class="text-left" style="font-weight: bold;">&nbsp;상품 위시리스트</h4>
- <table class="myres_table" style="margin-top: 20px;" v-for="vo in gWish_List">
+ <table class="myres_table" style="margin-top: 20px;" >
    <tr>
     <th class="text-center"></th>
     <th class="text-center">상품명</th>
     <th class="text-center">가격</th>
     <th></th>
    </tr>
-	<tr >
+	<tr v-for="vo in gWish_List" >
     <td class="text-center" style="margin: 0px auto;">
      <a :href="'../goods/goods_detail.do?gno='+vo.gno"><img :src="vo.g_img" style="width: 170px; height: 150px"></a>
     </td>

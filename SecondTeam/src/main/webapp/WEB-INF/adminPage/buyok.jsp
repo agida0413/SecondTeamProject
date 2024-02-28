@@ -10,8 +10,8 @@
 <div class="wrapper row3" id="buyokApp">
 		<main class="container clear">
 			<h2 class="sectiontitle">구매승인내역</h2>
-			<table class="table" style="text-align: center">
-			<tr>
+			<table class="table" style="text-align: center;vertical-align: middle;">
+			<tr style="white-space: nowrap;">
 				<th>아이디</th>
 				<th>상품번호</th>
 				<th>상품명</th>
@@ -19,8 +19,9 @@
 				<th>주문수량</th>
 				<th>주문금액</th>
 				<th>결제일자</th>
+				<th></th>
 			</tr>
-			<tr v-for="vo in buy_list">
+			<tr v-for="vo in buy_list" style=" white-space: nowrap;vertical-align: middle;">
 				<td>{{vo.userid}}</td>
 				<td>{{vo.gvo.gno}}</td>
 				<td>{{vo.gvo.g_name}}</td>
@@ -37,7 +38,7 @@
 			<nav class="pagination">
         <ul>
           <li v-if="startpage>1"><a @click="prev()" class="link">&laquo; Previous</a></li>
-          <li v-for="i in range(startpage,endpage)" :class="i===curpage?'current':''"><a @click="pagechange(i)" class="link">{{i}}</a></li>
+          <li v-for="i in range(startpage,endpage)" :class="curpage===i?'active':''"><a @click="pagechange(i)" class="link">{{i}}</a></li>
           <li v-if="endpage<totalpage"><a @click="next()" class="link">Next &raquo;</a></li>
         </ul>
       </nav>

@@ -19,6 +19,7 @@ import com.sist.service.GoodsService;
 import com.sist.service.MypageService;
 import com.sist.vo.CartVO;
 import com.sist.vo.DonClassResHistoryVO;
+import com.sist.vo.DonResVO;
 import com.sist.vo.GoodsVO;
 import com.sist.vo.VdataboardVO;
 import com.sist.vo.VprogramApplyVO;
@@ -140,6 +141,23 @@ public class MypageRestController {
 		String json=mapper.writeValueAsString(cList);
 		
 		return json;
+	}
+	
+	@GetMapping(value="myAndAdpage/donres_vue.do",produces = "text/plain;charset=UTF-8")
+	public String donres_vue(HttpSession session) throws Exception
+	{
+		String userid=(String)session.getAttribute("id");
+		System.out.println(userid);
+		List<DonResVO> dList=service.donResList(userid);
+		ObjectMapper mapper=new ObjectMapper();
+		String json=mapper.writeValueAsString(dList);
+		
+		return json;
+	}
+	@GetMapping(value="myAndAdpage/donres_cancel_vue.do",produces = "text/plain;charset=UTF-8")
+	public void donres_cancel (int dresno) throws Exception
+	{
+		service.donresCancel(dresno);
 	}
 	
 	

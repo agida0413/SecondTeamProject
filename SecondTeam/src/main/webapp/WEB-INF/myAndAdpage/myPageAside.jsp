@@ -32,7 +32,7 @@ cursor:pointer;
   <a href="../myAndAdpage/buylist.do"> <li class="list-group-item ${cate == 'buylist' ? 'active' : ''}" style="padding:18px;">주문내역</li></a>
   <a href="../myAndAdpage/moim_res_my.do"> <li class="list-group-item ${cate == '' ? 'active' : ''}" style="padding:18px;">소모임 예약목록</li></a>
   <a href="../myAndAdpage/donated_campaign.do"> <li class="list-group-item ${cate == 'donated_history' ? 'active' : ''}" style="padding:18px;">캠페인 후원내역</li></a>
-
+ <a href="../myAndAdpage/donres.do"> <li class="list-group-item ${cate == 'donres' ? 'active' : ''}" style="padding:18px;">기부스토어 예약내역</li></a>
 </ul>
 
 

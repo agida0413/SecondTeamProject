@@ -379,13 +379,21 @@ private ProgramService pService;
 		}
 	// 상품 위시 페이지
 	@GetMapping("myAndAdpage/wishgoods.do")
-	public String wishgoods() {
+	public String wishgoods(Model model) {
+		model.addAttribute("cate","wishgoods");
 		return "myAndAdpage/wishgoods";
 	}
 	// 구매내역
 	@GetMapping("myAndAdpage/buylist.do")
-	public String buylist() {
+	public String buylist(Model model) {
+		model.addAttribute("cate","buylist");
 		return "myAndAdpage/buylist";
+	}
+	
+	@GetMapping("myAndAdpage/donres.do")
+	public String donres(Model model) {
+		model.addAttribute("cate","donres");
+		return "myAndAdpage/donres";
 	}
 	
 	

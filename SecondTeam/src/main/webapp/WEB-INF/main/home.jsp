@@ -241,7 +241,7 @@ cursor: pointer;
       </div>
 				<div class="col-md-6 col-lg-3" v-for="vo in goods_main">
 					<div class="blog-entry">
-						<a href="#" class="img-link">
+						<a :href="'../goods/goods_before_detail.do?gno='+vo.gno" class="img-link">
 							<img :src="vo.g_img" alt="Image" class="img-fluid">
 						</a>
 						<h2><a href="#">{{vo.g_name}}</a></h2>

@@ -13,12 +13,14 @@ import com.sist.commons.CommonsFunction;
 import com.sist.dao.CartDAO;
 import com.sist.dao.ClassInformDAO;
 import com.sist.dao.DonClassReserveDAO;
+import com.sist.dao.DonResDAO;
 import com.sist.dao.ProgramListDAO;
 import com.sist.dao.ProgramWishDAO;
 import com.sist.mapper.ProgramWishMapper;
 import com.sist.vo.CartVO;
 import com.sist.vo.DonClassResHistoryVO;
 import com.sist.vo.DonClassVO;
+import com.sist.vo.DonResVO;
 import com.sist.vo.ProgramVO;
 import com.sist.vo.VprogramApplyVO;
 
@@ -36,6 +38,9 @@ public class MypageServiceImpl implements MypageService {
 	
 	@Autowired
 	private DonClassReserveDAO resDao;
+	
+	@Autowired 
+	private DonResDAO dDao;
 		
 	@Autowired
 	private CommonsFunction cf;
@@ -216,6 +221,16 @@ public class MypageServiceImpl implements MypageService {
 		returnMap.put("size", list.size());
 		
 		return returnMap;
+	}
+	@Override
+	public List<DonResVO> donResList(String userid) {
+		// TODO Auto-generated method stub
+		return dDao.donResList(userid);
+	}
+	@Override
+	public void donresCancel(int dresno) {
+		// TODO Auto-generated method stub
+		dDao.donresCancel(dresno);
 	}
 
 }

@@ -6,6 +6,7 @@ import java.util.Map;
 import com.sist.vo.CartVO;
 import com.sist.vo.DonClassResHistoryVO;
 import com.sist.vo.DonClassVO;
+import com.sist.vo.DonResVO;
 import com.sist.vo.ProgramVO;
 import com.sist.vo.VprogramApplyVO;
 
@@ -40,4 +41,8 @@ public interface MypageService {
 			
 		//나의 클래스 예약관리
 		public Map myDonclassResHistoryList(String userid,String page);
+		
+	// 기부스토어 예약 
+	public List<DonResVO> donResList(String userid);
+	public void donresCancel(int dresno);
 }

@@ -81,7 +81,7 @@ $(function(){
 		<div class="container">
 			<div class="row align-items-center justify-content-center text-center pt-5">
 				<div class="col-lg-6">
-					<h1 class="heading text-white mb-3" data-aos="fade-up">결제 페이지</h1>
+					<h1 class="heading text-white mb-3" data-aos="fade-up">후원 페이지</h1>
 				</div>
 			</div>
 		</div>
@@ -137,7 +137,7 @@ $(function(){
 								<input type="email" class="form-control" value="${sessionScope.email }" readonly>
 							</div>
 							<div class="col-12 mb-3">
-								<input type="text" class="form-control" id="howMuch" value="후원하실 금액을 입력해주세요.">
+								<input type="text" class="form-control" id="howMuch" placeholder="후원하실 금액을 입력해주세요.">
 							</div>
 							<div class="col-12 mb-3">
 								<textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="후원금과 함께 전달되는 메세지를 입력해주세요."></textarea>

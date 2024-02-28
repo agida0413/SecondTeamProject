@@ -335,7 +335,7 @@ h3.plan strong{
 			  <!-- 댓글목록 -->
 			  <div id="donationDetailReply">
 	            <div class="pt-5 comment-wrap">
-	              <h3 class="mb-5 heading" style="margin-bottom: 5px;">6 Comments<span style="float: right"><a class="btn reply_replybtn" @click="replyWrite()">댓글쓰기</a></span></h3>
+	              <h3 class="mb-5 heading" style="margin-bottom: 5px;">{{reply_list.length}} Comments<span style="float: right"><a class="btn reply_replybtn" @click="replyWrite()">댓글쓰기</a></span></h3>
 	                <div class="reply_box" v-show="replyShow">
 	                  <div class="reply_inner">
 	                    <div class="reply_write_area">
@@ -361,7 +361,8 @@ h3.plan strong{
 		            	<div class="reply_time">{{vo.dbday}}</div>
 		            	<div>
 		            	  <span>
-		            	    <a class="btn reply_replybtn" style="float: left" @click="subReplyShow(vo.rno)">답글</a>
+		            	    <a class="btn reply_replybtn" style="float: left" @click="subReplyShow(vo.rno)">수정</a>
+		            	    <a class="btn reply_replybtn" style="float: left">삭제</a>
 		            	    <a class="btn reply_replybtn" style="float: right">좋아요</a>
 		            	  </span>
 		            	</div>

@@ -121,13 +121,13 @@
 									</a>
 								</li>
 								<li>
-									<a href="../donation/donation_before_detail.do?dno=${dovo.dno }">
-										<img src="${dovo.d_image }" class="me-4">
+									<a href="../goods/goods_before_detail.do?gno==${gvo.gno }">
+										<img src="${gvo.g_img }" class="me-4">
 										<div class="text">
 											<h4>이달의 상품</h4>
 											<div class="post-meta">
-												<span class="mr-2">${dovo.d_title }</span>
-												<p class="mr-2">목표:${dovo.d_goal }원</p>
+												<span class="mr-2">${gvo.g_name }</span>
+												<p class="mr-2">상품가격:${gvo.g_price }원</p>
 												
 											</div>
 										</div>

@@ -5,10 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="css/flatpickr.min.css">
 <script src="https://unpkg.com/vue@3"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <style type="text/css">
 #reserveApp {
@@ -19,11 +18,21 @@
   color: #2c3e50;
   margin-top: 60px;
 }
+.link span span,.non_link{
+    display: inline-block;
+    padding : 10px;
+}
+.btnbtn{
+    display: inline-block;
+    padding : 10px;
+    margin: 5px 5px 5px 0px;
+    cursor: pointer;
+}
  .rounded {
-      -moz-border-radius:20px 20px 20px 20px; 
-      border-radius:20px 20px 20px 20px;
+     /*  -moz-border-radius:20px 20px 20px 20px;  */
       border:solid 1px #ffffff;
-      background-color:#2b6bd1;
+      background-color:#214252;
+      display: inline-block;
       padding:10px;
       color:#ffffff;
     }
@@ -46,11 +55,11 @@
            <caption><h3 class="text-center">소모임 리스트</h3></caption>
             <tr>
               <td colspan="2" class="text-center inline">
-                 <input type="button" class="btn btn-xs" value="운영중" 
+                 <input type="button" class="btn-primary btn-xs" value="운영중" 
                  @click="moimSelect('운영중')">&nbsp;
-                 <input type="button" class="btn btn-xs" value="부분운영" 
+                 <input type="button" class="btn-primary btn-xs" value="부분운영" 
                  @click="moimSelect('부분운영')">&nbsp;
-                 <input type="button" class="btn btn-xs" value="임시중단"
+                 <input type="button" class="btn-primary btn-xs" value="임시중단"
                  @click="moimSelect('임시중단')">&nbsp;
               </td>
            </tr>
@@ -98,7 +107,7 @@
 					                  {{day}}
 					                </span>
 				                </span>
-				                <span v-else style="color:gray">
+				                <span class="non_link" v-else style="color:gray">
 				                   {{day}}
 				                </span>
 				              </td>
@@ -117,7 +126,7 @@
           <caption><h3 class="text-center">시간 정보</h3></caption>
           <tr v-show="tShow">
             <td class="text-center">
-               <span class="btn btn-xs" v-for="time in time_list"
+               <span class="btn-primary btn-xs btnbtn" v-for="time in time_list"
                @click="timeSelect(time)">{{time}}</span>
             </td>
           </tr>
@@ -130,7 +139,7 @@
           <caption><h3 class="text-center">인원 정보</h3></caption>
           <tr v-show="iShow">
             <td class="text-center">
-               <span class="btn btn-xs" v-for="inwon in inwon_list"
+               <span class="btn-primary btn-xs btnbtn" v-for="inwon in inwon_list"
                @click="inwonSelect(inwon)"
                >{{inwon}}</span>
             </td>
@@ -140,7 +149,7 @@
      </tr>
      <tr v-show="rShow">
         <td class="text-center" width="60%" colspan="2">
-           <input type="button" class="btn-lg btn" value="예약하기"
+           <input type="button" class="btn-lg btn-primary" value="예약하기"
            @click="reserveOk()">
         </td>
      </tr>

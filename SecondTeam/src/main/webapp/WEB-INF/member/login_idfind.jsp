@@ -43,6 +43,18 @@ input:focus {
    font-size: 15px;
    border-radius: 20px;
 }
+#emailTab{
+   position: relative; 
+   height: 100px;
+   margin-bottom: 50px;
+   padding:10px;
+}
+#emailTab form button{
+    position: absolute;
+    bottom: 0;
+    right: 38%;
+    padding: 10px;
+}
 </style>
 <!-- jQuery 및 jQuery UI 로드 -->
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
@@ -96,7 +108,7 @@ input:focus {
             <p id="emailResult"></p>
           </div>
         </div>
-        <div class="text-center">
+        <div class="text-center ">
          <span><a href="../member/login_pwdfind.do" style="color: #fff !important;">
                     <i class="xi-user-o"></i>
                      비밀번호 찾기</a></span>

@@ -207,13 +207,13 @@ li{
         </div>
         
         <!-- 태그 부분 시작 -->
-       <div style="margin-left: 20px;" id="moim_tag" class="sidebar-box"
+      <!--  <div style="margin-left: 20px;" id="moim_tag" class="sidebar-box"
        >
        <h3 class="heading">tag list</h3>
            <ul class="tags" >
               <li><a class="link">예시자료</a></li>
             </ul>
-       </div>
+       </div> -->
     </div>
    
 		</div><!-- row -->

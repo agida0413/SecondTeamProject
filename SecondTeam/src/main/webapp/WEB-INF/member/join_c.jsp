@@ -33,6 +33,7 @@ table{
    background-color: #93a0a8;
    font-size: 15px;
    border-radius: 20px;
+   padding:10px;
 }
 </style>
 </head>

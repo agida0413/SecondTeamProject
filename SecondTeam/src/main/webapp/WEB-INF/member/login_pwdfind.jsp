@@ -43,6 +43,17 @@ input:focus {
    background-color: #93a0a8;
    font-size: 15px;
    border-radius: 20px;
+   position: absolute;
+    bottom: 0;
+    right: 38%;
+    padding: 10px;
+}
+
+#find_center{
+    height: 150px;
+   margin-bottom: 50px;
+   padding:10px;
+   position: relative;
 }
 </style>
 <script src="https://code.jquery.com/jquery.js"></script>
@@ -98,18 +109,18 @@ input:focus {
       <h2 class="sectiontitle text-center"><i class="xi-command"></i></h2>
       <h2 class="sectiontitle text-center">비밀번호 찾기</h2>
       <div class="row row1 rowrow">
-         <div class="find-id-form">
+         <div class="find-id-form" id="find_center">
         
         <!-- 이메일 탭 -->
         <div id="emailPwdTab">
-            <form>
+            <form class="text-right">
                 <label for="id">ID:</label>
-                <input type="text" name="id" id="findbyid" class="inputinput"><br>
+                <input type="text" name="id" id="findbyid" class="inputinput">&nbsp;&nbsp;&nbsp;&nbsp;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<br>
                 <label for="email">이메일:</label>
-                <input type="email" name="email" id="findbyemail" class="inputinput"><br>
+                <input type="email" name="email" id="findbyemail" class="inputinput">&nbsp;&nbsp;&nbsp;&nbsp;<br>
                 <button type="button" onclick="findPwd('email')" class="inputbutton">PW 찾기</button>
             </form>
-            <p id="emailResult"></p>
         	</div>
         	
         	

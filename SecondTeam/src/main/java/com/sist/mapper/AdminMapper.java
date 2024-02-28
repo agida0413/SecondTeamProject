@@ -31,7 +31,7 @@ public int totalpage(Map  map);
 	@Result(property = "gvo.g_name" , column = "g_name"),
 	@Result(property = "gvo.g_price" , column = "g_price")
 })
-@Select("SELECT gc.gcno, gl.gno, gc.userid, gc.cart_price, gc.cart_count, TO_CHAR(gc.buy_date, 'YYYY-MM-DD') as dbday, gc.buy_state, gc.recipient, gc.price, gl.g_name, gl.g_price, gc.num "
+@Select("SELECT gc.gcno, gl.gno, gc.userid, gc.cart_price, gc.cart_count, TO_CHAR(gc.buy_date, 'YYYY-MM-DD') as dbday, gc.buy_state, gc.recipient, gc.price, gl.g_name, gl.g_price, gl.g_img, gc.num "
 		+ "FROM (SELECT gcno, gno, userid, cart_price, cart_count, buy_date, buy_state, recipient, price, ROWNUM AS num "
 		+ "FROM goods_cart ORDER BY gcno DESC) gc "
 		+ "JOIN goodslist gl ON gc.gno = gl.gno "

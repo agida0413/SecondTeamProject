@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -91,8 +92,8 @@ public String buypage_vue(int page) throws Exception
 	String json=mapper.writeValueAsString(map);
 	return json;
 }
-@GetMapping(value="adminPage/buyok_vue.do",produces = "text/plain;charset=UTF-8")
-public void buyok(int gcno)
+@PostMapping(value="adminPage/buyok_vue.do",produces = "text/plain;charset=UTF-8")
+public void buyok(int gcno,CartVO vo)
 {
 	service.buyOk(gcno);
 }

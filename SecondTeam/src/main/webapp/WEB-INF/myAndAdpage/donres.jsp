@@ -10,7 +10,7 @@
 <div class="conatiner" id="donresApp">
 <div class="row my_res">
 <div class="row">
-<h4 class="text-center">&nbsp;기부스토어 예약내역</h4>
+<h4 class="text-left" style="font-weight: bold">&nbsp;기부스토어 예약내역</h4>
  <div class="donres" v-if="donres_list.length>0">
  <table class="myres_table" style="margin-top: 20px; text-align: center" v-for="vo in donres_list">
   
@@ -38,7 +38,7 @@
  </table>
  </div>
   <div class="text-center" >
-                    <div style="margin:70px 0 150px" v-if="donres_list.length==0">
+                    <div style="margin:170px 0 150px" v-if="donres_list.length==0">
                     <span>예약내역이 존재하지않습니다</span>
                     </div>
                     </div>
@@ -71,6 +71,7 @@ let donresApp=Vue.createApp({
 				
 				alert("기부스토어 방문 예약이 취소되었습니다")
 				this.donres_list=res.data
+				this.donres()
 			})
 		}
 	}

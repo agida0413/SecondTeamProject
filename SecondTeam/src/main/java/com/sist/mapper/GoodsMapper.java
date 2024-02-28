@@ -141,13 +141,15 @@ public void wishDelete(Map map);
 		+ "wl.objno=gl.gno WHERE id=#{id} AND typeno=3")
 public List<GoodsVO> goodsWishList(String id);
 
-@Select("SELECT gno,g_name,g_img,g_price FROM (SELECT gno,g_name,g_img,g_price FROM goodslist ORDER BY g_like DESC ) WHERE rownum<=4")
+@Select("SELECT g.gno,g_name,g_img,g_price,type_name,type_img FROM (SELECT gno,g_name,g_img,g_price FROM goodslist ORDER BY g_like DESC ) g "
+		+ "INNER JOIN typename t ON g.gno=t.gno "
+		+ "WHERE rownum<=4")
 public List<GoodsVO> mainGoodsList();
 
-@Select("SELECT gno,g_img,g_name,rownum "
-		+ "FROM (SELECT gno,g_img,g_name "
+@Select("SELECT gno,g_img,g_name,g_price,rownum "
+		+ "FROM (SELECT gno,g_img,g_name,g_price "
 		+ "FROM goodslist ORDER BY g_like DESC) "
-		+ "WHERE rownum=1")
+		+ "WHERE rownum=1") 
 public GoodsVO goodsFooterAOPData();
 
 }

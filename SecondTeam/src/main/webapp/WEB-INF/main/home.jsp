@@ -227,8 +227,6 @@ cursor: pointer;
    </section>
 	<!-- Start posts-entry -->
 	<!-- Start posts-entry -->
-		
-
 	<section class="section posts-entry posts-entry-sm bg-light">
 		<section class="section posts-entry posts-entry-sm bg-light">
 		<div class="container" id="mgApp">
@@ -239,16 +237,24 @@ cursor: pointer;
             </div>
             <div class="col-sm-6 text-sm-end"><a href="../goods/goods_main.do" class="read-more">전체 상품 보러가기</a></div>
       </div>
-				<div class="col-md-6 col-lg-3" v-for="vo in goods_main">
-					<div class="blog-entry">
-						<a :href="'../goods/goods_before_detail.do?gno='+vo.gno" class="img-link">
-							<img :src="vo.g_img" alt="Image" class="img-fluid">
-						</a>
-						<h2><a href="#">{{vo.g_name}}</a></h2>
-						<p>{{vo.g_price}}</p>
+					<div class="col-md-6 col-lg-3" v-for="vo in goods_main">
+						<div class="blog-entry">
+							<a :href="'../goods/goods_before_detail.do?gno='+vo.gno"
+								class="img-link"> <img :src="vo.g_img" alt="Image"
+								class="img-fluid">
+							</a>
+							<template v-for="(img, imgIndex) in vo.type_img.split(',')">
+								<img v-if="imgIndex < 2" :src="img" alt="Image"
+									class="img-fluid spaced-img" :key="imgIndex"
+									style="margin-right: 10px; width: 100px; height: 30px;">
+							</template>
+							<h2>
+								<a href="#">{{vo.g_name}}</a>
+							</h2>
+							<p>{{vo.g_price}}</p>
+						</div>
 					</div>
 				</div>
-			</div>
 		</div>
 	</section>
 	</section>

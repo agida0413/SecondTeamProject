@@ -119,6 +119,7 @@ const DonRes={
                 }).then(res=>{
                    console.log("res:"+dno)
                    alert("방문 예약이 접수되었습니다")
+                   location.href="../myAndAdpage/donres.do"
                 })
              },
            init(){

@@ -38,8 +38,8 @@ public interface CartMapper {
 })
 	
 // 장바구니 목록
-@Select("SELECT gc.gno,g_name,g_img,g_price,cart_price,cart_count,gcno,price,buy_state FROM goodslist gl JOIN goods_cart gc "
-		+ "ON gl.gno=gc.gno WHERE userid=#{userid}")
+@Select("SELECT gl.gno,g_name,g_img,g_price,cart_price,cart_count,gcno,price,buy_state FROM goodslist gl JOIN goods_cart gc "
+		+ "ON gl.gno=gc.gno WHERE userid=#{userid} AND buy_state IS NULL")
 public List<CartVO> cartListData(String userid);
 // 장바구니 비우기 (부분삭제)
 @Delete("DELETE FROM goods_cart WHERE gcno=#{gcno}")

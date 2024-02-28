@@ -510,6 +510,7 @@ let goodsDetail=Vue.createApp({
     		   }).then(res=>{
     			   alert("상품이 위시리스트에 담겼습니다")
     			   this.state='YES'
+    			   location.href="../myAndAdpage/wishgoods.do"
     		   })
     		}
     	   else if(this.state==="YES" && this.userid!=null)

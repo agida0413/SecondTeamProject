@@ -37,7 +37,7 @@
 <body>
 <div class="conatiner" id="buyListApp">
 		<div class="row my_buy" style="flex: center;">
-			<h4 class="text-center">&nbsp;상품 결제내역</h4>
+			<h4 class="text-left" style="font-weight: bold">&nbsp;상품 결제내역</h4>
 			<div class="buyList" v-if="buy_list.length>0">
 			<table class="mybuy_table" style="margin-top: 20px;" v-for="vo in buy_list">
 				<tr>
@@ -91,7 +91,7 @@
 			
 		</div>
 		<div class="text-center" >
-                    <div style="margin:70px 0 150px" v-if="buy_list.length==0">
+                    <div style="margin:170px 0 150px" v-if="buy_list.length==0">
                     <span>구매내역이 존재하지 않습니다</span>
                     </div>
                     </div>

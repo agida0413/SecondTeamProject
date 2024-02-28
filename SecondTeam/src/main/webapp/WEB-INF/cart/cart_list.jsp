@@ -31,9 +31,9 @@
 				<div style="text-align: center;">
 					<img src="../Projectimages/shoppingcart.png" style="width: 200px;">
 				</div>
-				<div class="shoping__cart__table" v-if="cart_list.length > 0">
+				<div class="shoping__cart__table">
     				<div v-for="(vo, index) in cart_list" :key="index">
-      			  <div class="shoping__cart__table" v-if="vo.buy_state!=='order'">
+      			  <div class="shoping__cart__table">
 					<table>
 						<thead>
 
@@ -84,7 +84,7 @@
 				</div>
 			</div>
 			</div>
-			<div class="text-center" v-if="cart_list.length==0 || cart_list.every(item => item.buy_state === 'order')">
+			<div class="text-center" v-if="cart_list.length==0">
 				<div style="margin: 70px 0 150px">
 					<span>장바구니에 담긴 상품이 없습니다</span>
 				</div>
@@ -98,7 +98,7 @@
                     </div>
                      
                 </div>
-                <div class="col-lg-6"  v-if="cart_list.length>0">
+                <div class="col-lg-6" v-if="cart_list.length>0">
                 <table class="table">
 		<colgroup>
 			<col style="width:50%;">
@@ -124,7 +124,7 @@
 			</tr>
 		</tbody>
 	</table>
-                        <a href="../cart/buy_page.do"><button class="form-control"  id="moveToBuy" style="width:100%; margin-top: 10px;" v-if="cart_list.length>0">결제이동하기
+                        <a href="../cart/buy_page.do"><button class="form-control"  id="moveToBuy" style="width:100%; margin-top: 10px;" >결제이동하기
                         </button>
                         </a>
                     </div>

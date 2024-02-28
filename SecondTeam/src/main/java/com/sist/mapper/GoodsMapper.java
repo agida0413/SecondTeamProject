@@ -144,6 +144,12 @@ public List<GoodsVO> goodsWishList(String id);
 @Select("SELECT gno,g_name,g_img,g_price FROM (SELECT gno,g_name,g_img,g_price FROM goodslist ORDER BY g_like DESC ) WHERE rownum<=4")
 public List<GoodsVO> mainGoodsList();
 
+@Select("SELECT gno,g_image,g_name,rownum "
+		+ "FROM (SELECT gno,g_image,g_name "
+		+ "FROM goodslist ORDER BY g_like DESC) "
+		+ "WHERE rownum=1")
+public GoodsVO goodsFooterAOPData();
+
 }
 
 

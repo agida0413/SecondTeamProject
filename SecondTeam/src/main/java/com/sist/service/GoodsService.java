@@ -30,4 +30,6 @@ public interface GoodsService {
 	public List<GoodsVO> goodsWishList(String id);
 	// 메인
 	public List<GoodsVO> mainGoodsList();
+	// 푸터
+	public GoodsVO goodsFooterAOPData();
 }

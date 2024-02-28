@@ -121,12 +121,14 @@
 									</a>
 								</li>
 								<li>
-									<a href="">
-										<img src="../images/img_3_sq.jpg" alt="Image placeholder" class="me-4 ">
+									<a href="../donation/donation_before_detail.do?dno=${dovo.dno }">
+										<img src="${dovo.d_image }" class="me-4">
 										<div class="text">
-											<h4>이달의 xxx</h4>
+											<h4>이달의 상품</h4>
 											<div class="post-meta">
-												<span class="mr-2">부내용 </span>
+												<span class="mr-2">${dovo.d_title }</span>
+												<p class="mr-2">목표:${dovo.d_goal }원</p>
+												
 											</div>
 										</div>
 									</a>

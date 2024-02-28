@@ -69,5 +69,8 @@ public List<GoodsVO> goodsWishList(String id){
 public List<GoodsVO> mainGoodsList(){
 	return mapper.mainGoodsList();
 }
+public GoodsVO goodsFooterAOPData() {
+	return mapper.goodsFooterAOPData();
+}
 
 }

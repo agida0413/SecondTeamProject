@@ -16,8 +16,10 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.sist.service.DonateClassService;
 import com.sist.service.DonationService;
+import com.sist.service.GoodsService;
 import com.sist.vo.DonClassVO;
 import com.sist.vo.DonationVO;
+import com.sist.vo.GoodsVO;
 import com.sist.vo.ProgramVO;
 import com.sist.vo.DonationVO;
 
@@ -31,6 +33,9 @@ public class CommonsAOP {
 	@Autowired 
 	private DonationService doService;
 	
+	@Autowired
+	private GoodsService gService;
+	
 	@After("execution(* com.sist.web.*Controller.*(..))")
 	public void commonsFooterSend() {
 		  HttpServletRequest request=((ServletRequestAttributes)
@@ -39,9 +44,11 @@ public class CommonsAOP {
 		  
 		  DonClassVO dcVo = dService.footerDonclassAopData();
 		  DonationVO dovo = doService.donationFooterAOPData();
+		  GoodsVO gvo=gService.goodsFooterAOPData();
 		  
 		  request.setAttribute("dcvo", dcVo);
 		  request.setAttribute("dovo", dovo);
+		  request.setAttribute("gvo", gvo);
 		  
 
 	}

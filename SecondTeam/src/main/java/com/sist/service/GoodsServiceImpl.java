@@ -120,5 +120,11 @@ public List<GoodsVO> mainGoodsList() {
 	return gDao.mainGoodsList();
 }
 
+@Override
+public GoodsVO goodsFooterAOPData() {
+	// TODO Auto-generated method stub
+	return gDao.goodsFooterAOPData();
+}
+
 
 }

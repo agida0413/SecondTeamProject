@@ -31,7 +31,7 @@
 	<td>{{vo.don_resinwon}}</td>
 	<td>
 	<button class="form-control"
-	style="width: 100px; height: 40px;" @click="resCancel(vo.dresno)">결제취소</button>
+	style="width: 100px; height: 40px;" @click="resCancel(vo.dresno)">예약취소</button>
 	</td>
 	</tr>
 	

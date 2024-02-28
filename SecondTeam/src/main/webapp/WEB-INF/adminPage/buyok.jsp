@@ -68,7 +68,7 @@
 		},
 		methods:{
 			buyList(){
-				axios.get("../adminPage/buylist_vue.do",{
+				axios.get("../adminPage/buylist_vue.do", {
 					params:{
 						page:this.curpage
 					}

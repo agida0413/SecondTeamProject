@@ -4,67 +4,72 @@ import org.apache.ibatis.annotations.*;
 import com.sist.vo.MemberVO;
 public interface MemberMapper {
 	
-	//1.È¸¿ø°¡ÀÔ
-	//1-1.¾ÆÀÌµð Áßº¹Ã¼Å©
+	//1.È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	//1-1.ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ßºï¿½Ã¼Å©
 	@Select("SELECT COUNT(*) FROM Member "
 			+ "WHERE userid=#{userid} ")
 	public int memberIdCount(String userid);
-	//1-2.È¸¿ø°¡ÀÔ Ãß°¡
-	//1-2-1.ÀÏ¹ÝÈ¸¿ø°¡ÀÔÃß°¡ (typeno=2, admin=2)
+	//1-2.È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
+	//1-2-1.ï¿½Ï¹ï¿½È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß°ï¿½ (typeno=2, admin=2)
 	@Insert("INSERT INTO member(mno,typeno,admin,userid,userpwd,username,sex,addr1,addr2,phone,email,content,birth) "
 			+ "VALUES(MEMBER_seq.nextval,2,2,#{userId},#{userPwd},#{userName},#{sex},#{addr1},#{addr2}, "
 			+ "#{phone},#{email},#{content},#{birth})")
 	public void memberInsert(MemberVO vo);
-	//1-2-2.¼¾ÅÍÈ¸¿ø°¡ÀÔÃß°¡ (typeno=3, admin=2)
+	//1-2-2.ï¿½ï¿½ï¿½ï¿½È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß°ï¿½ (typeno=3, admin=2)
 	@Insert("INSERT INTO member(mno,typeno,admin,userid,userpwd,username,centername,addr1,addr2,phone,email,content,birth) "
 				+ "VALUES(MEMBER_seq.nextval,3,2,#{userId},#{userPwd},#{centerName},#{centerName},#{addr1},#{addr2}, "
 				+ "#{phone},#{email},#{content},#{birth})")
 	public void memberInsertCenter(MemberVO vo);
-	//1-3.projectAuthorityÀº ¾È¸¸µë
+	//1-3.projectAuthorityï¿½ï¿½ ï¿½È¸ï¿½ï¿½ï¿½
 	
-	//2.·Î±×ÀÎ
-    //2-1.IDÁ¸Àç¿©ºÎ È®ÀÎ
-	//Àü¿¡¸¸µç 1-1 °¡Á®´Ù ¾²¸é µÊ
-	//2-2.ºñ¹Ð¹øÈ£ È®ÀÎ
+	//2.ï¿½Î±ï¿½ï¿½ï¿½
+    //2-1.IDï¿½ï¿½ï¿½ç¿©ï¿½ï¿½ È®ï¿½ï¿½
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 1-1 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+	//2-2.ï¿½ï¿½Ð¹ï¿½È£ È®ï¿½ï¿½
 	@Select("SELECT userId,userName,userPwd,enabled,centerName,admin,email,phone,mno "
 			+ "FROM member "
 			+ "WHERE userId=#{userId} ")
 	public MemberVO memberLogin(String userId);
 	
-	//3. ºñ¹Ð¹øÈ£ Ã£±â
-	//3-1. ¾ÆÀÌµð ¿©ºÎ È®ÀÎ
+	//3. ï¿½ï¿½Ð¹ï¿½È£ Ã£ï¿½ï¿½
+	//3-1. ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
 	@Select("SELECT COUNT(*) FROM member WHERE userId=#{userId}")
 	public int FindID(String userId);
-	//3-2. ÀÌ¸ÞÀÏ ¿©ºÎ È®ÀÎ
+	//3-2. ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
 	@Select("SELECT COUNT(*) FROM member WHERE userId=#{userId} AND email=#{email}")
 	public int FindEmail(@Param("userId") String userId, @Param("email") String email);
-	//3-3. ÀÓ½Ãºñ¹Ð¹øÈ£ ¹ß±Þ
+	//3-3. ï¿½Ó½Ãºï¿½Ð¹ï¿½È£ ï¿½ß±ï¿½
 	@Update("UPDATE member SET userPwd=#{temp} WHERE userId=#{userId}")
 	public void updateMemberPwdById(@Param("temp") String temp, @Param("userId") String userId);
 	
-	//4. ¾ÆÀÌµð Ã£±â
-	//4-1-1. ÀÌ¸ÞÀÏ·Î ¾ÆÀÌµð Ã£±â
+	//4. ï¿½ï¿½ï¿½Ìµï¿½ Ã£ï¿½ï¿½
+	//4-1-1. ï¿½Ì¸ï¿½ï¿½Ï·ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ Ã£ï¿½ï¿½
 	@Select("SELECT COUNT(*) FROM member WHERE email=#{email} ")
     public int selectMemberCountByEmail(String email);
-	//4-1-2. ÀÌ¸ÞÀÏ·Î Ã£Àº ¾ÆÀÌµð ÀÏºÎ Ãâ·ÂÇÏ±â
+	//4-1-2. ï¿½Ì¸ï¿½ï¿½Ï·ï¿½ Ã£ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ ï¿½Ïºï¿½ ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
 	@Select("SELECT userId " +
             "FROM MEMBER " +
             "WHERE email=#{email}")
     public String selectMaskedIdByEmail(String email);
 	
-	//5. È¸¿øÁ¤º¸ ¼öÁ¤
-		//5-1. È¸¿øÁ¤º¸ ºÒ·¯¿À±â
+	//5. È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		//5-1. È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ò·ï¿½ï¿½ï¿½ï¿½ï¿½
 		@Select("SELECT userId,userName,userPwd,sex,birth,email,"
 				+ "addr1,addr2,content "
 				+ "FROM member WHERE userId=#{userId} ")
 		public MemberVO memberUpdateDetail(String userId);
-		//5-2. È¸¿øÁ¤º¸ ¼öÁ¤ÇÏ±â
+		//5-2. È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
 		@Update("UPDATE member SET "
 				+"userName=#{userName},sex=#{sex},birth=#{birth},"
 				+ "email=#{email},addr1=#{addr1},"
 				+"addr2=#{addr2},content=#{content} "
 				+ "WHERE userId=#{userId}")
 		public void memberUpdate(MemberVO vo);
+		
+		// íƒˆí‡´
+		@Delete("DELETE FROM member "
+				+ "WHERE userId=#{userId}")
+		public void memberDelete(String userId);
 	}
 
 

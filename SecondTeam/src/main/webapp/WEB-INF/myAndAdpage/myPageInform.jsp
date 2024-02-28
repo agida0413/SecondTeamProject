@@ -100,6 +100,14 @@ table{
          <td colspan="2" class="text-center inline">
            <input type=button value="수정" class="btn-sm btn-primary" @click="update()">
            <input type=button value="취소" class="btn-sm btn-primary" @click="goback()">
+           <input type=button value="탈퇴" class="btn-sm btn-danger" @click="withdraw()">
+         </td>
+       </tr>
+       <tr>
+         <td colspan="2" class="text-center inline" v-show="wShow">
+           비밀번호 : <input type="password" class="input-sm" v-model="withpwd" ref="withpwd">
+           <input type=button value="탈퇴" class="btn-sm btn-danger" @click="withdrawOk()">
+           <input type=button value="취소" class="btn-sm btn-primary" @click="withdrawNo()">
          </td>
        </tr>
       </table>
@@ -117,7 +125,9 @@ table{
                email:'',
                addr1:'',
                addr2:'',
-               content:'' 
+               content:'',
+               wShow:false,
+               withpwd:''
          }
       },
       mounted(){
@@ -140,6 +150,29 @@ table{
          })
       },
       methods:{
+    	 withdrawOk(){
+    		 console.log(this.withpwd)
+    		 axios.post('../member/delete_ok_vue.do',null,{
+    			 params:{
+    				 pwd:this.withpwd
+    			 }
+    		 }).then(res=>{
+    			 if(res.data==='yes'){
+    				 alert('회원 탈퇴되었습니다.')
+    				 location.href="../main/main.do";
+    			 } else {
+    				alert('비밀번호가 일치하지 않습니다!!')
+    				this.$refs.withpwd=''
+    				this.$refs.withpwd.focus()
+    			 }
+    		 })
+    	 },
+    	 withdraw(){
+    		 this.wShow=true;
+    	 },
+    	 withdrawNo(){
+    		 this.wShow=false;
+    	 },
          goback(){
             window.history.back()
          },

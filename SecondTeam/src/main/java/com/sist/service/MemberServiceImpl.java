@@ -102,7 +102,7 @@ public class MemberServiceImpl implements MemberService{
 			return "NO";
 		else
 			maskedId=selectMaskedIdByEmail(email);
-		    System.out.println("ÀÌ¸ÞÀÏ·ÎÃ£Àº¾ÆÀÌµð(service):"+maskedId);
+		    System.out.println("ï¿½Ì¸ï¿½ï¿½Ï·ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½(service):"+maskedId);
 			return maskedId;
 	}
 
@@ -117,6 +117,23 @@ public class MemberServiceImpl implements MemberService{
 		// TODO Auto-generated method stub
 		return dao.memberUpdate(vo);
 	}
+
+	@Override
+	public String memberDelete(String userId, String pwd) {
+		// TODO Auto-generated method stub
+		String result="";
+		MemberVO dbvo=new MemberVO();
+		dbvo=dao.memberLogin(userId,pwd);
+		if(dbvo.getMsg()=="OK") {
+			dao.memberDelete(userId);
+			result="yes";
+		} else {
+			result="no";
+		}
+		
+		return result;
+	}
+
 
 	
 	

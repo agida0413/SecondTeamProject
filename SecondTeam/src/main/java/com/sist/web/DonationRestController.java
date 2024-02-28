@@ -158,7 +158,7 @@ public class DonationRestController {
 	
 	
 	@GetMapping(value="donation_reply_list_vue.do",produces = "text/plain;charset=UTF-8")
-	public String donation_reply_list_vue(int dno,int page) throws Exception{
+	public String donation_reply_list_vue(int dno,int page,HttpSession session) throws Exception{
 		int rowSize=5;
 		int start=(rowSize*page)-(rowSize-1);
 		int end=(rowSize*page);
@@ -169,10 +169,11 @@ public class DonationRestController {
 		map.put("end", end);
 		
 		List<DonationReplyVO> list=rService.donationMainReplyListData(map);
-		
+		String dSessionId=(String)session.getAttribute("id");
 		map=new HashMap();
 		map.put("reply_list", list);
 		map.put("totalpage", totalpage);
+		map.put("dSessionId", dSessionId);
 		
 		ObjectMapper mapper=new ObjectMapper();
 		String json=mapper.writeValueAsString(map);

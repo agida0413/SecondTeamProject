@@ -13,89 +13,89 @@ import com.sist.vo.MemberVO;
 @Repository
 public class MemberDAO {
 	
-	//º¹È£È­¸¦À§ÇØ °¡Á®¿È
+	//ï¿½ï¿½È£È­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	@Autowired
 	private BCryptPasswordEncoder encoder;
 		
 	@Autowired
 	private MemberMapper mapper;
 	
-	//1-1.¾ÆÀÌµð Áßº¹Ã¼Å©
+	//1-1.ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ßºï¿½Ã¼Å©
 	public int memberIdCount(String userid)
 	{
 		return mapper.memberIdCount(userid);
 	}
-	//1-2-1.ÀÏ¹ÝÈ¸¿ø°¡ÀÔ Ãß°¡
+	//1-2-1.ï¿½Ï¹ï¿½È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
 	public void memberInsert(MemberVO vo)
 	{
 		mapper.memberInsert(vo);
 	}
-	//1-2-2.¼¾ÅÍÈ¸¿ø°¡ÀÔ Ãß°¡
+	//1-2-2.ï¿½ï¿½ï¿½ï¿½È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
 	public void memberInsertCenter(MemberVO vo)
 	{
 		mapper.memberInsertCenter(vo);
 	}
 	
-	//2-2-2. ·Î±×ÀÎ-ºñ¹Ð¹øÈ£È®ÀÎ
+	//2-2-2. ï¿½Î±ï¿½ï¿½ï¿½-ï¿½ï¿½Ð¹ï¿½È£È®ï¿½ï¿½
 	public MemberVO memberLogin(String userId, String userPwd)
 	{
 		MemberVO dbVO=new MemberVO();
 		int count=mapper.memberIdCount(userId);
 		if(count==0)
 		{
-			//¾ÆÀÌµð ¾øÀ»¶§
+			//ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			dbVO.setMsg("NOID");
 		}
 		else
 		{
 			dbVO=mapper.memberLogin(userId);
-			//¾ÏÈ£È­µÇ¾îÀÖ´ÂºÎºÐ º¹È£È­ÇØ¼­ ºÙ¿©Áà¾ßÇÔ
+			//ï¿½ï¿½È£È­ï¿½Ç¾ï¿½ï¿½Ö´ÂºÎºï¿½ ï¿½ï¿½È£È­ï¿½Ø¼ï¿½ ï¿½Ù¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			if(encoder.matches(userPwd, dbVO.getUserPwd()))
 			{
-				//·Î±×ÀÎ¼º°ø
+				//ï¿½Î±ï¿½ï¿½Î¼ï¿½ï¿½ï¿½
 				//System.out.println(dbVO.getUserId());
 				dbVO.setMsg("OK");
 			}
 			else
 			{
-				//ºñ¹Ð¹øÈ£ºÒÀÏÄ¡
+				//ï¿½ï¿½Ð¹ï¿½È£ï¿½ï¿½ï¿½ï¿½Ä¡
 				dbVO.setMsg("NOPWD");
 			}
 		}
 		return dbVO;
 	}
 	
-	//3. ºñ¹Ð¹øÈ£ Ã£±â
-	//3-1. ¾ÆÀÌµð ¿©ºÎ È®ÀÎ
+	//3. ï¿½ï¿½Ð¹ï¿½È£ Ã£ï¿½ï¿½
+	//3-1. ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
 	public int FindID(String userId)
 	{
 		return mapper.FindID(userId);
 	}
-	//3-2. ÀÌ¸ÞÀÏ ¿©ºÎ È®ÀÎ
+	//3-2. ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
 	public int FindEmail(String userId, String email)
 	{
 		return mapper.FindEmail(userId, email);
 	}
-	//3-3. ÀÓ½Ãºñ¹Ð¹øÈ£ ¹ß±Þ
+	//3-3. ï¿½Ó½Ãºï¿½Ð¹ï¿½È£ ï¿½ß±ï¿½
 	public void updateMemberPwdById(String temp,String userId)
 	{
 		mapper.updateMemberPwdById(temp, userId);
 	}
 	
-	//4. ¾ÆÀÌµð Ã£±â
-	//4-1-1. ÀÌ¸ÞÀÏ·Î ¾ÆÀÌµð Ã£±â
+	//4. ï¿½ï¿½ï¿½Ìµï¿½ Ã£ï¿½ï¿½
+	//4-1-1. ï¿½Ì¸ï¿½ï¿½Ï·ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ Ã£ï¿½ï¿½
 	public int selectMemberCountByEmail(String email)
 	{
 		return mapper.selectMemberCountByEmail(email);
 	}
-	//4-1-2. ÀÌ¸ÞÀÏ·Î Ã£Àº ¾ÆÀÌµð ÀÏºÎ Ãâ·ÂÇÏ±â
+	//4-1-2. ï¿½Ì¸ï¿½ï¿½Ï·ï¿½ Ã£ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ ï¿½Ïºï¿½ ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
 	public String selectMaskedIdByEmail(String email)
 	{
 		return mapper.selectMaskedIdByEmail(email);
 	}
 	
-	//5. È¸¿øÁ¤º¸ ¼öÁ¤
-		//5-1. È¸¿øÁ¤º¸ ºÒ·¯¿À±â
+	//5. È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		//5-1. È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ò·ï¿½ï¿½ï¿½ï¿½ï¿½
 		public MemberVO memberUpdateDetail(String userId)
 		{
 			return mapper.memberUpdateDetail(userId);
@@ -104,9 +104,13 @@ public class MemberDAO {
 		{
 			  String result="yes";
 		      mapper.memberUpdate(vo);
-		      System.out.println("yes/no result°ª(DAO)"+result);
+		      System.out.println("yes/no resultï¿½ï¿½(DAO)"+result);
 		      
 		       return result;
 
+		}
+		
+		public void memberDelete(String userId) {
+			mapper.memberDelete(userId);
 		}
 }

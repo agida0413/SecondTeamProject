@@ -361,9 +361,9 @@ h3.plan strong{
 		            	<div class="reply_time">{{vo.dbday}}</div>
 		            	<div>
 		            	  <span>
-		            	    <a class="btn reply_replybtn" style="float: left" @click="subReplyShow(vo.rno)">수정</a>
-		            	    <a class="btn reply_replybtn" style="float: left">삭제</a>
-		            	    <a class="btn reply_replybtn" style="float: right">좋아요</a>
+		            	    <a v-if="vo.writer==dSessionId" class="btn reply_replybtn" style="float: left">수정</a>
+		            	    <a v-if="vo.writer==dSessionId"  class="btn reply_replybtn" style="float: left">삭제</a>
+		            	    <a v-if="dSessionId"  class="btn reply_replybtn" style="float: right">좋아요</a>
 		            	  </span>
 		            	</div>
 		              </div>
@@ -492,7 +492,8 @@ h3.plan strong{
     			historyCurpage:1,
     			pay_list:[],
     			payTotalpage:0,
-    			paysize:0
+    			paysize:0,
+    			dSessionId:''
     		} 
     	 },
     	 mounted(){
@@ -559,6 +560,7 @@ h3.plan strong{
     				console.log(res.data); 
     				this.reply_list=res.data.reply_list;
     				this.replyTotalpage=res.data.totalpage;
+    				this.dSessionId=res.data.dSessionId;
     			 })
     		 },
     		 historyDataSend(){

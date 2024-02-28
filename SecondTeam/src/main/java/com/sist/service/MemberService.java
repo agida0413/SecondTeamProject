@@ -5,37 +5,37 @@ import org.apache.ibatis.annotations.Param;
 import com.sist.vo.MemberVO;
 
 public interface MemberService {
-	//1-1.¾ÆÀÌµð Áßº¹Ã¼Å©
+	//1-1.ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ßºï¿½Ã¼Å©
 	public int memberIdCount(String userid);
-	//1-2-1.È¸¿ø°¡ÀÔ Ãß°¡
+	//1-2-1.È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
 	public void memberInsert(MemberVO vo);
-	//1-2-2.¼¾ÅÍÈ¸¿ø°¡ÀÔ Ãß°¡
+	//1-2-2.ï¿½ï¿½ï¿½ï¿½È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
 	public void memberInsertCenter(MemberVO vo);
-	//2-2. ·Î±×ÀÎ-ºñ¹Ð¹øÈ£È®ÀÎ
+	//2-2. ï¿½Î±ï¿½ï¿½ï¿½-ï¿½ï¿½Ð¹ï¿½È£È®ï¿½ï¿½
 	public MemberVO memberLogin(String userId, String userPwd);
 	
-	//3. ºñ¹Ð¹øÈ£ Ã£±â
-	//3-1. ¾ÆÀÌµð ¿©ºÎ È®ÀÎ
+	//3. ï¿½ï¿½Ð¹ï¿½È£ Ã£ï¿½ï¿½
+	//3-1. ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
 	public int FindID(String userId);
-	//3-2. ÀÌ¸ÞÀÏ ¿©ºÎ È®ÀÎ
+	//3-2. ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
 	public int FindEmail(String userId, String email);
-	//3-3. ÀÓ½Ãºñ¹Ð¹øÈ£ ¹ß±Þ
+	//3-3. ï¿½Ó½Ãºï¿½Ð¹ï¿½È£ ï¿½ß±ï¿½
 	public void updateMemberPwdById(String temp,String userId);
-	//3-4. 3-1~3-3ÇÕÄ¡±â
+	//3-4. 3-1~3-3ï¿½ï¿½Ä¡ï¿½ï¿½
 	public String pwdFind(String id, String email, String temp);
 	
-	//4. ¾ÆÀÌµð Ã£±â
-	//4-1-1. ÀÌ¸ÞÀÏ·Î ¾ÆÀÌµð Ã£±â
+	//4. ï¿½ï¿½ï¿½Ìµï¿½ Ã£ï¿½ï¿½
+	//4-1-1. ï¿½Ì¸ï¿½ï¿½Ï·ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ Ã£ï¿½ï¿½
 	public int selectMemberCountByEmail(String email);
-	//4-1-2. ÀÌ¸ÞÀÏ·Î Ã£Àº ¾ÆÀÌµð ÀÏºÎ Ãâ·ÂÇÏ±â
+	//4-1-2. ï¿½Ì¸ï¿½ï¿½Ï·ï¿½ Ã£ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ ï¿½Ïºï¿½ ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
 	public String selectMaskedIdByEmail(String email);
-	//4-1-3. ÀÌ¸ÞÀÏ ÇÕÄ¡±â
+	//4-1-3. ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½
 	 public String idemailFind(String email);
 	 
-	//5. È¸¿øÁ¤º¸ ¼öÁ¤
-		//5-1. È¸¿øÁ¤º¸ ºÒ·¯¿À±â
+	//5. È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		//5-1. È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ò·ï¿½ï¿½ï¿½ï¿½ï¿½
 		public MemberVO memberUpdateDetail(String userId);
-		//5-2. È¸¿øÁ¤º¸ ¼öÁ¤ÇÏ±â
+		//5-2. È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
 		public String memberUpdate(MemberVO vo);
-
+		public String memberDelete(String userId,String pwd);
 }

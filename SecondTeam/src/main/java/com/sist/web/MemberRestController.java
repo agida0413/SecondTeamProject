@@ -30,7 +30,7 @@ public class MemberRestController {
 		 return String.valueOf(count);
 	}
 	
-	//·Î±×ÀÎ ½ÇÇà
+	//ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     @GetMapping(value = "member/login_ok_vue.do", produces = "text/plain;charset=UTF-8")
     public String member_login_ok_vue(String userId, String userPwd, boolean ck, HttpSession session, HttpServletResponse response)
     {
@@ -64,21 +64,21 @@ public class MemberRestController {
     	return vo.getMsg();
     }
     
-    //¾ÆÀÌµðÃ£±â
+    //ï¿½ï¿½ï¿½Ìµï¿½Ã£ï¿½ï¿½
     @RequestMapping("member/idfindemail_ok.do")
 	  public String member_idfindemailok(String email) {
     	String res="";
     	try {
 		  //System.out.println(email);
 		  res=service.idemailFind(email);
-		  //System.out.println("ÀÌ¸ÞÀÏ·ÎÃ£Àº¾ÆÀÌµð(controller):"+res);
+		  //System.out.println("ï¿½Ì¸ï¿½ï¿½Ï·ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½(controller):"+res);
 		  }catch(Exception ex) {
 			  ex.printStackTrace();
 		  }
     	return res;
 	  }
     
-  //¸¶ÀÌÆäÀÌÁö È¸¿øÁ¤º¸ ºÒ·¯¿À±â
+  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ò·ï¿½ï¿½ï¿½ï¿½ï¿½
     @GetMapping(value = "member/update_vue.do", produces = "text/plain;charset=UTF-8")
     public String member_update(String userId) throws Exception
     {
@@ -88,13 +88,27 @@ public class MemberRestController {
 		return json;
     }
     
-    //¸¶ÀÌÆäÀÌÁö È¸¿øÁ¤º¸ ¼öÁ¤ÇÏ±â
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
     @PostMapping(value="member/update_ok_vue.do",produces = "text/plain;charset=UTF-8")
     public String member_update_ok(MemberVO vo)
     {
     	   String result=service.memberUpdate(vo);
-    	   System.out.println("yes/no result°ª(CONTROLLER)"+result);
+    	   System.out.println("yes/no resultï¿½ï¿½(CONTROLLER)"+result);
     	   return result;
+    }
+    
+    @PostMapping(value = "member/delete_ok_vue.do",produces = "text/plain;charset=UTF-8")
+    public String member_delete_ok(String pwd,HttpSession session) {
+    	
+    	System.out.println(pwd);
+    	String userId=(String)session.getAttribute("id");
+    	String result=service.memberDelete(userId, pwd);
+    	if(result=="yes") {
+    		session.invalidate();
+    	}
+    	System.out.println(result);
+    	return result;
+    	
     }
 	  
 }

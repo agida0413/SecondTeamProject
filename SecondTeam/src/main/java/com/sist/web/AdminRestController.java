@@ -131,8 +131,8 @@ public String buypage_vue(int page) throws Exception
 	String json=mapper.writeValueAsString(map);
 	return json;
 }
-@PostMapping(value="adminPage/buyok_vue.do",produces = "text/plain;charset=UTF-8")
-public void buyok(int gcno,CartVO vo)
+@GetMapping(value="adminPage/buyok_vue.do",produces = "text/plain;charset=UTF-8")
+public void buyok(int gcno)
 {
 	service.buyOk(gcno);
 }

@@ -236,7 +236,7 @@ color:blue;
                  <span style="float:right; ">
                    <span  @click="replyDelete(vo.rno,vo.root)" v-if="vo.content!=='삭제된 댓글입니다.'"><a style= "color:#ff9999; margin-right:10px;"class="reply rounded rpoint" v-if="vo.userid===sessionId">삭제</a></span>
                         <span  @click="updateForm(vo.rno)" v-if="vo.content!=='삭제된 댓글입니다.'"> <a style="color:#8470FF; margin-right:10px;" class="reply rounded rpoint" v-if="vo.userid===sessionId" >수정</a> </span>
-                   <span ><a  style="margin-right:10px;" class="reply rounded rpoint" v-if="vo.userid!==sessionId">신고하기</a></span>
+                   
                  
                  </span> 
                   </h3>
@@ -295,7 +295,7 @@ color:blue;
                         <span style="float:right;">
                    <span  @click="replyDelete(avo.rno,avo.root)"><a style= "margin-right:10px; color:#ff9999;"class="reply rounded rpoint" v-if="avo.userid===sessionId">삭제</a></span>
                         <span @click="updateForm(avo.rno)"> <a style="margin-right:10px; color:#8470FF;" class="reply rounded rpoint" v-if="avo.userid===sessionId" >수정</a> </span>
-                 <span ><a style="margin-right:10px;" class="reply rounded rpoint" v-if="avo.userid!==sessionId">신고하기</a></span>
+               
                  
                  </span> 
                       </h3>

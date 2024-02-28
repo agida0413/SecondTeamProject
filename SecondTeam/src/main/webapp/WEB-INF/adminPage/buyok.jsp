@@ -75,7 +75,6 @@
 				}).then(res=>{
 					console.log(res.data)
 					this.buy_list=res.data
-					this.g_img=res.data.
 				})
 				
 				axios.get("../adminPage/buypage_vue.do",{
@@ -113,23 +112,14 @@
 				this.buyList()
 			},
 			ok(gcno) {
-				let form=FormData()
-				form.append("g_img",this.g_img)
-				form.append("g_name",this.g_name)
-				form.append("g_price",this.g_price)
-				form.append("recipient",this.recipient)
-				form.append("buy_count",this.buy_count)
-				form.append("cartprice",this.cartprice)
-				form.append("dbday",this.dbday)
-				form.append("gcno",gcno)
-			    axios.get("../adminPage/buyok_vue.do",form, {
-			    	headers: {
-		         		   'Content-Type': 'multipart/form-data' 
-		 	            }
-			    }).then(res => {
-			    	
-			        this.buyList();
-			    })
+				axios.get("../adminPage/buyok_vue.do",{
+					params:{
+						gcno:gcno
+					}
+				}).then(res=>{
+					this.buy_list=res.data
+				})
+			   
 			}
 	    }
 	}).mount("#buyokApp")

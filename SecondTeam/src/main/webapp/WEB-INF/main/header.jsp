@@ -97,7 +97,6 @@
 							</ul>
 							&nbsp;
 							<span><a href="../member/login.do" style="color:#fff; font-size: 14px;"><i class="xi-key"></i> LOGIN</a></span>
-							<span style="position: absolute;"><a href="../program/login.do" style="color:black;"><img src="../Projectimages/login.png" width="20px;">(구)Login</a></span>
 							</c:if>
 							
 							 <c:if test="${sessionScope.id!=null }">

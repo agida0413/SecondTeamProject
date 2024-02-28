@@ -47,6 +47,23 @@ public class AdminServiceImpl implements AdminService {
 		dao.buyOk(gcno);
 	}
 
+	@Override
+	public void memberControl(int mno, String type) {
+		if(type.equals("1")) {
+			dao.grantMem(mno);
+		}
+		else if (type.equals("2")) {
+		dao.deleteMem(mno);	
+		}
+		else if (type.equals("3")) {
+		dao.revokeMem(mno);			
+				}
+		else if (type.equals("4")) {
+			dao.deleteMemWing(mno);
+		}
+		
+	}
+
 	
 	
 }

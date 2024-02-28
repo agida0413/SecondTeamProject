@@ -12,4 +12,6 @@ public interface AdminService {
 	public List<CartVO> buyList(Map map);
 	public int buyTotalpage();
 	public void buyOk(int gcno);
+	
+	public void memberControl(int mno,String type);
 }

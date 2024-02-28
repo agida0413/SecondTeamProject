@@ -48,6 +48,43 @@ int start= cf.start(rowsize, curpage);
          
    return json;
 }
+
+@GetMapping(value="adminPage/memberList_page_vue.do",produces = "text/plain;charset=UTF-8")
+public String adminPaging(String ss, String page ) throws JsonProcessingException{
+   System.out.println("실행");
+   if(page==null) {
+      page="1";
+   }
+   int curpage=Integer.parseInt(page);
+   Map map =new HashMap();
+   map.put("ss", ss);
+   
+   final int BLOCK=10;
+   int totalpage=service.totalpage(map);
+   
+   int startpage=cf.startPage(BLOCK, curpage);
+   int endpage=cf.endPage(BLOCK, curpage, totalpage);
+   
+  
+  map.put("startpage", startpage);
+  map.put("endpage", endpage);
+  map.put("totalpage", totalpage);
+  map.put("curpage", curpage);
+   ObjectMapper mapper= new ObjectMapper();
+   String json= mapper.writeValueAsString(map);
+         
+   return json;
+}
+
+@GetMapping(value="adminPage/memberControl_vue.do",produces = "text/plain;charset=UTF-8")
+public void memControl(String type,int mno) throws Exception
+{
+	service.memberControl(mno, type);
+	
+	
+	
+}
+
 @GetMapping(value="adminPage/buylist_vue.do",produces = "text/plain;charset=UTF-8")
 public String buylist(String page) throws Exception
 {
@@ -70,6 +107,8 @@ public String buylist(String page) throws Exception
 	         
     return json;
 }
+
+
 @GetMapping(value="adminPage/buypage_vue.do",produces = "text/plain;charset=UTF-8")
 public String buypage_vue(int page) throws Exception
 {

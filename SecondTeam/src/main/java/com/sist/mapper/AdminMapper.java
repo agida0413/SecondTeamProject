@@ -3,6 +3,7 @@ package com.sist.mapper;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
@@ -25,6 +26,26 @@ public interface AdminMapper {
    
 @Select("SELECT CEIL(COUNT(*)/10.0) FROM member WHERE userid LIKE '%'||#{ss}||'%' ")
 public int totalpage(Map  map);
+
+
+@Delete("DELETE FROM MEMBER WHERE mno=#{mno} ")
+public void deleteMem(int mno);
+@Update("UPDATE MEMBER SET "
+		+"admin=1 "
+		+"WHERE mno=#{mno}")
+public void grantMem(int mno);
+
+@Update("UPDATE MEMBER SET "
+		+"admin=2 "
+		+"WHERE mno=#{mno}")
+public void revokeMem(int mno);
+
+@Update("UPDATE MEMBER SET "
+		+"wing=0 "
+		+"where mno=#{mno}")
+public void deleteMemWing(int mno);
+	
+
 
 @Results({
 	@Result(property = "gvo.gno" ,column="gno"),

@@ -32,4 +32,18 @@ public int buyTotalpage() {
 public void buyOk(int gcno) {
 	mapper.buyOk(gcno);
 }
+
+public void deleteMem(int mno) {
+	mapper.deleteMem(mno);
+}
+
+public void grantMem(int mno) {
+ 	mapper.grantMem(mno);
+}
+public void revokeMem(int mno) {
+	mapper.revokeMem(mno);
+}
+public void deleteMemWing(int mno) {
+	mapper.deleteMemWing(mno);
+}
 }

@@ -46,7 +46,7 @@ cursor: pointer;
 		<div class="container">
 			<div class="row align-items-stretch retro-layout">
 				<div class="col-md-4">
-					<a href="single.html" class="h-entry mb-30 v-height gradient">
+					<a href="../goods/goods_main.do" class="h-entry mb-30 v-height gradient">
 
 						<div class="featured-img" style="background-image: url('../Projectimages/상품_메인.jpg');"></div>
 						<span class="date" style="
@@ -83,7 +83,7 @@ cursor: pointer;
 					</a>
 				</div>
 				<div class="col-md-2">
-					<a href="single.html" class="h-entry mb-30 v-height gradient">
+					<a href="../main/main.do" class="h-entry mb-30 v-height gradient">
 
 						<div class="featured-img" style="background-image: url('../Projectimages/2.jpg');"></div>
 						<span class="date" style="
